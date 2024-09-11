@@ -1,0 +1,264 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig}
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+% 标题设置
+\title{\textbf{应用随机过程}}
+\author{Little Wolf}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+\tableofcontents
+\newpage
+
+\section{王冠香补充题目}
+\begin{problem}
+    设$A,B$是$\mathbb{R}^n$的互不相交的闭集, 证明: 存在开集$O_1,O_2, \quad s.t.\quad A\subset O_1, B\subset O_2, O_1\cap O_2 = \varnothing$.
+\end{problem}
+
+\section{多元函数的极限和连续}
+
+\begin{problem}
+1. 证明$\mathbb{R}^n$中两点距离满足三角不等式：对于$\forall \bm{x},\bm{y},\bm{z}\in \mathbb{R}^n$，有$|\bm{x}-\bm{z}|\leq |\bm{x}-\bm{y}|+|\bm{y}-\bm{z}|$
+\end{problem}
+
+\begin{solution}
+设$a_i=x_i-y_i, b_i=y_i-z_i$, 要证: $|\bm{x}-\bm{z}|\leq |\bm{x}-\bm{y}|+|\bm{y}-\bm{z}|$, 即
+\begin{align*}
+    &|\bm{x}-\bm{z}|\leq |\bm{x}-\bm{y}|+|\bm{y}-\bm{z}| \iff \sqrt{\sum_{i=1}^n (a_i+b_i)^2}\leq \sqrt{\sum_{i=1}^n a_i^2}+\sqrt{\sum_{i=1}^n b_i^2}\\\iff& \sum_{i=1}^n a_ib_i\leq \sqrt{\sum_{i=1}^n a_i^2}\sqrt{\sum_{i=1}^n b_i^2}\iff \vec{a}\cdot \vec{b}\leq |\vec{a}|\cdot|\vec{b}|
+\end{align*}
+\end{solution}
+\begin{note}
+    直接硬证有点困难，尝试对要证明的结论做等价变形.
+\end{note}
+
+\begin{problem}
+2. 若 $\lim _{k \rightarrow \infty}\left|\boldsymbol{x}_k\right|=+\infty$, 则称 $\mathbb{R}^n$ 中的点列 $\left\{\boldsymbol{x}_k\right\}$ 趋于 $\infty$. 现在设点列 $\left\{\boldsymbol{x}_k=\left(x_1^k, x_2^k, \cdots, x_n^k\right)\right\}$ 趋于 $\infty$, 试判断下列命题是否正确:
+
+(1) 对于 $\forall i(1 \leqslant i \leqslant n)$, 序列 $\left\{x_i^k\right\}$ 趋于 $\infty$;
+
+(2) $\exists i_0\left(1 \leqslant i_0 \leqslant n\right)$, 序列 $\left\{x_{i_0}^k\right\}$ 趋于 $\infty$.
+\end{problem}
+\begin{solution}
+    (1) 不正确, 反例: $\bm{x}^k=(k,0,0,\cdots,0)$, 那么对$2\leq i\leq n$, 有$x_i^k\equiv 0$.
+    
+    (2) 不正确, 反例: 记$t\equiv k (\mod n)$, 设$\bm{x}^k$的第$t$个元素是$k$其余为$0$, 那么满足条件, 但$\forall i, 1\leq i \leq n$, 都有$x_{i}^k$在充分大的$K$后无限次取$0$，因此不可能趋于$\infty$.
+\end{solution}
+
+\begin{problem}
+3. 求下列集合的聚点集:
+
+(1) $E=\left\{\left(\frac{q}{p}, \frac{q}{p}, 1\right) \in \mathbb{R}^3: p, q \in \mathbb{N}\right.$ 互素, 且 $\left.q<p\right\}$;
+
+(2) $E=\left\{\left(\ln \left(1+\frac{1}{k}\right)^k, \sin \frac{k \pi}{2}\right): k=1,2, \cdots\right\}$;
+
+(3) $E=\left\{\left(r \cos \left(\tan \frac{\pi}{2} r\right), r \sin \left(\tan \frac{\pi}{2} r\right)\right) \in \mathbb{R}^2: 0 \leqslant r<1\right\}$.
+\end{problem}
+\begin{solution}
+    (1)$E^{\prime}=\{(x,x,1)|x\in[0,1]\}$;
+
+    (2) \textcolor{blue}{$\ln(1+\frac{1}{k})^k \sim (\frac{1}{k}-\frac{1}{2k^2}+o(\frac{1}{k^2}))^k \to 1(k\to \infty)$}. $\sin \frac{k\pi}{2}$的聚点集是$\{-1,0,1\}$. 因此$E^{\prime}=\{(1,-1),(1,0),(1,1)\}$;
+
+    (3)\textcolor{red}{$E^{\prime}=\{(x,y)|x^2+y^2=1\}$}. 因为$\lim_{r\to 1}r\cos(\tan\frac{\pi}{2}r)$极限并不存在, 但分析渐进性质可以知道, $\tan\frac{\pi}{2}r\to \infty$, 将$\tan\frac{\pi}{2}r$看成一个以半径$r$为自变量的角度参数, 那么当半径$r\to 1$的时候, 角度会转无数圈, 单位圆周成为聚点集.
+\end{solution}
+
+\begin{problem}
+4. 求下列集合的内部、外部、边界及闭包:
+
+(1) $E=\left\{(x, y, z) \in \mathbb{R}^3: x>0, y>0, z=1\right\}$ ;
+
+(2) $E=\left\{(x, y) \in \mathbb{R}^2: x>0, x^2+y^2-2 x>1\right\}$.
+\end{problem}
+\begin{solution}
+    (1) "一张纸".\\内部$E^{o}=\varnothing$\\外部$(E^{c})^{o}=\mathbb{R}^n \backslash \{(x,y,1)|\textcolor{red}{x\geq 0 , y\geq 0}\}$(注意要把包含$0$的部分也去掉)\\边界$\partial E= \overline{E} = \{(x,y,1)|x\geq 0, y\geq 0\}$.
+
+    (2) $x^2+y^2-2x>1\iff (x-1)^2+y^2>(\sqrt{2})^2$, 即扣去一个开圆盘留下的区域. 又$x>0$, 只看$x$正半轴的部分.\\内部$E^{o}=E=\{(x,y)|x>0, x^2+y^2-2x\textcolor{red}{>} 1\}$\\外部$(E^{c})^{o}=\mathbb{R}^3\backslash \{(x,y)|x\textcolor{red}{\geq}0,x^2+y^2-2x\textcolor{red}{\geq}1\}$(补集的内部，把$E$补成闭集之后扣掉)\\边界$\partial E=\{(x,y)|x^2+y^2-2x=1\}\cup \{(0,y)|y^2\geq 1\}$\\闭包$\overline{E}=\{(x,y)|x\geq 0, x^2+y^2-2x\geq 1\}$.
+\end{solution}
+
+\begin{problem}
+5. 设 $\left\{\left(x_k, y_k\right)\right\} \subset \mathbb{R}^2$ 是一个点列, 判断如下命题是否为真：点列 $\left\{\left(x_k, y_k\right)\right\}$ 在 $\mathbb{R}^2$ 中有聚点的充分必要条件是 $\left\{x_k y_k\right\}$ 在 $\mathbb{R}$ 中有聚点.
+\end{problem}
+\begin{solution}\textcolor{red}{下面是错误的分析}: \\$\{(x_k,y_k)\}$有聚点$\iff$存在子列收敛$\{(x_{n_k},y_{n_k})\}\to (a,b)\Rightarrow \{x_{n_k}y_{n_k}\}\to ab \iff \{x_ky_k\}$有聚点.\\
+\textcolor{red}{反例, 既不充分也不必要}: \\
+(1) $\{(0,\frac{1}{k})\}$有极限(当然有聚点)$(0,0)$, 但$0\cdot \frac{1}{k}=0$是单点集, \textcolor{blue}{单点集没有聚点(这是我没有想到的)}
+$$\{(x_n,y_n)\}\text{有聚点}\quad \text{不能推出}\quad \{x_ny_n\}\text{有聚点}$$
+(2) $\{(k+1, \frac{1}{k})\}$没有聚点(因为$x$之间至少差了$1$!), 而$\{\frac{k+1}{k}\}$有极限(有聚点)$1$.
+$$\{x_ny_n\}\text{有聚点}\quad \text{不能推出}\quad \{(x_n,y_n)\}\text{有聚点}$$
+\end{solution}
+\begin{note}
+    极限点不一定是聚点, 因为极限点可以是整个序列取单点集: $1\to 1$\\
+    而聚点的要求是: 一定要有无穷多个点(这是定义的区别)
+\end{note}
+
+\begin{problem}
+6. 设 $E \subset \mathbb{R}^n$, 证明:
+
+(1) $\bar{E}=E^{\circ} \cup \partial E$;
+
+(2) $E^{\prime}=\bar{E}^{\prime}$
+\end{problem}
+\begin{solution}
+    \textcolor{blue}{证明等号, 左边属于右边, 右边属于左边.}\\
+(1) 方法一：$(\overline{E})^{c}=(E^{c})^{o}=(E^{o}\cup \partial E)^c \Rightarrow \overline{E}=E^{o}\cup \partial E$.\\
+方法二：先证明$\overline{E}\subset E^{o}\cup \partial E$. 任取$x\in \overline{E}$, 如果$x\in E^{o}$, 当然有$x\in E^{o}\cup \partial E$; 如果$x\notin E^{o}$, 那么$x\in E\backslash E^{o} \textcolor{red}{\text{就是}}\partial E$, 因此有$\overline{E}\subset E^{o}\cup \partial E$. \textcolor{blue}{再证明$E^{o}\cup \partial E\subset \overline{E}$.}\\
+(2) $E^{\prime}\subset \overline{E}^{\prime}$很好证明, 因为$E\subset \overline{E}$, 所以$E^{\prime}$中任取一点$x\in E^{\prime}$, 一定是$E$中子列的极限点, 当然也就是$\overline{E}$中子列的极限点, 因此$x\in \overline{E}^{\prime}$, 因此$E^{\prime}\subset \overline{E}^{\prime}$.\\
+另一方面, 来证明$\overline{E}^{\prime}\subset E^{\prime}$.\textcolor{blue}{根据书上对闭包的定义，$\overline{E}=E\cup E^{\prime}$, 因此$\overline{E}^{\prime}=E^{\prime}\cup (E^{\prime})^{\prime}$, 因此只需要证明$(E^{\prime})^{\prime}\subset E^{\prime}$}.\\
+\textbf{\textcolor{red}{方法一}}: 根据极限点的定义, $\forall x\in (E^{\prime})^{\prime}, \textcolor{red}{\forall}  \delta>0,\quad s.t. \quad U_0(x,\frac{\delta}{2})\cap E^{\prime} \neq \varnothing$; $\forall x^{\prime} \in U_0(x,\frac{\delta}{2})\cap E^{\prime} $(注意,取自上面的交集), 因为$x^{\prime}\in E^{\prime}$, 所以$\textcolor{red}{\forall}  \delta>0, \quad s.t. \quad U_0(x^{\prime},\frac{\delta}{2}) \cap E \neq \varnothing$. 即$|x-x^{\prime}|<\frac{\delta}{2}$, 且$\exists x^{\prime \prime}\in  U_0(x^{\prime},\frac{\delta}{2}) \cap E,\quad s.t. \quad |x^{\prime}-x^{\prime \prime}|<\frac{\delta}{2}$, 从而根据三角不等式, $|x-x^{\prime \prime}|<\delta$, 即$U_0(x,\delta)\cap E \neq \varnothing$. 由$\delta$的任意推出$x\in E^{\prime} \Rightarrow (E^{\prime})^{\prime}\subset E^{\prime}$.\\
+\textbf{\textcolor{red}{方法二}}: 根据极限点的定义, $\forall x\in (E^{\prime})^{\prime}, \exists \{x_n\}\in E^{\prime}, \quad s.t. \quad x_n\to x$. 即$\forall \delta>0, \exists N_1>0, \quad s.t. \forall n>N_1, \quad |x-x_n|<\frac{\delta}{2}$. 任取一个满足$|x-x_n|<\frac{\delta}{2}$的$x_{n_0}$, 因为$x_{n_0}\in E^{\prime}$, $\exists \{y_n\}\in E,\quad s.t. \quad y_n\to x_{n_0}$, 即对上面相同的$\delta>0$, $\exists N_2>0, \forall n>N_2$, $s.t. \quad |x_{n_0}-y_n|<\frac{\delta}{2}$. 任取上述满足条件的一个$y_{n_1}$, 通过三角不等式得到$|x-y_{n_1}|\leq |x-x_{n_0}|+|x_{n_0}-y_{n_1} |<\delta$, $\forall n\geq N_1+N_2$, 得证. 
+\end{solution}
+\begin{note}
+    (1) 书中的定义是：$\overline{E}=E\cup E^{\prime}$, 另一种定义: $\partial E=\overline{E}\backslash E^{o}$, 即$\overline{E}=E^{o}\cup \partial E$\\
+    (2) 导集的理解：
+    \begin{itemize}
+        \item $\forall x\in E^{\prime}, \exists \{x_n\}\in E, \quad s.t. \quad x_n \to x$. (作为一个子列的极限点, \textcolor{red}{可以从这个角度得到\textbf{\textcolor{red}{方法二}}})
+        \item $\forall x\in E^{\prime}, \textcolor{red}{\forall} \delta>0, \quad s.t. \quad U_0(x,\delta)\cup E\neq \varnothing$. (从邻域的角度)
+    \end{itemize}
+\end{note}
+
+\begin{problem}
+7. 设 $\left\{A_\lambda\right\}_{\lambda \in \Lambda}$ 为 $\mathbb{R}^n$ 的一族集合, 证明:
+
+(1) 当 $\Lambda$ 为有限指标集时, 成立 $\overline{\bigcup_{\lambda \in \Lambda} A_\lambda} \subseteq \bigcup_{\lambda \in \Lambda} \overline{A_\lambda}, \bigcap_{\lambda \in \Lambda} A_\lambda^{\circ} \subseteq\left(\bigcap_{\lambda \in \Lambda} A_\lambda\right)^{\circ}$;
+
+(2) 对任意的指标集, 成立 $\bigcup_{\lambda \in \Lambda} A_\lambda^{\circ} \subseteq\left(\bigcup_{\lambda \in \Lambda} A_\lambda\right)^{\circ}, \overline{\bigcap_{\lambda \in \Lambda} A_\lambda} \subseteq \bigcap_{\lambda \in \Lambda} \overline{A_\lambda}$.
+\end{problem}
+
+\begin{problem}
+8. 设 $E \subset \mathbb{R}^n$ ，证明：
+
+(1) $E^{\prime}$ 是闭集;
+
+(2) $\partial E$ 是闭集.
+\end{problem}
+
+\begin{solution}
+(1) 即证明: $E^{\prime}=\overline{E^{\prime}}$, 而$\overline{E^{\prime}}=E^{\prime}\cup (E^{\prime})^{\prime}$, 显然$E^{\prime}\subset \overline{E^{\prime}}$, 又根据6题的结论, $(E^{\prime})^{\prime}\subset E^{\prime}$, 得证.\\
+(2) 即证明: $\partial E = \overline{\partial E}=\partial E\cap (\partial E)^{\prime}$, 即证明$(\partial E)^{\prime}\subset \partial E$.\\
+\textbf{\textcolor{red}{方法一}}: $E^{o}$是开集, $(E^{c})^{o}$是开集, 那么$E^{o}\cup (E^{c})^{o}$是开集, 那么$\mathbb{R}^n \backslash (E^{o}\cup (E^{c})^{o}) = \partial E$是闭集 (边界$E$理解成, 既不属于$E$的内部$E^{o}$, 也不属于补集的内部$(E^{c})^{o}$的部分).\\
+\textbf{\textcolor{red}{方法二}}: (\textcolor{blue}{直接证明$(\partial E)^{\prime}\subset \partial E$.}) 考虑$\partial E=\overline{E}\backslash E^{o}$, 那么$(\overline{E})^{\prime}=(\partial E)^{\prime}\cup (E^{o})^{\prime}$, 根据第六题的结论, $(\overline{E})^{\prime}=\overline{E}$, 因此$\overline{E}=\partial E \cup E^{o}= (\partial E)^{\prime}\cup (E^{o})^{\prime}$, 因此$\forall x\in (\partial E)^{\prime}$, 只可能属于$\partial E$或者$E^{o}$. 采用反证法, 若$x\in E^{o}$, 根据极限点定义, $\textcolor{red}{\forall} \delta>0, U_0(x,\delta)\cap \partial E\neq \varnothing$, 但根据$E^{o}$是开集的定义, 充分小的$\delta$可以使$U_0(x,\delta)\subset E^{o}\Rightarrow U_0(x,\delta)\cap \partial E=\varnothing$, 矛盾. 
+\end{solution}
+\begin{note}
+    (1) $(E^{\prime})^{\prime}\subset E^{\prime}$, $(\partial E)^{\prime}\subset \partial E$.\\
+    (2) $\overline{E}=\partial E\cup E^{o} = E\cup E^{\prime}$\\
+    (3) \textcolor{red}{问题: $\overline{E}=\partial E\cup E^{o} $的两边取导集, 还是可以得到等式$(\overline{E})^{\prime}=(\partial E)^{\prime}\cup (E^{o})^{\prime}$. 但是如果写成$\partial E=\overline{E}\backslash E^{o}$, 还可以两边取导集吗？}
+\end{note}
+
+\begin{problem}
+9. 设 $E \subset \mathbb{R}^2$, 记 $E_1=\{x \in \mathbb{R}: \exists(x, y) \in E\}, E_2=\{y \in \mathbb{R}$ ： $\exists(x, y) \in E\}$ ，判断下列命题是否为真 (说明理由):
+
+(1) $E$ 为 $\mathbb{R}^2$ 中的开 (闭) 集时, $E_1$ 和 $E_2$ 均为 $\mathbb{R}$ 中的开 (闭) 集;
+
+(2) $E_1$ 和 $E_2$ 均为 $\mathbb{R}$ 中的开 (闭) 集时， $E$ 为 $\mathbb{R}^2$ 中的开 (闭) 集。
+\end{problem}
+
+\begin{problem}
+10. 构造 $\mathbb{R}^2$ 中单位圆盘 $\Delta=\left\{(x, y): x^2+y^2<1\right\}$ 内的一个点列 $\left\{\left(x_k, y_k\right)\right\}$, 使得它的点构成的集合的聚点集恰为单位圆周 $\partial \Delta$.
+\end{problem}
+
+\begin{solution}
+考虑$\{(r_k\cos \theta_k, r_k \sin \theta_k)\}$, 当$r_k\to 1$时, 趋于$(\cos\theta, \sin\theta)$, 借鉴3(3)的思想, 构造$\theta$序列作为$r$的函数, 使得$r\to 1$的过程中, $\theta\to \infty$. 例如: $\{(r_k\cos(\tan \frac{\pi}{2}r_k),r_k\sin(\tan \frac{\pi}{2}r_k))\}$, 其中$r_k=\frac{k}{k+1}$, i.e., $\{(\frac{k}{k+1}\cos(\tan \frac{k\pi}{2(k+1)}),\frac{k}{k+1}\sin(\tan \frac{k\pi}{2(k+1)}))\}$.
+\end{solution}
+\begin{note}
+    \textcolor{red}{问题: 除了构造$r_k\to 1$的同时, $\theta_k$可以与$r_k$独立地定义, 如果$\theta_k$的定义只是保证趋于有限$(\cos \theta, \sin \theta)$, 那么只能保证聚点是$\partial \Delta$的有限点, 即使以可列方式组合之后成大序列, 还是不能遍历不可数集, 那么$\theta_k$的定义必须保证趋于$(\infty, \infty)$吗?}
+\end{note}
+
+\begin{problem}
+11. 设 $E_1, E_2 \subset \mathbb{R}^n$ 为两个非空集合, 定义 $E_1, E_2$ 间的距离如下:
+$$
+d\left(E_1, E_2\right)=\inf _{\boldsymbol{x} \in E_1, \boldsymbol{y} \in E_2}|\boldsymbol{x}-\boldsymbol{y}|
+$$
+(1) 举例说明存在开集 $E_1, E_2$, 使得 $E_1 \cap E_2=\varnothing$, 但 $d\left(E_1, E_2\right)=0$;
+
+(2) 举例说明存在闭集 $E_1, E_2$, 使得 $E_1 \cap E_2=\varnothing$, 但 $d\left(E_1, E_2\right)=0$;
+
+(3) 证明: 若紧集 $E_1, E_2$ 满足 $d\left(E_1, E_2\right)=0$, 则必有 $E_1 \cap E_2 \neq \varnothing$.
+\end{problem}
+
+\begin{problem}
+12. 设 $F \subset \mathbb{R}^n$ 是紧集, $E \subset \mathbb{R}^n$ 是开集, 且 $F \subset E$ 。证明：存在开集 $O$ ，使得 $F \subset O \subset \bar{O} \subset E$ 。
+\end{problem}
+
+\begin{problem}
+13. 求下列函数的定义域:
+
+(1) $f(x, y, z)=\ln \left(y-x^2-z^2\right)$;
+
+(2) $f(x, y, z)=\sqrt{x^2+y^2-z^2}$;
+
+(3) $f(x, y, z)=\frac{\ln \left(x^2+y^2-z\right)}{\sqrt{z}}$.
+\end{problem}
+
+\begin{problem}
+14. 确定下列函数极限是否存在, 若存在则求出极限:
+
+(1) $\lim _{E \ni(x, y) \rightarrow(0,0)} \frac{\sin \left(x^3+y^3\right)}{x^2+y}$, 其中 $E=\left\{(x, y): y>x^2\right\}$;
+
+(2) $\lim _{(x, y) \rightarrow(0,0)} x \ln \left(x^2+y^2\right)$;
+
+(3) $\lim _{|(x, y)| \rightarrow+\infty}\left(x^2+y^2\right) \mathrm{e}^{-(|x|+|y|)}$;
+
+(4) $\lim _{|(x, y)| \rightarrow+\infty}\left(1+\frac{1}{|x|+|y|}\right)^{\frac{x^2}{|x|+|y|}}$;
+
+(5) $\lim _{(x, y, z) \rightarrow(0,0,0)}\left(\frac{x y z}{x^2+y^2+z^2}\right)^{x+y}$;
+
+(6) $\lim _{E \ni(x, y, z) \rightarrow(0,0,0)} x^{y z}$, 其中 $E=\{(x, y, z): x, y, z>0\}$;
+
+(7) $\lim _{(x, y, z) \rightarrow(0,1,0)} \frac{\sin (x y z)}{x^2+z^2}$
+
+(8) $\lim _{(x, y, z) \rightarrow(0,0,0)} \frac{\sin x y z}{\sqrt{x^2+y^2+z^2}}$
+
+(9) $\lim _{\boldsymbol{x} \rightarrow \mathbf{0}} \frac{\left(\sum_{i=1}^n x_i\right)^2}{|\boldsymbol{x}|^2}$.
+\end{problem}
+
+\begin{problem}
+15. 试给出三元函数 $f(x, y, z)$ 累次极限 $\lim _{x \rightarrow x_0} \lim _{y \rightarrow y_0} \lim _{z \rightarrow z_0} f(x, y, z)$ 的定义, 并构造一个三元函数 $f(x, y, z)$, 使得它满足: $\lim _{(x, y, z) \rightarrow(0,0,0)} f(x, y, z)$存在, 但 $\lim _{x \rightarrow 0} \lim _{y \rightarrow 0} \lim _{z \rightarrow 0} f(x, y, z)$ 不存在.
+\end{problem}
+
+\begin{problem}
+16. 设 $y=f(x)$ 在 $U_0\left(0, \delta_0\right) \subset \mathbb{R}$ 中有定义, 满足 $\lim _{x \rightarrow 0} f(x)=0$, 且对于 $\forall x \in U_0\left(0, \delta_0\right)$, 有 $f(x) \neq 0$. 记 $E=\{(x, y): x y \neq 0\}$, 证明:
+
+(1) $\lim _{E \ni(x, y) \rightarrow(0,0)} \frac{f(x) f(y)}{f^2(x)+f^2(y)}$ 不存在;
+\end{problem}
+
+\end{document}
+

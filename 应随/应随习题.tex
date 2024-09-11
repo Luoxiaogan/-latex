@@ -1,0 +1,1365 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig, }
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+% 标题设置
+\title{\textbf{应用随机过程}}
+\author{Little Wolf}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+\tableofcontents
+\newpage
+
+\section{往年题}
+\subsection{蒋达权2023年第一次小测}
+\begin{problem}
+    1. (16分) 设 \( X = \left\{  {{X}_{n} : n \geq  0}\right\}   \) 是取值于 \( S = \{ 1,2,3,4\}  \) 的离散时间参数时齐马氏
+
+\[\mathbf{P} = \left( \begin{matrix} {0.3} & {0.3} & {0.4} & 0 \\  0 & 0 & {0.5} & {0.5} \\  {0.5} & {0.5} & 0 & 0 \\  0 & {0.4} & {0.3} & {0.3} \end{matrix}\right) \]
+
+(1) (8分) 若 \( X \) 的初始分布为 \( P\left( {{X}_{0} = 1}\right)  = P\left( {{X}_{0} = 2}\right)  = \frac{1}{2},P\left( {{X}_{0} = 3}\right)  = P\left(X_0=4\right)=0 \)。计算概率$P(X_1=3,X_2=2,X_3=4)$.
+
+(2) (8分) \( \forall i = 1,2,3,4, \) 求 \( \mathop{\lim }\limits_{{n \rightarrow   + \infty }}P\left( {{X}_{n} = i}\right)  \).
+\end{problem}
+\begin{solution}
+    (1) 初分布$\mu=(\frac{1}{2},\frac{1}{2},0,0)$，因此$P_{\mu}(X_1=3)=\mu \mathbf{P}[3]=0.45$，因此有
+    \begin{align*}
+        P_{\mu}(X_1=3,X_2=2,X_3=4)=P_{\mu}(X_1=3)p_{32}p_{24}=0.45\cdot 0.5 \cdot 0.5=0.1125
+    \end{align*}
+    (2) 计算$\mathbf{P}^2$，有 
+    \begin{align*}
+        \mathbf{P}^2= \left( \begin{matrix} {0.3} & {0.3} & {0.4} & 0 \\  0 & 0 & {0.5} & {0.5} \\  {0.5} & {0.5} & 0 & 0 \\  0 & {0.4} & {0.3} & {0.3} \end{matrix}\right)  \cdot \left( \begin{matrix} {0.3} & {0.3} & {0.4} & 0 \\  0 & 0 & {0.5} & {0.5} \\  {0.5} & {0.5} & 0 & 0 \\  0 & {0.4} & {0.3} & {0.3} \end{matrix}\right) = \left( \begin{matrix} {0.35} & {0.35} & {0.19} & 0.11 \\  0.25 & 0.25 & {0.15} & {0.35} \\  {0.15} & {0.15} & 0.25 & 0.45 \\  0.2 & {0.29} & {0.33} & {0.18} \end{matrix}\right) 
+    \end{align*}
+    由于$\mathbf{P}^2$的每一个元素都是正数，因此马氏链是不可约的，又因为是有限状态不可约马氏链，当然是正常返的，又因为在$\mathbf{P}^2$阶段，每个状态都可以一步返回自己，因此周期为$1$，所以是非周期的(实际上，因为$\mathbf{P}$有对角元是正数，所以肯定是非周期的)。上述条件使得这个马氏链适用于强遍历定理，所以$\lim_{n\to +\infty}P(X_n=i)=\pi_i$，计算不变分布得到答案.
+\end{solution}
+
+\begin{problem}
+    2. (16分) 设 \( X = \left\{  {{X}_{n} : n > 0}\right\}   \) 是取非负整数值的离散时间参数时齐马氏链,转移阵 \( \mathbb{P} = {\left( {p}_{ij}\right) }_{i,j \geq  0} \) 的元素如下: \( \forall i \geq  0,{p}_{i,i + 1} = p \in  \left( {0,1}\right) ,{p}_{i0} = 1 - p,{p}_{ij} =  \) 0  \( \left( {\forall j \neq  0,i + 1}\right)  \)  . 令  \( {\sigma }_{0} = \inf \{ n \geq  1 : {X}_{n} = 0\}  \)  。
+
+(1) (8分) 求给定 \( {X}_{0} = 0 \) 的条件下 \( {\sigma }_{0} \) 的概率分布列 \( {P}_{0}\left( {{\sigma }_{0} = n}\right) \left( {n \geq  1}\right)  \) 。
+
+(2) (8分) 马氏链 \( X \) 是否正常返? 为什么?
+\end{problem}
+\begin{solution}
+    (1) $P_0(\sigma_0=n)=(1-p)p^{n-1}$\\
+    (2) 因为马氏链不可约，计算$P_0(\sigma_0<\infty)=\sum_{n=1}^{\infty}(1-p)p^{n-1}=(1-p)\frac{1}{1-p}=1$，因此常返.
+\end{solution}
+
+\begin{problem}
+    3. (8分) 设 \( X = \left\{  {{X}_{n} : n \geq  0}\right\}   \) 是取值于可数集 \( S \) 的离散时间参数马氏链。证明: \( \forall n \geq  1,i,j \in  S,{B}_{k} \subset  S\left( {0 \leq  k \leq  n - 1}\right)  \) ,有
+
+\[P\left( {{X}_{n + 1} = j \mid  {X}_{n} = i,{X}_{k} \in  {B}_{k},0 \leq  k \leq  n - 1}\right)  = P\left( {{X}_{n + 1} = j \mid  {X}_{n} = i}\right) .\]
+\end{problem}
+\begin{solution}
+    \begin{align*}
+        &P(X_{n+1}=j|X_n=i,X_k\in B_k,0\leq k\leq n-1)\\
+        =&\sum_{e^{(n-1)}\in B_{n-1}}P(X_{n-1}=e^{(n-1)})P(X_{n+1}=j|X_n=i,X_{n-1}=e^{(n-1)},X_k\in B_k,0\leq k\leq n-2)\\
+        =&\sum_{e^{(n-1)}\in B_{n-1},\cdots,e^{(0)}\in B_0}P(X_{n-1}=e^{(n-1)})\cdots P(X_0=e^{(0)})P(X_{n+1}=j|X_n=i,X_{n-1}=e^{(n-1)},\cdots,X_0=e^{(0)})\\
+        =&\sum_{e^{(n-1)}\in B_{n-1},\cdots,e^{(0)}\in B_0}P(X_{n-1}=e^{(n-1)})\cdots P(X_0=e^{(0)})P(X_{n+1}=j|X_n=i)\\
+        &=P(X_{n+1}=j|X_n=i)
+    \end{align*}
+    
+\end{solution}
+
+\begin{problem}
+    4. (10分) 设 \( \left\{  {{X}_{n} : n \geq  0}\right\}   \) 是独立同分布随机变量列,服从分布: \( P\left( {{X}_{n} = 1}\right)  =  \)
+
+\( \frac{2}{3},P\left( {{X}_{n} =  - 1}\right)  = \frac{1}{3} \) 。定义滑动平均
+
+\[{\xi }_{n} = \frac{1}{2}\left( {{X}_{n} + {X}_{n - 1}}\right) ,\forall n \geq  1.\]
+
+\( \xi  = \left\{  {{\xi }_{n} : n \geq  1}\right\}   \) 是否是马氏链? 为什么?
+\end{problem}
+\begin{solution}
+    考虑$P(\xi_{n+1}=i_{n+1}|\xi_n=i_n,\cdots,\xi_1=i_1)$，那么可以得到关于$X_0,\cdots,X_{n+1}$这$n+2$个元素的$n+1$个线性方程。由于$X_0$的取值只有两种可能，在$X_0$取定的情况下，可以反解出$X_1,\cdots,X_{n+1}$的值，那么上述的条件概率就变成了$P(X_{n+1}=j_{n+1}(X_0)|X_{n}=j_{n}(X_0),\cdots,X_{1}=j_{1}(X_0),X_0)$，等于$P(X_{n+1}=j_{n+1}(X_0)|X_{n}=j_{n}(X_0))=P(X_{n+1}=j_{n+1}(X_0)|X_{n}=j_{n}(X_0), X_{n-1}=j_{n-1}(X_0))=P(\xi_{n+1}=i_{n+1}|\xi_n=i_{n})$，因此是马氏链.
+\end{solution}
+\begin{note}
+    \textcolor{blue}{a small question: 要基于$X_0$作为参数的条件下，才能反解，这样$X_0$的值是否会造成影响呢？答案是不会的，因为我只是需要$X_0$作为参数，具体的$X_0$到底取什么并不重要.}
+\end{note}
+
+\section{马氏链}
+%%\CJKfamily{zhkai}
+\subsection{定义与例子}
+\begin{problem}
+1. 验证: 随机游动是一个马氏链, 试写出转移概率.
+\end{problem}
+\begin{solution}
+$\xi_1,...,\xi_n,...$是整值的独立同分布随机变量，$S_0$和它们都独立，$S_n=S_0+\sum_{k=1}^n \xi_k$，那么$P(S_{n+1}=i_{n+1}|S_n=i_n,...,S_0=i_0)=P(\xi_{n+1}=i_{n+1}-i_{n}|S_n=i_n,...,S_0=i_0)=P(\xi_{n+1}=i_{n+1}-i_{n})=P(S_{n+1}=i_{n+1}|S_{n}=i_{n})$，因此满足马氏性，又根据同分布，$p_{ij}=P(\xi_{n+1}=j-i)$对任意的$n$相同，因此是时齐马氏链。转移概率$p_{ij}=P(\xi=j-i)$。
+\end{solution}
+
+\begin{problem}
+4. 设 $\left\{X_n\right\}$ 是马氏链. 举例说明: $A$ 不是单点集,
+$$
+P\left(X_{n+1}=j \mid X_n \in A, X_{n-1}=i\right) \neq P\left(X_{n+1}=j \mid X_n \in A\right) .
+$$
+因此在应用马氏性时, 一定要知道过程现在所处的确切状态, 而不能仅仅知道现在的状态属于某个集合.  
+\end{problem}
+\begin{solution}
+考虑$S=\{1,2,3\},A=\{1,2\},P=\left( \begin{matrix} 0 & {0.5} & {0.5} \\  {0.5} & 0 & {0.5} \\  0 & {0.5} & {0.5} \end{matrix}\right)$\\由于$P\left(X_{n+1}=j \mid X_n=2\right)=\begin{cases}
+    0.5&,j=1\\
+    0&,j=2\\
+    0.5&,j=3
+\end{cases},P\left(X_{n+1}=j \mid X_n=3\right)=\begin{cases}
+    0&,j=1\\
+    0.5&,j=2\\
+    0.5&,j=3
+\end{cases}$\\而$P\left(X_{n+1}=j \mid X_n\in A\right)=P\left(X_{n+1}=j \mid X_n=2\right)+P\left(X_{n+1}=j \mid X_n=3\right)$，因此$P\left(X_{n+1}=j \mid X_n\in A\right)=\begin{cases}
+    0.5&,j=1\\
+    0.5&,j=2\\
+    1&,j=3
+\end{cases}$，但是，对于$P\left(X_{n+1}=j \mid X_n\in A,X_{n-1}=2\right)$，在$X_n$时只能转移到$X_n=1$或者$X_n=2$\\因此，$P\left(X_{n+1}=j \mid X_n\in A,X_{n-1}=2\right)=P\left(X_{n+1}=j \mid X_n=3\right)$，不相等。
+\end{solution}
+\begin{problem}
+    5. 证明命题: 马氏性等价于
+    $$P\left( {{X}_{0} = {i}_{0},{X}_{1} = {i}_{1},\cdots ,{X}_{n} = {i}_{n}}\right)  = P\left( {{X}_{0} = {i}_{0}}\right) \mathop{\prod }\limits_{{k = 1}}^{n}p\left( {{i}_{k - 1},{i}_{k}}\right) $$
+    并研究关于非时齐马氏链的相应结论
+\end{problem}
+\begin{solution}
+$(\Rightarrow)$ 已知满足马氏性，那么有
+\begin{align*}
+&P\left( {{X}_{0} = {i}_{0},{X}_{1} = {i}_{1},\cdots ,{X}_{n} ={i}_{n}}\right)=P(X_0=i_0)P(X_1=i_1,\cdots,X_n=i_n\mid X_0=i_0)\\
+=&P(X_0=i_0)P(X_1=i_1|X_0=i_0)P(X_2=i_2,\cdots,X_n=i_n|X_0=i_0,X_1=i_1)\\
+=&P(X_0=i_0)p(i_0,i_1)\underbrace{P(X_2=i_2|X_0=i_0,X_1=i_1)}_{=p(i_1,i_2)}P(X_3=i_3,\cdot,X_n=i_n\mid X_0=i_0,X_1=i_1,X_2=i_2)\\
+=&P\left( {{X}_{0} = {i}_{0}}\right) \mathop{\prod }\limits_{{k = 1}}^{n}p\left( {{i}_{k - 1},{i}_{k}}\right) 
+\end{align*}
+$(\Leftarrow)$ 已知等式成立，由于
+\begin{align*}
+    &P\left( {{X}_{0} = {i}_{0},{X}_{1} = {i}_{1},\cdots ,{X}_{n} = {i}_{n}}\right)\\
+    =&P(X_0=i_0)\cdot P(X_1=i_1|X_0=i_0)\cdot P(X_2=i_2|X_0=i_0,X_1=i_1)\cdots P(X_n=i_n|X_0=i_0,\cdots,X_{n-1}=i_{n-1})\\
+    =&P\left( {{X}_{0} = {i}_{0}}\right) \mathop{\prod }\limits_{{k = 1}}^{n}p\left( {{i}_{k - 1},{i}_{k}}\right)
+\end{align*}
+由于对应项有小于等于的关系：$P(X_k=i_k|X_0=i_0,\cdots,X_{k-1}=i_{k-1})\leq P(X_k=i_k|X_{k-1}=i_{k-1})$，因此取等号当且仅当所有等式成立，即满足马氏性。\\
+对于非时齐马氏链，只能得到与$n$有关的命题
+$$P\left( {{X}_{0} = {i}_{0},{X}_{1} = {i}_{1},\cdots ,{X}_{n} = {i}_{n}}\right)=P(X_0=i_0)\cdot P(X_1=i_1|X_0=i_0)\cdots P(X_n=i_n|X_{n-1}=i_{n-1})$$
+\end{solution}
+
+\begin{problem}
+12. 某篮球运动员投球成功的概率取决于他前两次的投球成绩. 如果两次都成功,则下次投球成功的概率为$\frac{3}{4}$；如果两次都失败，下次投球成功的概率为$\frac{1}{2}$；如果两次一次成功一次失败，下次投球成功的概率为$\frac{2}{3}$。用马氏链来刻画连续投球，求出投球成功的概率近似值。
+\end{problem}
+\begin{solution}
+设成功是$W$，失败是$L$，那么设状态空间为$S=\{S_1,S_2,S_3,S_4\}$，对应$S_1=WW,S_2=WL,S_3=LW,S_4=LL$，转移矩阵是(考虑前两次投球所属的状态空间，根据这一次投球的结果，得到前一次加上这一次所处的状态空间)
+$$P=\begin{pmatrix}
+    \frac{3}{4}&\frac{1}{4}&0&0\\0&0&\frac{2}{3}&\frac{1}{3}\\ \frac{2}{3}&\frac{1}{3}&0&0\\ 0&0&\frac{1}{2}&\frac{1}{2}
+\end{pmatrix}$$
+之后，计算perron vector，$\pi=(\pi_1,\cdots,\pi_4)^T$，那么得到了平衡状态下在各个状态的概率，因此可以计算成功率为
+$$p=\pi_1\cdot \frac{3}{4}+\pi_2\cdot \frac{2}{3}+\pi_3\cdot \frac{2}{3}+\pi_4\cdot \frac{1}{2}$$
+\end{solution}
+
+\begin{problem}
+\textcolor{red}{7$^*$}. 假设某加油站给一辆车加油需要一个单位时间 (比如, 5 分钟). 令 \( {\xi }_{n} \) 是第 \( n \) 个单位时间来加油的汽车数. 假设 \( {\xi }_{1},{\xi }_{2},\cdots \) 独立同分布, 取值非负整数, \( P\left( {{\xi }_{1} = k}\right) = {p}_{k},k \geq 0 \) . 在任意时刻 \( n \) ,如果加油站有车, 那么加油站为其中一辆车加油 (耗时一个单位时间, 然后该汽车在时刻 \( n + 1 \) 离开加油站); 否则,加油站什么都不做. 将 \( n \) 时刻加油站中的汽车数记为 \( {X}_{n} \) . 写出 \( \left\{ {X}_{n}\right\} \) 的状态空间与转移概率.
+\end{problem}
+\begin{solution}
+$S=\{0,1,2,\cdots\}=\mathbb{Z}$，$P(X_{n+1}=j|X_n=i)=p_{j-i+1}, \forall j\geq i-1$.
+\end{solution}
+
+\begin{problem}
+    \textcolor{red}{8$^*$}. 一个粒子在三角形的三个顶点之间跳跃. 它每一步独立地跳跃,按顺时针方向移动的概率为 \( p \in \left( {0,1}\right) \) ,按逆时针方向移动的概率为 \( 1 - p \) . 试求 “ \( n \) 步之后该粒子恰好位于出发点” 的概率 \( {p}_{n} \) ,并计算 \( \mathop{\lim }\limits_{{n \rightarrow \infty }}{p}_{n} \) .
+\end{problem}
+
+\begin{solution}
+$n$步之后粒子恰好位于出发点的概率$p_n=\frac{1}{3}\text{tr}(P^n)=\frac{1}{3}\text{tr}(D^n)$，其中$D$是$P$的对角化后的对角矩阵，计算$P$的特征值，$-(\lambda-1)(\lambda^2+\lambda+3p^2-3p+1)=0$，因此特征值是$\lambda_1=1,\lambda_2=\frac{-1+i\sqrt{3(2p-1)^2}}{2},\lambda_3=\frac{-1-i\sqrt{3(2p-1)^2}}{2}$，那么
+$$3p_n=1+(\frac{-1+i\sqrt{3(2p-1)^2}}{2})^n+(\frac{-1-i\sqrt{3(2p-1)^2}}{2})^n\to 1$$
+因此$p_n \to \frac{1}{3}$
+\end{solution}
+\begin{problem}
+    \textcolor{red}{\( {10}^{ * } \) }. 假设 \( \mathbf{P} \) 是 \( S \) 上的转移矩阵, \( \widehat{S} \) 是可数集, \( f : S \rightarrow \widehat{S} \) 是满射, 满足: 对所有 \( i,{i}^{\prime } \in S \) ,若 \( f\left( i\right) = f\left( {i}^{\prime }\right) \) ,则
+\[\mathop{\sum }\limits_{{j : f\left( j\right) = k}}{p}_{ij} = \mathop{\sum }\limits_{{j : f\left( j\right) = k}}{p}_{{i}^{\prime }j},\;\forall k \in \widehat{S}.\]
+证明: 若 \( \left\{ {X}_{n}\right\} \) 是 \( S \) 上以 \( \mathbf{P} \) 为转移矩阵的马氏链,则 \( \left\{ {f\left( {X}_{n}\right) }\right\} \) 是 \( \widehat{S} \) 上的马氏链.
+\end{problem}
+\begin{solution}
+$\{X_n\}$是马氏链，故$P(X_{n+1}=j|X_n=i,X_0=i_0,\cdots,X_{n-1}=i_{n-1})=p_{ij}$，对于$P(f(X_{n+1})=k|f(X_n)=l,f(X_0)=t_0,\cdots,f(X_{n-1})=t_{n-1})$，需要转化回$\{X_n\}$，才能验证马氏性.
+\begin{align*}
+&P(f(X_{n+1})=k|f(X_n)=l,f(X_0)=t_0,\cdots,f(X_{n-1})=t_{n-1})\\
+=& \sum_{j\in S: f(j)=k} P(X_{n+1}=j|f(X_n)=l,f(X_0)=t_0,\cdots,f(X_{n-1})=t_{n-1})\\
+=& \text{number} \{i\in S: f(i)=l \}\cdot\sum_{j\in S: f(j)=k} P(X_{n+1}=j|X_n=i_0,f(X_0)=t_0,\cdots,f(X_{n-1})=t_{n-1})\\
+=&\text{number} \{i\in S: f(i)=l \}\cdot\sum_{j\in S: f(j)=k} P(X_{n+1}=j|X_n=i_0)\\
+=&P(f(X_{n+1})=k|f(X_n)=l)
+\end{align*}
+\end{solution}
+
+\begin{problem}
+    \textcolor{red}{11$^*$}. 假设 \( \left\{ {X}_{n}\right\} \) 是规则树 \( {\mathbb{T}}^{d} \) 上的随机游动,取 \( {Y}_{n} = \left| {X}_{n}\right| \) (参见例 1.1.10). 根据上题, \( \left\{ {Y}_{n}\right\} \) 是马氏链. 试写出 \( \left\{ {Y}_{n}\right\} \) 的状态空间与转移概率.
+\end{problem}
+\begin{solution}
+状态空间$S=\{0,1,2,\cdots\}=\mathbb{N}$，转移概率$P(Y_{n+1}=1|Y_{n}=0)=1,P(Y_{n+1}=i-1|Y_{n}=i)=p_{i,i-1}=\frac{1}{d+1},P(Y_{n+1}=i+1|Y_{n}=i)=p_{i,i+1}=\frac{d}{d+1}$
+\end{solution}
+
+\begin{problem}
+\textcolor{red}{12$^*$}. (Polya 坛子) 假设坛中最初有一个红球、一个黑球和一个白球. 每一步从坛中随机拿出一个球, 再将此球连同一个与之同色的球一起放回坛中. 假设 \( n \) 步后坛中有 \( {R}_{n} \) 个红球、 \( {B}_{n} \) 个黑球、 \( {W}_{n} \) 个白球,令 \( {X}_{n} = \left( {{R}_{n},{B}_{n},{W}_{n}}\right) \) .
+
+(1) 证明 \( \left\{ {X}_{n}\right\} \) 是马氏链,并写出其状态空间与转移概率
+
+(2) 已知 \( {X}_{0} = \left( {1,1,1}\right) \) ,求 \( {X}_{n} \) 的分布.
+
+(3) 求 \( P\left( {{X}_{n} = \left( {i,j,k}\right) ,{X}_{n + 1} = \left( {i + 1,j,k}\right) }\right) \) .
+\end{problem}
+\begin{solution}
+(1) $X_{n}$的概率分布至于上一步的状态有关，因此是马氏链，状态空间$S=\mathbb{N}^*\times \mathbb{N}^* \times \mathbb{N}^*$，转移概率$P(X_{n+1}=(i+1,j,k)|X_{n}=(i,j,k))=\frac{i}{i+j+k},P(X_{n+1}=(i,j+1,k)|X_{n}=(i,j,k))=\frac{j}{i+j+k},P(X_{n+1}=(i,j,k+1)|X_{n}=(i,j,k))=\frac{k}{i+j+k},\;i+j+k=n+3$\\
+(2) \textcolor{blue}{$X_n$的时候有$n+3$个球，红黑白三种球是对称的，只需考虑红球，先算一算$n=1,2$的情况，就会发现，$X_n$的时候，红色球可以取到$\{1,\cdots,n+1\}$，并且比例是：$1:2:3:\cdots:n+1$个球的比例是$n+1:n:\cdots:2:1$，因此，每一种球的概率分布是$P(R_n=k)=\frac{2(n+2-k)}{(n+1)(n+2)}$}. 但是还不完善，因为约束关系，实际上是两个变量. 所以$P(X_n=(i,j,k))=P(R_n=i)P(W_n+B_n=n+3-i,W_n=j)$，而这里的$P(W_n+B_n=n+3-i,W_n=j)$是否符合前面的“均匀分布”的结论呢？数学归纳法发现（枚举一下前几次）是肯定的，所以
+\begin{align*}
+&P(X_n=(i,j,k))\\
+=&P(R_n=i)P(W_n+B_n=n+3-i,W_n=j)\\
+=&\frac{2(i+j)}{(i+j+k+1)(i+j+k+2)}\cdot \frac{1}{j+k+3}\\
+=&\frac{2(i+j)}{(n+4)(n+5)}\cdot \frac{1}{j+k+3}
+\end{align*}
+(3) 利用第二问的结论，注意这里的初态还是$(1,1,1)$，得到
+\begin{align*}
+&P\left( {{X}_{n} = \left( {i,j,k}\right) ,{X}_{n + 1} = \left( {i + 1,j,k}\right) }\right)\\
+=&P({X}_{n} = \left( {i,j,k}\right))\cdot\frac{i}{i+j+k}\\
+=& \frac{2(i+j)}{(n+4)(n+5)}\cdot \frac{1}{j+k+3} \cdot \frac{i}{n+3}
+\end{align*}
+\end{solution}
+
+\begin{problem}\textcolor{red}{13$^*$.} 对于马氏链, $\forall r\geq 1,\forall {n}_{1} < \cdots  < {n}_{r} < n < m,\forall {B}_{1},\cdots ,{B}_{r},A\subset S, i\in S$. 证明:  
+$$P\left( {{X}_{m} \in  A \mid  {X}_{n} = i,{X}_{{n}_{1}} \in  {B}_{1},\cdots ,{X}_{{n}_{r}} \in  {B}_{r}}\right)  = P\left( {{X}_{m} \in  A \mid  {X}_{n} = i}\right)$$  
+\end{problem}
+\begin{solution}
+    根据马氏性，可以得到
+    \begin{align*}
+&P(X_m\in A| X_n=i,X_{n_1}\in B_1,\cdots,X_{n_r}\in B_r)\\
+=&\sum_{j\in A}P(X_m=j| X_n=i,X_{n_1}\in B_1,\cdots,X_{n_r}\in B_r)\\
+=&\sum_{j\in A}P(X_m=j| X_n=i)=P(X_m\in A|X_n=i)
+    \end{align*}
+\end{solution}
+
+\begin{problem}
+\textcolor{red}{14$^*$}$ . \{X_n\}$是以$\mu$为初分布，以$\bm{P}$为转移矩阵的马氏链.
+\end{problem}
+
+\begin{solution}
+ 因为$X_0=g(U_0)$，因此$P(g(U_0)=i)=\mu_i$，因此初始分布是$\mu$.
+
+ 因为$X_{n+1}=f(X_n,U_{n+1})$，因此$P(X_{n+1}=j|X_{n}=i)=P(f(i,U_{n+1})=j)=p_{ij}$，因此转移矩阵是$\bm{P}$
+
+ 因为$P(X_{n+1}=j|X_{n}=i,X_{0}=i_0,\cdots,X_{n-1}=i_{n-1})=P(f(i,U_{n+1})=j|f(i_{n-1},U_{n})=i,f(i_{n-2},U_{n})=i_{n-1},\cdots,f(i_0,U_{1})=i_1,g(U_0)=i_0)$，由于独立性，等于$P(X_{n+1}=j|X_n=i)=p_{ij}$，所以是马氏链
+\end{solution}
+
+\begin{problem}
+\textcolor{red}{${15}^{ * }$} . 假设对任意 $n \geq 0,i \in S,f\left( {n,i, \cdot }\right) : \left\lbrack {0,1}\right\rbrack \rightarrow S$ ,使得对任意
+
+$U \sim U\left( {0,1}\right)$
+
+$$
+P\left( {f\left( {n;i,U}\right) = j}\right) = {p}_{n;i,j},\;j \in S.
+$$
+
+(1) 证明: 对任意 $n \geq 0,{\mathbf{P}}_{n} = {\left( {p}_{n;i,j}\right) }_{S \times S}$ 为转移矩阵.
+
+(2) 假设 ${X}_{0},{U}_{1},{U}_{2},\cdots$ 相互独立, ${U}_{n} \sim U\left( {0,1}\right) ,n \geq 1,{X}_{0}$ 取值于 $S$ . 递归定义 ${X}_{n + 1} = f\left( {n + 1;{X}_{n},{U}_{n + 1}}\right) ,n = 0,1,2,\cdots$ . 证明: $\left\{ {X}_{n}\right\}$ 是马氏链. (注: $\left\{ {X}_{n}\right\}$ 可以为非时齐的.)
+\end{problem}
+\begin{solution}
+(1) $\sum_{j\in S}p_{n;i,j}=\sum_{j\in S}P(f(n;i,U)=j)=1$，因此是转移矩阵
+
+(2)由于
+\begin{align*}
+&P(X_{n+1}=j|X_n=i,X_{n-1}=i_{n-1},\cdot,X_0=i_0)\\
+=&P(f(n+1;i,U_{n+1})=j|f(n;i_{n-1},U_n)=i,\cdots,X_0=i_0)\\
+=&P(f(n+1;i,U_{n+1})=j)\\
+=&p_{n+1;i,j}=P(X_{n+1}=j|X_n=i)
+\end{align*}
+因此是马氏链
+\end{solution}
+
+\subsection{不变分布}
+\begin{problem}
+    2. 设 \( \left\{  {{X}_{n} : n \geq  0}\right\}   \) 是取值于 \( {\mathbb{Z}}_{ + } \) 的马氏链,其转移概率为
+\[{p}_{00} = p,\;{p}_{01} = 1 - p,\;{p}_{i,i + 1} = 1 - {p}_{i,i - 1} = \beta ,\;\forall i = 1,2,\cdots ,\]
+其中 \( 0 \leq  p < 1,0 < \beta  < 1 \) . 当 \( \beta  < 1/2 \) 时,求不变分布 \( \pi  \) 并计算 \( {E}_{\pi }{X}_{100} \) . (当 \( p = 0 \) 时,  此马氏链称为 \( {\mathbb{Z}}_{ + } \) 上的带反射壁的随机游动.)
+\end{problem}
+\begin{solution}
+   计算得到，$\pi_1=\frac{1-p}{1-\beta}\pi_0,\pi_{k+1}=\frac{1-\beta}{\beta}\pi_{k},\forall k\geq 1$，因此有
+    $$\pi_0=(1+\frac{1-p}{1-\beta}\sum_{i=0}^{\infty}(\frac{\beta}{1-\beta})^i)^{-1}\;\;\;\;, \pi_k=\frac{(1-p)\beta^{k-1}}{(1-\beta)^k}\pi_0,\forall k\geq 1$$
+$\beta<\frac{1}{2}$保证了$\frac{\beta}{1-\beta}<1$，因此不变分布是存在的.\\
+对于，$\mathbb{E}_{\pi}[X_{100}]$是和$100$没关系的，实际上
+$$\mathbb{E}_{\pi}[X_{100}]=\sum_{k=1}^{\infty}k\cdot \pi_k=\sum_{k=1}^{\infty}k\cdot \frac{(1-p)\beta^{k-1}}{(1-\beta)^k}\pi_0=(1-p)\pi_0\cdot \sum_{k=1}^{\infty}\frac{k\beta^{k-1}}{(1-\beta)^k}$$
+计算得到
+$$\mathbb{E}_{\pi}[X_{100}]=\frac{(1-p)(1-\beta)}{(1-2\beta)^2}\cdot \pi_0=\frac{(1-p)(1-\beta)}{(1-2\beta)^2}\cdot (1+\frac{1-p}{1-\beta}\sum_{i=0}^{\infty}(\frac{\beta}{1-\beta})^i)^{-1}$$
+\end{solution}
+
+\begin{problem}
+3. 设 \( S \) 上的马氏链 \( \left\{  {{X}_{n} : n \geq  0}\right\}   \) 具有不变分布 \( \pi  \) . 令 \( {Y}_{n} = \left( {{X}_{n},{X}_{n + 1}}\right) ,n = 0,1,2,\cdots  \) .  证明 \( \left\{  {{Y}_{n} : n \geq  0}\right\}   \) 是马氏链,并以 \( \left\{  {{\widetilde{\pi }}_{i,j} = {\pi }_{i}{p}_{ij} : i,j \in  S}\right\}   \) 为其不变分布.
+\end{problem}
+\begin{solution}
+考虑$P(Y_n=\bm{j}|Y_{n-1}=\bm{i_{n-1}},\cdot,Y_{0}=\bm{i_0})$，把$Y$拆分成$X$，可以发现
+\begin{align*}
+&P(Y_n=\bm{j}|Y_{n-1}=\bm{i_{n-1}},\cdot,Y_{0}=\bm{i_0})\\
+=&P(X_{n}=j_1,X_{n+1}=j_2|X_{n}=i_{n-1,2},X_{n-1}=i_{n-1,2},X_{n-1}=i_{n-2,1},X_{n-2}=i_{n-2,2},\cdots)\\
+=&P(X_{n}=j_1,X_{n+1}=j_2|X_{n}=i_{n-1,2},X_{n-1}=i_{n-1,2})\\
+=&P(Y_n=\bm{j}|Y_{n-1}=\bm{i_{n-1}})
+\end{align*}
+满足马氏性。
+\begin{align*}
+    \Tilde{\pi}_{ij}=&\sum_{(k_1,k_2)\in S\times S} \Tilde{\pi}_{k_1,k_2}P(Y_{n+1}=(i,j)|Y_{n}=(k_1,k_2))\\
+    =&\sum_{(k_1,k_2)\in S\times S} \Tilde{\pi}_{k_1,k_2}P(X_{n+1}=i,X_{n+2}=j| X_{n}=k_1,X_{n+1}=k_2)\\
+    =&\sum_{k_1\in S, k_2=i} \Tilde{\pi}_{k_1, i}P(X_{n+2}=j|X_{n+1}=i)\\
+    =&\sum_{k_1\in S, k_2=i} \Tilde{\pi}_{k_1, i}p_{ij}=p_{ij}\cdot\sum_{k_1\in S, k_2=i} \Tilde{\pi}_{k_1, i}=\pi_i\cdot p_{ij}
+\end{align*}
+或者，直观上来说，$Y$处在状态$(i,j)$的平稳概率就是，$X_k=i$的平稳概率$\pi_i$且下一个状态为$j$的概率，即$\pi_i\cdot p_{ij}$
+\end{solution}
+
+\begin{problem}
+4. 设马氏链的取值为非负整数,其转移概率为 \( p\left( {0,1}\right)  = 1 \) ; 对于 \( i \geq  1,{p}_{i,i - 1} = \lambda /\left( {\lambda  + 1}\right)  \) ,  \( {p}_{i,i + k} = {p}_{k}/\left( {\lambda  + 1}\right) ,\forall k \geq  1 \) . 其中, \( 1 = \mathop{\sum }\limits_{{k = 1}}^{\infty }{p}_{k} < \mathop{\sum }\limits_{{k = 1}}^{\infty }k{p}_{k} < \lambda  \) . 设 \( \pi  \) 为该马氏链的 不变分布,试求 \( {\pi }_{1} \) .
+\end{problem}
+\begin{solution}
+得到方程组：$\frac{\lambda}{1+\lambda}\pi_1=\pi_0, \pi_0+\frac{\lambda}{1+\lambda}\pi_2=\pi_1$\\以及$\frac{1}{1+\lambda}\sum_{i=1}^{k} p_{k-i}\pi_{i}+\frac{\lambda}{1+\lambda}\pi_{k+1}=\pi_{k},\forall k\geq2$，解方程，得\\
+$\pi_1=\frac{\lambda+1}{\lambda}\pi_0, \pi_k=\frac{(\lambda+1)^{k-2}(\lambda+1-\lambda\sum_{i=1}^{k-2}p_i)}{\lambda^k}\pi_0,\forall k\geq 2$，因此
+$$\pi_0=(1+\frac{\lambda+1}{\lambda}+\sum_{k=2}^{\infty}\frac{(\lambda+1)^{k-2}(\lambda+1-\lambda\sum_{i=1}^{k-2}p_i)}{\lambda^k})^{-1}=(3-\sum_{k=2}^{\infty}\frac{(\lambda+1)^{k-2}}{\lambda^{k-1}}\sum_{i=1}^{k-2}p_i)^{-1}$$
+因此有，$\pi_1=\frac{\lambda+1}{\lambda}(3-\sum_{k=2}^{\infty}\frac{(\lambda+1)^{k-2}}{\lambda^{k-1}}\sum_{i=1}^{k-2}p_i)^{-1}$
+\end{solution}
+
+\subsection{常返性}
+
+\begin{problem}
+\textcolor{red}{1$^*$  }. 证明:
+
+(1) 若 $D$ 是有限闭集,则存在常返类 $C$ ,使得 $C \subseteq D$
+
+(2) 有限状态空间上的马氏链有常返态.
+
+(3) 若 $C$ 是有限的闭的互通类,则 $C$ 是常返类.   
+\end{problem}
+\begin{solution}
+随机过程是样本点和时间的二元函数，映射到状态空间，对于$X(\omega,t)$，它的取值落入状态空间$S$，固定$t$，$X(\omega,t_0)$是一个随机变量，表示在$t_0$时刻的一个分布； 固定样本点$\omega$，$X(\omega_0,t)$是状态空间$S$中的一个样本轨道.
+
+(1) 有限闭集$D=\{a_1,\cdots,a_n\}$，因此可以看成新的状态空间，反证法，设每一个状态都不是常返的，那么$P(w\;|X(w)=a_i, \;i.o.)=0$. 那么$\sum_{i=0}^n P(\omega| X(\omega)=a_i,\;i.o.)=0$，有限和仍然是$0$，但是$P(\omega| \exists a_i \in D, \; X(\omega)=a_i\; i.o.)=1$，这是因为对于任意一个样本，这个样本的样本轨道即使遍历了有限的$D$，那么必定至少在一个状态常返。由$P(\omega| \exists a_i \in D, \; X(\omega)=a_i\; i.o.)\leq \sum_{i=0}^n P(\omega| X(\omega)=a_i,\;i.o.)$导出矛盾.
+
+(2) 有限状态空间本身是有限闭集
+
+(3) $C$有限闭集，因此内部存在常返类，$C$互通，因此整个是常返类
+\end{solution}
+
+\begin{note}
+\textcolor{blue}{(1) 中的“看成新的状态空间”这句话是重要的，否则样本轨道从大的状态$S$进入$D$的概率有可能是$0$，那么$P(\omega| \exists a_i \in D, \; X(\omega)=a_i\; i.o.)=0$.\\(2) 在状态$i$常返$\iff P_i(V_i=\infty)=1\iff P_i(\sigma_i<\infty)=1$. 即从正态$i$出发，返回$i$的总次数是无穷，返回$i$的时间是有限. 而求概率，本质上是在求满足条件的样本点集合的测度，即$P_i(\omega|X(\omega) i.o.)=1$}
+\end{note}
+\subsection{极限行为}
+\begin{problem}设$\mathbf{P}$不可约,则存在正整数$d$以及$S$的一个分割${D}_{0},{D}_{1},\cdots,{D}_{d - 1}$。（对任何 $n$ 补充定义 ${{D}_{{nd} + r} \mathrel{\text{:=}} {D}_{r}}$ ）,使得:
+
+(1) $\forall r \geq 0,\forall i \in {D}_{r},\forall l \geq 0,{\sum }_{j \in {D}_{r + l}}{p}_{ij}^{\left( l\right) } = 1$ ;
+
+(2) $\forall r \geq 0,\forall i,j \in {D}_{r},\exists {n}_{0} \geq 0$ 使得当 $n \geq {n}_{0}$ 时, ${p}_{ij}^{\left( nd\right) } > 0$ .\\
+(提示: 取定 \( k \in S \) ,令 \( {R}_{k} = \{ n : {p}_{kk}^{\left( n\right) } > 0\} ,d = \min \{ n - m : n,m \in \) \( \left. {{R}_{k},n > m}\right) ,{D}_{r} = \left\{ {i \in S : \exists n \geq 0\text{ s.t. }{p}_{ki}^{\left( nd + r\right) } > 0}\right\} \) .)
+\end{problem}
+\begin{solution}
+(1) 按照提示的方法定义$d$和$D_i$. 反证法，假设存在$r_0\geq0$，存在$i_0\in D_{r_0}$，存在$l_0\geq 0$，使得$\sum_{j\in D_{r_0+l_0}p_{i_0,j}^{(l_0)}}<1$. 那么就存在状态$w^*$不属于$D_{r_0+l_0}$，使得从状态$i_0$走$l_0$步之后到达$w^*$，即$p_{i_0,w^*}^{(l_0)}>0$. 因为所有的$D_i$对$S$做了分割，因此$w^*$必然在某一个$D_i,i\neq i_0+l_0$中. 不妨设$r_0=1$，$l_0=1,i=3$，即$i_0\in D_1, l_0=1, \sum_{j\in D_2}p_{i_0,j}^{(1)}<1, w^*\in D_3,p_{i_0,w^*}^{(1)}>0$. 根据$d$的定义，存在$n_0,m_0\in R_{kk},d=n_0-m_0$. 现在，状态$k\in D_0$，可以通过包含$w^*$的路径，走$d-1$步返回$D_0$，这与$d$的定义矛盾.\\
+(2) 
+\end{solution}
+
+\subsection{击中概率}
+\begin{problem}
+    1. 假设 $\left\{X_n\right\}$ 是不可约马氏链, $D$ 为 $S$ 的非空真子集。令
+    $$
+    \hat{X}_n= \begin{cases}X_n, & n \leqslant \tau_D, \\ X_{\tau_D} & n>\tau_D .\end{cases}
+    $$
+    (1) 证明: $\left\{\hat{X}_n\right\}$ 是 $S$ 上的马氏链.\\
+    (2) 求 $\left\{\hat{X}_n\right\}$ 的转移概率 (用 $\left\{X_n\right\}$ 的转移矩阵表达).\\
+    (3) 证明: \( {P}_{i}\left( {{\tau }_{D}^{\left( X\right) } < \infty }\right)  = {P}_{i}\left( {{\tau }_{D}^{\left( X\right) } < \infty }\right) ,\forall i \in  S \) .
+\end{problem}
+\begin{proof}
+    (1) 考虑$P(\hat{X}_{n+1}=i_{n+1}|\hat{X}_n=i_{n},\cdots,\hat{X}_0=i_0 )$. 若$n+1\leq \tau_D$, 那么上面的式子和$X_n$是一样的，因此是马氏链. 若$n+1>\tau_D$，那么至少有$\hat{X}_{n+1}=\hat{X}_n=X_{\tau_D}$，因此$P(\hat{X}_{n+1}=i_{n+1}|\hat{X}_n=i_{n},\cdots,\hat{X}_0=i_0 )=P(X_{\tau_D}=i_{n+1}|X_{\tau_D}=i_n)=P(\hat{X}_{n+1}=i_{n+1}|\hat{X}_n=i_{n})$，具有马氏性.\\
+    (2) \textcolor{red}{有点迷惑呀}，我觉得是$\hat{P}=P$.\\
+    (3) 这是因为 
+    \begin{align*}
+        &P_i(\tau_D^{(X)}<\infty)=\sum_{t=1}^{\infty}P(\tau_D^{(X)}=t)\\=&\sum_{t=1}^{\infty}P(X_t\in D, \{X_{t-1},\cdot X_{1} \}\subsetneq D|X_0=i)\\
+        =&\sum_{t=1}^{\infty}P(\hat{X}_t\in D, \{\hat{X}_{t-1},\cdot \hat{X}_{1} \}\subsetneq D|\hat{X}_0=i)=P_i(\tau_D^{(\hat{X})}<\infty)
+    \end{align*}
+\end{proof}
+\begin{problem}
+    2. 假设 \( S \) 不可约、常返; \( A,B \) 为 \( S \) 中的非空子集,且 \( A \cap  B = \varnothing  \) 记 \( {x}_{i} = {P}_{i}\left( {{\tau }_{A} < {\tau }_{B}}\right)  \) ,写出 \( \left\{  {{x}_{i} : i \in  S}\right\}   \) 满足的方程组.
+\end{problem}
+\begin{solution}
+    $x_i=1,i\in A$, $x_i=0,i\in B$, 下面考虑$i\notin A, i\notin B$. 此时有
+    \begin{align*}
+        P_i(\tau_A<\tau_B)=\sum_{j\in S}p_{ij}P(\tau_A<\tau_B|X_1=j)
+    \end{align*}
+    考虑$Y_n=X_{n+1}$, 由于$i\notin A, i\notin B$, 有$\tau_A^{(Y)}=\tau_A^{(X)}+1, \tau_B^{(Y)}=\tau_B^{(X)}+1$, 因此有
+    \begin{align*}
+        P_i(\tau_A<\tau_B)=\sum_{j\in S}p_{ij}P(\tau_A<\tau_B|X_1=j)=\sum_{j\in S}p_{ij}x_j,\quad x_i=1,i\in A,\quad x_i=0,i\in B
+    \end{align*}
+\end{solution}
+
+\begin{problem}
+    3. 制造某种产品需要经过前后两道工序. 在完成第一道工序之后 \( {10}\%  \) 的加工件成了废品, \( {20}\%  \) 的加工件需要返工,剩余的 \( {70}\%  \) 则进入第二道工序. 在完成第二道工序之后, \( 5\%  \) 的加工件成了废品, \( 5\%  \) 的加工件需要返回到第一道工序, \( {10}\%  \) 的加工件需要返回到第二道工序,剩余的 \( {80}\%  \) 可以出厂.
+
+(1) 试用马氏链模拟此系统.
+
+(2) 利用击中概率求整个生产过程的废品率.
+\end{problem}
+\begin{solution}
+    (1)设$A,B,C,D$分别代表处在第一道工序，处在第二道工序，出厂，废品四个状态，那么转移矩阵是
+    $$P=\begin{pmatrix}
+        0.2 & 0.7 & 0 &0.1 \\ 0.05 & 0.1 & 0.8 & 0.05 \\ 0 & 0 & 1 & 0 \\ 0 & 0& 0& 1
+    \end{pmatrix}$$
+
+    (2) 废品率就是$P_A(\tau_D<\infty)$, 不妨$A,B,C,D$对应$1,2,3,4$, 有 
+    $$p_i(\tau_4<\infty)=x_i=\sum_{j=1}^4p_{ij}x_j, x_3=0,x_4=1, i\in \{1,2\}$$
+    解得$x_1=\frac{25}{137}, x_2=\frac{9}{137}$, 因此击中概率是$x_1=\frac{25}{137}$.
+\end{solution}
+
+\begin{problem}
+    4. 某赌徒参加公平博弈,每次输、赢的概率均为 \( 1/2 \) . 当他的赌资为 \( i \) 元时,他的策略如下: 若 \( 0 < i \leq  5 \) ,则押注 \( i \) 元; 若 \( 5 < i < {10} \) ,则押注 \( {10} - i \) 元; 若 \( i = 0 \) 或 10,则结束赌博. 假设他最初有 2 元钱. 求他结束赌博时口袋里有 10 元钱的概率. (注: 假设他押注 \( j \) 元,若赢则赌资增加 \( j \) 元,若输则赌资减少 \( j \) 元.)
+\end{problem}
+\begin{solution}
+    如果不去列方程算击中概率，凭感觉算的话，如下图所示.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{image/1.jpg}
+    \end{figure}
+    单次有$\frac{3}{16}$的概率到达$10$, 有$\frac{1}{16}$的概率返回$2$, 因此总概率是
+    $$\frac{3}{16}\sum_{t=0}^{\infty} (\frac{1}{16})^t=\frac{1}{90}$$
+    \textcolor{blue}{而列方程计算的话，$8$个未知数$8$个方程. 算麻了也没算出来.}
+\end{solution}
+
+\begin{problem}
+    5. 研究更新过程 (例 1.1.9) 的常返性.
+\end{problem}
+\begin{proof}
+    因为$p_{i,i-1}=1, \forall i\geq 1, p_{0,i}=P(L=i+1), \forall i\geq 0$. 考虑$x_i=P_i(\tau_0<\infty)$, 显然有$x_0=1$. 由于$x_1=x_2=\dots=x_{n+1}=\dots$, 将它们记为$t$, 那么$x_0=1=p_1+(1-p_1)t=t$, 因此等式只有恒为$1$的解，而更新过程是不可约的马氏链，根据书上命题，更新过程是常返的。
+\end{proof}
+
+\begin{problem}
+    6. 证明: 对任意 \( d \geq  2 \) ,规则树 \( {\mathbb{T}}^{d} \) 上的简单随机游动非常返.
+\end{problem}
+\begin{solution}
+    \textcolor{blue}{直接套用定理来构造存在不恒为$1$的解似乎很难，我们可以直接考虑使用格林函数.} 因为这是不可约马氏链，考虑根节点的格林函数，第$0$层总概率是$1$，第$1$层总概率是$(\frac{1}{d+1})^2(d+1)=\frac{1}{d+1}$，第$2$层的总概率是$(\frac{1}{d+1})^4(d+1)^2=(\frac{1}{d+1})^2$，归纳有$i$层总概率是$(\frac{1}{d+1})^{2i}$，求和是收敛的，因此非常返.
+\end{solution}
+
+\begin{problem}
+    7. 假设 \( \left\{  {X}_{n}\right\}   \) 为 \( \{ 0,1,2,\cdots \}  \) 上的马氏链,转移概率如下:
+\[\begin{matrix} {p}_{01} = 1;\;{p}_{i,i + 1} = \frac{{i}^{2} + {2i} + 1}{2{i}^{2} + {2i} + 1},\;{p}_{i,i - 1} = \frac{{i}^{2}}{2{i}^{2} + {2i} + 1},\;i \geq  1; \end{matrix}\]
+若 \( \left| {i - j}\right|  \geq  2 \) ,则 \( {p}_{ij} = 0 \) . 证明该马氏链是非常返的,并计算 \( {\rho }_{i} =  \) \( {P}_{i}\left( {{\sigma }_{0} < \infty }\right)  \) . (提示: \( \mathop{\sum }\limits_{{k = 1}}^{\infty }\frac{1}{{k}^{2}} = \frac{{\pi }^{2}}{6} \) .)
+\end{problem}
+
+\begin{solution}
+    首先，这个马氏链是不可约的。直接使用格林函数，计算$G_{00}=\sum_{n=0}^{\infty}p_{00}^{(n)}$. 首先，奇数次不可能返回，偶数次结果：$p_{00}^{(0)}=0,\dots, p_{00}^{(2k)}=\Pi_{i=1}^{k-1}\frac{i^2(i^2+2i+1)}{(2i^2+2i+1)^2}$，因此$p_{00}^{(2k)}=\frac{k^2}{2k^2+2k+1}\Pi_{i=1}^{k-1}\frac{i^2(i^2+2i+1)}{(2i^2+2i+1)^2}\sim O(\frac{1}{2\cdot 4^{k-1}})$，求和是收敛的，因此非常返. 根据$\rho_i$的定义，得到$\rho_i=p_{i,i-1}\rho_{i-1}+p_{i,i+1}\rho_{i+1},\forall i\geq 1$，那么可以证明$\rho_0=\rho_1=\cdots$，全部的$\rho$都是相等的。那么$\rho_i=\rho_0,\forall i\geq 0$，下面计算$\rho_0$.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{image/2.png}
+    \end{figure}
+    怎么感觉$\sum_{k=2}^{\infty}\frac{k^2}{2k^2+2k+1}\Pi_{i=1}^{k-1}\frac{i^2(i^2+2i+1)}{(2i^2+2i+1)^2}$不是人能算出来的呢？
+\end{solution}
+
+\begin{problem}
+    8. 假设 \( \left\{  {X}_{n}\right\}   \) 为离散圆周 \( {\mathbb{S}}_{N} \) 上的简单随机游动 (定义见例 1.2.8). 试求 \( \left\{  {X}_{n}\right\}   \) 在首次回到初始点之前走遍所有顶点的概率.
+\end{problem}
+\begin{solution}
+    不妨设初始点是$0$，那么求从$0$点出发首次回到$0$点之前走遍所有顶点的概率。这个概率就是$P_{0}(\tau_{N-1}<\sigma_{0})-p_{0,N-1}=P_{0}(\tau_{N-1}<\sigma_{0})-\frac{1}{2}$(这是因为，从$0$开始走，如果减去直接跳到$N-1$的概率$\frac{1}{2}$，那么只能跳到$1$，那么如果要求$\tau_{N-1}<\sigma_0$，那么粒子必须在返回$0$之前走到$N-1$，必然会遍历所有顶点). 下面来计算$P_{0}(\tau_{N-1}<\sigma_{0})$. 使用首步分析法，记$\mu_i=P_i(\tau_{N-1}<\sigma_0)$，那么有
+    \begin{align*}
+        \mu_0&=\frac{1}{2}P_0(\tau_{N-1}<\sigma_0|X_1=N-1)+\frac{1}{2}P_0(\tau_{N-1}<\sigma_0|X_1=1)\\ &=\frac{1}{2}+\frac{1}{2}P_0(\tau_{N-1}<\sigma_0|X_1=1)=\frac{1}{2}+\frac{1}{2}\mu_1 \\&\Rightarrow \mu_0=\frac{\mu_1+1}{2}\\
+        \mu_1&=\frac{1}{2}\mu_0+\frac{1}{2}\mu_2\Rightarrow \mu_0=\frac{\mu_2+2}{3}\\
+        \cdots&\\ \mu_0&=\frac{\mu_1+1}{2}=\frac{\mu_2+2}{3}=\cdots=\frac{\mu_{N-1}+(N-1)}{N}
+    \end{align*}
+    而$\mu_{N-1}=1$，因此$\mu_0=1$，所以从$0$点出发首次回到$0$点之前走遍所有顶点的概率是$\frac{1}{2}$.\textcolor{blue}{有没有阳间一点的思路？感觉第一步还是不是很确定。}
+\end{solution}
+
+\begin{problem}
+    9. 假设 \( \left\{  {S}_{n}\right\}   \) 是一维简单随机游动, \( N \geq  2 \) . 记 \( \tau  = \inf \{ n \geq  0 \) : \( \left. {{S}_{n} = 0\text{ 或 }N}\right\}   \) . 证明:
+
+(1) \( {P}_{k}\left( {\tau  \leq  N}\right)  \geq  {2}^{-\left( {N - 1}\right) },k = 0,1,\cdots ,N \) ;
+
+(2) \( {E}_{k}\tau  < \infty ,k = 0,1,\cdots ,N \) .
+\end{problem}
+\begin{note}
+    $\tau$实际上是停时.
+\end{note}
+
+\begin{solution}
+    (1) \textcolor{blue}{注意力惊人：思考耗时最短的路径是？} 最短的路径就是沿着一个方向一直走，这样的话$\tau\leq N$一定成立，这样的概率和是$\frac{1}{2^k}+\frac{1}{2^{N-k}}\geq 2\cdot\frac{1}{2^N}=\frac{1}{2^{N-1}}$.\\ 
+    (2) 考虑方程$E_k\tau=\frac{1}{2}E_{k-1}(\tau+1)+\frac{1}{2}E_{k+1}(\tau+1)=1+\frac{1}{2}E_{k-1}(\tau)+\frac{1}{2}E_{k+1}(\tau)$，以及边界条件$E_0(\tau)=E_{N}(\tau)=0$. 记$E_k(\tau)=e_i$，得到$e_0=e_{N-1}=0$，以及
+    \begin{align*}
+        e_1=\frac{e_2}{2}+1=\frac{e_3}{3}+2=\dots=\frac{e_{N-1}}{N-1}+(N-2)
+    \end{align*}
+    带入$2e_{N-1}=2+e_{N-2}$，得到$e_k=k(N-k)<\infty$.
+\end{solution}
+
+\begin{problem}
+    \( {10}^{ * } \) . 对任意 \( \left( {i,j}\right)  \in  {\mathbb{Z}}^{2} \) ,独立抛一枚公平的硬币,若抛到正面,则在 \( \left( {i,j}\right)  \) 与 \( \left( {i + 1,j}\right)  \) 之间连一条边,否则,在 \( \left( {i,j}\right)  \) 与 \( \left( {i,j + 1}\right)  \) 之间连一条边. 于是,我们得到二维格点的随机子图 \( G \) ,以 \( {\mathbb{Z}}^{2} \) 为顶点. 证明: \( P\left( {G\text{ 连通 }}\right)  = 1 \) .
+\end{problem}
+\begin{solution}
+    因为$a$和$b$的初始点的路径其实互不相关，我可以先让其中一个点先移动，使得$a$点和$b$点处在$y=-x+k,\exists k$上（移动到这个状态的总的可能性一定是有限种，我们对其中一种分析，总概率加起来还是$1$），这时，将$c\cdot\frac{|b-a|}{\sqrt{2}}$作为$u$的初始值，其中$c=1$或$-1$，根据方向决定，并且平移到$y=-x$上。\\接下来让两个粒子同步移动一步，那么之后就是在做$y=-x$这个一维状态空间上的随机游走,$\frac{1}{2}$不动，$\frac{1}{4}$变大一格，$\frac{1}{4}$变小一格（注意，我这里是包含了方向的，因此$u$的状态空间是$\mathbb{Z}$），不妨设$u_0=t\neq 0$，那么$P(G$连通$)=1$等价于$P_t(\sigma_0<\infty)=1$. 设 $p_i=P_i(\sigma_0<\infty)$，因为一维随机游走常返，所以$p_0=1$，又根据首步分析法，得到$2p_{i}=p_{i-1}+p_{i+1}$，因此整个序列是等差数列，而所有概率都应该小于等于$1$，因此全部都等于$1$，得证.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.5\textwidth]{image/4.jpg}
+    \end{figure}
+    \textcolor{blue}{实际上，最后的讨论是没有必要的。因为整个马氏链不可约，且每一个点都是常返的，那么必然有$P_i(\sigma_j<\infty)=1$. 真的吗？}
+\end{solution}
+
+\subsection{格林函数}
+\begin{problem}
+    1. 一只青蛙在正立方体的 8 个顶点上做随机游动, 每次以 $\frac{1}{4}$
+
+概率停留不动,以 \( 1/4 \) 的概率选取一条边并跳至相邻的顶点. 试求
+
+(1) 从正方体的一个顶点 \( v \) 出发首次回到 \( v \) 的平均时间;
+
+(2) 从 \( v \) 出发首次到达对径点 \( w \) 的平均时间.
+\end{problem}
+\begin{solution}
+    (1) 显然这个马氏链不可约，且状态空间有限，那么不变分布一定存在，并且每个顶点都是正常返的。由对称性，$\pi_i=\frac{1}{8}$，又根据$E_i(\sigma_i)=\frac{1}{\pi_i}=8$得到首次返回平均时间.\\
+    (1) 另解：设$S=\{1,2,\cdots,8\}$，考虑$E_1(\sigma_1)$，采用首步分析法，有
+    \begin{align*}
+        E_1(\sigma_1)&=\frac{1}{4}\cdot 1+\frac{1}{4} E_1(\sigma_1|X_1=2)+\frac{1}{4} E_1(\sigma_1|X_1=3)+\frac{1}{4} E_1(\sigma_1|X_1=4)\\
+        &=1+\frac{1}{4}E_2(\sigma_1)+\frac{1}{4}E_3(\sigma_1)+\frac{1}{4}E_4(\sigma_1)
+    \end{align*}
+    以距离$1$有几条边，来分割状态空间，分别是$A,B,C,D$，那么有$E_{1}(\sigma_1)=e_A=1+\frac{3}{4}e_B$. 并且同理我们有：
+    \begin{align*}
+        e_A&=1+\frac{3}{4}e_B\\e_B&=1+\frac{1}{4}e_B+\frac{1}{2}e_C\\e_C&=1+\frac{1}{2}e_B+\frac{1}{4}e_C+\frac{1}{4}e_D\\e_D&=1+\frac{3}{4}e_C+\frac{1}{4}e_D
+    \end{align*}
+    \textcolor{red}{方程很容易列错，注意第二个方程里面没有$\frac{1}{4}e_A$}，求解，得到$e_A=8,e_B=\frac{28}{3},e_C=12,e_D=\frac{40}{3}$.\\(2) $e_D=\frac{40}{3}$.
+\end{solution}
+
+\begin{problem}
+    2. 假设 \(\left\{ S_n \right\}\) 是从 0 出发的一维随机游动，步长分布为 \(P(\xi = k) = \frac{1}{6}, k = 1, \cdots, 6\) 。令 \(T = \min \left\{ n \geq 1 \mid S_n - 1 \text{ 可以被 } 8 \text{ 整除} \right\}\) 。求：\({E}_0 T\)。
+\end{problem}
+\begin{solution}
+    只需要在模$8$意义下对状态空间进行分类就好了. 记$E_i(T)=e_i$，那么只需要考虑$e_0,\cdots,e_7$就行了，因为$\forall k\geq 8, e_{k}=e_{t}, k\equiv t \mod 8$. 有如下方程：
+    \begin{align*}
+        e_0&=E(T|S_0=0)\\
+        &=\frac{1}{6}E(T|S_0=0,S_1=1)+\cdots+\frac{1}{6}E(T|S_0=0,S_1=5)+\frac{1}{6}E(T|S_0=0,S_1=6)\\
+        &=1+\frac{1}{6}(e_2+e_3+e_4+e_5+e_6)
+    \end{align*}
+    注意$E(T|S_0=0,S_1=1)=1$
+
+    同理我们可以得到方程组：
+    \begin{align*}
+        e_0&=1+\frac{1}{6}(e_2+e_3+e_4+e_5+e_6)\\
+        e_1&=1+\frac{1}{6}(e_2+e_3+e_4+e_5+e_6+e_7)\\
+        e_2&=1+\frac{1}{6}(e_3+e_4+e_5+e_6+e_7+e_0)\\
+        e_3&=1+\frac{1}{6}(e_4+e_5+e_6+e_7+e_0)\\
+        e_4&=1+\frac{1}{6}(e_5+e_6+e_7+e_0+e_2)\\
+        e_5&=1+\frac{1}{6}(e_6+e_7+e_0+e_2+e_3)\\
+        e_6&=1+\frac{1}{6}(e_7+e_0+e_2+e_3+e_4)\\
+        e_7&=1+\frac{1}{6}(e_0+e_2+e_3+e_4+e_5)
+    \end{align*}
+    求解下列方程，得到 $e_0=\frac{205886}{30025}\approx 6.85715$.
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.7\textwidth]{image/3.png}
+    \end{figure}
+\end{solution}
+
+\begin{problem}
+    3. 某商家设计了一套小画片,共有 \( N \) 种,并在每一产品包装
+入一张小画片, 种类等可能出现. 假设某人每天购买一包该产品, 第$n$天见过 \( {X}_{n} \) 种不同的小画片.
+
+(1) 写出 \( \left\{  {X}_{n}\right\}   \) 的转移概率.
+
+(2) 假设此人总共花了 \( \tau  \) 天收集齐整套小画片,试求 \( {E\tau } \) .
+\end{problem}
+
+\begin{solution}
+    (1) 状态空间$S=\{1,2,\cdots,N\}$，有$p_{i,i}=\frac{i}{N},p_{i,i+1}=\frac{N-i}{N}$，其余都是$0$.\\
+    (2) 实际上$\tau=\tau_{N}$，求的是$E(\tau)=E_{0}(\tau_N)$. 记$E_i(\tau_N)=e_i$，自然有$e_N=0$，其余的由首步分析法如下
+    \begin{align*}
+        e_0&=1+e_1\\
+        e_1&=1+\frac{1}{N}e_1+\frac{N-1}{N}e_2\\
+        e_i&=1+\frac{i}{N}e_i+\frac{N-i}{N}e_{i+1},\quad i=1,2,\cdots,N-2\\
+        e_{N-1}&=1+\frac{N-1}{N}e_{N-1}
+    \end{align*}
+    求解得到：$e_0=N+N\sum_{i=1}^N \frac{1}{i}$
+\end{solution}
+
+\begin{problem}
+    4. 设 \( \left\{  {X}_{n}\right\}   \) 为随机游动; 步长分布为 \( P\left( {\xi  = 2}\right)  = P\left( {\xi  =  - 1}\right)  = \frac{1}{2} \) . 令 \( \phi \left( s\right)  \mathrel{\text{:=}} {E}_{1}{s}^{{\tau }_{0}} \) ,其中 \( s \in  \left( {0,1}\right)  \) . 证明: \( {s\phi }{\left( s\right) }^{3} - {2\phi }\left( s\right)  + s = 0 \) .
+\end{problem}
+\begin{solution}
+    首步分析法，得到 
+    \begin{align*}
+        E(s^{\tau_0}|X_0=1)&=\phi(s)=\frac{1}{2}E(s^{\tau_0}|X_0=1,X_1=0)+\frac{1}{2}E(s^{\tau_0}|X_0=1,X_1=3)\\
+        &=\frac{s}{2}+\frac{s}{2}E(s^{\tau_0}|X_0=3)
+    \end{align*}
+    但是怎么得到$E(s^{\tau_0}|X_0=3)=\phi(s)^3=E(s^{\tau_0}|X_0=1)^3$呢？
+    \textcolor{red}{在$X_0=t+1$的条件下，$\tau_{0}$和$\tau_{0}-\tau_{t}$独立.}\textcolor{blue}{直观上来说，因为从$t+1$出发想要走到$0$，而根据条件，向左边走只能一格一格跳，那么肯定会先到$t$，即$\tau_t>\tau_0$在$X_0=t+1$的条件下恒成立. 而$\tau_0$只依赖于初始点$t+1$. 而$\tau_0-\tau_t$相当于是走到$t$之后再走到$0$所需要的时间间隔，应该是独立的.}
+    \begin{align*}
+        E_{t+1}(s^{\tau_0})&=E(s^{\tau_0-\tau_t}|X_0=t+1)\cdot E(s^{\tau_t}|X_0=t+1)
+    \end{align*}
+    根据平移对称性，有$E(s^{\tau_t}|X_0=t+1)=E(s^{\tau_0}|X_0=1)=\phi(s)$.（之后想想怎么写成更严格的推演），而$E(s^{\tau_0-\tau_t}|X_0=t+1)=E(s^{\tau_0}|X_0=t)$（直观，之后想想怎么写成更严格的推演），所以有
+    \begin{align*}
+        E_{t+1}(s^{\tau_0})&=E(s^{\tau_0-\tau_t}|X_0=t+1)\cdot E(s^{\tau_t}|X_0=t+1)\\
+        &=\phi(s)E(s^{\tau_0}|X_0=t)
+    \end{align*}
+    归纳有$E_{t+1}(s^{\tau_0}=\phi(s)^{t+1})$，所以$E_{3}(s^{\tau_0}=\phi(s)^{3})$，得证.\\
+    \textbf{严格书写}：在$\tau_t<\infty$的条件下，考虑从$t+1$出发的马氏链，有$\tau_t$与$\tau_{0}-\tau_{t}$独立，有
+    \begin{align*}
+        E_{t+1}(s^{\tau_0}| \tau_t<\infty )&=E_{t+1}(s^{\tau_0-\tau_{t}}| \tau_t<\infty )\cdot E_{t+1}(s^{\tau_{t}}| \tau_t<\infty )\\
+        &=E_t(s^{\tau_0})\cdot E_1(s^{\tau_0}|\tau_0<\infty)\tag{*}
+    \end{align*}
+    注意到$E_{t+1}(s^{\tau_t}|\tau_t<\infty)=E_1(\tau_0)$以及$P_{t+1}(\tau_0=k|\tau_t<\infty)=\frac{P_{t+1}(\tau_0=k)}{P_{t+1}(\tau_t<\infty)}$, 这是因为$\{\tau_0<\infty\}\subset \{\tau_t<\infty\}$, 因此在$(*)$式两边同乘$P_1(\tau_0<\infty)=P_{t+1}(\tau_t<\infty)$, 有 
+    $$E_{t+1}(s^{\tau_0})=E_t(s^{\tau_0})\phi(s)$$
+    因此$E_{3}(s^{\tau_0})=\phi(s)^3$.\\
+    \textcolor{red}{\textbf{方法二}}: $x_i=E_i(s^{\tau_0})$, 递推格式$x_i=\frac{s}{2}(x_{i-1}+x_{i+2})$, 为了求特征方程, 带入$x_k=x^k$, 有$sx^3-2x+s=0$. 下面说明$0<s<1$的情况下, $f(x)=sx^3-2x+s$有三个不同的实根$\alpha<\beta<\gamma$且满足$\alpha<-1,0<\beta<1,\gamma>1$, 这是因为 
+    $$f(-\infty)=-\infty,f(-1)=2>0,f(0)=s>0,f(1)=2s-2<0,f(+\infty)=+\infty$$
+    得到通项$x_i=c_1\alpha^i+c_2\beta^i+c_3\gamma^i$, 由于$x_i=E_i(s^{\tau_0})\leq s^i\to 0$, 因此$c_1=c_3=0$, 又因为$y_0=c_2=1$, 所以$x_i=\beta^i$, 特别的$x_1=\phi(s)$是$sx^3-2x+s$的根.
+\end{solution}
+
+\begin{problem}
+    5. 证明: \( \left\{  {{E}_{i}{\sigma }_{D} : i \in  S}\right\}   \) 是方程组 (1.7.8) 最小的非负解.
+\end{problem}
+
+\begin{solution}
+    要证明$E_i(\tau)=E_i(\tau_{D^c})$是下面方程的最小非负解.
+    \begin{align*}
+        y_i=1+\sum_{j\in S}p_{ij}y_j,\quad \forall i\in D,\quad y_i=0,\quad \forall i\notin D
+    \end{align*}
+    $E_i(\tau)$是从$i$出发，离开$D$的平均时间，因此若$i\notin D$，自然有$E_i(\tau)=0$，有$E_i(\tau)=y_i$. 接下来，根据首步分析法，若$i\in D$，有
+    \begin{align*}
+        E_i(\tau)&=\sum_{j\in S}p_{ij}E(\tau|X_0=i,X_1=j)=\sum_{j\in S}p_{ij}(1+E(\tau|X_0=j))\\&=1+\sum_{j\in S}p_ijE_j(\tau)
+    \end{align*}
+    即，已经证明了$E_i(\tau)$是上述方程的解，下面证明是最小非负解.（仿照书上的关于击中概率的证明）加上上述方程有新的解$\{\tilde{y}_i,i\in S\}$，那么对于$i\notin D$，有$\tilde{y}_i=y_i=0\Rightarrow \tilde{y_i}\geq y_i$. 对于$i\in D$
+    \begin{align*}
+        \tilde{y}_i&=1+\sum_{j\in S}p_{ij} \tilde{y}_j\\
+        &=1+\sum_{j\in D}p_{ij}(1+\sum_{k\in D}p_{jk} \tilde{y}_k)\\
+        &=1+\sum_{j\in D}p_{ij}+\sum_{j,k\in D}p_{ij}p_{jk} \tilde{y}_k\\
+        &=\cdots\\
+        &=1+\sum_{j_1\in D}p_{ij_1}+\cdots+\sum_{j_1,\cdots,j_n\in D}p_{ij_1}p_{j_1j_2}\cdots p_{j_{n-1}j_n} \tilde{y}_{j_n}\\
+        &=1+P_i(\tau_{D^c}>1)+P_i(\tau_{D^c}>2)+\cdots+P_i(\tau_{D^c}>n)\\
+        &=1+P_i(\tau_{D^c}=2)+2\cdot P_i(\tau_{D^c}=3)+\cdots+n\cdot P_i(\tau_{D^c}=n+1)\\
+        &\geq P_i(\tau_{D^c}=1)+2\cdot P_i(\tau_{D^c}=2)+3\cdot P_i(\tau_{D^c}=3)+\cdots+(n+1)\cdot P_i(\tau_{D^c}=n+1)\\
+        &\to E_i(\tau_{D^c})=y_i
+    \end{align*}
+    不等号是因为把$1$拆分成了$1=\sum_{k=1}^{\infty}P_i(\tau_{D^c}=k)$而忽略掉了$n+1$之后的部分.
+\end{solution}
+
+\begin{problem}
+ 6. 假设 \( i,j \) 是两个互不相等的状态. 证明下面三条等价:
+
+(1) \( {\rho }_{ij} > 0 \) ; (2) \( i \rightarrow  j \) ; (3) \( {G}_{ij} > 0 \) .
+\end{problem}
+
+\begin{solution}
+    (1)$\Rightarrow$(2), $\rho_{ij}=P_i(\sigma_j<\infty)>0$, 那么$\exists m>0, P_i(\sigma_j=m)>0$, 因此$p_{ij}^{(m)}=P_i(X_m=j)>P_i(\sigma_j=m)>0$, 因此$i\to j$.\\
+    (2)$\Rightarrow$(3), $G_{ij}=\sum_{k=0}^{\infty}p_{ij}^{(k)}>p_{ij}^{(m)}>0,\exists m>0$.\\
+    (3)$\Rightarrow$(1), 反证法, 若$\rho_{ij}=0$, 那么$P_i(\sigma_j=\infty)=1$, 那么和从$i$出发永远不可能到$j$(概率$1$), 那么$G_{ij}>0\Rightarrow p_{ij}^{(m)}=P_i(X_m=j)>P_i(\sigma_j=m)>0$矛盾, 因此$\rho_{ij}>0$.
+\end{solution}
+
+\begin{problem}
+    7. 证明: \( {\rho }_{ii} = 1 - 1/{G}_{ii} \) .
+\end{problem}
+
+\begin{solution}
+    \textcolor{blue}{实操上来说, 拆分$G_{ii}$反而要更容易, 到时候再想想拆$\rho_{ii}$的方法吧.}
+    \begin{align*}
+        G_{ii}&=1+\sum_{m=1}^{\infty}\textcolor{red}{p_{ii}^{(m)}}=1+\sum_{m=1}^{\infty}\textcolor{red}{\sum_{n=1}^{m}P_{i}(\sigma_i=n)p_{ii}^{(m-n)}}\\
+        &=1+\sum_{n=1}^{\infty}P_{i}(\sigma_i=n)\sum_{m=n}^{\infty}p_{ii}^{(m-n)}=1+G_{ii}\rho_{ii}\quad\Rightarrow{\rho }_{ii} = 1 - 1/{G}_{ii}
+    \end{align*}
+\end{solution}
+
+\begin{problem}
+    8. 对任意 \( i,j \in  S \) ,令 \( {F}_{ij}\left( s\right)  \mathrel{\text{:=}} \mathop{\sum }\limits_{{n = 0}}^{\infty }{P}_{i}\left( {{\tau }_{j} = n}\right) {s}^{n},{G}_{ij}\left( s\right)  :=  \) \( \mathop{\sum }\limits_{{n = 0}}^{\infty }{P}_{i}\left( {{X}_{n} = j}\right) {s}^{n} \) . 证明: \( {G}_{ij}\left( s\right)  = {F}_{ij}\left( s\right) {G}_{jj}\left( s\right)  \) .
+\end{problem}
+
+\begin{solution}
+    使用和上一题相同的处理方法 
+    \begin{align*}
+        G_{ij}(s)&=\sum_{n=0}^{\infty}P_i(X_n=j)s^n=\sum_{n=0}^{\infty}\sum_{m=0}^{n}P_i(\tau_j=m)p_{jj}^{(n-m)}s^n\\
+        &=\sum_{m=0}^{\infty}P_i(\tau_j=m)s^m\sum_{n=m}^{\infty}p_{jj}^{(n-m)}s^{n-m}=F_{ij}(s)G_{jj}(s)
+    \end{align*}
+\end{solution}
+
+\begin{problem}
+    9. 假设 \( {\xi }_{1},\cdots ,{\xi }_{n} \) 独立同分布, \( P\left( {{\xi }_{1} = 1}\right)  = 1 - P\left( {{\xi }_{1} = 0}\right)  = {p} \) \(\in \left( {0,1}\right)  \) . 记 \( K = {\xi }_{1} + \cdots  + {\xi }_{n} \) .
+
+(1) 证明: \( E{\left( K - EK\right) }^{4} = {nE}{\left( {\xi }_{1} - p\right) }^{4} + {\mathrm{C}}_{n}^{2}{\mathrm{C}}_{4}^{2}{\left( \operatorname{Var}\left( {\xi }_{1}\right) \right) }^{2} \) .
+
+(2) 假设 \( 0 < q < p \) ,对任意 \( a > 0 \) ,令 \( \varphi \left( a\right)  = {\mathrm{e}}^{-{aq}}\left( {p{\mathrm{e}}^{a} + 1 - p}\right)  \) . 证明: 对任意 \( a > 0,P\left( {K < {qn}}\right)  \leq  \varphi {\left( a\right) }^{n} \) ,并证明: 存在 \( a \) ,使得 \( \varphi \left( a\right)  < 1 \) .
+\end{problem}
+
+\begin{solution}
+    (1) $E(K-EK)^4=E(\sum_{i=1}^n(\xi_1-p))^4$, 其中$(\xi_i-p)^3(\xi_j-p),(\xi_i-p)^2(\xi_j-p)(\xi_k-p),(\xi_i-p)(\xi_j-p)(\xi_k-p)(\xi_l-p)$的期望因为独立性拆开之后都是$0$, 只剩下$\sum_{i=1}^nE(\xi_i-p)^4=nE(\xi_1-p)^4$以及${n \choose 2}{n \choose 4}(\text{Var}(\xi_1))^2$, 因此等式成立.\\
+    (2) 考虑Markov不等式
+    \begin{align*}
+        P(K<qn)&=P(K-np<n(q-p))=P(\frac{K-np}{n(q-p)}\geq 1)\leq \frac{1}{n^4(p-q)^4}E(K-EK)^4\\
+        &=\frac{np(1-p)[(1-p)^3+p^3]+{n \choose 2}{n \choose 4}p^2(1-p)^2}{n^4(p-q)^4}
+    \end{align*}
+    $\varphi(a)$的极值点$a^{*}$满足$e^{a^*}=\frac{q(1-p)}{p(1-q)}$, 带入有$\varphi(a^*)=(\frac{1-p}{1-q})^{1-q}(\frac{p}{q})^q$\\
+    \textcolor{red}{呜呜，后面再来想想——绷不住啦, (1)和(2)完全没关系啊.}\\
+    \textcolor{blue}{我们发现：$Ee^{a\xi}=pe^a+1-p$, 这启发我们这样放缩：}
+    \begin{align*}
+        P(K<qn)&=P(-qn+K<0)=E(\mathbf{1}_{\{-qn+K<0\}})\leq E(e^{a(-qn+K)})
+    \end{align*}
+    这是因为$\mathbf{1}_{\{-qn+K<0\}}\leq 0 <e^{a(-qn+K)}$, 利用独立性计算期望就能得到下面的不等式
+    \begin{align*}
+        P(K<qn)\leq E(e^{a(-qn+K)})\leq e^{-aqn}E(e^{a\xi})^n=e^{-aqn}\cdot (pe^a+1-p)^n=\varphi(a)^n
+    \end{align*}
+    对于$\varphi(a)=e^{-aq}(pe^a+1-p),\varphi(0)=1$,求导有$\varphi^{\prime}(a)=\frac{pe^a-q(pe^a+1-p)}{e^{aq}},\varphi^{\prime}(0)=p-q>0$, 因此根据连续性，当然存在$a>0$, 使得$\varphi(a)<1$.
+\end{solution}
+
+\begin{problem}
+    10. 假设 \( d \geq  3 \) . 证明: 存在常数 \( {C}_{d} \) ,使得 \( {P}_{0}\left( {{S}_{2n} = 0}\right)  \leq  {C}_{d} \cdot  {n}^{-d/2} \) . (提示: 仿照 (1.7.6) 式与 (1.7.7) 式, 并利用上题结论.)
+\end{problem}
+
+\begin{problem}
+    \( {11}^{ * } \) . 某研究员每隔一段独立同分布的随机时间观察一次实验进度,间隔时间 \( \xi  \) 等概率地为 1 分钟,2 分钟, \( \cdots ,{30} \) 分钟. 假设研究员在某整点进行了一次观察. 请问: 平均多长时间后研究员再一次恰好在整点进行观察?
+\end{problem}
+
+\begin{solution}
+    设$S_0=0,S_n=\xi_1+\cdots+\xi_n$, $\tau=\min_{n}\{n\geq 1|S_n\text{被60整除}\}$, 求$E(S_{\tau})$. 首先$E(\xi)=15.5$, 下面求停时的期望$E(\tau)$(理论上肯定是$60$), 因此根据Wald等式，答案是$15.5*60=930$. 下面说明为什么$E(\tau)=60$. \textcolor{blue}{我总不可能列一个$60$维方程来算吧}.\textcolor{red}{实际上, $E(\tau)=E_0(\tau_0)$ (从模$60$的角度来看), 那么根据：不变分布存在时, 频率的极限是不变分布, 有$E_0(\tau_0)=\frac{1}{\pi_0}$, 下面我们(先写后证)，说明不变分布$\pi$是均匀分布:} 因为转移矩阵$\mathbf{P}\in \mathbb{R}^{60*60}$满足列和为$1$，因此是双随机矩阵，所以不变分布是均匀分布(并且这个是充要条件)，因此得到$\pi_0=\frac{1}{60}$.
+\end{solution}
+
+\begin{problem}
+    \( {12}^{ * } \) . 假设 \( \left\{  {S}_{n}\right\}   \) 为一维简单随机游动. 令 \( {M}_{n}^{\left( 1\right) } = {S}_{n},{M}_{n}^{\left( 2\right) } =  \) \( {S}_{n}^{2} - n,{M}_{n}^{\left( 3\right) } = {S}_{n}^{3} - {3n}{S}_{n},{M}_{n}^{\left( 4\right) } = {S}_{n}^{4} - {6n}{S}_{n}^{2} + 3{n}^{2} + {2n} \) .
+
+(1) 证明: \( E{M}_{n}^{\left( k\right) } = 0,k = 1,2,3,4 \) .
+
+(2) 假设 \( \tau  \) 是 \( \left\{  {S}_{n}\right\}   \) 的停时. 试给出一个充分条件,使得 \( E{M}_{\tau }^{\left( k\right) } =  \) 0 . (注: \( k = 1,2 \) 时,分别对应瓦尔德等式与瓦尔德第二等式.)
+\end{problem}
+
+\subsection{遍历定理与正常返}
+\begin{problem}
+    1. 对于马氏链而言, “不可约”是不变分布唯一的必要条件吗? 如果是, 试证明之; 如果不是, 试将之改为一个必要条件.
+\end{problem}
+\begin{solution}
+    “不可约”不是"不变分布唯一"的必要条件. 不可约的马氏链不一定不变分布唯一(例如这个不可约马氏链是零常返的，那么不变分布不存在); 不变分布存在且唯一的马氏链也不一定不可约. 因此两者是既不充分也不必要的.
+    
+    马氏链的不变分布唯一\textcolor{red}{当且仅当}该马氏链分解成(一个或多个)互通类之后，只存在一个互通类是正常返的.
+    
+    (1) 如果这个马氏链是不可约的，那么马氏链只有可能是非常返或零常返或正常返，此时"正常返"$\iff$存在唯一的不变分布.
+
+    (2) 如果马氏链可约，那么有多个互通类(当然互通类可能不是闭集),对于每一个互通类, 我们可以讨论它的常返性: 如果这个互通类是常返的，那么这个互通类必然是闭集。
+    
+    如果不存在正常返的互通类，那么不变分布不存在。
+    
+    如果存在唯一的正常返的互通类，那么马氏链最后一定会停留在这个正常返类中，那么存在唯一的不变分布。
+
+    如果存在不止一个正常返的互通类(正常返类)，那么在两个正常返类上都有唯一的不变分布，通过添加$0$拓展到整个马氏链上, 做系数求和为$1$的线性组合, 可以得到无穷个不变分布, 此时不变分布是不唯一的.
+\end{solution}
+\begin{note}
+    \begin{itemize}
+        \item 状态空间$S$的子集$A$中任意两个状态互通$\iff A$是互通类 
+        \item 称$A$是闭集$\iff \forall i\in A, \sum_{j\in A}p_{ij}=1$，即从$A$出发，不可能跑出去
+        \item 因为一个马氏链必然是闭集，所以马氏链不可约$\iff$只有一个互通类; 
+        \item 互通类不一定是闭集；闭集也不一定互通类(例如可约的马氏链)
+        \item \textcolor{blue}{一个可约的马氏链，当然可以被分解成好几个互通类，但是这些互通类不一定是闭集，也就是说我可以从一个互通类单向地跑到另一个互通类(当然不可以是双向的，否则就是一个互通类了)}。而且有趣的是，如果是有限的马氏链，当然是存在至少一个闭集的(\textcolor{red}{are you sure?})。但如果是状态空间无限的马氏链，可以每一个互通类都是闭集
+        \item 如果一个互通类是常返的(无论是否正常返)，它一定是闭集(\textcolor{blue}{也就是说，常返类一定是闭集})
+    \end{itemize}
+\end{note}
+
+\begin{problem}
+    2. 假设状态空间 \( S \) 有限. 证明:(1) 存在正常返态; (2) 存在不变分布.
+\end{problem}
+\begin{solution}
+    (1) 因为状态空间$S$有限, 必然存在常返态$A$(如果$S$不可约，由于常返态$A$一定是互通类，那么$S=A$), 根据常返性, $A$是闭集, 因此$A$是正常返或零常返的,考虑限制在$A$上的不可约马氏链$\hat{\mathbf{P}}$,我们就有$\frac{V_i(n)}{n}\to \frac{1}{E_i(\sigma_i)}$,这个几乎必然收敛的性质不依赖于是否正常返. 如果整个$A$是零常返的, 那么有限求和可以和极限号换序，得到矛盾
+    $$1=\sum_{i\in A}\frac{V_i(n)}{n}\to \sum_{i\in A}\frac{1}{E_i(\sigma_i)}=0$$
+    因此有限不可约马氏链$A$一定是正常返的, 因此有限状态空间$S$必然存在正常返类.
+
+    (2) 至少存在一个互通类是正常返的，那么必然存在不变分布.
+\end{solution}
+\begin{note}
+    \begin{itemize}
+        \item 有限状态空间$S$不然存在常返态
+        \item 常返是互通类的性质，因此常返态一定是互通的。又因为常返，所以常返态是闭集，所以常返态一定是闭的互通类
+        \item 有限不可约马氏链一定是正常返的
+    \end{itemize}
+\end{note}
+
+\begin{problem}
+    3. 仿照命题 1.8.4,证明: 例 1.8.16 中的 \( \left\{  {{E}_{i}\mathop{\sum }\limits_{{n = 0}}^{{\sigma  - 1}}{\mathbf{1}}_{\left\{  {X}_{n} = j\right\}  } : i \in  S}\right\}   \)
+是不变测度. (注: 将其归一化可得 (1.8.9) 式的另一个证明.)
+\end{problem}
+
+\begin{solution}
+    马氏链不可约，正常返. 给定正整数$m$, $\sigma:=\inf\{n\geq m| X_n=i \}$, 考虑$\mu_i=E_i\sum_{n=0}^{\sigma - 1}\mathbf{1}_{\{X_n=j\}}$. 注意这里的$j$是给定不变的. 想要证明$\mu_k=\sum_{i\in S}\mu_ip_{ik}$.
+
+    根据$\sigma$的定义, 表达的是$m-1$步之后首入状态$i$的时刻,进行如下分解
+    \begin{align*}
+        \mu_i&=E_i\sum_{n=0}^{\sigma - 1}\mathbf{1}_{\{X_n=j\}}=E_i\sum_{n=0}^{m-2}\mathbf{1}_{\{X_n=j\}}+E_i\sum_{n=m-1}^{\sigma - 1}\mathbf{1}_{\{X_n=j\}}\\
+        &=E_i(V_j(m-2))+E_i \sum_{n=m-1}^{\infty} \mathbf{1}_{\{X_n=j,\sigma>n\}}\\
+        &=\sum_{n=0}^{m-2}P_i(X_n=j)+\sum_{n=m-1}^{\infty}P_i(X_n=j,\sigma>n)
+    \end{align*}
+    仿照证明, 考虑$\sum_{i\in S}\mu_i p_{ik}$
+    \begin{align*}
+        \sum_{i\in S}\mu_i p_{ik}&=\sum_{i\in S}\sum_{n=0}^{m-2}P_i(X_n=j)p_{ik}+\sum_{i\in S}\sum_{n=m-1}^{\infty}P_i(X_n=j,\sigma>n)p_{ik}
+    \end{align*}
+    \textcolor{blue}{不知道是题目中符号的问题还是自己的问题，这里就做不动了.}
+    
+\end{solution}
+
+\begin{problem}
+    4. 某考试从题库中随机选取 100 道判断题. 若某题的正确答案为 “是”, 则下一题的正确答案为 “是” 的概率为 0.6 ; 若某题的正确答案为 “否”, 则下一题的正确答案为 “是” 的概率为 0.5 . 某学生把所有题都独立地以概率 \( p \) 回答 “是”,以概率 \( 1 - p \) 回答 “否”.
+
+(1) 建立马氏链模型刻画该学生每道题回答正确与否.
+
+(2) 试估计该学生的得分.
+
+(3) 求 \( p \) 的最优选择.
+\end{problem}
+
+\begin{solution}
+    (1) $\{X_n\}$描述题目的答案,$S=\{0,1\}$,否和是,那么有转移概率和转移矩阵,算出不变分布有$\pi_0=\frac{4}{9},\pi_1=\frac{5}{9}$.学生在每一个时刻$n$都独立地以概率 \( p \) 回答 “是”,以概率 \( 1 - p \) 回答 “否”,根据他此时所处的状态来判断正确和错误.
+
+    (2) 设$n$次内访问状态$0$的次数是$V_0(n)$,独立同分布做题,期望$Ex=1-p$,设总得分是$F_0(n)$,根据遍历定理和大数定律有$\frac{F_0(n)}{n}=\frac{V_0(n)}{n}\frac{x_1+\cdots+x_{V_0(n)}}{V_0(n)}\to \pi_0(1-p)$; 同理, 有$\frac{F_1(n)}{n}\to \pi_1p$. 那么在平稳分布的意义下, 做一道题的平均得分是$\frac{4}{9}(1-p)+\frac{5}{9}p=\frac{4+p}{9}$, 做$100$道题目的期望得分是$\frac{100(4+p)}{9}$.
+
+    (3) $p^*=1$.
+\end{solution}
+
+\begin{problem}
+    5. 假设 \( \left\{  {S}_{n}\right\}   \) 是一维随机游动,步长分布为 \( P\left( {\xi  = k}\right)  = 1/6 \) , \( k = 1,\cdots ,6 \) . 令 \( {A}_{n} =  \) “ \( {S}_{n} \) 能被 13 整除”. 试求: \( \mathop{\lim }\limits_{{n \rightarrow  \infty }}{P}_{0}\left( {A}_{n}\right)  \) .
+\end{problem}
+\begin{solution}
+    在模$13$的意义下,$\tilde{S}=\{0,1,\cdots,12\}$. 
+    
+    \textcolor{blue}{\textbf{方法一}}: 那么$\lim_{n\to\infty}P_0(A_n)=\lim_{n\to\infty}P(\tilde{X}_n=0|\tilde{X}_0=0)=\lim_{n\to\infty}\tilde{p}_{00}^{(n)}$. 假设我们的转移矩阵是$\tilde{P}$,那么perron vector是不变分布$\pi$,那么有$\tilde{P}_{\infty}=\lim_{n\to \infty}\tilde{P}^n=\mathbf{1}\pi^T$,因此$\lim_{n\to\infty}\tilde{p}_{00}^{(n)}$作为$\tilde{P}_{\infty}$的$(0,0)$元就是$\tilde{\pi}_0$. 因此只需要计算$\tilde{\pi}_0$即可. 
+
+    \textcolor{blue}{\textbf{方法二}}: 初分布$\mu=(1,0\cdots,0)$已经确定，那么在第$n$步的分布就是$\mu \mathbf{P}^n\to \mu \mathbf{1}_n \pi^T =\pi^T$，那么$P_0(A_n)\to \pi_0$.
+
+    \textcolor{blue}{\textbf{方法三}}: $\tilde{S}$是不可约的有限马氏链, 因此是正常返的. 根据强遍历定理，直接得到$P_0(\tilde{X}_n=0)\to \pi_0$, 并且强遍历定理也可以解释：最终的极限与初分布无关
+
+    可以发现$\tilde{P}$双随机,因此不变分布是均匀分布,$\lim_{n\to\infty}P_0(A_n)=\frac{1}{13}$.
+    
+    \textcolor{red}{怎样才能方便地验证是列随机呢？每次都画一遍随机矩阵还是太麻烦了.比如说$15$整除的时候也是吗？}
+\end{solution}
+
+\begin{problem}
+    6. 假设 \( \left\{  {X}_{n}\right\}   \) 是离散圆周 \( {\mathbb{S}}_{N} \) 上的随机游动 (参见例 1.2.8). 试用两种不同的方法求 \( {E}_{0}{\sigma }_{0} \) .
+\end{problem}
+
+\begin{solution}
+    \textbf{方法一}:因为$\mathbf{P}$是双随机矩阵, 所以不变分布是均匀分布,因此$E_0(\sigma_0)=\frac{1}{\pi_0}=N$.
+
+    \textbf{方法二}:首步分析法,$E_i(\sigma_0)=e_i$
+    \begin{align*}
+        e_0&=1+pe_1+(1-p)e_{N-1}\\
+        e_1&=1+pe_2+(1-p)\cdot 0\\
+        e_2&=1+pe_3+(1-p)e_{1}\\
+        &\cdots \\
+        e_{N-2}&=1+pe_{N-1}+(1-p)e_{N-3}\\
+        e_{N-1}&=1+p\cdot 0+(1-p)e_{N-2}
+    \end{align*}
+    把后面的$N-1$个方程看成整体,考虑$\mu_i=e_i$,补充定义$\mu_0=\mu_N=0$,那么有
+    $$\mu_i=1+p\mu_{i+1}+(1-p)\mu_{i-1},\quad \forall i\in \{1,2,\cdots,N-1\}$$
+    这等价于迭代方程$p(\mu_i-\mu_{i+1})=1+(1-p)(\mu_{i-1}-\mu_i)$,迭代计算有
+    \begin{align*}
+        \mu_{N-1}&=\frac{1}{p}\sum_{i=0}^{N-2}(\frac{1-p}{p})^{i}-(\frac{1-p}{p})^{N-1}\mu_1
+    \end{align*}
+    \textcolor{red}{求出来有问题？}
+\end{solution}
+
+\begin{problem}
+    7. 假设 \( d \) 为整数且 \( d \geq  2,{p}_{0},{p}_{1},\cdots ,{p}_{d - 1} \in  \left( {0,1}\right) ,\left\{  {X}_{n}\right\}   \) 是 \( \mathbb{Z} \) 上的马氏链, 转移概率为
+
+\[{p}_{{nd} + i,{nd} + i + 1} = {p}_{i},\;{p}_{{nd} + i,{nd} + i - 1} = 1 - {p}_{i},\]
+
+\[\forall n \in  \mathbb{Z},i \in  \{ 0,1,\cdots ,d - 1\} .\]
+
+证明: \( {X}_{n}/n \) 几乎必然收敛. (提示: 取 \( {Y}_{n} \in  S = \{ 0,1,\cdots ,d - 1\}  \) 满足 \( {Y}_{n} \equiv  {X}_{n}\left( {\;\operatorname{mod}\;d}\right)  \) ,则 \( \left\{  {Y}_{n}\right\}   \) 是 \( S \) 上的马氏链.)
+\end{problem}
+
+\begin{solution}
+    根据提示,取$Y_n\equiv X_n (\mod d)$, 那么$\{Y_n\}$是马氏链,状态空间$S=\{0,1,\cdots,d-1\}$,转移概率
+    \begin{align*}
+        \mathbf{P}=\begin{pmatrix}
+            0&p_0&0&\cdots&0&0&1-p_0\\
+            1-p_1&0&p_1&\cdots&0&0&0\\
+            \vdots&\vdots&\vdots& &\vdots&\vdots&\vdots\\
+            0&0&0&\cdots&1-p_{d-2}&0&p_{d-2}\\
+            p_{d-1}&0&0&\cdots&0&1-p_{d-1}&0
+        \end{pmatrix}
+    \end{align*}
+    \textcolor{blue}{考察$Y$和$X$之间到底相差了多少.}
+    \\已知$X_0$(以及$Y_0$),那么$(X_{n+1}-Y_{n+1})-(X_0-Y_0)=\Delta \cdot d =d\cdot \textcolor{red}{\sum_{k=0}^{n} \mathbf{1}_{\{Y_{k}=Y_0,Y_{k+1}=Y_0+1 (\mod d)\}}}$
+    \\根据已知的结论,$\frac{1}{n+1}\sum_{k=0}^{n} \mathbf{1}_{\{Y_{k}=d-1,Y_{k+1}=0\}}$几乎必然收敛于$\pi_{Y_0}p_{Y_0}$. 而$\{Y_n\}$是有限状态的马氏链,当然有$\frac{Y_{n+1}}{n+1}$几乎必然收敛,因此
+    $$\frac{X_{n+1}}{n+1}=\frac{Y_{n+1}}{n+1}+\frac{X_0-Y_0}{n+1}+d\frac{\Delta}{n+1}\overset{a.s.}{\to} 0+ 0+ d \pi_{Y_0}p_{Y_0}=d \pi_{Y_0}p_{Y_0}$$
+\end{solution}
+
+\begin{problem}
+    8. 在例 1.8.15 中, 证明:
+
+(1) \( \left\{  {Y}_{n}\right\}   \) 是 \( \widetilde{S} \mathrel{\text{:=}} \left\{  {\left( {i,j}\right)  : {p}_{ij} > 0}\right\}   \) 上的马氏链,转移概率由 (1.8.7) 式给出;
+
+(2) 若 \( \left\{  {X}_{n}\right\}   \) 不可约 (常返,或正常返),则 \( \left\{  {Y}_{n}\right\}   \) 也相应地不可约 (常返,或正常返)
+\end{problem}
+\begin{solution}
+    (1) $\tilde{p}_{(ij)(lk)},j\neq l$,这是$(X_n=i,X_{n+1}=j)\to(X_{n+1}=l,X_{n+2}=k)$的概率,$j\neq l$时当然是$0$,$j=l$时,就是$P(X_{n+2}=k|X_{n+1}=j)=p_{jk}$.\\
+    (2) $\{X_n\}$不可约,即$\{X_n\}$中任意两个状态之间是互通的, 那么任取$(i,j),(k,l)\in \tilde{S}$,那么$p_{(ij)(kl)}^{(m)}=p_{jk}^{(m)}p_{kl}>0,\exists m>0$和$p_{(kl)(ij)}^{(n)}=p_{li}^{(n)}p_{ij}>0,\exists n>0$,因此$\{Y_n\}$也不可约
+
+    若$\{X_n\}$常返,我们计算$\{Y_n\}$中状态$(i,j)$的格林函数:
+    \begin{align*}
+        \sum_{m=0}^{\infty}P_{(i,j)\to (i,j)}^{(m)}&=\sum_{m=0}^{\infty}p_{ji}^{(m)}p_{ij}=p_{ij}\sum_{m=0}^{\infty}\sum_{k=0}^{m}P_{j}(\sigma_i=k)p_{ii}^{(m-k)}\\
+        &=p_{ij}\sum_{k=0}^{\infty}P_{j}(\sigma_i=k)\textcolor{blue}{\sum_{m=k}^{\infty}p_{ii}^{(m-k)}}\\
+        &=p_{ij}\sum_{k=0}^{\infty}P_{j}(\sigma_i=k)\textcolor{blue}{\sum_{l=0}^{\infty}p_{ii}^{(l)}}>\infty
+    \end{align*}
+    因此,$\{Y_n\}$也是常返的.
+
+    若$\{X_n\}$正常返,那么$\{X_n\}$存在不变分布,那么$\{Y_n\}$也存在不变分布(如例题中给出),那么$\{Y_n\}$也是正常返的.
+    
+    \textcolor{red}{这里的,正常返和存在不变分布真的是当且仅当的关系吗?}
+\end{solution}
+
+\begin{problem}
+    9. 假设$\{X_n\}$是不可约、正常返马氏链, \( \pi  \) 为其不变分布. 用两种方法证明: 对任意 \( l \geq  1,{i}_{0},\cdots ,{i}_{l} \in  S \) ,
+\[\left. {\left. {\frac{1}{n}\left| {\{ 0 \leq  m \leq  n - 1 : {X}_{m} = {i}_{0},{X}_{m + 1} = {i}_{1},\cdots ,{X}_{m + l} = {i}_{l}\} }\right. \;}\right| \;}\right| \]
+\[\xrightarrow[]{\text{ a.s. }}{\pi }_{{i}_{0}}{p}_{{i}_{0}{i}_{1}}\cdots {p}_{{i}_{l - 1}{i}_{l}}.\]
+\end{problem}
+\begin{solution}
+    \textbf{方法一}: 构造新的马氏链$Y_n=(X_{n},X_{n+1},\cdots,X_{n+l})$,它是不可约,正常返的马氏链.根据遍历定理,那么LHS就是状态的函数对时间的平均,是几乎必然收敛到空间平均的,即$\pi_{\{{X}_{m} = {i}_{0},{X}_{m + 1} = {i}_{1},\cdots ,{X}_{m + l} = {i}_{l}\}}\cdot 1$,那么为${\pi }_{{i}_{0}}{p}_{{i}_{0}{i}_{1}}\cdots {p}_{{i}_{l - 1}{i}_{l}}$.\\
+    \textbf{方法二}: 前$n$步,一共经过了$r_0$次从$i_0$出发再回到$i_0$的游弋,那么 
+    $$LHS=\frac{r_0}{n}\cdot \frac{1}{r_0}\left| {\{ 0 \leq  m \leq  n - 1 : {X}_{m} = {i}_{0},{X}_{m + 1} = {i}_{1},\cdots ,{X}_{m + l} = {i}_{l}\} }\right|\to \pi_0 \cdot {p}_{{i}_{0}{i}_{1}}\cdots {p}_{{i}_{l - 1}{i}_{l}}$$
+\end{solution}
+
+\begin{problem}
+    10. 考虑从 \( i \) 出发的马氏链第 \( r \) 次回访 \( i \) 的时间 \( {T}_{r} \) ,其中 \( {T}_{0} \mathrel{\text{:=}} 0 \) . 令 \( {\xi }_{r} = {\mathbf{1}}_{\left\{  {X}_{{T}_{r - 1} + 1} = j\right\}  },r = 1,2,\cdots  \) . 试仿照例 1.8.17 给出例 1.8.15 的另一证明.
+\end{problem}
+\begin{solution}
+    考虑$\frac{1}{n}\sum_{m=0}^{n}\mathbf{1}_{\{X_{m}=i,X_{m+1}=j\}}$，设前$n$步经历了$r_i$次从$i$出发再返回$i$的游弋，那么
+    $$\frac{1}{n}\sum_{m=0}^{n}\mathbf{1}_{\{X_{m}=i,X_{m+1}=j\}}=\frac{r_i}{n}\cdot \frac{1}{r_i}\sum_{m=0}^{n}\mathbf{1}_{\{X_{m}=i,X_{m+1}=j\}}=\frac{r_i}{n}\cdot \frac{1}{r_i}\sum_{r=1}^{r_i}\mathbf{1}_{\{X_{T_{r-1}+1}=j\}}$$
+    第一项用遍历定理，第二项用大数定律$\frac{1}{r_i}\sum_{r=1}^{r_i}\mathbf{1}_{\{X_{T_{r-1}+1}=j\}}=\frac{\xi_1+\cdots+\xi_{r_i}}{r_i}\to p_{ij}$，得到$\to \pi_ip_{ij}$.
+\end{solution}
+
+\begin{problem}
+    11. 假设马氏链不可约,其转移矩阵 \( \mathbf{P} \) 是幂等的,即 \( \mathbf{P} = {\mathbf{P}}^{2} \) . 证明: 对于任意状态 \( i,j,{p}_{ij} = {p}_{jj} \) .
+\end{problem}
+\begin{solution}
+    \textbf{方法一}：因为$\mathbf{P}^2=\mathbf{P}$，所以$\mathbf{P}$的每一列都是$\mathbf{P}$的特征值为$1$的特征向量. 根据Perron–Frobenius theorem, 特征值$1$是最大的特征值，并且特征子空间的维数是$1$，所以$P$的所有列都是(显然是特征向量的)$\mathbf{1}$的倍数，那么肯定有每一列都是相同的.\\
+    \textbf{方法二}：因为$(\pi\mathbf{P})\mathbf{P}=\pi\mathbf{P}$，因此，对任意的分布$\pi$，有$\pi\mathbf{P}$都是不变分布。但马氏链不可约，又存在不变分布，因此是正常返的，从而不变分布唯一(即不可约的马氏链，不变分布存在则唯一)。记这个不变分布是$\overline{\pi}$，那么有$\pi\mathbf{P}=\overline{\pi}$，取$\pi=(1,0,\cdots),(0,1,0,\cdots),\cdots,(0,\cdots,0,1)$，即可得到$p_{ij}=p_{jj}$.\\
+    \textcolor{blue}{还不清楚Perron–Frobenius theorem的内容？}
+\end{solution}
+
+\begin{problem}
+    12. 假设 \( \left\{  {X}_{n}\right\}   \) 是 \( N \) 个顶点的完全图上的随机游动.
+
+(1) 求 \( {P}_{i}\left( {{\sigma }_{i} = n}\right) ,n = 1,2,\cdots  \) ,并由此计算 \( {E}_{i}{\sigma }_{i} \) .
+
+(2) 根据不变分布的定义列方程并解出 \( \pi  \) ,然后验证 (1.8.1) 式.
+
+(注: 在完全图中, 任意两个不同的顶点之间有且仅有一条边相连.)
+\end{problem}
+\begin{solution}
+    (1) 第一步，走到了其他顶点，$p=1$，中间$n-2$步，是$\frac{N-2}{N-1}$，最后一步回去$\frac{1}{N-1}$\\因此是$\frac{1}{N-1}(\frac{N-2}{N-1})^{n-2}$，以及有$P_i(\sigma_i=1)=0,P_i(\sigma_i=2)=1\cdot \frac{1}{N-1}$，因此有
+    $$E_i(\sigma_i)=\frac{1}{N-1}\sum_{n=2}^{\infty} n\cdot(\frac{N-2}{N-1})^{n-2}=\frac{1}{N-1}\cdot N(N-1)=N$$\\
+    (2) 转移矩阵$\mathbf{P}$是列随机矩阵，因此不变分布是均匀分布，$\pi=(\frac{1}{N},\cdots,\frac{1}{N})$，符合$\pi_i=\frac{1}{E_i(\sigma_i)}$.
+\end{solution}
+
+\begin{problem}
+    \( {13}^{ * } \) . 假设 \( \left\{  {X}_{n}\right\}   \) 是 \( N \) 个顶点的完全图上的随机游动. 将 \( \left\{  {X}_{n}\right\}   \) 走遍所有顶点的时间记为 \( T \) ,即 \( T = \mathop{\max }\limits_{{i \in  S}}{\tau }_{i} \) . 求 \( {E}_{i}T \) .
+\end{problem}
+\begin{solution}
+    设$T_k$是访问了第$k$“种”顶点之后，访问到新的顶点的时间，那么总时间$T=\sum_{k=1}^{N-1}T_k$。因为访问了$k$“种”顶点之后，访问新顶点的概率是$\frac{N-k}{N-1}$，因此$E(T_k)=\frac{N-1}{N-k}$(因为期望时间是单次尝试的期望的倒数)，所以有
+    $$E_i(T)=(N-1)\sum_{i=1}^{N-1}\frac{1}{i}$$
+\end{solution}
+
+\begin{problem}
+    \( {14}^{ * } \) . 假设某马氏链不可约、正常返,并假设观察该马氏链 \( n \) 步,依次得到状态 \( {i}_{0},\cdots ,{i}_{n} \)
+
+(1) 求该马氏链的转移概率矩阵的最大似然估计 \( \widehat{\mathbf{P}} = {\left( {\widehat{p}}_{ij}\right) }_{S \times  S} \) .
+
+(2) 证明: 最大似然估计 \( \widehat{\mathbf{P}} \) 具有强相合性.
+\end{problem}
+
+\begin{solution}
+    参考：\url{https://www.stat.cmu.edu/~cshalizi/462/lectures/06/markov-mle.pdf}\\
+    (1) 根据书上例题的结论，$\frac{1}{n}\sum_{m=0}^{n}\mathbf{1}_{\{X_m=i,X_{m+1}=j\}}\overset{a.s.}{\to}\pi_ip_{ij}$, 因此
+    $$\frac{\sum_{m=0}^{n}\mathbf{1}_{\{X_m=i,X_{m+1}=j\}}}{\sum_{m=0}^{n}\mathbf{1}_{\{X_m=i\}}}\overset{a.s.}{\to}p_{ij}$$
+    如果能证明LHS就是最大似然估计，那么就能证明强相合性.\\
+    (2) 样本是$i_0,\cdots,i_n$，那么对$P(X_0=i_0,\cdots,X_n=i_n)$做等价变换 
+    \begin{align*}
+        \mathcal{L}=&P(X_0=i_0,\cdots,X_n=i_n)=P(X_0=i_0)\prod_{k=0}^{n-1}P(X_{k+1}=i_{k+1}|X_k=i_k)\\=&P(X_0=i_0)\prod_{k=0}^{n-1}\textcolor{red}{\prod_{i\in S}\prod_{j\in S}p_{ij}^{\mathbf{1}_{\{X_{k+1}=j,X_k=i\}}}}\\
+    \end{align*}
+    因此，我们的优化问题是 
+    \begin{align*}
+        \max_{p_{ij},\quad i,j \in S} \log(\mathcal{L}) -\sum_{i\in S}\lambda_i(\sum_{j\in S}p_{ij}-1)
+    \end{align*}
+    那么有(别忘了约束条件)
+    \begin{align*}
+        \ell&=\log(\mathcal{L}) -\sum_{i\in S}\lambda_i(\sum_{j\in S}p_{ij}-1)\\
+        &=\log P(X_0=i_0)+\sum_{k=0}^{n-1}\sum_{i\in S}\sum_{j\in S}\mathbf{1}_{\{X_{k+1}=j,X_k=i\}} \log (p_{ij})-\sum_{i\in S}\lambda_i(\sum_{j\in S}p_{ij}-1)\\
+        \Rightarrow& \frac{\partial \ell}{\partial p_{ij}}=\sum_{k=0}^{n-1}\frac{\mathbf{1}_{\{X_{k+1}=j,X_k=i\}}}{p_{ij}}-\lambda_i=0 \Rightarrow p_{ij}=\frac{\sum_{k=0}^{n-1}\mathbf{1}_{\{X_{k+1}=j,X_k=i\}}}{\lambda_i}\\
+        &\sum_{j\in S}p_{ij}=1\Rightarrow \lambda_i = \sum_{j\in S}\sum_{k=0}^{n-1}\mathbf{1}_{\{X_{k+1}=j,X_k=i\}}\\ 
+        &\hat{p}_{ij}=\frac{\sum_{k=0}^{n-1}\mathbf{1}_{\{X_{k+1}=j,X_k=i\}}}{\sum_{j\in S}\sum_{k=0}^{n-1}\mathbf{1}_{\{X_{k+1}=j,X_k=i\}}}=\textcolor{blue}{\frac{\sum_{k=0}^{n-1}\mathbf{1}_{\{X_{k+1}=j,X_k=i\}}}{\sum_{k=0}^{n-1}\mathbf{1}_{\{X_k=i\}}}} \textcolor{red}{\overset{a.s.}{\to}p_{ij}}
+    \end{align*}
+\end{solution}
+
+\subsection{强遍历定理}
+\begin{problem}
+    1. 设有 6 个车站, 道路连接情况如图 1.19 所示. 假设汽车每天可以从一个车站驶到与之直接有公路相连的相邻车站, 在夜间到达车站接受加油、清洗、检修等服务, 次日清晨各车站按相同比例将各汽车报往其相邻车站.
+
+(1) 试说明: 在运行了很多日子以后, 各车站每晚留宿的汽车比例趋于稳定.
+
+(2) 求出这些稳定值, 以便正确地设置各车站的服务规模.
+\end{problem}
+\begin{solution}\\
+    \begin{wrapfigure}{l}{0.25\textwidth} % 'l' 表示图片靠左, '0.4\textwidth' 表示图片占据页面宽度的40%
+        \centering
+        \includegraphics[width=\linewidth]{image/5.png} % 替换为你的图片文件名
+        %\caption{}
+    \end{wrapfigure}
+    转移矩阵是：
+    \begin{align*}
+        \mathbf{P}=\begin{pmatrix}
+            0&\frac{1}{2}&0&0&0&\frac{1}{2}\\
+            \frac{1}{3}&0&\frac{1}{3}&0&0&\frac{1}{3}\\
+            0&\frac{1}{2}&0&\frac{1}{2}&0&0\\
+            0&0&\frac{1}{3}&0&\frac{1}{3}&\frac{1}{3}\\
+            0&0&0&\frac{1}{2}&0&\frac{1}{2}\\
+            \frac{1}{4}&\frac{1}{4}&0&\frac{1}{4}&\frac{1}{4}&0
+        \end{pmatrix}
+    \end{align*}
+    直接计算不变分布，$\pi\mathbf{P}=\pi$，得到
+    \begin{align*}
+        \pi=(\frac{1}{8},\frac{3}{16},\frac{1}{8},\frac{3}{16},\frac{1}{8},\frac{1}{4})
+    \end{align*}
+    而"每晚留宿的汽车比例"应该是$\mu^{(n)}=\mu^{(0)}\mathbf{P}^n$，其中$\mu^{(0)}$是初始分布，第$n$天在$i$车站的比例是：
+    $$\mu_i^{(n)}=\sum_{j\in S}\mu_j^{(0)}p_{ji}^{(n)}\to \sum_{j\in S}\mu_j^{(0)}\pi_i=\pi_i \mu^{(0)}\mathbf{1}=\pi_i$$
+    极限号是根据强遍历定理(\textcolor{red}{不过，不可约和正常返还好说，这里的非周期其实不好说})\\
+    \textcolor{blue}{可以看出，这里的初始分布对最后的稳定比例不造成影响}
+\end{solution}
+\begin{note}
+    状态$i$的周期是$d_i=\gcd \{n| p_{ii}^{(n)}>0\}$，整个马氏链的周期是$d=\gcd\{d_i|i\in S\}$.这样可以说明这个马氏链是非周期的. 即$1\to 2\to 1$，也可以$1\to 2\to 3\to 1$，所以状态$1$的周期是$1$，那么整个不可约马氏链的周期也是$1$.
+
+    不可约：计算$\mathbf{P}^2$，应该每一个元素都是正的？
+\end{note}
+
+\begin{problem}
+    2. (1) 求平面正六边形平铺图和平面正三角形平铺图 (见第一章中的图 1.4) 上的简单随机游动的周期.
+
+(2) 对任意连通图,试讨论其上的简单随机游动的周期.
+\end{problem}
+\begin{solution}
+    (1) 平面正三角形平铺图：任意的顶点$o$，都有$p_{oo}^{2}>0,p_{oo}^{(3)}>0$，因此每一个顶点(该状态)的周期都是$1$，因此整个马氏链的周期也是$1$，因此是非周期的\\
+    平面正六边形平铺图：周期是$2$. 这是因为$\forall o\in S, p_{oo}^{(2k)}>0,p_{oo}^{(2k+1)}=0\Rightarrow d=2$.
+
+    (2) \textcolor{red}{难说，以下是gpt回答，以后再思考}\\
+    对于任意连通图 \( G \) 上的简单随机游动，我们讨论周期如下：
+
+\begin{itemize}
+    \item \textbf{周期的定义：}  
+    在连通图 \( G \) 中，若顶点 \( v \) 从自身出发，经过 \( k \) 步回到自身的概率为 \( p_{vv}^{(k)} > 0 \)，则 \( k \) 是顶点 \( v \) 的周期的一部分。如果存在最小的 \( d \) 使得 \( p_{vv}^{(kd)} > 0 \) 且 \( p_{vv}^{(kd+1)} = 0 \) 对所有 \( k \) 都成立，那么 \( d \) 被称为顶点 \( v \) 的周期。如果对于所有顶点，周期 \( d \) 都相同，那么这个图的周期为 \( d \)。
+    
+    \item \textbf{讨论：}
+    \begin{enumerate}
+        \item \textbf{非周期图：}  
+        如果连通图是二分图（即所有的顶点可以分成两个独立集，使得任何一条边的两个端点分别属于这两个集），则图的周期通常为2（如前面提到的正六边形平铺图）。如果不是二分图（如正三角形平铺图），图的周期为1。
+        
+        \item \textbf{一般图：}  
+        在一般的连通图中，如果从任意顶点 \( v \) 出发，能以不同步数回到顶点 \( v \) （如 \( p_{vv}^{(k)} > 0 \) 对多个 \( k \) 都成立），则图的周期为1，称为非周期图。
+    \end{enumerate}
+\end{itemize}
+
+总结来说，连通图的周期与该图的结构密切相关，二分图的周期通常为2，而对于非二分图，周期可能为1或其他特定的值。
+
+\end{solution}
+\begin{problem}
+    3. 在埃伦费斯特模型 (例 1.1.8 与例 1.8.11) 中, 设 \( N = 8,X_0=0 \). 描述 \( n \) 很大时 \( {X}_{n} \) 的分布. (注: 按照 \( n \) 的奇偶分别讨比.)
+\end{problem}
+
+\begin{problem}
+    4. 假设 \( \mathbf{P} \) 不可约、非周期. 证明: 定理 1.9.3 的证明中定义的转移矩阵 \( \mathbf{R} \) 也是非周期的.
+\end{problem}
+
+\begin{problem}
+    5. 假设  \( \mathbf{P} \)  不可约、正常返,周期  \( d \geq  2 \) . 若  \( i \in  {D}_{r},j \in  {D}_{r + s} \) ,则 \( \mathop{\lim }\limits_{{n \rightarrow  \infty }}{p}_{ij}^{\left( nd + s\right) } = d{\pi }_{j} \) ,其中 \( \pi  \) 为 \( \mathbf{P} \) 的不变分布.
+\end{problem}
+
+\begin{problem}
+    6. 证明: (1.9.1) 式成立.
+\end{problem}
+
+\begin{problem}
+    \( {7}^{ * } \) . 证明: 定理 1.9.3 的证明中定义的 \( \left\{  {W}_{n}\right\}   \) 与 \( \left\{  {Y}_{n}\right\}   \) 都是 \( S \) 上以 \( \mathrm{P} \) 为转移矩阵的马氏链.
+\end{problem}
+
+\section{跳过程}
+\subsection{泊松过程}
+
+\begin{problem}
+    1. 举例说明存在计数过程 \( \left\{  {X}_{t}\right\}   \) ,使得通过 (2.1.2) 式得到的 \( \left\{  {S}_{n}\right\}   \)
+并不满足 (2.1.1) 式.
+\end{problem}
+\begin{solution}
+    想要构造一个计数过程$\{X_t\}$, 使得$S_n=\inf\{t|X_t\geq n\}$(发生第$n$次的最初时刻)定义的$S_n$不满足$X_t=\sup\{n|S_n\leq t\}$($t$时刻之间最多发生次数).\\
+    \textcolor{red}{尝试了：一次跳多格的阶梯函数，不行。主要是因为计数过程得满足，非负正整数取值，单调，右连续，左极限存在。怀疑需要让跳跃的时间间隔趋于$0$，才可能做到；如果跳跃的时间间隔有一个常数下界是不可能构造反例的？}
+\end{solution}
+
+\begin{problem}
+    \( 2. \) 假设 \( \xi  \sim  \operatorname{Exp}\left( \lambda \right)  \) . 证明: 对任意 \( t,s > 0,P\left( {\xi  - t > s \mid  \xi  > t}\right)  =  P(\xi>s)\) 
+\end{problem}
+\begin{solution}
+    \textcolor{blue}{含义上就是指数分布的无记忆性.}\\ 直接计算可得:
+    \begin{align*}
+        P(\xi-t>s|\xi>t)=\frac{P(\xi>t+s)}{P(\xi>t)}=\frac{e^{-\lambda(t+s)}}{e^{-\lambda t}}=e^{-\lambda s}=P(\xi>s)
+    \end{align*}
+\end{solution}
+
+\begin{problem}
+    3.\( \text{ 假设 }\xi ,\eta \text{ 相互独立,并且 }\xi  \sim  \operatorname{Exp}\left( {\lambda }_{1}\right) ,\eta  \sim  \operatorname{Exp}\left( {\lambda }_{2}\right) .\text{ 证明: }  \)
+
+\( \left( 1\right) \min \{ \xi ,\eta \}  \sim  \operatorname{Exp}\left( {{\lambda }_{1} + {\lambda }_{2}}\right) ; \)
+
+(2) \( P\left( {\xi  < \eta }\right)  = {\lambda }_{1}/\left( {{\lambda }_{1} + {\lambda }_{2}}\right)  \) .
+
+(注: 可从此题结论读解泊松流的叠加.)
+\end{problem}
+\begin{solution}
+    (1) 直接用概率论方法计算即可(\textcolor{blue}{注意积分限，以及计算尾分布更方便})
+    \begin{align*}
+        P(\min\{\xi,\eta\}>k)&=\iint_{\min\{\xi,\eta\}>k} \lambda_1e^{-\lambda_1 u}\lambda_2e^{-\lambda_2 v}du dv\\
+        &=\int_{k}^{\infty}\lambda_1e^{-\lambda_1 u}\left(\int_{k}^u \lambda_2e^{-\lambda_2 v} dv\right)du+\int_{k}^{\infty}\lambda_2e^{-\lambda_2 v}\left(\int_{k}^v \lambda_1e^{-\lambda_1 u} du\right)dv\\
+        &=\int_{k}^{\infty}\lambda_1e^{-\lambda_1 u}\left(e^{-k\lambda_2}-e^{-u\lambda_2}\right)du+\int_{k}^{\infty}\lambda_2e^{-\lambda_2 v}\left(e^{-k\lambda_1}-e^{-v\lambda_1}\right)dv\\
+        &=(1+1-1)e^{-k(\lambda_1+\lambda_2)}=e^{-k(\lambda_1+\lambda_2)}
+    \end{align*}
+    因此$\min\{\xi,\eta\}\sim \text{Exp}(\lambda_1+\lambda_2)$\\
+    (2) 也是直接计算
+    \begin{align*}
+        P(\xi<\eta)&=\iint_{\xi<\eta}\lambda_1e^{-\lambda_1 u}\lambda_2e^{-\lambda_2 v}du dv\\
+        &=\int_0^{\infty} \lambda_2e^{-\lambda_2 v}\int_0^{v}\lambda_1e^{-\lambda_1 u}du dv\\
+        &=1-\frac{\lambda_2}{\lambda_1+\lambda_2}=\frac{\lambda_1}{\lambda_1+\lambda_2}
+    \end{align*}
+    解释泊松流的叠加：从指数闹钟构造泊松流的角度来看，取$S_n^{(1)}=\xi_1+\cdots+\xi_n$，$S_n^{(2)}=\eta_1+\cdots+\eta_n$可以构造速率分别为$\lambda_1$和$\lambda_2$的泊松流. 首先根据(2)的结论，将$p$设为$\frac{\lambda_1}{\lambda_1+\lambda_2}$，那么这就是一个分类器(硬币)，接下来，根据(1)的结论，做$\min\{\xi,\eta\}$等价于以概率$p$对两个泊松流做合并.
+\end{solution}
+
+\begin{problem}
+    4. 假设 \( V,{\zeta }_{1},{\zeta }_{2},\cdots  \) 相互独立, \( P\left( {V = k}\right)  = {\left( 1 - p\right) }^{k - 1}p,k = 1,2,\cdots  \) , 并且 \( {\zeta }_{n} \sim  \operatorname{Exp}\left( \lambda \right) ,n = 1,2,\cdots  \) . 令 \( \xi  = {\zeta }_{1} + \cdots  + {\zeta }_{V} \) . 证明: \( \xi  \sim  \operatorname{Exp}\left( {\lambda p}\right)  \) . (注: 试从此题结论读解泊松过程的细分.)
+\end{problem}
+\begin{solution}
+    首先做拆分：
+    \begin{align*}
+        P(\zeta_1+\cdots+\zeta_V>t)&=\sum_{k=1}^{\infty}(1-p)^{k-1}p\cdot P(\zeta_1+\cdots+\zeta_k>t)\tag{*}
+    \end{align*}
+    直接计算
+    \begin{align*}
+        &P(\zeta_1+\cdots+\zeta_k>t)\\
+        =&\int_{0}^{t}\int_{0}^{t-x_1}\int_{0}^{t-(x_1+x_2)}\cdots \int_{0}^{t-(x_1+\cdots+x_{k-1})}\lambda^{k-1}e^{-\lambda(x_1+\cdots+x_{k-1})} \left(\int_{0}^{t-(x_1+\cdots+x_{k-1})}\lambda e^{-\lambda x_k} dx_k \right)dx_{k-1}\cdots dx_3 dx_2 dx_1
+    \end{align*}
+    \textcolor{blue}{太难算了，之所以不考虑$P(\zeta_1+\cdots+\zeta_k<t)$是因为积分限会由于取值范围($>0$)而变得很复杂}.\\
+    单个$\zeta\sim \text{Exp}(\lambda) = \Gamma(1 , \lambda)$，那么$\zeta_1+\cdots+\zeta_k\sim \Gamma(k , \lambda)$，密度函数为$\textcolor{red}{\frac{\lambda^k x^{k-1} e^{-\lambda x}}{(k-1)!}}$，\textcolor{blue}{但直接计算Gamma函数的积分仍然十分复杂，好的方法是在$(*)$式两边同时对整体$\xi$求导，得到密度函数的等式}
+    \begin{align*}
+        f_{\xi}(x)&=\sum_{k=1}^{\infty}(1-p)^{k-1}p\cdot f_{\xi | V=k}(x)=\sum_{k=1}^{\infty}(1-p)^{k-1}p\cdot  \textcolor{red}{\frac{\lambda^k x^{k-1} e^{-\lambda x}}{(k-1)!}}\\
+        &=\lambda p e^{-\lambda x} \sum_{k=1}^{\infty} \frac{(\lambda x (1-p))^{k-1}}{(k-1)!}=\lambda p e^{-\lambda x} e^{\lambda x(1-p)}=\lambda p \cdot e^{-\lambda p x}
+    \end{align*}
+    理解泊松分布的细分：在书上的例子中，我们是对泊松流中的每一个元素，独立地，以概率$p$做伯努利实验，分类成了两类，这样得到了两个独立的泊松分布，速率分别是$p\lambda$和$(1-p)\lambda$. 而在题目中，$V$是几何分布，实际上记录的是第一次分给“第一类”的时刻，即第一次第一类时间$X_1^{(1)}$到达的时间，在泊松过程中，它的分布就是$\xi_1^{(1)}$的分布(这里的上标代表分类)，因此是参数为$p\lambda$的几何分布.
+\end{solution}
+\begin{note}
+    验证分布，不一定非要去算分布函数，可以考虑验证密度函数.
+\end{note}
+
+\begin{problem}
+    5. 假设某公交车站有甲、乙两路公交车, 到达时刻是相互独立的泊松流,速率分别为 \( {\lambda }_{1} \) 与 \( {\lambda }_{2} \) . 求:
+
+(1) 在时间段 \( \left\lbrack  {0,1}\right\rbrack   \) 中恰好到达 3 辆公交车的概率;
+
+(2) 某人在车站等甲路车, 在他等甲路车的时间段内, 恰好经过 3 辆乙路车的概率.
+\end{problem}
+\begin{solution}\textcolor{red}{注意区分，$X_t$表示$t$时刻之前一共来了多少车；$S_n$表示第$n$辆车来的时刻.}
+    \\(1) 泊松流合流之后，速率为$\lambda_1+\lambda_2$，不妨设之前是$\{X_t\}$和$\{Y_t\}$，合流后是$\{Z_t\}$. 考虑"时间段$[0,1]$内到达的车辆数目恰好是$3$的概率"，因为$Z_t$表示的是时刻$t$之前到达车辆的总数，因此上述概率就是$P(Z_1=3)$，而$Z_1\sim P(\lambda_1+\lambda_2)$，因此，$P(Z_1=3)=\frac{(\lambda_1+\lambda_2)^3e^{-3(\lambda_1+\lambda_2)}}{3!}$\\
+    (2) 对于"在他等甲路车的时间段内, 恰好经过 3 辆乙路车的概率"。由于，等到第一辆甲车的时间段是$[0,S_1^{(X)}]$，在这段时间内，乙车到达的次数是$\textcolor{red}{Y_{S_1^{(X)}}\sim P(\lambda_2S_1^{(X)})}$，因此，所求的概率(计算条件概率的积分)是
+    \begin{align*}
+        P(Y_{S_1^{(X)}}=3)&=\int_0^{\infty} P(Y_{S_1^{(X)}}=3|S_1^{(X)}=t)\cdot P(S_1^{(X)}=t) dt\\
+        &=\int_0^{\infty}\frac{(\lambda_2t)^3e^{-3\lambda_2 t}}{3!}\cdot \lambda_1 e^{-\lambda_1 t}dt=\textcolor{blue}{\frac{\lambda_1\lambda_2^3}{(\lambda_1+3\lambda_2)^4}}
+    \end{align*}
+    \textcolor{blue}{好难算，可以验算一下.}
+\end{solution}
+
+\begin{problem}
+    6. 假设 \( \left\{  {X}_{t}\right\}   \) 是速率为 \( \lambda  \) 的泊松过程, \( T \) 与 \( \left\{  {X}_{t}\right\}   \) 相互独立且 \( T \sim  \operatorname{Exp}\left( \mu \right)  \) . 试求 \( {X}_{T} \) 的分布列.
+\end{problem}
+\begin{solution}
+    直接用全概公式拆分计算
+    \begin{align*}
+        P(X_T=k)&=\int_0^{\infty} P(X_T=k|T=t)\cdot P(T=t)dt\\
+        &=\int_0^{\infty} \frac{(t\lambda)^ke^{-kt\lambda}}{k!}\cdot \mu e^{-\mu t}dt=\frac{\lambda^k \mu}{k!}\int_0^{\infty} t^ke^{-(k\lambda+\mu)t}dt\\
+        &=\frac{\lambda^k \mu}{k!}\cdot \frac{1}{(\mu+k\lambda)^{k+1}}\Gamma(k+1)\overset{k\text{是整数}}{=}\frac{\lambda^k \mu}{k!}\cdot \frac{1}{(\mu+k\lambda)^{k+1}}k!\\
+        &=\frac{\lambda^k \mu}{(\mu+k\lambda)^{k+1}}
+    \end{align*}
+\end{solution}
+\begin{note}
+    中间一部分的具体计算：换元$(k\lambda+\mu)t=s$
+    \begin{align*}
+        \int_0^{\infty} t^ke^{-(k\lambda+\mu)t}dt&=\frac{1}{(k\lambda+\mu)^{k+1}}\int_0^{\infty} s^k e^{-s}ds=\frac{1}{(k\lambda+\mu)^{k+1}}\Gamma(k+1)
+    \end{align*}
+\end{note}
+
+\begin{problem}
+    7. 假设某房产中介发布售楼信息的时刻是速率为 \( \lambda  \) 的泊松流,每条信息的房价服从 \( U\left( {{300},{2000}}\right)  \) (单位: 万元). 某先生只关注房价不超过 800 万元的信息. 他读每条信息所花的时间是一个独立的随机变量, 服从 \( U\left( {1,2}\right)  \) (单位: 小时). 将某 30 天中他关注的信息数目记为 \( X \) ,他读完这些信息所花的总时间记为 \( Y \) 小时 (注: 有可能 \( Y \geq  {30} \times  {24} \) ). 试求:
+
+(1) \( X \) 的分布;
+
+(2) \( E\exp \left( {aY}\right)  \) ,其中 \( a \) 为常数.
+\end{problem}
+\begin{solution}
+    (1) $X$是$30$天中房价不超过$800$万元的信息的数目，用$S_n^{(R)}$表示$n$天给发布的所有消息，每条消息以$\frac{800-300}{2000-300}=\frac{5}{17}$的概率被关注，因此可以拆分出小的泊松过程，速率是$\frac{5}{17}\lambda$，泊松流记为$S_n^{(S)}$，因此这里的$X=S_{30}^{(S)}\sim P(\frac{150}{17}\lambda)$，服从参数为$\frac{150}{17}\lambda$的泊松分布.\\
+    (2) 设单次阅读信息的时间是$\xi\sim U(1,2)$，那么$Y=\xi_1+\cdots+\xi_{X}$，其中$\xi_i$独立同分布，所以 
+    \begin{align*}
+        E(e^{aY})&=E(e^{a(\xi_1+\cdots+\xi_X)})=E(e^{a\xi_1}\cdot e^{a\xi_2}\cdots e^{a\xi_{X}})=E[E[e^{a\xi_1}\cdot e^{a\xi_2}\cdots e^{a\xi_{X}}|X=k]]\\
+        &=E[(E e^{a\xi})^X]=\textcolor{blue}{E[(\frac{e^{2a}-e^a}{a})^X]}=\sum_{k=1}^{\infty} (\frac{e^{2a}-e^a}{a})^k \cdot \frac{(\frac{150}{17}\lambda)^k e^{-\frac{150}{17}\lambda }}{k!}\\
+        &=e^{-\frac{150}{17}\lambda }\sum_{k=1}^{\infty} (\frac{e^{2a}-e^a}{a}\cdot \frac{150}{17}\lambda)^k \cdot \frac{ 1}{k!}=e^{-\frac{150}{17}\lambda }e^{\frac{e^{2a}-e^a}{a}\cdot \frac{150}{17}\lambda}=\exp(\frac{150\lambda}{17}(\frac{e^{2a}-e^a}{a}-1))
+    \end{align*}
+    实际上，$\textcolor{blue}{E[(\frac{e^{2a}-e^a}{a})^X]}$就是母函数的计算，可以借助泊松分布的母函数的结论：$E(z^{X})=e^{\lambda(z-1)}$.
+\end{solution}
+
+\begin{problem}
+    8. 证明: (1) 推论 2.1.8;
+
+(2) 命题 2.1.10;
+
+(3) 命题 2.1.11 及其逆命题;
+
+(4) 定理 2.1.12 与定理 2.1.13.
+\end{problem}
+
+\begin{problem}
+    \( {9}^{ * } \) . 在例 2.1.15 中,假设 \( {\phi }_{1} \) 是离散型随机变量. 证明: 推论 2.1.6 和推论 2.1.8 对于复合泊松过程 \( \left\{  {Y}_{t}\right\}   \) 也成立.
+\end{problem}
+
+\begin{problem}
+    \( {10}^{ * } \) . 证明命题 2.1.18.
+\end{problem}
+
+\subsection{跳过程的定义及其转移概率}
+\begin{problem}
+    
+\end{problem}
+
+\section{布朗运动}
+\subsection{高斯分布和高斯过程}
+\begin{problem}
+    1. 假设 \( \overrightarrow{X} = \left( {{X}_{1},\cdots ,{X}_{n}}\right)  \) 服从 \( n \) 维高斯分布. 证明:
+
+(1) 存在服从 \( n \) 维标准正态分布的随机向量 \( \overrightarrow{Z} = \left( {{Z}_{1},\cdots ,{Z}_{n}}\right)  \) 和 \( n \times  n \)  矩阵  \( \mathbf{M} \) ,使得  \( \overrightarrow{X} = \mathbf{M}\overrightarrow{Z} \) .
+
+(2) 对任意 \( m \times  n \) 矩阵 \( \mathbf{M},\mathbf{M}\overrightarrow{X} \) 服从 \( m \) 维高斯分布.
+\end{problem}
+\begin{solution}
+
+(1) 假设$\vec{X}\sim N(\vec{\mu},\Sigma)$, 取$A=\sqrt{\Sigma}$($\Sigma$半正定,可行), 任取$\vec{V}\sim N(\vec{0},I_n)$, 那么$\vec{X}\overset{d}{=}A\vec{V}$. 
+
+考虑$A=\begin{pmatrix}
+    \alpha_1 \\ \alpha_2\\ \vdots \\\alpha_n
+\end{pmatrix}=\begin{pmatrix}
+\hat{A}_1 \\ \hat{A}_2
+\end{pmatrix}$, 其中前$r=\text{rank}(A)$行线性无关, 那么后$n-r$行可以被前$r$行线性表出: $\hat{A}_2=B\hat{A}_1$. 由于$(X_1,\cdots,X_r)^T \overset{d}{=}\hat{A}_1V$, 又因为$\hat{A}_1$满秩, 因此$(X_1,\cdots,X_r)^T$是非退化的$r$维高斯分布, 因此存在$C_{r\times r}$和$r$维标准正态分布$Z_{r}$, 使得$(X_1,\cdots,X_r)^T=CZ_r$ (实际上, 这里的$C_{r\times r}$可以是$\sqrt{\Sigma_{11}}=\sqrt{\hat{A}_1\hat{A}_1^T}$, 注意这里的$\hat{A}_1\in \mathbf{R}^{r\times n}$). 
+
+由于同分布式子的右边, 后$n-r$行可以被前$r$行线性表出, 那么左边的后$n-r$行也可以被前$r$行用同样的方式线性表出. 因此有$(X_1,\cdots,X_r,X_{r+1},\cdots,X_n)^T=\begin{pmatrix}
+    CZ_r \\ BCZ_r
+\end{pmatrix}=\begin{pmatrix}
+    C & \vec{0}\\ BC & \vec{0}
+\end{pmatrix}\cdot \begin{pmatrix}
+    Z_r \\ Z_{n-r}
+\end{pmatrix}$, 其中$Z_{n-r}$是$n-r$维的标准正态分布, 和$Z_r$相互独立. 因此$M=\begin{pmatrix}
+    C & \vec{0}\\ BC & \vec{0}
+\end{pmatrix}, \vec{Z}=\begin{pmatrix}
+    Z_r \\ Z_{n-r}
+\end{pmatrix}$.
+
+(2) 计算特征函数, 因为$M\vec{X}\sim N(M\vec{\mu},M\Sigma M^T)$, 因此$f_{M\vec{X}}(t)=\exp(it^TM\mu-\frac{1}{2}t^T M\Sigma M^T t)$, 因此是$m$维高斯分布.
+\end{solution}
+
+\begin{problem}
+    2. 证明命题 3.1.2 与命题 3.1.3.
+\end{problem}
+\begin{solution}\\
+\textcolor{blue}{命题 3.1.2: $\vec{X}=\{X_{\alpha}|\alpha\in I\}$是高斯系，$I_{1},\dots,I_{n}$是$I$的互不相交的非空子集. $\vec{X}_{r}=\{X_{\alpha}|\alpha\in I_{r}\}$. 如果对任意的$r\neq s$，有协方差为$0$，即
+$$
+\text{Cov}(X_{\alpha},X_{\beta})=0,\quad \forall \alpha\in I_{r},\forall \beta \in I_{s}
+$$
+那么$\vec{X}_{1},\dots,\vec{X}_{n}$相互独立.}\\
+\textbf{证明}: 不妨$n=2$, 已知对于正态分布, 不相关(即协方差是$0$)当且仅当独立. 因此有$X_{\alpha}$和$X_{\beta}$独立, 又因为$\vec{X}_1$中任意分量和$\vec{X}_2$中任意分量独立, 因此$\vec{X}_1$和$\vec{X}_2$独立.\\
+\textcolor{blue}{命题 3.1.3: $\{X_{\alpha}|\alpha\in I\}$是高斯系，$J$是指标集，若对任意的$\beta\in J$，存在$n\geq 1$，$\alpha_{1},\dots,\alpha_{n}\in I$，$c_{1},\dots,c_{n}\in \mathbb{R}$，使得$Y_{\beta}=c_{1}X_{\alpha_{1}}+\dots+c_{n}\alpha_{n}$(即，可以被线性表出)，那么$\{Y_{\beta}|\beta \in J\}$也是高斯系.}
+\textbf{证明}: 因为$\{X_{\alpha}|\alpha\in I\}$是高斯系,所以$(X_{\alpha_1},\cdots,X_{\alpha_n})$是高斯向量, 所以它们的线性组合$Y_{\beta}$是正态分布. 而从$\{Y_{\beta}|\beta \in J\}$中任意取有限个元素组成的向量可以被$\{X_{\alpha}|\alpha\in I\}$中取出有限个元素组成的高斯向量线性表出, 因此也是高斯向量, 根据高斯系的定义, $\{Y_{\beta}|\beta \in J\}$也高斯系.
+\end{solution}
+
+\begin{problem}
+    3. 假设 \( {\overrightarrow{X}}_{1},{\overrightarrow{X}}_{2},\cdots  \) 是一列 \( d \) 维高斯向量,且对任意 \( \overrightarrow{t} \in  {\mathbb{R}}^{d} \) . \( \mathop{\lim }\limits_{{n \rightarrow  \infty }}{f}_{{\overrightarrow{X}}_{n}}\left( \overrightarrow{t}\right)  \) 存在且有限,将此极限记为 \( f\left( \overrightarrow{t}\right)  \) . 证明: \( f\left( \overrightarrow{t}\right)  \) 是某 \( d \) 维高斯向量的特征函数.
+\end{problem}
+\begin{solution}
+    因为固定$t$, 令$n\to +\infty$
+    $$f_{\vec{X}_n}(t)=\exp(i\mu_n^Tt-\frac{1}{2}t^T\Sigma_nt)=\exp(-\frac{1}{2}t^T\Sigma_nt)\cdot (i\sin (\mu_n^Tt)+\cos(\mu_n^Tt))$$
+    极限存在，因此实部虚部的极限都存在, 因此有
+    \begin{align*}
+        \sin (\mu_n^Tt)\exp(-\frac{1}{2}t^T\Sigma_nt)\to \mathbf{R}(t),\quad \cos (\mu_n^Tt)\exp(-\frac{1}{2}t^T\Sigma_nt)\to \mathbf{I}(t)
+    \end{align*}
+    因此可以解出: $\tan(\mu_n^Tt)\to \frac{\mathbf{R}(t)}{\mathbf{I}(t)},\quad \exp(-\frac{1}{2}t^T\Sigma_nt) \to \sqrt{\mathbf{R}(t)^2+\mathbf{I}(t)^2}$, 因此$\mu_n^Tt$和$t^T\Sigma_nt$的极限均存在. 而因为$t\in \mathbb{R}^d$, 因此可以反解出$\mu_n$和$\Sigma_n$的极限(因为可以通过变换$t$得到不可数个方程, 必然可以反解出来), 再根据极限唯一, 有$f(\vec{t})$满足高斯向量的特征函数形式, 得证.
+\end{solution}
+
+\subsection{布朗运动的定义与莱维构造}
+假设 \( \left\{  {B}_{t}\right\}   \) 是一维标准布朗运动.
+\begin{problem}
+    1. 对任意正整数 \( n \) ,求 \( {B}_{1} + {B}_{2} + \cdots  + {B}_{n} \) 的分布.
+\end{problem}
+
+\begin{problem}
+    2. 设 \( 0 < {t}_{1} < {t}_{2} < {t}_{3} < {t}_{4} \) ,计算 \( E\left( {{B}_{{t}_{1}}{B}_{{t}_{2}}{B}_{{t}_{3}}{B}_{{t}_{4}}}\right)  \) . 
+\end{problem}
+
+\begin{problem}
+    3. 设 \( s > t > 0 \) ,试求:
+
+(1) \( E\left( {{B}_{s}^{2} - s \mid  {B}_{t} = x}\right)  \) ;
+
+(2) \( E\left( {{B}_{s}^{3} - {3s}{B}_{s}^{2} \mid  {B}_{t} = x}\right)  \) ;
+
+(3) \( E\left( {{B}_{s}^{4} - {6s}{B}_{s}^{2} + 3{s}^{2} \mid  {B}_{t} = x}\right)  \) . (注: 对比 \( §{1.7} \) 习题 12.)
+\end{problem}
+
+\begin{problem}
+    4. 设 \( 0 < s < t \) ,试证:
+
+\[P\left( {{B}_{s} > 0,{B}_{t} > 0}\right)  = \frac{1}{4} + \frac{1}{2\pi }\arcsin \sqrt{\frac{s}{t}}.\]
+\end{problem}
+
+\begin{problem}
+    5. 考虑 \( d \) 维标准布朗运动,记 \( \overrightarrow{x} = \left( {{x}_{1},\cdots ,{x}_{d}}\right) ,\overrightarrow{y} = \left( {{y}_{1},\cdots ,{y}_{d}}\right)  \) .
+
+(1) 证明: 转移密度有如下表达式:
+\[{p}_{t}\left( {\overrightarrow{x},\overrightarrow{y}}\right)  = \mathop{\prod }\limits_{{i = 1}}^{d}{p}_{t}\left( {{x}_{i},{y}_{i}}\right)  = \frac{1}{{\left( \sqrt{2\pi t}\right) }^{d}}\exp \left\{  {-\mathop{\sum }\limits_{{i = 1}}^{d}\frac{{\left( {y}_{i} - {x}_{i}\right) }^{2}}{2t}}\right\}  ,\]
+
+(2) 记 \( G\left( {\overrightarrow{x},\overrightarrow{y}}\right)  \mathrel{\text{:=}} {\int }_{0}^{\infty }{p}_{t}\left( {\overrightarrow{x},\overrightarrow{y}}\right) \mathrm{d}t \) ,并称其为格林函数. 证明: 对 \( d \geq  2,G\left( {\overrightarrow{x},\overrightarrow{y}}\right)  = \infty  \) ; 对 \( d \geq  3 \) ,
+
+\[G\left( {\overrightarrow{x},\overrightarrow{y}}\right)  = \frac{\Gamma \left( {d/2 - 1}\right) }{2{\pi }^{d/2}} \cdot  \frac{1}{{\left| \overrightarrow{x} - \overrightarrow{y}\right| }^{d - 2}}.\]
+
+(注: 忽略前面的系数, 格林函数正是物理中的牛顿位势.)
+\end{problem}
+
+\begin{problem}
+    6. 验证布朗运动的转移密度满足如下偏微分方程:
+\[\frac{\partial {p}_{t}\left( {x,y}\right) }{\partial t} = \frac{1}{2}\mathop{\sum }\limits_{{i = 1}}^{n}\frac{{\partial }^{2}{p}_{t}\left( {x,y}\right) }{\partial {x}_{i}^{2}} = \frac{1}{2}\mathop{\sum }\limits_{{i = 1}}^{n}\frac{{\partial }^{2}{p}_{t}\left( {x,y}\right) }{\partial {y}_{i}^{2}}.\]
+\end{problem}
+
+\begin{problem}
+    7. 设 \( \left\{  {W}_{t}\right\}   \) 是标准布朗运动,且与 \( \left\{  {B}_{t}\right\}   \) 相互独立
+
+(1) 设 \( {\xi }_{t} = a{B}_{t} + b{W}_{t} \) ,若 \( \left\{  {\xi }_{t}\right\}   \) 也是标准布朗运动. 那么 \( a \) 和 \( b \) 应满足什么条件?
+\end{problem}
+
+
+
+\end{document}
+
