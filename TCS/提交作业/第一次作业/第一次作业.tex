@@ -226,6 +226,7 @@ $P_{12}$ 1.1 写出计算下述函数的$\mathscr{S}$程序(允许使用宏指�
 可供使用的宏指令:\begin{itemize}
     \item GOTO $A$
     \item $V\leftarrow V^{\prime}$ 
+    \item 判断 $X=0$ 和跳转
 \end{itemize}
 \end{note}
 
@@ -238,7 +239,8 @@ $P_{12}$ 1.2 给出下列程序$\mathscr{P}$计算的函数$\psi_{\mathscr{P}}^{
     (2) [A]&X\leftarrow X-1\\
     &\text{IF}\quad X=0 \quad \text{GOTO}\quad  A\\
     &X\leftarrow X-1\\
-    &\text{IF}\quad X\neq 0 \quad \text{GOTO}\quad  A
+    &\text{IF}\quad X\neq 0 \quad \text{GOTO}\quad  A\\
+    (3) \text{空程序}&
 \end{align*}
 \end{problem}
 \begin{solution}
@@ -247,7 +249,8 @@ $P_{12}$ 1.2 给出下列程序$\mathscr{P}$计算的函数$\psi_{\mathscr{P}}^{
     \uparrow (\text{未定义})  & \text{if } x \in \mathbb{N}^*, \\
   0 & \text{if } x = 0.
 \end{cases}$\\
-(2) $\psi_{\mathscr{P}_1}^{(1)}(x) =\uparrow, x\in \mathbb{N} $.
+(2) $\psi_{\mathscr{P}_1}^{(1)}(x) =\begin{cases}0,&x\text{是正偶数}\\ \uparrow , &x=0 \text{或}x\text{是奇数}\end{cases} $\\
+(3) $\psi_{\mathscr{P}_1}^{(1)}(x)=0, \forall x\in \mathbb{N}$
 \end{solution}
 
 \end{document}
