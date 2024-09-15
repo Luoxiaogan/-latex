@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.21)  15 SEP 2024 21:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.5.21)  15 SEP 2024 21:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -645,34 +645,17 @@ LaTeX Font Info:    Trying to load font information for U+rsfs on input line 49.
  (c:/texlive/2023/texmf-dist/tex/latex/jknapltx/ursfs.fd
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 57.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 57.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 57.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 57.
-
-
-Overfull \hbox (40.57605pt too wide) detected at line 70
+Overfull \hbox (40.57605pt too wide) detected at line 71
 []
  []
 
 
-Overfull \hbox (41.14136pt too wide) detected at line 82
+Overfull \hbox (41.14136pt too wide) detected at line 83
 []
  []
 
 
-Overfull \hbox (53.42229pt too wide) in paragraph at lines 89--93
+Overfull \hbox (53.42229pt too wide) in paragraph at lines 90--94
 \C70/rm/m/n/10/6b d \C70/rm/m/n/10/65 ö \C70/rm/m/n/10/6c ¡ \C70/rm/m/n/10/67 	 \C70/rm/m/n/10/7b V \C70/rm/m/n/10/75 e \C70/rm/m/n/10/88 « \C70/rm/m/n/10/53 ` \C70/rm/m/n/10/4f ^^X\OT1/cmr/m/n/10 , \C70/rm/m/n/10/75 Y \C70/rm/m/n/10/4e  \C70/rm/m/n/10/67 e \C70/rm/m/n/10/76 „ \C70/rm/m/n/10/66 /$\OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 M; D\OMS/cmsy/m/n/10 g ^^B f\OML/cmm/m/it/10 L; R\OMS/cmsy/m/n/10 g$\OT1/cmr/m/n/10 . \C70/rm/m/n/10/56 à \C70/rm/m/n/10/6b d \C70/rm/m/n/10/5b X \C70/rm/m/n/10/6d ; \C70/rm/m/n/10/4e  \C70/rm/m/n/10/67 e \C70/rm/m/n/10/76 „ \C70/rm/m/n/10/7b V \C70/rm/m/n/10/75 e \C70/rm/m/n/10/7e Ä \C70/rm/m/n/10/54 ^^H \C70/rm/m/n/10/67 	\OT1/cmr/m/n/10 : $(\OML/cmm/m/it/10 M; L\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 M; R\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 D; L\OT1/cmr/m/n/10 )\OML/cmm/m/it/10 ; \OT1/cmr/m/n/10 (\OML/cmm/m/it/10 D; R\OT1/cmr/m/n/10 )$.
  []
 
@@ -680,38 +663,32 @@ Overfull \hbox (53.42229pt too wide) in paragraph at lines 89--93
 File: ctex-zhmap-windows.tex 2022/07/14 v2.5.10 Windows font map loader for pdfTeX and DVIPDFMx (CTEX)
 {c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{UGBK.sfd}{Unicode.sfd}) [1
 
-] [2]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 172.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 172.
-
-[3] (./hw1.aux)
+] [2] [3] (./hw1.aux)
 
 Package rerunfilecheck Warning: File `hw1.out' has changed.
 (rerunfilecheck)                Rerun to get outlines right
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `hw1.out':
-(rerunfilecheck)             Before: A8E0C49678F9A65324CE0C8962B9D03C;1339
-(rerunfilecheck)             After:  D05FBA6B5D8EFE964151B848A31F7F5C;1357.
+(rerunfilecheck)             Before: 0724AB933BB89E1D5F6EBD99CCF09FF0;1303
+(rerunfilecheck)             After:  E7E0BAD13B9294921092664F3CE0CCE1;1289.
  ) 
 Here is how much of TeX's memory you used:
- 16091 strings out of 476025
- 271356 string characters out of 5794015
+ 16100 strings out of 476025
+ 271493 string characters out of 5794015
  1880382 words of memory out of 5000000
- 36074 multiletter control sequences out of 15000+600000
- 549151 words of font info for 167 fonts, out of 8000000 for 9000
+ 36082 multiletter control sequences out of 15000+600000
+ 551176 words of font info for 175 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  78i,23n,80p,1180b,496s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+pdfTeX warning (dest): name{subsection.1.7} has been referenced but does not exist, replaced by a fixed one
+
 <c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simkai.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/Windows/Fonts/simhei.ttf><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on hw1.pdf (3 pages, 445290 bytes).
+Output written on hw1.pdf (3 pages, 447188 bytes).
 PDF statistics:
- 437 PDF objects out of 1000 (max. 8388607)
- 284 compressed objects within 3 object streams
- 12 named destinations out of 1000 (max. 500000)
+ 439 PDF objects out of 1000 (max. 8388607)
+ 286 compressed objects within 3 object streams
+ 13 named destinations out of 1000 (max. 500000)
  265 words of extra memory for PDF output out of 10000 (max. 10000000)
 
