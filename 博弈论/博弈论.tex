@@ -1,0 +1,190 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig}
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+% 标题设置
+\title{\textbf{博弈论}}
+\author{Little Wolf}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+\tableofcontents
+\newpage
+
+\section{作业1}
+
+
+\subsection{1. $n$个参与者的一价拍卖和$n$个参与者的二价拍卖}
+
+\begin{solution}
+(a) 学习讲义上的书写, 需要阐明参与者, 策略空间, 收益函数.\\
+参与者$N=\{1,2,\cdots,n\}$\\
+策略空间$S_i=[0,+\infty), \forall i\in N$.\\
+每个玩家的收益函数:
+\begin{align*}
+    v_i(p_1,\cdots,p_n)=\begin{cases}
+        v_i-p_i& \text{if}\quad  p_i>\max_{k\neq i,k\in N}\{p_k\}\\
+        \frac{v_i-p_i}{|\{k|p_k=\max\{p_1,\cdots,p_n\}\}|}& \text{if} \quad p_i=\max\{p_1,\cdots,p_n\} \quad \text{and}\quad |\{k|p_k=\max\{p_1,\cdots,p_n\}\}|>1\\
+        0&\text{if} \quad p_i<\max\{p_1,\cdots,p_n\} 
+    \end{cases}
+\end{align*}
+\textcolor{blue}{注意, 右边的$v_i$是 willingness to pay, 左边的$v_i(p_1,\cdots,p_n)$是收益函数(消费者剩余)}\\
+(b) $n$个参与者的二价拍卖: \\
+参与者$N=\{1,\cdots,n\}$\\
+策略空间$S_i=[0,+\infty), \forall i\in N$\\
+每个玩家的收益函数:
+\begin{align*}
+    v_i(p_1,\cdots,p_n)=\begin{cases}
+        v_i-\max_{k\neq i,k\in N}\{p_k\}& \text{if}\quad  p_i>\max_{k\neq i,k\in N}\{p_k\}\\
+        \frac{v_i-\textcolor{red}{\max_{k\notin J, k\in N}\{p_k\}}}{|\{j|p_j=\max\{p_1,\cdots,p_n\}\}|}& \text{if} \quad p_i=\max\{p_1,\cdots,p_n\} \quad \text{and}\quad |\textcolor{red}{\underbrace{\{j|p_j=\max\{p_1,\cdots,p_n\}\}}_{\text{这个集合定义为$J$}}}|>1\\
+        0&\text{if} \quad p_i<\max\{p_1,\cdots,p_n\} 
+    \end{cases}
+\end{align*}
+\textcolor{blue}{注意是支付次高的价格, 在出最高价的人数大于一的时候, 要把他们都剔除掉.}
+\end{solution}
+
+
+\subsection{4.5, Iterated Elimination}
+
+\begin{solution}
+第一轮, 对行玩家, $U$被$M$完全占优, 删去$U$. 对列玩家, 没有完全被占优策略.\\
+第二轮, 对行玩家, 没有完全被占优策略. 对列玩家, $C$被$R$完全占优, 删去$C$.\\
+此时没有策略被占优, 留下来的是$\{M,D\}\times\{L,R\}$. 因此存活下来的策略组合有: $(M,L),(M,R),(D,L),(D,R)$.
+\end{solution}
+
+
+\subsection{4.6, Roommates}
+
+\begin{solution}
+(a) $v_i=(10-t_j-t_i)t_i$. 固定$t_j\geq 0$, $\max_{t_i\geq 0}v_i$得到最优反应.
+\begin{align*}
+    BR_i(t_j)=\begin{cases}
+        \frac{10-t_j}{2}&\text{if}\quad 0\leq t_j<10 \\
+        0 &\text{if}\quad 10\leq t_j
+    \end{cases}=\max\{\frac{10-t_j}{2},0\}
+\end{align*}
+根据对称性, 有
+\begin{align*}
+    BR_j(t_i)=\begin{cases}
+        \frac{10-t_i}{2}&\text{if}\quad 0\leq t_i<10 \\
+        0 &\text{if}\quad 10\leq t_i
+    \end{cases}=\max\{\frac{10-t_i}{2},0\}
+\end{align*}
+(b) \textcolor{red}{按照约定, 单轮删除, 对于每一个玩家, 一直删除完全被占有策略直到无法删除为止}.\\
+每个人的策略空间$S_i=S_j=[0,+\infty)$.\\
+对于$[0,5]$, 根据(a)中对最优反应的分析, \textcolor{blue}{存在一个对手策略, 使得$x\in [0,5]$是最优反应, 那么它一定不是严格被占优的. 因此$[0,5]$不会被删掉.}\\
+对于$\forall t_i\in(5,+\infty)$的策略, 因为收益函数$v_i=(10-t_j-t_i)t_i$关于$t_i$的导函数$10-t_j-2t_i<0$, 因此$v_i(5)>v_i(t_i)$, 被策略$5$严格占优, 因此被删除.\\
+因此对于两个玩家, 第一轮删除之后, 留下来的策略都是$[0,5]$.\\
+(c) 直接求解$x=\frac{10-x}{2}\Rightarrow x=\frac{10}{3}$.
+\end{solution}
+
+
+\subsection{4.7, Campaigning}
+
+\begin{solution}
+(a) 参与者$N={1,2}$\\
+策略空间$S_1=S_2=\{P,B,N\}$\\
+payoff function(收益函数):
+\begin{align*}
+    &v_1(P,P)=0.5,v_1(P,B)=0,v_1(P,N)=0.3\\
+    &v_1(B,P)=1,v_1(B,B)=0.5,v_1(B,N)=0.4\\
+    &v_1(N,P)=0.7,v_1(N,B)=0.6,v_1(N,N)=0.5\\\\
+    &v_2(P,P)=0.5,v_2(B,P)=0,v_2(N,P)=0.3\\
+    &v_2(P,B)=1,v_2(B,B)=0.5,v_2(N,B)=0.4\\
+    &v_2(P,N)=0.7,v_2(B,N)=0.6,v_2(N,N)=0.5
+\end{align*}
+\\(b) 博弈矩阵如下:
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+    \hline
+      & P & B & N \\ \hline
+    P & (0.5,0.5) & (0,1) & (0.3,0.7) \\ \hline
+    B & (1,0) & (0.5,0.5) & (0.4,0.6) \\ \hline
+    N & (0.7,0.3) & (0.6,0.4) & (0.5,0.5) \\ \hline
+\end{tabular}
+\end{center}
+(c) 第一轮, 对行玩家, $P$被$B$严格占优, 删去$P$, $B,N$之间没有严格占优关系; 对列玩家, $P$被$B$严格占优, 删去$P$, $B,N$之间没有严格占优关系\\
+第二轮, 对行玩家, $B$被$N$严格占优, 删去$N$; 对列玩家, $B$被$N$严格占优, 删去$N$\\
+剩下策略组合$(N,N)$; this procedure will lead to a clear prediction.
+\end{solution}
+
+
+\subsection{4.8 Beauty Contest Best Responses}
+
+\begin{solution}
+(a) 平均数的$\frac{3}{4}$是$\frac{20(n-1)+x}{n}\cdot \frac{3}{4}=15+\frac{3(x-20)}{4n}$, 不妨取$x=16$, 那么$15+\frac{3(x-20)}{4n}=15-\frac{3}{n}<15<16<19$, 因此$i$号玩家获胜, $19$当然不是唯一的最优反应.\\
+(b) 设$a=\frac{20(n-1)+x}{n}\cdot \frac{3}{4}$\\
+如果$a\leq x$, 那么只需要$x<20$即可($x\leq 19$), 即此时$x\in [15+\frac{3(x-20)}{4n},20)\cap \mathbb{Z}$.\\
+如果$x<a$, 那么需要$0\leq a-x<20-a\iff x\in (30+\frac{3x-60-40n}{2n}, 15+\frac{3(x-20)}{4n})\cap \mathbb{Z}$.\\
+因此, 如果$i$玩家是最终胜者, 策略取值范围是$(30+\frac{3x-60-40n}{2n}, 20)\cap \mathbb{Z}$, 当然与$n$有关.
+\end{solution}
+
+\subsection{6. Tow-player game}
+\begin{solution}
+(a) 取$x_i>0$, 那么$v_i(x_i,x_j)=\arctan x_i$, 那么任意比$x_i$大的策略都严格占优$x_i$. 因此所有的大于$0$的策略都是被严格占优的.\\
+(b) 取$x_i=0$, 那么$v_i(0,x_j)=\begin{cases}
+    2& \text{if} \quad x_j=1\\
+    0 & \text{if otherwise}
+\end{cases}$, $x_j=1$的时候, $2>\frac{\pi}{2}$, 是最优反应, 因此一定不是被严格占优的.\\
+(c) 不是互为最佳反应(\textcolor{red}{mutual best responses}). 因为对方取$0$的时候, 我取非零值有正的收益函数, 不是最优反应.
+\end{solution}
+
+\subsection{$n$-firm Cournot competition}
+
+\begin{solution}
+(a) Write down its normal form game(写出标准形式博弈, \textcolor{blue}{其实就是写出:玩家, 策略空间, 收益函数})\\
+玩家: $N=\{1,\cdots,n\}$\\
+策略空间: $S_i=[0,+\infty)$\\
+收益函数: 
+$$v_i(q_1,\cdots,q_n)=q_i\cdot\max\{100-\sum_{j=1}^nq_j,0\}-10q_i=\max\{q_i(90-\sum_{j\neq i}q_j -q_i), -10q_i\}$$
+(b) 计算最优反应: 
+$$BR_i(q_{-i})=\begin{cases}
+    \frac{90-\sum_{j\neq i}q_j}{2}&\text{if} \quad 0\leq \sum_{j=1}^n q_j \leq 90\\
+    0&\text{if} \quad  90\leq \sum_{j=1}^n q_j 
+\end{cases}=\max\{\frac{90-\sum_{j\neq i}q_j}{2},0\}$$
+因为$q_j\in [0,+\infty)$, 所以$BR_i(q_{-i})\in [0,45]$, 即在某个对手策略下是最优反应, 因此一定不是被严格占优的. 而对$(45,+\infty)$的策略, 都被$45$严格占优. 一次第一轮删除之后, 所有玩家的策略组合都是$[0,45]$.\\
+多次删除, 极限情况是: $x=\frac{90-(n-1)x}{2}\iff x=\frac{90}{n+1}$. 因此最后存活下来的策略是$\frac{90}{n+1}$.
+\end{solution}
+
+\end{document}
+
