@@ -135,4 +135,11 @@
     $S=\{0,1,2,\cdots\}=\mathbb{Z}$，$P(X_{n+1}=j|X_n=i)=p_{j-i+1}, \forall j\geq i-1$.
     \end{solution}
 
+    \begin{problem}
+    11. 假设 \( \left\{ {X}_{n}\right\} \) 是规则树 \( {\mathbb{T}}^{d} \) 上的随机游动,取 \( {Y}_{n} = \left| {X}_{n}\right| \) (参见例 1.1.10). 根据上题, \( \left\{ {Y}_{n}\right\} \) 是马氏链. 试写出 \( \left\{ {Y}_{n}\right\} \) 的状态空间与转移概率.
+\end{problem}
+\begin{solution}
+状态空间$S=\{0,1,2,\cdots\}=\mathbb{N}$，转移概率$P(Y_{n+1}=1|Y_{n}=0)=1,P(Y_{n+1}=i-1|Y_{n}=i)=p_{i,i-1}=\frac{1}{d+1},P(Y_{n+1}=i+1|Y_{n}=i)=p_{i,i+1}=\frac{d}{d+1}$
+\end{solution}
+
 \end{document}
