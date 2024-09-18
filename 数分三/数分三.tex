@@ -56,6 +56,23 @@
     设$A,B$是$\mathbb{R}^n$的互不相交的闭集, 证明: 存在开集$O_1,O_2, \quad s.t.\quad A\subset O_1, B\subset O_2, O_1\cap O_2 = \varnothing$.
 \end{problem}
 
+\begin{solution}
+    $d(x,A)=\inf\{|x-a|:a\in A\}$
+\begin{align*}
+    O_1&=\{x|\frac{d(x,A)}{d(x,A)+d(x,B)}<\frac{1}{2}\}=\{x|d(x,A)<d(x,B)\}\\
+    O_2&=\{x|\frac{d(x,B)}{d(x,A)+d(x,B)}<\frac{1}{2}\}=\{x|d(x,B)<d(x,A)\}
+\end{align*}
+对任意的$x^*\in X_1$, $d(x^*,A)<d(x^*,B)$, 那么取$\delta_0=\frac{d(x^*,B)-d(x^*,A)}{4}$, $\forall x\in U(x^*,\delta_0)$, 有$d(x,A)\leq d(x^*,A)+\delta < d(x^*,B)-\delta\leq d(x,B)$, 即$U(x^*,\delta_0)\subset O_1$, 因此$O_1$是开集. 同理, $O_2$是开集.\\
+根据定义(因为两个严格的不等式不能同时成立), $O_1\cap O_2=\varnothing$\\
+因为$\forall x\in A, d(x,A)=0$, 而$A,B$是不相交的闭集, \textcolor{blue}{所以$B\subset A^c$, 且$A^c$是开集, 因此$\forall x\in A, \forall y\in B, \exists  \delta>0$, 使得$d(y,A)>\delta, \forall y\in B$, 从而有$d(x,B)>\delta$, 因此$x\in O_1\Rightarrow A\subset O_1$, 同理$B\subset O_2$}.
+\end{solution}
+\begin{note}
+两个互不相交的闭集$A,B$, 因为$B\subset A^c$, $A^c$闭集, 所以$\forall b\in B, \exists \delta_b>0, U(b,\delta_b)\subset A^c$, 因此$\forall x\in A$取定, $|x-b|>\delta_b>0$.\\
+考虑下确界$\inf\{|x-b|:b\in B\}$, 如果下确界等于$0$, 那么显然$x\in \partial A$(否则如果是内点, 上述下确界必然大于$0$); 但如果下确界等于$0$, 那么必然有一个$B$中的子列趋于$x$, 但$B$是闭集, 包含自身的极限点, 得到$x\in B$, 矛盾. 因此下确界一定大于$0$.\\ 
+两个互不相交的闭集$A,B$, 单点到另一个集合的距离的下确界是正的.\\
+两个互不相交的闭集$A,B$, 集合中任意一点到另一个集合的距离的下确界不一定是正的.
+\end{note}
+
 \section{多元函数的极限和连续}
 
 \begin{problem}
