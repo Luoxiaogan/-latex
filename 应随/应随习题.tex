@@ -411,6 +411,77 @@ $$\pi_0=(1+\frac{\lambda+1}{\lambda}+\sum_{k=2}^{\infty}\frac{(\lambda+1)^{k-2}(
 因此有，$\pi_1=\frac{\lambda+1}{\lambda}(3-\sum_{k=2}^{\infty}\frac{(\lambda+1)^{k-2}}{\lambda^{k-1}}\sum_{i=1}^{k-2}p_i)^{-1}$
 \end{solution}
 
+\begin{problem}
+1. 算矩阵的不变分布
+\end{problem}
+\begin{solution}
+考虑
+$$\pi\mathbf{P}=\pi \iff (\mathbf{P}^T-\mathbf{I})\pi^T=0$$
+先用高斯消元法算出通解，然后联立归一化条件得到不变分布:
+$$\pi=(0.125 , 0.1875, 0.125 , 0.1875, 0.125 , 0.25)$$
+\end{solution}
+
+\begin{problem}
+    2. 若$\pi$是不变分布, 则$\forall A\subset S$, 有 
+$$\sum_{i\in A,j\notin A} \pi_i p_{ij} = \sum_{i\in A,j\notin A}\pi_j p_{ji}$$
+\textcolor{blue}{即, 进入$A$的概率流等于离开$A$的概率流}
+\end{problem}
+\begin{solution}
+    \textcolor{blue}{思路: 先证明, 单个状态的流入和流出相等; 然后求和}
+\begin{align*}
+    &\pi_i=\sum_{j\in S}\pi_jp_{ij}=\sum_{j\neq i}\pi_j p_{ij}+\pi_i p_{ii}\\
+    \iff &\pi_i\textcolor{red}{(1-p_{ii})}=\pi_i\textcolor{red}{\sum_{j\neq i}p_{ij}}=\sum_{j\neq i}\pi_jp_{ij}
+\end{align*}
+对$i\in A$求和, 得到
+\begin{align*}
+    \sum_{i\in A}\pi_i\sum_{j\notin A}p_{ij}=\sum_{i\in A}\sum_{j\notin A}\pi_i p_{ij}
+\end{align*}
+\end{solution}
+\begin{note}
+注意: (转移矩阵对行求和)$p_{ii}+\sum_{j\neq i}p_{ij}=\sum_{j\in S}p_{ij}=1$, 但(转移矩阵对列求和)$\sum_{i\in S}p_{ij}$很可能不等于$1$.
+\end{note}
+
+\begin{problem}
+    4. 给转移矩阵, 算不变分布和$\lim_{n\to\infty}P(X_n=1)$
+\end{problem}
+\begin{solution}
+    计算得到: (1)$\pi=(0.3,0.5,0.2)$. \\(2) $\lim_{n\to \infty}P(X_n=1)=\mu^T\mathbf{P}_{\infty}[1]=\mu^T\mathbf{1}_n\pi^T[1]=\pi_1=0.3$
+\end{solution}
+\begin{problem}
+5. 证明: 转移矩阵$\mathbf{P}$的全体不变分布构成凸集. 即若$\mu,\pi$都是$\mathbf{P}$的不变分布,$0<p<1$, 那么$p\mu+(1-p)\pi$也是$\mathbf{P}$的不变分布.
+\end{problem}
+\begin{solution}
+因为$\mu\mathbf{P}=\mathbf{P}, \pi\mathbf{P}=\mathbf{P}$, 所以$(p\mu+(1-p)\pi)\mathbf{P}=\mathbf{P}$, 且$\left\langle p\mu+(1-p)\pi, \mathbf{1}_n \right\rangle=1$. 且因为是凸组合, 所以每一个元素非负, 因此是不变分布.
+\end{solution}
+
+\begin{problem}
+    7. 若$\mathbf{P}$满足列和为$1$, 即$\sum_{i\in S}p_{ij}=1$, 称为双随机矩阵.\\
+(1) 如果$\mathbf{P}$双随机, 那么$\mathbf{P}^n$双随机\\
+(2) 如果$\mathbf{P}$双随机, 那么$\mu\equiv 1$是不变测度.
+\end{problem}
+\begin{solution}
+(1) 下面证明任意两个双随机矩阵相乘还是双随机. $A,B$双随机, 那么$AB$的第$i$列的求和是: $\sum_{j=1}^n AB[j,i]=\sum_{j=1}^n \sum_{k=1}^n a_{jk}b_{ki}=\sum_{k=1}^n b_{ki}\sum_{j=1}^n a_{jk}=\sum_{k=1}^n b_{ki}=1$. 最后两个等号分别利用了$\sum_{j=1}^n a_{jk}=1$($A$的第$k$列求和是$1$), 以及$\sum_{k=1}^n b_{ki}=1$($B$的第$i$列求和是$1$).\\
+(2) 因为$\mu \mathbf{P}=\mathbf{P}$, 且所有元素是非负的, 当然是不变测度.
+\end{solution}
+
+\begin{problem}
+$S$有限, $\mathbf{P}$是$S$上的转移矩阵, 固定$i\in S$, 证明:\\
+(1) 存在正整数子列$n_1,\cdots$, 使得对任意状态$j$, 极限
+\begin{align*}
+    \lim_{r\to\infty} \left(\sum_{m=0}^{n_r-1}p_{ij}^{(m)}\right)/ n_r
+\end{align*}
+存在, 记为$\mu_j$.\\
+(2) $\{\mu_j\}$是不变分布.
+\end{problem}
+\begin{solution}
+(1) 直观上来说, 有限状态空间的转移矩阵一定存在不变分布, 且$\mathbf{P}^n\to \mathbf{P}_{\infty}=\mathbf{1}_n\pi^T$, 因此有$p_{ij}^{(m)}=\mathbf{P}^m[i,j]\to \mathbf{P}_{\infty}[i,j]=\pi_j$. 接下来就很好证明了, 因为这等价于, 已知$\lim_{n\to \infty} x_{n}=A$, 要证$\lim_{n \to \infty} \frac{\sum_{i=0}^{n-1}x_{i}}{n}=A$.\\
+根据Stolze定理即可得到:
+\begin{align*}
+    \lim_{n\to\infty} \frac{\sum_{m=0}^{n-1} p_{ij}^{m} }{n} =\lim_{n\to \infty} \frac{\sum_{m=0}^{n} p_{ij}^{m} - \sum_{m=0}^{n-1} p_{ij}^{m} }{(n+1)-n} = \pi_j
+\end{align*}
+那么任意子列当然成立.\\
+(2) 根据(1)的分析$\mu_j=\pi_j$, 当然是不变分布.
+\end{solution}
 \subsection{常返性}
 
 \begin{problem}
