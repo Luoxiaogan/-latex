@@ -7,3 +7,6 @@ TCS/TCS.synctex.gz
 
 *.log
 *.synctex.gz
+*.aux
+*.toc
+*.out

@@ -483,6 +483,10 @@ $$\lim_{r\to \infty}\frac{\sum_{m=0}^{n_r-1}p_{ij}^{(m)}}{n_r}$$
 \begin{align*}
     &\sum_{j\in S}\mu_j\cdot p_{jk}=\sum_{j\in S}\lim_{r\to \infty} \frac{\sum_{m=0}^{n_r-1}p_{ij}^{(m)}}{n_r}\cdot p_{jk}=\lim_{r\to\infty}\frac{\sum_{j\in S}\sum_{m=0}^{n_r-1}p_{ij}^{(m)}p_{jk}}{n_r}=\lim_{r\to \infty}\frac{\sum_{m=1}^{n_r}p_{ik}^{(m)}}{n_r}=\mu_k
 \end{align*}
+以及验证归一化:
+\begin{align*}
+    \sum_{j\in S}\mu_j=\sum_{j\in S}\lim_{r\to \infty} \frac{\sum_{m=0}^{n_r-1}p_{ij}^{(m)}}{n_r}=\lim_{r\to\infty}\frac{\sum_{m=0}^{n_r-1}\sum_{j\in S}p_{ij}^{(m)}}{n_r}=\lim_{r\to \infty}1=1
+\end{align*}
 \end{solution}
 \begin{solution}\textcolor{red}{这个解答有点小问题: 从题目的用意上来说, 大概就是来让我证明这个不变分布存在的, 但是我直接使用了"有限状态空间的转移矩阵一定存在不变分布"的结论.}\\
 (1) 直观上来说, 有限状态空间的转移矩阵一定存在不变分布, 且$\mathbf{P}^n\to \mathbf{P}_{\infty}=\mathbf{1}_n\pi^T$, 因此有$p_{ij}^{(m)}=\mathbf{P}^m[i,j]\to \mathbf{P}_{\infty}[i,j]=\pi_j$. 接下来就很好证明了, 因为这等价于, 已知$\lim_{n\to \infty} x_{n}=A$, 要证$\lim_{n \to \infty} \frac{\sum_{i=0}^{n-1}x_{i}}{n}=A$.\\

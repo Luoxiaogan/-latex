@@ -381,8 +381,37 @@ $P_{16}\; 2.1.5$用基本的原始递归函数来表示下面的函数, 从而�
 
 \begin{problem}
 $P_{22}\;2.3.4$利用极小化给出下述函数$f(x)$:\\
-(1) 
+(1) $f(x)=\begin{cases}
+    \sqrt{x}, &x\text{是完全平方数}\\
+    \uparrow, &\text{否则}
+\end{cases}$\\
+(2) $g(x)$是全函数, 若存在$t$, 使得$g(t)=x$, 则$f(x)$等于使得$g(t)=x$成立的最小的$t$, 否则$f(x)\uparrow$.
 \end{problem}
+\begin{solution}
+(1) $f(x)=\min_{t}(t^2=x)$\\
+(2) $f(x)=\min_{t}(g(t)=x)$
+\end{solution}
+\begin{note}
+\textbf{\textcolor{blue}{应该是对的吧}}: \textcolor{red}{使用极小化定义的函数中，加入我想要定义的函数不是全函数(即在某些情况下无定义), 那么一定是用无界极小化定义的. 因为有界极小化+原始递归，定义出的都是全函数}
+\end{note}
+
+\begin{problem}
+$P_{36}\; 2.1$ 证明: 仅在有穷个点处非零值, 在其余点取零的函数一定是原始递归函数.
+\end{problem}
+\begin{solution}
+ 思路：因为只在有限个地方取非零值, 那么只需要对这有限个点做有限递归\\
+设$f(x)$在$x_1,\cdots,x_k$处取非零值$c_1,\cdots,c_k$, 其余点取零.\\
+定义:
+$$\chi_{x_i}(x)=\begin{cases}
+    1,&x=x_i\\
+    0,&x\neq x_i
+\end{cases}=(x=x_i)$$
+是原始递归的谓词, 那么定义:
+\begin{align*}
+    f(x)=\sum_{i=1}^{k}c_i\cdot\chi_{x_i}(x)
+\end{align*}
+(有限求和,常数乘法原始递归)因此也是原始递归的.
+\end{solution}
 
 
 \end{document}
