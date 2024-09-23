@@ -1,5 +1,5 @@
 \documentclass[10pt, a4paper, oneside]{ctexart}
-\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig, fdsymbol}
 \usepackage[thicklines]{cancel}
 \usepackage{enumitem}
 \usepackage{geometry}
@@ -259,5 +259,130 @@
     (2) $\psi_{\mathscr{P}_1}^{(1)}(x) =\begin{cases}0,&x\text{是正偶数}\\ \uparrow , &x=0 \text{或}x\text{是奇数}\end{cases} $\\
     (3) $\psi_{\mathscr{P}_1}^{(1)}(x)=0, \forall x\in \mathbb{N}$
     \end{solution}
+
+\begin{problem}
+$P_{12}$ 1.3 证明下面的函数是部分可计算的:\\
+(1) $x_1+x_2$;  (2) $x_1-x_2$;  (3) $x_1x_2$;  (4) 空函数
+\end{problem}
+\begin{solution}
+\textcolor{red}{要证明一个函数是部分可计算的, 实际上就是可以用$S$函数把它写出来, "部分"指的是可以在某些点上没有定义}\\
+(1) 思路：$x_2$一直减$1$, $x_1$一直加$1$, 直到减到零
+\begin{align*}
+    &Y\leftarrow X_1\\
+    &Z\leftarrow X_2\\
+    [A]& \text{IF} \quad Z\neq 0 \quad \text{GOTO} \quad B\\
+    & \text{GOTO}\quad E\\
+    [B]& Z\leftarrow Z-1\\
+    &Y\leftarrow Y+1\\
+    &\text{GOTO}\quad  A
+\end{align*} 
+(2) 思路: 如果$x_1<x_2$, 那么无定义, 因此看谁先减到$0$.
+\begin{align*}
+    &Z_1\leftarrow X_1\\
+    &Z_2\leftarrow X_2\\
+    [A]& \text{IF} \quad Z_1\neq 0 \quad \text{GOTO} \quad B\\
+    &\text{GOTO}\quad  D_1\\
+    [B]& \text{IF} \quad Z_2\neq 0 \quad \text{GOTO} \quad C\\
+    &\text{GOTO}\quad  D_2\\
+    [C]& Z_1\leftarrow Z_1-1\\
+    & Z_2\leftarrow Z_2-1\\
+    &\text{GOTO}\quad  A\\
+    [D_1]& Y\leftarrow Z_2\\
+    &\text{GOTO}\quad  E\\
+    [D_2]& Y\leftarrow Z_1\\
+    &\text{GOTO}\quad  E
+\end{align*}
+(3) 思路: 如果有$0$, 返回$0$; 如果都不是$0$, 一直减$x_2$, 同时对$x_1$做加法(已经证明是部分可计算函数)
+\begin{align*}
+    &Z_1\leftarrow X_1\\
+    &Z_2\leftarrow X_2\\
+    [A]& \text{IF} \quad Z_1\neq 0 \quad \text{GOTO} \quad B\\
+    &\text{GOTO}\quad  E\\
+    [B]& \text{IF} \quad Z_2\neq 0 \quad \text{GOTO} \quad C\\
+    &\text{GOTO}\quad  E\\
+    [C]& Z_2\leftarrow Z_2-1\\
+    &Z_1\leftarrow Z_1+Z_1\\
+    &\text{GOTO}\quad  B
+\end{align*}
+(4) 思路: 空函数就是处处无定义, 直接进入死循环即可.
+\begin{align*}
+    [A]&Z\leftarrow Z+1\\
+    & \text{IF} \quad Z\neq 0 \quad \text{GOTO} \quad A\\
+\end{align*}
+\end{solution}
+
+\begin{problem}
+    $P_{13}$ 1.4 证明下述谓词是可计算的\\
+(1) $x\geq a$, $a$是正整数\\
+(2) $x_1\leq x_2$\\
+(3) $x_1=x_2$
+\end{problem}
+\begin{solution}
+\textcolor{red}{要证明一个谓词是可计算的，实际上就是证明这个谓词(判断过程)可以用$S$语言表示}\\
+(1) 思路: 两边一直减$1$, 看谁先减到$0$, \textcolor{blue}{又因为是大于等于, 所以可以先验证$Z_2$}
+\begin{align*}
+    &Z_1\leftarrow X\\
+    &Z_2\leftarrow a\\
+    [A]& \text{IF} \quad Z_2\neq 0 \quad \text{GOTO} \quad B\\
+    &\text{GOTO}\quad  D_2\\
+    [B]& \text{IF} \quad Z_1\neq 0 \quad \text{GOTO} \quad C\\
+    &\text{GOTO}\quad  D_1\\
+    [C]&Z_1\leftarrow Z_1-1\\
+    &Z_2\leftarrow Z_2-1\\
+    &\text{GOTO}\quad  A\\
+    [D_1]&\text{GOTO}\quad  E\\
+    [D_2]&Y\leftarrow Y+1\\
+    &\text{GOTO}\quad  E
+\end{align*}
+(2) 思路: 和第一问思路类似, 注意取等条件对判定顺序的影响
+\begin{align*}
+    &Z_1\leftarrow X_1\\
+    &Z_2\leftarrow X_2\\
+    [A]& \text{IF} \quad Z_1\neq 0 \quad \text{GOTO} \quad B\\
+    &\text{GOTO}\quad  D_2\\
+    [B]& \text{IF} \quad Z_2\neq 0 \quad \text{GOTO} \quad C\\
+    &\text{GOTO}\quad  D_1\\
+    [C]&Z_1\leftarrow Z_1-1\\
+    &Z_2\leftarrow Z_2-1\\
+    &\text{GOTO}\quad  A\\
+    [D_1]&\text{GOTO}\quad  E\\
+    [D_2]&Y\leftarrow Y+1\\
+    &\text{GOTO}\quad  E
+\end{align*}
+(3) 思路: 可以使用(1)和(2)的判定了
+\begin{align*}
+    &Z_1\leftarrow X_1\\
+    &Z_2\leftarrow X_2\\
+    [A]&\text{IF} \quad Z_1\leq Z_2 \quad \text{GOTO} \quad B\\
+    &\text{GOTO}\quad  E\\
+    [B]&\text{IF} \quad Z_2\leq Z_1 \quad \text{GOTO} \quad C\\
+    &\text{GOTO}\quad  E\\
+    [C]&Y\leftarrow Y+1\\
+    &\text{GOTO}\quad  E
+\end{align*}
+\end{solution}
+
+\begin{problem}
+$P_{16}\; 2.1.5$用基本的原始递归函数来表示下面的函数, 从而它们也是原始递归函数\\
+(1) $E(x)=\begin{cases}
+    1, &x\text{偶数}\\
+    0, &x\text{奇数}
+\end{cases}$\\
+(3) $\max(x,y)=\begin{cases}
+    x&,x\geq y\\
+    y,&x<y
+\end{cases}$
+\end{problem}
+\begin{solution}
+(1) $E(0)=1, E(x+1)=\alpha(E(x))$.\\
+(2) $\max(x,y)=x\alpha(y\dotminus x)+y\alpha(x \dotminus p(y))$\\
+这是因为, 当$x\geq y$时, $y\dotminus x=0$, 因此$\alpha(y\dotminus x)=1$. 但为了防止$x=y$且取非零值($x=y=0$不影响)的时候, 得到$2x$, 因此要保证$x=y$的时候, $y$的系数不能是$1$, 因此取$x\dotminus p(y)$ 
+\end{solution}
+
+\begin{problem}
+$P_{22}\;2.3.4$利用极小化给出下述函数$f(x)$:\\
+(1) 
+\end{problem}
+
 
 \end{document}

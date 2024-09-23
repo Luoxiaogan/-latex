@@ -474,6 +474,17 @@ $S$有限, $\mathbf{P}$是$S$上的转移矩阵, 固定$i\in S$, 证明:\\
 (2) $\{\mu_j\}$是不变分布.
 \end{problem}
 \begin{solution}
+(1) 因为对状态$j$有
+$$\frac{\sum_{m=0}^{n-1}p_{ij}^{(m)}}{n}\leq 1$$
+所以, $\{\frac{\sum_{m=0}^{n-1}p_{ij}^{(m)}}{n}\}$是一个有界序列, 必然存在收敛子列, 即存在子列$\{n_r\}$使得
+$$\lim_{r\to \infty}\frac{\sum_{m=0}^{n_r-1}p_{ij}^{(m)}}{n_r}$$
+存在, \textcolor{blue}{注意, 这个子列的选取是对于状态$j$而言的, 不过由于我们的状态空间$S$是有限的, 所以可以先取$j=1$对应的子列, 然后取$j=2$对应的子列的子列, 直到$j=n$, 最后得到的子列是对任意的$j\in S$成立的}.\\
+(2) 计算:
+\begin{align*}
+    &\sum_{j\in S}\mu_j\cdot p_{jk}=\sum_{j\in S}\lim_{r\to \infty} \frac{\sum_{m=0}^{n_r-1}p_{ij}^{(m)}}{n_r}\cdot p_{jk}=\lim_{r\to\infty}\frac{\sum_{j\in S}\sum_{m=0}^{n_r-1}p_{ij}^{(m)}p_{jk}}{n_r}=\lim_{r\to \infty}\frac{\sum_{m=1}^{n_r}p_{ik}^{(m)}}{n_r}=\mu_k
+\end{align*}
+\end{solution}
+\begin{solution}\textcolor{red}{这个解答有点小问题: 从题目的用意上来说, 大概就是来让我证明这个不变分布存在的, 但是我直接使用了"有限状态空间的转移矩阵一定存在不变分布"的结论.}\\
 (1) 直观上来说, 有限状态空间的转移矩阵一定存在不变分布, 且$\mathbf{P}^n\to \mathbf{P}_{\infty}=\mathbf{1}_n\pi^T$, 因此有$p_{ij}^{(m)}=\mathbf{P}^m[i,j]\to \mathbf{P}_{\infty}[i,j]=\pi_j$. 接下来就很好证明了, 因为这等价于, 已知$\lim_{n\to \infty} x_{n}=A$, 要证$\lim_{n \to \infty} \frac{\sum_{i=0}^{n-1}x_{i}}{n}=A$.\\
 根据Stolze定理即可得到:
 \begin{align*}
