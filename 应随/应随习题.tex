@@ -447,6 +447,11 @@ $$\sum_{i\in A,j\notin A} \pi_i p_{ij} = \sum_{i\in A,j\notin A}\pi_j p_{ji}$$
 \begin{solution}
     计算得到: (1)$\pi=(0.3,0.5,0.2)$. \\(2) $\lim_{n\to \infty}P(X_n=1)=\mu^T\mathbf{P}_{\infty}[1]=\mu^T\mathbf{1}_n\pi^T[1]=\pi_1=0.3$
 \end{solution}
+\begin{note}
+    补充说明为什么$\mathbf{P}_{\infty}=\mathbf{1}_n\pi^T$.\\
+    首先, 有限状态的时齐马氏链的不变分布存在, 又因为$\mathbf{P}_{\infty}\cdot \mathbf{P}=\mathbf{P}\cdot \mathbf{P}_{\infty}=\mathbf{P}_{\infty}$, 而$\mathbf{P}_{\infty}=\mathbf{1}_n\pi^T$满足条件.
+\end{note}
+
 \begin{problem}
 5. 证明: 转移矩阵$\mathbf{P}$的全体不变分布构成凸集. 即若$\mu,\pi$都是$\mathbf{P}$的不变分布,$0<p<1$, 那么$p\mu+(1-p)\pi$也是$\mathbf{P}$的不变分布.
 \end{problem}
