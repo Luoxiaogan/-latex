@@ -259,10 +259,42 @@ $$BR_i(q_{-i})=\begin{cases}
 \end{solution}
 
 \subsection{Asymmetric Bertrand}
+\begin{solution}
+(a) $(1.5,1.51)$是纳什均衡, 因为玩家一没有动力去改变价格; 玩家二对比$1.5$高的价格都可以取, 因为它卖不出去; 也不会降低价格, 因为卖价低于$2$, 亏钱.\\
+(b) 考虑最优反应
+\begin{align*} 
+BR_1(p_2)=\begin{cases}
+    (p_2,+\infty), &p_2<1\\
+    (1,+\infty), &p_2=1\\
+    p_2-0.01, &p_2>1\\
+\end{cases}
+\end{align*}
+\begin{align*}
+    BR_2(p_1)=\begin{cases}
+        (p_1,+\infty), &p_1<2\\
+        (2,+\infty), &p_1=2\\
+        p_1-0.01, &p_1>2\\
+    \end{cases}
+    \end{align*}
+因此有100个纳什均衡, 分别是$(1.00,1.01)$一直到$(1.99,2.00)$, 已知加$0.01$即可.
+\end{solution}
 
 \subsection{New Asymmetric Bertrand}
+\begin{solution}
+如果$p_1<0$, 两个公司都会亏钱, 它们会提高价格保证自己卖不出去\\
+如果$p_1>2$, 两个公司都挣钱, 它们都会降低价格来让自己卖出去\\
+如果$1\leq p_1\leq 2$, 那么第二个公司赚不到钱, $p_2\in[p_1,+\infty]$都无差异, 并且如果取低于$p_1$的价格, 第二个公司的收益降低; 对第一个公司, 最优反应是$p_2$, 因此纳什均衡是$(p_1,p_2)=(p,p), p\in[1,2]$.
+\end{solution}
 
 \subsection{Hotelling's Price Competition}
+\begin{solution}
+(a) 直接计算: $v-p_1-x^*=v-p_2-(1-x^*)$, 得到$x^*=(1+p_2-p_1)/2$.\\
+因此有$v_i(p_1,p_2)=\frac{1+p_j-p_i}{2}\cdot p_i$(因为比$x^*$小的都会去$1$.)\\
+计算一阶条件, $p_1=(1+p_2)/2$, 对称地有$p_2=(1+p_1)/2$\\
+(b) 唯一的纳什均衡是$p_1=p_2=1$, 但是$v=1$时,$x^*=1/2$, 以及$v-p_1-1/2=-1/2$, 不会购买. 对$1$来说: $\max_{p_1}(1-p_1)p_1$得到$p_1=1/2$; 此时对于小于$1/2$的都会去$1$, 根据对称性得到结果, 因此唯一的那是均衡是$(1/2,1/2)$.\\
+(c) $x^*=1/2+p_2-p_1$, 因此有收益函数$v_i(p_1,p_2)=(1/2+p_j-p_i)\cdot p_i$; 最优反应: $p_1=\frac{1+2p_2}{4}, p_2=\frac{1+2p_1}{4}$\\
+联立计算有$p_1=p_2=1/2$, 计算$x^*$的收益是$0$, 这是纳什均衡.
+\end{solution}
 
 
 \end{document}

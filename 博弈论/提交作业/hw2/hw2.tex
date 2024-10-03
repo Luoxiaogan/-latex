@@ -1,0 +1,161 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig}
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+% 标题设置
+\title{\textbf{博弈论 HW2}}
+\author{罗淦 2200013522}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+%\tableofcontents
+%\newpage
+
+\section{作业1}
+
+\subsection{Splitting Pizza}
+\begin{solution}
+(1) 最优反应如下:
+\begin{align*}
+    BR_i(s_j)=\begin{cases}
+        8-s_j, &\quad \text{若} 0\leq s_j<8\\
+        \{0,1,\cdots,8\}, &\quad \text{若} s_j=8
+    \end{cases}
+\end{align*}
+(2) \textcolor{red}{纯策略纳什均衡一定是最优反应的交点吗?}\\
+纯策略纳什均衡有: $(s_1,s_2)=(x,8-x), x\in \{1,2,\cdots,7\}$和$(s_1,s_2)=(8,8)$.
+\end{solution}
+
+\subsection{Public Good Contribution}
+\begin{solution}
+(1) 最优反应: 如果另外两个都是$0$, 那么我最好是$0$; 如果另外两个都是$1$, 那么我最好是$0$, 因为我可以不劳而获; 如果另外只有一个是$1$, 那么我最好是$1$.
+\begin{align*}
+    BR_i(s_{-i})=\begin{cases}
+        0,&\quad \text{若}\sum_{j\neq i}s_j=0\\
+        1,&\quad \text{若}\sum_{j\neq i}s_j=1\\
+        0,&\quad \text{若}\sum_{j\neq i}s_j=2
+    \end{cases}
+\end{align*}
+(2) \textcolor{red}{讨论纯策略的纳什均衡, 因此此时我们的策略组合是有限的, 因此可以直接枚举讨论, 并看看有没有可获利的偏离.}\\
+策略$(0,0,0)$, 任何一个玩家如果偏离成$1$, 收益都会从$0$变成$-1$, 因此不会偏离, 这是一个纳什均衡.\\
+策略$(1,0,0),(0,1,0),(0,0,1)$, 取$1$的玩家如果偏离成$0$, 收益会从$-1$变成$0$, 存在一个玩家有可获利的偏离, 不是纳什均衡.\\
+策略$(1,1,0),(0,1,1),(1,0,1)$, 取$1$的玩家如果偏离成$0$, 收益会从$2$变成$0$, 不偏离; 取$0$的玩家如果偏离成$1$, 收益会从$3$变成$2$, 不偏离. 因此是纳什均衡.\\
+策略$(1,1,1)$, 任何一个玩家偏离成$0$, 收益会从$2$变成$3$, 会偏离, 不是纳什均衡.\\
+因此, 纳什均衡有: $(0,0,0),(1,1,0),(0,1,1),(1,0,1)$
+\end{solution}
+
+\subsection{Tragedy of the Roommates}
+\begin{solution}
+(a) $c<1$的时候, 收益函数是:
+\begin{align*}
+    v_i(s_i,s_{-i})=-cs_i+\sum_{i=1}^n s_i = s_i(1-c)+\sum_{j\neq i}s_j
+\end{align*}
+因此, 任意给定对手的策略$s_{-i}$, $s_i$越大, 我的收益更大, 因此任何小于$5$的$s_i$都被严格占优, 因此唯一的纳什均衡就是所有人都取$s_i=5$\\
+(b) $c>1$的时候, 收益函数是:
+\begin{align*}
+    v_i(s_i,s_{-i})=-cs_i+\sum_{i=1}^n s_i = s_i(1-c)+\sum_{j\neq i}s_j
+\end{align*}
+其中$1-c<0$, 因此任意给定对手的策略$s_{-i}$, $s_i$越小, 我的收益更大, 因此任何大于$0$的$s_i$都被严格占优, 因此唯一的纳什均衡就是所有人都取$s_i=0$\\
+(c) $n=5,c=2$, 唯一的纳什均衡是$(0,0,0,0,0)$, 每个人的收益是$(0,0,0,0,0)$; 这不是帕累托有效(帕累托最优)的; 例如取策略为$(1,1,1,1,1)$, 每个人的收益是$(4,4,4,4,4)$, 每个人的收益都变高了.
+\end{solution}
+
+\subsection{Synergies}
+\begin{solution}
+(a) 最优反应要进行分类讨论:
+\begin{align*}
+    BR_i(s_j)=\begin{cases}
+        \frac{a+e_j}{2}&,\quad \text{若} e_j>-a\\
+        0&,\quad \text{若} e_j\leq -a
+    \end{cases}
+\end{align*}
+\textcolor{red}{\textbf{但是, 根据群里面的消息, 只需要考虑$a>0$的部分即可}}, 因此最优反应是:
+\begin{align*}
+    BR_i(e_j)=\frac{a+e_j}{2}
+\end{align*}
+(b) 在古诺均衡中, $BR_i(e_j)=\max\{\frac{a-e_j}{2}\}$; 而在本题目中,  $BR_i(e_j)=\frac{a+e_j}{2}$; \textcolor{blue}{这是因为在本题目中, 两玩家的策略形成促进关系(Synergy), 即固定我的策略, 对手的策略"数值"上增加, 我的收益是增大的.}\\
+(c) 计算最优反应的交点: $\begin{cases}
+    2x=&a+y\\
+    2y=&a+x
+\end{cases}\Rightarrow x=y=a$, 即唯一的纳什均衡是$(a,a)$.
+\end{solution}
+
+\subsection{Asymmetric Bertrand}
+\begin{solution}
+(a) $(1.5,1.51)$是纳什均衡, 因为玩家一没有动力去改变价格; 玩家二对比$1.5$高的价格都可以取, 因为它卖不出去; 也不会降低价格, 因为卖价低于$2$, 亏钱.\\
+(b) 考虑最优反应
+\begin{align*} 
+BR_1(p_2)=\begin{cases}
+    (p_2,+\infty), &p_2<1\\
+    (1,+\infty), &p_2=1\\
+    p_2-0.01, &p_2>1\\
+\end{cases}
+\end{align*}
+\begin{align*}
+    BR_2(p_1)=\begin{cases}
+        (p_1,+\infty), &p_1<2\\
+        (2,+\infty), &p_1=2\\
+        p_1-0.01, &p_1>2\\
+    \end{cases}
+    \end{align*}
+因此有100个纳什均衡, 分别是$(1.00,1.01)$一直到$(1.99,2.00)$, 已知加$0.01$即可.
+\end{solution}
+
+\subsection{New Asymmetric Bertrand}
+\begin{solution}
+如果$p_1<0$, 两个公司都会亏钱, 它们会提高价格保证自己卖不出去\\
+如果$p_1>2$, 两个公司都挣钱, 它们都会降低价格来让自己卖出去\\
+如果$1\leq p_1\leq 2$, 那么第二个公司赚不到钱, $p_2\in[p_1,+\infty]$都无差异, 并且如果取低于$p_1$的价格, 第二个公司的收益降低; 对第一个公司, 最优反应是$p_2$, 因此纳什均衡是$(p_1,p_2)=(p,p), p\in[1,2]$.
+\end{solution}
+
+\subsection{Hotelling's Price Competition}
+\begin{solution}
+(a) 直接计算: $v-p_1-x^*=v-p_2-(1-x^*)$, 得到$x^*=(1+p_2-p_1)/2$.\\
+因此有$v_i(p_1,p_2)=\frac{1+p_j-p_i}{2}\cdot p_i$(因为比$x^*$小的都会去$1$.)\\
+计算一阶条件, $p_1=(1+p_2)/2$, 对称地有$p_2=(1+p_1)/2$\\
+(b) 唯一的纳什均衡是$p_1=p_2=1$, 但是$v=1$时,$x^*=1/2$, 以及$v-p_1-1/2=-1/2$, 不会购买. 对$1$来说: $\max_{p_1}(1-p_1)p_1$得到$p_1=1/2$; 此时对于小于$1/2$的都会去$1$, 根据对称性得到结果, 因此唯一的那是均衡是$(1/2,1/2)$.\\
+(c) $x^*=1/2+p_2-p_1$, 因此有收益函数$v_i(p_1,p_2)=(1/2+p_j-p_i)\cdot p_i$; 最优反应: $p_1=\frac{1+2p_2}{4}, p_2=\frac{1+2p_1}{4}$\\
+联立计算有$p_1=p_2=1/2$, 计算$x^*$的收益是$0$, 这是纳什均衡.
+\end{solution}
+
+\end{document}
+
