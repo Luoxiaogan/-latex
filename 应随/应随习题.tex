@@ -570,10 +570,11 @@ $\Rightarrow$中, 闭集构造的一个直观的思路：$a,b\in S$, $a$不可�
 \begin{problem}
     5. 状态空间$S$有限, 证明: 存在闭的互通类.
 \end{problem}
-\begin{solution}
-如果$S$不可约, 那么$S$本身就是一个闭的互通类.\\
+\begin{solution}\\
+\textcolor{red}{\textbf{方法一}}: 如果$S$不可约, 那么$S$本身就是一个闭的互通类.\\
 如果$S$可约, 根据4的结论, $S$存在非空的, 闭的真子集$A$; 把马氏链限制在$A$上, 它构成一个新的有限的状态空间. 返回讨论第一步\\
-因为$S$有限, 上述两部不能无限进行, 最终存在$A^*$是$S$的闭的子集, 是互通类.
+因为$S$有限, 上述两部不能无限进行, 最终存在$A^*$是$S$的闭的子集, 是互通类.\\
+\textcolor{red}{\textbf{方法二}}: 有限状态空间$S$是有限个互通类的无交的并, 而$S$至少有一个闭的子集(例如它自己), 根据3题的结论, 这个闭集要么和包含互通类, 要么和互通类完全不交. 因此必然存在一个闭的互通类.
 \end{solution}
 
 \subsection{首达时和强马氏性}
@@ -599,7 +600,7 @@ $$\xi = \sum_{t=0}^{\tau_i} \mathbf{1}_{\{X_t=j\}}, \quad X_0=i$$
 \end{align*}
 \end{solution}
 \begin{note}
-\textcolor{blue}{强马氏性, 因为到达每次$j$之后当做新的马氏链来看待}
+\textcolor{blue}{强马氏性, 因为到达每次$j$之后的随机过程当做新的马氏链来看待}
 \end{note}
 
 \subsection{常返性}
