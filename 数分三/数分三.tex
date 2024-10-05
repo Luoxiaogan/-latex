@@ -351,6 +351,16 @@ $$
 \begin{problem}
 15. 试给出三元函数 $f(x, y, z)$ 累次极限 $\lim _{x \rightarrow x_0} \lim _{y \rightarrow y_0} \lim _{z \rightarrow z_0} f(x, y, z)$ 的定义, 并构造一个三元函数 $f(x, y, z)$, 使得它满足: $\lim _{(x, y, z) \rightarrow(0,0,0)} f(x, y, z)$存在, 但 $\lim _{x \rightarrow 0} \lim _{y \rightarrow 0} \lim _{z \rightarrow 0} f(x, y, z)$ 不存在.
 \end{problem}
+\begin{solution}
+三元函数累次极限的定义: 设函数$w = f(x,y,z)$在$E\subset \mathbb{R}^3$上有定义\\
+且邻域$U_0( (x_0,y_0,z_0), \delta  )\subset E$.\\
+若在$U_0( (x_0,y_0,z_0), \delta )$内, 对每一个固定的$x\neq x_0, y\neq y_0$, 有$\lim_{z\to z_0}f(x,y,z)= \varphi(x,y)$存在\\
+且(二元函数的累次极限已经定义了, 直接调用)$\lim_{x\to x_0}\lim_{y\to y_0}\varphi(x,y)=A$\\
+则有$\lim_{x\to x_0}\lim_{y\to y_0}\lim_{z\to z_0}f(x,y,z)=A$.\\
+\textcolor{blue}{构造:
+$$f(x,y,z)=x+z+y\sin \frac{1}{z}$$
+重极限$\lim_{(x,y,z)\to (0,0,0) }f(x,y,z)=0$存在, 但是累次极限不存在, 因为$z\to 0 $时就已经无穷了.}
+\end{solution}
 
 \begin{problem}
 16. 设 $y=f(x)$ 在 $U_0\left(0, \delta_0\right) \subset \mathbb{R}$ 中有定义, 满足 $\lim _{x \rightarrow 0} f(x)=0$, 且对于 $\forall x \in U_0\left(0, \delta_0\right)$, 有 $f(x) \neq 0$. 记 $E=\{(x, y): x y \neq 0\}$, 证明:
