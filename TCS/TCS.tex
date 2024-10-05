@@ -514,4 +514,118 @@ $$\frac{y(y+1)}{2}+(y+2)+(y+3)+\cdots+(x+y+1)=\frac{(x+y)(x+y+1)}{2}+x$$
 \end{align*}
 (3) $\sigma_1(z),\sigma_2(z)$原始递归, 所以加和原始递归
 \end{solution}
+
+\section{通用程序}
+
+\begin{problem}
+计算$\text{STP}(x_1,\cdots,x_n,y,0)=$?
+\end{problem}
+\begin{solution}
+    $$\text{STP}(x_1,\cdots,x_n,y,0)=\begin{cases}
+        1, & \text{if}\quad y=0\\
+        0, &\text{否则} 
+    \end{cases}$$
+\end{solution}
+
+\begin{problem}
+    3.1 证明HALT$(0,x)$是不可计算的
+\end{problem}
+\begin{solution}
+反证法, 假设HALT$(0,x)$可计算, 构造:
+$$[A] \text{IF} \quad  \text{HALT}(0,x) \quad \text{GOTO} \quad A $$
+这是可计算的, 有程序$P$可以计算, 程序$P$的编号是$k$.\\
+那么HALT$(0,k) \iff P(k)=0 \iff \neg $HALT$(0,k)$, 矛盾.
+\end{solution}
+
+\begin{problem}
+    3.3 证明: 不存在可计算函数$f(x)$, 使得当$\Phi(x,x)\downarrow$时$f(x) = \Phi(x,x)+1$.
+\end{problem}
+\begin{solution}
+    反证法, 如果是可计算的, 那么函数$f(x)$有编号$k$, 那么\textcolor{red}{$f(x)=\Phi(x,k)$}, 因此有$f(k)=\Phi(k,k)=\Phi(k,k)+1$, 矛盾.
+\end{solution}
+
+\begin{problem}
+设$f$是一个全函数, $B=\{f(n)| n\in N\}$, 证明:\\
+(1) 若$f$是可计算的, 那么$B$是$r.e.$\\
+(2) 若$f$是可计算的, 严格增加的($f(n)<f(n+1), \forall n\in N$), 则$B$是递归的.
+\end{problem}
+\begin{solution}
+    (1) \textcolor{blue}{构造一个可计算函数, 使得输入的$x$如果在$B$里面, 就停机(输出什么都行), 否则不停机(无定义)}
+    \begin{align*}
+        h(x) = \begin{cases}
+            0, &\text{if} \quad \exists n (f(n)=x)\\
+            \uparrow, &\text{else}
+        \end{cases}
+    \end{align*}
+    可计算函数:
+    \begin{align*}
+        [A] &\text{IF} \quad f(N)=X\quad \text{GOTO} \quad E\\
+        & N\leftarrow N+1\\
+        & \text{GOTO} \quad A
+    \end{align*}
+    (2)\textcolor{blue}{构造一个可计算函数, 使得输入的$x$如果在$B$里面, 就输出$1$, 如果不在里面, 就输出$0$}\\
+    \textcolor{red}{又因为函数是严格单调的, 因此我只需要遍历$N$, 直到$f(N)$大于$X$或者$f(N)=X$即可.}
+    \begin{align*}
+        [A] &\text{IF} \quad f(N)=X\quad \text{GOTO} \quad C\\
+        [B] &\text{IF} \quad f(N)>X\quad \text{GOTO} \quad E\\
+        & N\leftarrow N+1\\
+        & \text{GOTO} \quad A\\
+        [C]& Y\leftarrow Y+1\\
+        & \text{GOTO} \quad E
+    \end{align*}
+\end{solution}
+\begin{note}
+    \begin{itemize}
+        \item 存在不是 可计算 的 全函数, 例子(这是一个不可计算的谓词): HALT(x,x)
+        \item 存在不是 部分可计算 的 部分函数, 例子: $f(x)= \begin{cases}
+            1, & \text{if } \neg \text{HALT}(x,x)\\
+            0, & \text{if } \text{HALT}(x,x)
+        \end{cases}$
+    \end{itemize}
+\end{note}
+
+\begin{problem}
+3.6 设$A,B$是$N$的非空子集, 定义:
+\begin{align*}
+    A\odot B & = \{2x| x\in A\}\cup \{2x+1 | x\in B\}\\
+    A \otimes B & = \{ <x,y>| x\in A,y\in B  \}
+\end{align*}
+证明:\\
+(1) $A\odot B$是递归的当且仅当$A$和$B$是递归的\\
+(2) $A\otimes B$是递归的当且仅当$A$和$B$是递归的
+\end{problem}
+\begin{note}
+实际上, 上述两个集合的构造方式都是"双射"的编码, 因此只要知道$x$\textcolor{red}{是否属于}$A\odot B$, 那么就一定知道$x$\textcolor{red}{是否属于}$A$或者$B$, 反之亦然(显然)
+\end{note}
+\begin{solution}
+(1) 分析谓词: $(x\in A\odot B)$, $(x\in A)$, $(x\in B)$:
+\begin{align*}
+    (x\in A\odot B) \iff ( (2|x) \wedge (\lfloor x/2 \rfloor\in  A ))
+    \vee ( \neg(2|x) \wedge  ( \lfloor (x-1)/2 \rfloor  ) \in B)
+\end{align*}
+(2) 对于配对函数$z=<x,y>$, 有原始递归函数$l(z),r(z)$.\\
+分析谓词: $(x\in A\otimes B)$, $(x\in A)$, $(x\in B)$:
+\begin{align*}
+    (z\in A\otimes B) \iff ( (x = l(z)) \wedge (x \in  A ))
+    \vee ( (x = r(z)) \wedge  ( x \in B))
+\end{align*}
+\end{solution}
+
+\begin{problem}
+3.7 证明集合$B = \{x\in N |   a\in \text{ran}\Phi_x \}$是递归可枚举的, $a$是常数.
+\end{problem}
+\begin{solution}
+\textcolor{blue}{这里的$\text{ran}\Phi_x$就是值域\\注意, 这里的函数$\Phi_x$是部分可计算的, 而不是像3.5的全函数\\我需要构造一个可计算函数来判断$x$}\textcolor{red}{是属于}\textcolor{blue}{$B$的, 即, 如果属于, 我知道, 但是不知道不属于}\\
+需要再添加一个程序来执行对$\Phi(n_0,x)$是否有定义的判定.
+\begin{align*}
+    [A] &\text{IF} \quad \neg STP(N,X,T)  \quad \text{GOTO} \quad B\\
+    & \text{IF} \quad \Phi(N,X)=a  \quad \text{GOTO} \quad E\quad \quad \textcolor{blue}{\text{需要对输入N停机之后才能有输出来判断是不是a}}\\
+    [B]& N\leftarrow N+1\\
+    & \text{IF} \quad N\leq T \quad \text{GOTO} \quad A\\
+    &T\leftarrow T+1 \\
+    &N\leftarrow \\
+    &\text{GOTO} \quad A
+\end{align*}
+\end{solution}
+
 \end{document}
