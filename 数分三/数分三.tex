@@ -53,7 +53,7 @@
 
 \section{王冠香补充题目}
 \begin{problem}
-    设$A,B$是$\mathbb{R}^n$的互不相交的闭集, 证明: 存在开集$O_1,O_2, \quad s.t.\quad A\subset O_1, B\subset O_2, O_1\cap O_2 = \varnothing$.
+    设$A,B$是$\mathbb{R}^n$的互不相交的闭集, 证明: 存在开集$O_1,O_2, \quad s.t.\quad A\subseteq O_1, B\subseteq O_2, O_1\cap O_2 = \varnothing$.
 \end{problem}
 
 \begin{solution}
@@ -62,12 +62,12 @@
     O_1&=\{x|\frac{d(x,A)}{d(x,A)+d(x,B)}<\frac{1}{2}\}=\{x|d(x,A)<d(x,B)\}\\
     O_2&=\{x|\frac{d(x,B)}{d(x,A)+d(x,B)}<\frac{1}{2}\}=\{x|d(x,B)<d(x,A)\}
 \end{align*}
-对任意的$x^*\in X_1$, $d(x^*,A)<d(x^*,B)$, 那么取$\delta_0=\frac{d(x^*,B)-d(x^*,A)}{4}$, $\forall x\in U(x^*,\delta_0)$, 有$d(x,A)\leq d(x^*,A)+\delta < d(x^*,B)-\delta\leq d(x,B)$, 即$U(x^*,\delta_0)\subset O_1$, 因此$O_1$是开集. 同理, $O_2$是开集.\\
+对任意的$x^*\in X_1$, $d(x^*,A)<d(x^*,B)$, 那么取$\delta_0=\frac{d(x^*,B)-d(x^*,A)}{4}$, $\forall x\in U(x^*,\delta_0)$, 有$d(x,A)\leq d(x^*,A)+\delta < d(x^*,B)-\delta\leq d(x,B)$, 即$U(x^*,\delta_0)\subseteq O_1$, 因此$O_1$是开集. 同理, $O_2$是开集.\\
 根据定义(因为两个严格的不等式不能同时成立), $O_1\cap O_2=\varnothing$\\
-因为$\forall x\in A, d(x,A)=0$, 而$A,B$是不相交的闭集, \textcolor{blue}{所以$B\subset A^c$, 且$A^c$是开集, 因此$\forall x\in A, \forall y\in B, \exists  \delta>0$, 使得$d(y,A)>\delta, \forall y\in B$, 从而有$d(x,B)>\delta$, 因此$x\in O_1\Rightarrow A\subset O_1$, 同理$B\subset O_2$}.
+因为$\forall x\in A, d(x,A)=0$, 而$A,B$是不相交的闭集, \textcolor{blue}{所以$B\subseteq A^c$, 且$A^c$是开集, 因此$\forall x\in A, \forall y\in B, \exists  \delta>0$, 使得$d(y,A)>\delta, \forall y\in B$, 从而有$d(x,B)>\delta$, 因此$x\in O_1\Rightarrow A\subseteq O_1$, 同理$B\subseteq O_2$}.
 \end{solution}
 \begin{note}
-两个互不相交的闭集$A,B$, 因为$B\subset A^c$, $A^c$闭集, 所以$\forall b\in B, \exists \delta_b>0, U(b,\delta_b)\subset A^c$, 因此$\forall x\in A$取定, $|x-b|>\delta_b>0$.\\
+两个互不相交的闭集$A,B$, 因为$B\subseteq A^c$, $A^c$闭集, 所以$\forall b\in B, \exists \delta_b>0, U(b,\delta_b)\subseteq A^c$, 因此$\forall x\in A$取定, $|x-b|>\delta_b>0$.\\
 考虑下确界$\inf\{|x-b|:b\in B\}$, 如果下确界等于$0$, 那么显然$x\in \partial A$(否则如果是内点, 上述下确界必然大于$0$); 但如果下确界等于$0$, 那么必然有一个$B$中的子列趋于$x$, 但$B$是闭集, 包含自身的极限点, 得到$x\in B$, 矛盾. 因此下确界一定大于$0$.\\ 
 两个互不相交的闭集$A,B$, 单点到另一个集合的距离的下确界是正的.\\
 两个互不相交的闭集$A,B$, 集合中任意一点到另一个集合的距离的下确界不一定是正的.\\
@@ -134,7 +134,7 @@
 \end{solution}
 
 \begin{problem}
-5. 设 $\left\{\left(x_k, y_k\right)\right\} \subset \mathbb{R}^2$ 是一个点列, 判断如下命题是否为真：点列 $\left\{\left(x_k, y_k\right)\right\}$ 在 $\mathbb{R}^2$ 中有聚点的充分必要条件是 $\left\{x_k y_k\right\}$ 在 $\mathbb{R}$ 中有聚点.
+5. 设 $\left\{\left(x_k, y_k\right)\right\} \subseteq \mathbb{R}^2$ 是一个点列, 判断如下命题是否为真：点列 $\left\{\left(x_k, y_k\right)\right\}$ 在 $\mathbb{R}^2$ 中有聚点的充分必要条件是 $\left\{x_k y_k\right\}$ 在 $\mathbb{R}$ 中有聚点.
 \end{problem}
 \begin{solution}\textcolor{red}{下面是错误的分析}: \\$\{(x_k,y_k)\}$有聚点$\iff$存在子列收敛$\{(x_{n_k},y_{n_k})\}\to (a,b)\Rightarrow \{x_{n_k}y_{n_k}\}\to ab \iff \{x_ky_k\}$有聚点.\\
 \textcolor{red}{反例, 既不充分也不必要}: \\
@@ -149,7 +149,7 @@ $$\{x_ny_n\}\text{有聚点}\quad \text{不能推出}\quad \{(x_n,y_n)\}\text{�
 \end{note}
 
 \begin{problem}
-6. 设 $E \subset \mathbb{R}^n$, 证明:
+6. 设 $E \subseteq \mathbb{R}^n$, 证明:
 
 (1) $\bar{E}=E^{\circ} \cup \partial E$;
 
@@ -158,10 +158,10 @@ $$\{x_ny_n\}\text{有聚点}\quad \text{不能推出}\quad \{(x_n,y_n)\}\text{�
 \begin{solution}
     \textcolor{blue}{证明等号, 左边属于右边, 右边属于左边.}\\
 (1) 方法一：$(\overline{E})^{c}=(E^{c})^{o}=(E^{o}\cup \partial E)^c \Rightarrow \overline{E}=E^{o}\cup \partial E$.\\
-方法二：先证明$\overline{E}\subset E^{o}\cup \partial E$. 任取$x\in \overline{E}$, 如果$x\in E^{o}$, 当然有$x\in E^{o}\cup \partial E$; 如果$x\notin E^{o}$, 那么$x\in E\backslash E^{o} \textcolor{red}{\text{就是}}\partial E$, 因此有$\overline{E}\subset E^{o}\cup \partial E$. \textcolor{blue}{再证明$E^{o}\cup \partial E\subset \overline{E}$.}\\
-(2) $E^{\prime}\subset \overline{E}^{\prime}$很好证明, 因为$E\subset \overline{E}$, 所以$E^{\prime}$中任取一点$x\in E^{\prime}$, 一定是$E$中子列的极限点, 当然也就是$\overline{E}$中子列的极限点, 因此$x\in \overline{E}^{\prime}$, 因此$E^{\prime}\subset \overline{E}^{\prime}$.\\
-另一方面, 来证明$\overline{E}^{\prime}\subset E^{\prime}$.\textcolor{blue}{根据书上对闭包的定义，$\overline{E}=E\cup E^{\prime}$, 因此$\overline{E}^{\prime}=E^{\prime}\cup (E^{\prime})^{\prime}$, 因此只需要证明$(E^{\prime})^{\prime}\subset E^{\prime}$}.\\
-\textbf{\textcolor{red}{方法一}}: 根据极限点的定义, $\forall x\in (E^{\prime})^{\prime}, \textcolor{red}{\forall}  \delta>0,\quad s.t. \quad U_0(x,\frac{\delta}{2})\cap E^{\prime} \neq \varnothing$; $\forall x^{\prime} \in U_0(x,\frac{\delta}{2})\cap E^{\prime} $(注意,取自上面的交集), 因为$x^{\prime}\in E^{\prime}$, 所以$\textcolor{red}{\forall}  \delta>0, \quad s.t. \quad U_0(x^{\prime},\frac{\delta}{2}) \cap E \neq \varnothing$. 即$|x-x^{\prime}|<\frac{\delta}{2}$, 且$\exists x^{\prime \prime}\in  U_0(x^{\prime},\frac{\delta}{2}) \cap E,\quad s.t. \quad |x^{\prime}-x^{\prime \prime}|<\frac{\delta}{2}$, 从而根据三角不等式, $|x-x^{\prime \prime}|<\delta$, 即$U_0(x,\delta)\cap E \neq \varnothing$. 由$\delta$的任意推出$x\in E^{\prime} \Rightarrow (E^{\prime})^{\prime}\subset E^{\prime}$.\\
+方法二：先证明$\overline{E}\subseteq E^{o}\cup \partial E$. 任取$x\in \overline{E}$, 如果$x\in E^{o}$, 当然有$x\in E^{o}\cup \partial E$; 如果$x\notin E^{o}$, 那么$x\in E\backslash E^{o} \textcolor{red}{\text{就是}}\partial E$, 因此有$\overline{E}\subseteq E^{o}\cup \partial E$. \textcolor{blue}{再证明$E^{o}\cup \partial E\subseteq \overline{E}$.}\\
+(2) $E^{\prime}\subseteq \overline{E}^{\prime}$很好证明, 因为$E\subseteq \overline{E}$, 所以$E^{\prime}$中任取一点$x\in E^{\prime}$, 一定是$E$中子列的极限点, 当然也就是$\overline{E}$中子列的极限点, 因此$x\in \overline{E}^{\prime}$, 因此$E^{\prime}\subseteq \overline{E}^{\prime}$.\\
+另一方面, 来证明$\overline{E}^{\prime}\subseteq E^{\prime}$.\textcolor{blue}{根据书上对闭包的定义，$\overline{E}=E\cup E^{\prime}$, 因此$\overline{E}^{\prime}=E^{\prime}\cup (E^{\prime})^{\prime}$, 因此只需要证明$(E^{\prime})^{\prime}\subseteq E^{\prime}$}.\\
+\textbf{\textcolor{red}{方法一}}: 根据极限点的定义, $\forall x\in (E^{\prime})^{\prime}, \textcolor{red}{\forall}  \delta>0,\quad s.t. \quad U_0(x,\frac{\delta}{2})\cap E^{\prime} \neq \varnothing$; $\forall x^{\prime} \in U_0(x,\frac{\delta}{2})\cap E^{\prime} $(注意,取自上面的交集), 因为$x^{\prime}\in E^{\prime}$, 所以$\textcolor{red}{\forall}  \delta>0, \quad s.t. \quad U_0(x^{\prime},\frac{\delta}{2}) \cap E \neq \varnothing$. 即$|x-x^{\prime}|<\frac{\delta}{2}$, 且$\exists x^{\prime \prime}\in  U_0(x^{\prime},\frac{\delta}{2}) \cap E,\quad s.t. \quad |x^{\prime}-x^{\prime \prime}|<\frac{\delta}{2}$, 从而根据三角不等式, $|x-x^{\prime \prime}|<\delta$, 即$U_0(x,\delta)\cap E \neq \varnothing$. 由$\delta$的任意推出$x\in E^{\prime} \Rightarrow (E^{\prime})^{\prime}\subseteq E^{\prime}$.\\
 \textbf{\textcolor{red}{方法二}}: 根据极限点的定义, $\forall x\in (E^{\prime})^{\prime}, \exists \{x_n\}\in E^{\prime}, \quad s.t. \quad x_n\to x$. 即$\forall \delta>0, \exists N_1>0, \quad s.t. \forall n>N_1, \quad |x-x_n|<\frac{\delta}{2}$. 任取一个满足$|x-x_n|<\frac{\delta}{2}$的$x_{n_0}$, 因为$x_{n_0}\in E^{\prime}$, $\exists \{y_n\}\in E,\quad s.t. \quad y_n\to x_{n_0}$, 即对上面相同的$\delta>0$, $\exists N_2>0, \forall n>N_2$, $s.t. \quad |x_{n_0}-y_n|<\frac{\delta}{2}$. 任取上述满足条件的一个$y_{n_1}$, 通过三角不等式得到$|x-y_{n_1}|\leq |x-x_{n_0}|+|x_{n_0}-y_{n_1} |<\delta$, $\forall n\geq N_1+N_2$, 得证. 
 \end{solution}
 \begin{note}
@@ -182,14 +182,14 @@ $$\{x_ny_n\}\text{有聚点}\quad \text{不能推出}\quad \{(x_n,y_n)\}\text{�
 \end{problem}
 
 \begin{solution}
-(1) $A_{\lambda}\subset \overline{A_{\lambda}}$, 故$\bigcup_{\lambda\in \Lambda} A_{\lambda}\subset \bigcup_{\lambda\in \Lambda}\overline{A_{\lambda}}$, 所以$\overline{\bigcup_{\lambda\in \Lambda} A_{\lambda}}\subset \overline{\bigcup_{\lambda\in \Lambda}\overline{A_{\lambda}}}$, 又因为指标集有限, 因此$\overline{\bigcup_{\lambda\in \Lambda}\overline{A_{\lambda}}}=\bigcup_{\lambda\in \Lambda}\overline{A_{\lambda}}$, 第一部分得证.\\
-而$\bigcap_{\lambda \in \Lambda}A_{\lambda}^{o}=(\bigcup_{\lambda\in \Lambda} \overline{A_{\lambda}^{c}})^{c}\textcolor{red}{\subset}(\overline{\bigcup_{\lambda\in \Lambda} A_{\lambda}^{c}})^{c}=(\bigcap_{\lambda\in \Lambda}A_{\lambda})^{o}$.\\
-(2) $\overline{A_{\lambda}}$闭集, 无穷闭集的交还是闭集, $\bigcap_{\lambda\in \Lambda}\overline{A_{\lambda}}$是闭集, 因此有$\overline{\bigcap_{\lambda\in \Lambda}A_{\lambda}}\subset \overline{\bigcap_{\lambda\in \Lambda}\overline{A_{\lambda}}}=\bigcap_{\lambda\in \Lambda}\overline{A_{\lambda}}$.\\
-而$\bigcup_{\lambda\in \Lambda}A_{\lambda}^{o}=(\bigcup_{\lambda\in \Lambda}\overline{A^c_{\lambda}})^{c}\subset (\overline{\bigcup_{\lambda\in \Lambda}A_{\lambda}^c})^c=(\bigcap_{\lambda\in \Lambda}A_{\lambda})^{o}$
+(1) $A_{\lambda}\subseteq \overline{A_{\lambda}}$, 故$\bigcup_{\lambda\in \Lambda} A_{\lambda}\subseteq \bigcup_{\lambda\in \Lambda}\overline{A_{\lambda}}$, 所以$\overline{\bigcup_{\lambda\in \Lambda} A_{\lambda}}\subseteq \overline{\bigcup_{\lambda\in \Lambda}\overline{A_{\lambda}}}$, 又因为指标集有限, 因此$\overline{\bigcup_{\lambda\in \Lambda}\overline{A_{\lambda}}}=\bigcup_{\lambda\in \Lambda}\overline{A_{\lambda}}$, 第一部分得证.\\
+而$\bigcap_{\lambda \in \Lambda}A_{\lambda}^{o}=(\bigcup_{\lambda\in \Lambda} \overline{A_{\lambda}^{c}})^{c}\textcolor{red}{\subseteq}(\overline{\bigcup_{\lambda\in \Lambda} A_{\lambda}^{c}})^{c}=(\bigcap_{\lambda\in \Lambda}A_{\lambda})^{o}$.\\
+(2) $\overline{A_{\lambda}}$闭集, 无穷闭集的交还是闭集, $\bigcap_{\lambda\in \Lambda}\overline{A_{\lambda}}$是闭集, 因此有$\overline{\bigcap_{\lambda\in \Lambda}A_{\lambda}}\subseteq \overline{\bigcap_{\lambda\in \Lambda}\overline{A_{\lambda}}}=\bigcap_{\lambda\in \Lambda}\overline{A_{\lambda}}$.\\
+而$\bigcup_{\lambda\in \Lambda}A_{\lambda}^{o}=(\bigcup_{\lambda\in \Lambda}\overline{A^c_{\lambda}})^{c}\subseteq (\overline{\bigcup_{\lambda\in \Lambda}A_{\lambda}^c})^c=(\bigcap_{\lambda\in \Lambda}A_{\lambda})^{o}$
 \end{solution}
 
 \begin{problem}
-8. 设 $E \subset \mathbb{R}^n$ ，证明：
+8. 设 $E \subseteq \mathbb{R}^n$ ，证明：
 
 (1) $E^{\prime}$ 是闭集;
 
@@ -197,19 +197,19 @@ $$\{x_ny_n\}\text{有聚点}\quad \text{不能推出}\quad \{(x_n,y_n)\}\text{�
 \end{problem}
 
 \begin{solution}
-(1) 即证明: $E^{\prime}=\overline{E^{\prime}}$, 而$\overline{E^{\prime}}=E^{\prime}\cup (E^{\prime})^{\prime}$, 显然$E^{\prime}\subset \overline{E^{\prime}}$, 又根据6题的结论, $(E^{\prime})^{\prime}\subset E^{\prime}$, 得证.\\
-(2) 即证明: $\partial E = \overline{\partial E}=\partial E\cap (\partial E)^{\prime}$, 即证明$(\partial E)^{\prime}\subset \partial E$.\\
+(1) 即证明: $E^{\prime}=\overline{E^{\prime}}$, 而$\overline{E^{\prime}}=E^{\prime}\cup (E^{\prime})^{\prime}$, 显然$E^{\prime}\subseteq \overline{E^{\prime}}$, 又根据6题的结论, $(E^{\prime})^{\prime}\subseteq E^{\prime}$, 得证.\\
+(2) 即证明: $\partial E = \overline{\partial E}=\partial E\cap (\partial E)^{\prime}$, 即证明$(\partial E)^{\prime}\subseteq \partial E$.\\
 \textbf{\textcolor{red}{方法一}}: $E^{o}$是开集, $(E^{c})^{o}$是开集, 那么$E^{o}\cup (E^{c})^{o}$是开集, 那么$\mathbb{R}^n \backslash (E^{o}\cup (E^{c})^{o}) = \partial E$是闭集 (边界$E$理解成, 既不属于$E$的内部$E^{o}$, 也不属于补集的内部$(E^{c})^{o}$的部分).\\
-\textbf{\textcolor{red}{方法二}}: (\textcolor{blue}{直接证明$(\partial E)^{\prime}\subset \partial E$.}) 考虑$\partial E=\overline{E}\backslash E^{o}$, 那么$(\overline{E})^{\prime}=(\partial E)^{\prime}\cup (E^{o})^{\prime}$, 根据第六题的结论, $(\overline{E})^{\prime}=\overline{E}$, 因此$\overline{E}=\partial E \cup E^{o}= (\partial E)^{\prime}\cup (E^{o})^{\prime}$, 因此$\forall x\in (\partial E)^{\prime}$, 只可能属于$\partial E$或者$E^{o}$. 采用反证法, 若$x\in E^{o}$, 根据极限点定义, $\textcolor{red}{\forall} \delta>0, U_0(x,\delta)\cap \partial E\neq \varnothing$, 但根据$E^{o}$是开集的定义, 充分小的$\delta$可以使$U_0(x,\delta)\subset E^{o}\Rightarrow U_0(x,\delta)\cap \partial E=\varnothing$, 矛盾. 
+\textbf{\textcolor{red}{方法二}}: (\textcolor{blue}{直接证明$(\partial E)^{\prime}\subseteq \partial E$.}) 考虑$\partial E=\overline{E}\backslash E^{o}$, 那么$(\overline{E})^{\prime}=(\partial E)^{\prime}\cup (E^{o})^{\prime}$, 根据第六题的结论, $(\overline{E})^{\prime}=\overline{E}$, 因此$\overline{E}=\partial E \cup E^{o}= (\partial E)^{\prime}\cup (E^{o})^{\prime}$, 因此$\forall x\in (\partial E)^{\prime}$, 只可能属于$\partial E$或者$E^{o}$. 采用反证法, 若$x\in E^{o}$, 根据极限点定义, $\textcolor{red}{\forall} \delta>0, U_0(x,\delta)\cap \partial E\neq \varnothing$, 但根据$E^{o}$是开集的定义, 充分小的$\delta$可以使$U_0(x,\delta)\subseteq E^{o}\Rightarrow U_0(x,\delta)\cap \partial E=\varnothing$, 矛盾. 
 \end{solution}
 \begin{note}
-    (1) $(E^{\prime})^{\prime}\subset E^{\prime}$, $(\partial E)^{\prime}\subset \partial E$.\\
+    (1) $(E^{\prime})^{\prime}\subseteq E^{\prime}$, $(\partial E)^{\prime}\subseteq \partial E$.\\
     (2) $\overline{E}=\partial E\cup E^{o} = E\cup E^{\prime}$\\
     (3) \textcolor{red}{问题: $\overline{E}=\partial E\cup E^{o} $的两边取导集, 还是可以得到等式$(\overline{E})^{\prime}=(\partial E)^{\prime}\cup (E^{o})^{\prime}$. 但是如果写成$\partial E=\overline{E}\backslash E^{o}$, 还可以两边取导集吗？}
 \end{note}
 
 \begin{problem}
-9. 设 $E \subset \mathbb{R}^2$, 记 $E_1=\{x \in \mathbb{R}: \exists(x, y) \in E\}, E_2=\{y \in \mathbb{R}$ ： $\exists(x, y) \in E\}$ ，判断下列命题是否为真 (说明理由):
+9. 设 $E \subseteq \mathbb{R}^2$, 记 $E_1=\{x \in \mathbb{R}: \exists(x, y) \in E\}, E_2=\{y \in \mathbb{R}$ ： $\exists(x, y) \in E\}$ ，判断下列命题是否为真 (说明理由):
 
 (1) $E$ 为 $\mathbb{R}^2$ 中的开 (闭) 集时, $E_1$ 和 $E_2$ 均为 $\mathbb{R}$ 中的开 (闭) 集;
 
@@ -229,7 +229,7 @@ $$\{x_ny_n\}\text{有聚点}\quad \text{不能推出}\quad \{(x_n,y_n)\}\text{�
 \end{note}
 
 \begin{problem}
-11. 设 $E_1, E_2 \subset \mathbb{R}^n$ 为两个非空集合, 定义 $E_1, E_2$ 间的距离如下:
+11. 设 $E_1, E_2 \subseteq \mathbb{R}^n$ 为两个非空集合, 定义 $E_1, E_2$ 间的距离如下:
 $$
 d\left(E_1, E_2\right)=\inf _{\boldsymbol{x} \in E_1, \boldsymbol{y} \in E_2}|\boldsymbol{x}-\boldsymbol{y}|
 $$
@@ -241,7 +241,7 @@ $$
 \end{problem}
 
 \begin{problem}
-12. 设 $F \subset \mathbb{R}^n$ 是紧集, $E \subset \mathbb{R}^n$ 是开集, 且 $F \subset E$ 。证明：存在开集 $O$ ，使得 $F \subset O \subset \bar{O} \subset E$ 。
+12. 设 $F \subseteq \mathbb{R}^n$ 是紧集, $E \subseteq \mathbb{R}^n$ 是开集, 且 $F \subseteq E$ 。证明：存在开集 $O$ ，使得 $F \subseteq O \subseteq \bar{O} \subseteq E$ 。
 \end{problem}
 
 \begin{problem}
@@ -352,8 +352,8 @@ $$
 15. 试给出三元函数 $f(x, y, z)$ 累次极限 $\lim _{x \rightarrow x_0} \lim _{y \rightarrow y_0} \lim _{z \rightarrow z_0} f(x, y, z)$ 的定义, 并构造一个三元函数 $f(x, y, z)$, 使得它满足: $\lim _{(x, y, z) \rightarrow(0,0,0)} f(x, y, z)$存在, 但 $\lim _{x \rightarrow 0} \lim _{y \rightarrow 0} \lim _{z \rightarrow 0} f(x, y, z)$ 不存在.
 \end{problem}
 \begin{solution}
-三元函数累次极限的定义: 设函数$w = f(x,y,z)$在$E\subset \mathbb{R}^3$上有定义\\
-且邻域$U_0( (x_0,y_0,z_0), \delta  )\subset E$.\\
+三元函数累次极限的定义: 设函数$w = f(x,y,z)$在$E\subseteq \mathbb{R}^3$上有定义\\
+且邻域$U_0( (x_0,y_0,z_0), \delta  )\subseteq E$.\\
 若在$U_0( (x_0,y_0,z_0), \delta )$内, 对每一个固定的$x\neq x_0, y\neq y_0$, 有$\lim_{z\to z_0}f(x,y,z)= \varphi(x,y)$存在\\
 且(二元函数的累次极限已经定义了, 直接调用)$\lim_{x\to x_0}\lim_{y\to y_0}\varphi(x,y)=A$\\
 则有$\lim_{x\to x_0}\lim_{y\to y_0}\lim_{z\to z_0}f(x,y,z)=A$.\\
@@ -363,10 +363,143 @@ $$f(x,y,z)=x+z+y\sin \frac{1}{z}$$
 \end{solution}
 
 \begin{problem}
-16. 设 $y=f(x)$ 在 $U_0\left(0, \delta_0\right) \subset \mathbb{R}$ 中有定义, 满足 $\lim _{x \rightarrow 0} f(x)=0$, 且对于 $\forall x \in U_0\left(0, \delta_0\right)$, 有 $f(x) \neq 0$. 记 $E=\{(x, y): x y \neq 0\}$, 证明:
+16. 设 $y=f(x)$ 在 $U_0\left(0, \delta_0\right) \subseteq \mathbb{R}$ 中有定义, 满足 $\lim _{x \rightarrow 0} f(x)=0$, 且对于 $\forall x \in U_0\left(0, \delta_0\right)$, 有 $f(x) \neq 0$. 记 $E=\{(x, y): x y \neq 0\}$, 证明:
 
 (1) $\lim _{E \ni(x, y) \rightarrow(0,0)} \frac{f(x) f(y)}{f^2(x)+f^2(y)}$ 不存在;
+
+(2) $\lim_{E \ni(x, y) \rightarrow(0,0)}  \frac{yf^2(x)}{f^4(x)+y^2}$不存在.
 \end{problem}
+
+\begin{solution}
+\textcolor{blue}{核心的思路: 还是去取不同的子列$(x_k,y_k)$, 来使得极限趋于不同的值. 不过这里实际上需要控制的是$f(x_k),f(y_k)$, 所以更困难一点.}\\
+(1) 首先取子列$(x_k , y_k)=(\frac{1}{k}, \frac{1}{k})$, 那么极限是$\frac{1}{2}$.\\
+其次, 对任意的$k\in \mathbb{N}^{*}$, $\exists \delta_k > 0$, 使得$|x_k|<\delta_k$, 就有$|f(x_k)|<\frac{1}{k}$.\\
+\textcolor{red}{接下来, 对于固定的$|f(x_k)|$, 存在$\delta^{\prime}_k>0$, 使得$|y_k|<\delta^{\prime}_k$, 就有$|f(y_k)|<\frac{|f(x_k)|}{k}<\frac{1}{k^2}$}\\
+那么对于这样的子列$(x_k,y_k)$, 就有极限
+\begin{align*}
+|\frac{f(x_k)f(y_k)}{f(x_k)^2+f(y_k)^2}| = \frac{1}{\frac{|f(x_k)|}{|f(y_k)|}+\frac{|f(y_k)|}{|f(x_k)|}}
+\end{align*}
+又因为
+\begin{align*}
+    |\frac{f(x_k)^2+f(y_k)^2}{f(x_k)f(y_k)}|= \frac{|f(x_k)|}{|f(y_k)|}+\frac{|f(y_k)|}{|f(x_k)|}\geq \frac{|f(x_k)|}{|f(y_k)|} \geq k \to +\infty
+\end{align*}
+因此
+\begin{align*}
+    |\frac{f(x_k)f(y_k)}{f(x_k)^2+f(y_k)^2}|\to 0
+\end{align*}
+所以极限不存在
+
+(2) 和第一问相同的套路, 甚至还要简单一些:\\
+首先取$y=f(x)^2$, 极限是$\frac{1}{2}$.\\
+对任意的$k\in \mathbb{N}^*$, 存在$\delta_k$, $|x_k|<\delta_k$, 有$|f(x_k)|<\frac{1}{k}$\\
+对固定的$|f(x_k)|$, 存在$y_k$, 使得$|y_k|<\frac{|f(x_k)|^2}{k}$, 因此有:
+\begin{align*}
+    |\frac{y_k f(x_k)^2}{f(x_k)^4+y_k^2 }|=\frac{1}{ \frac{f(x_k)^2}{|y_k|}+\frac{|y_k|}{f(x_k)^2}}\leq \frac{1}{ \frac{f(x_k)^2}{|y_k|}}\leq \frac{1}{k}\to 0
+\end{align*}
+因此极限不存在
+\end{solution}
+
+\begin{problem}
+    17. 构造二元函数$f(x,y)$, 使得对$k=1,2,\cdots,K$, 有$\lim_{x\to 0}f(x,x^k)=0$, 但是$\lim_{(x,y)\to(0,0)}f(x,y)$不存在.
+\end{problem}
+\begin{solution}
+\textcolor{blue}{核心的思路: 重极限不存在, 但是方向导数存在的例子, 例如:$\frac{xy}{x^2+y^2} = \frac{\sin 2\theta}{2}$, 尝试构造类似这样的多项式的分式形式\\
+并且注意到, $k=1,2,\cdots,K$, 分母的主导项应该是更低阶的无穷小.}\\
+取
+$$f(x,y)=\frac{x^{K+1}}{x^{K+1}+y} \Rightarrow \frac{x^{K+1}}{x^{K+1}+x^k} \sim \frac{x^{K+1}}{x^k} \to 0, \quad k=1,2\cdots,K$$
+而$y=x^{K+1}$时, 极限为$\frac{1}{2}$, 重极限不存在
+\end{solution}
+
+\begin{problem}
+18. 设函数 $f(x, y)$ 在 $\mathbb{R}^2$ 内除直线 $x=a$ 与 $y=b$ 外处处有定义,并且满足:
+
+(a) $\lim _{y \rightarrow b} f(x, y)=g(x)$ 存在;
+
+(b) $\lim _{x \rightarrow a} f(x, y)=h(y)$ 一致存在, 即对于 $\forall \varepsilon>0, \exists \delta>0$, 使得对于 $\forall(x, y) \in\{(x, y): 0<|x-a|<\delta\}$ ，有 $|f(x, y)-h(y)|<\varepsilon$.
+
+证明: 存在 $c \in \mathbb{R}$, 使得有
+
+(1) $\lim _{x \rightarrow a} \lim _{y \rightarrow b} f(x, y)=\lim _{x \rightarrow a} g(x)=c$;
+
+(2) $\lim _{y \rightarrow b} \lim _{x \rightarrow a} f(x, y)=\lim _{y \rightarrow b} h(y)=c$;
+
+(3) $\lim _{E \ni(x, y) \rightarrow(a, b)} f(x, y)=c$, 其中 $E=\mathbb{R}^2 \backslash\{(x, y): x=a$ 或 $y=b\}$.
+\end{problem}
+\begin{solution}
+(1) \textcolor{blue}{思路: 证明极限存在, 考虑柯西收敛准则}\\
+要证明: $\forall \epsilon>0, \exists \delta>0$, 使得$\forall x_1,x_2 \in U_0(a,\delta)$, 都有$|g(x_1)-g(x_2) |<\epsilon$.\\
+因为$\lim_{y\to b}f(x,y)=g(x)$, 所以, $\forall \epsilon>0$, 存在$y_0\neq b$, 使得$|g(x_1)-f(x_1,y_0) |\leq \epsilon/4$, $|g(x_2)-f(x_2,y_0) |\leq \epsilon/4$. \textcolor{blue}{之所以是相同的$y_0$是为了使用一致存在的条件}\\
+因为$\lim_{x\to a}f(x,y)=h(y)$一致存在, 对于上面的$\epsilon>0$, 存在$\delta>0$, $\forall x\in U_0(a,\delta)$, 都有$|f(x,y)-h(y) |<\epsilon/4$, 那么就取最初的$x_1,x_2\in U_0(a,\delta)$, 因此有$ |f(x_1,y_0)-h(y_0) |\leq \epsilon/4 $, $ |f(x_2,y_0)-h(y_0) |\leq \epsilon/4 $.\\
+因此有, $\forall \epsilon>0, \exists \delta>0$, $\forall x_1,x_2\in U_0(a,\delta)$:
+\begin{align*}
+    &|g(x_1)-g(x_2) |\\\leq& |g(x_1)-f(x_1,y_0) |+|f(x_1,y_0)-h(y_0) |+|h(y_0)-f(x_2,y_0) |+|f(x_2,y_0)-g(x_2) |\leq \epsilon
+\end{align*}
+因此极限$\lim_{x\to a}g(x)$存在, 记为$c$.
+
+(2) 要证明: $\forall \epsilon>0, \exists \delta_1>0$, 使得$\forall y_1,y_2 \in U_0(b,\delta_1)$, 都有$|h(y_1)-h(y_2) |<\epsilon $.\\
+首先, 因为$\lim_{x\to a}f(x,y)=h(y)$一致存在, 因此对上述的$\epsilon>0$, $\exists \delta_0>0$, 使得$\forall x\in U_0(a,\delta_0)$, 都有$|f(x,y)-h(y) |<\epsilon/5$. \textcolor{blue}{注意, 因为一致性, 才可以对不同的$y_1,y_2$, 只要$x$和$a$够近, 就行}\\
+又因为我们(1)证明了$\lim_{x\to a}g(x)=c$, 因为对取定的$\epsilon>0$, 存在$\delta_0^{\prime}$, $\forall x_1,x_2\in U_0(a,\delta_0^{\prime})$, 都有$|g(x_1)-g(x_2) |<\epsilon/5$.\\
+现在取$\delta_2 = \min\{\delta_0, \delta_0^{\prime}\}$, 取$x_1,x_2\in U_0(a,\delta_2)$.\\
+因此, $\forall \epsilon>0$, $\exists \delta_1>0$, $\forall y_1,y_2\in U_0(b,\delta_1)$. 以及取$x_1,x_2\in U_0(a,\delta_2)$
+\begin{align*}
+    &|h(y_1)-h(y_2) |\\
+    \leq& |h(y_1)-f(x_1,y_1) |+|f(x_1,y_1)-g(x_1) |+|g(x_1)-g(x_2)| \\&+ |g(x_2)-f(x_2,y_2)| + |f(x_2,y_2)-h(y_2)|\\
+    \leq &\epsilon
+\end{align*} 
+\textcolor{red}{樂, 这样只是证明了极限存在, 但是极限不一定等于$c$啊, 可以一步到位的:}\\
+想证明: $\forall \epsilon>0$, $\exists \delta>0$, $\forall y\in U_0(b,\delta)$, $|h(y)-c|<\epsilon $\\
+因为: $\lim_{x\to a}f(x,y)=h(y)$一致存在, 所以对$\forall y$, 只要$x\in U_0(a,\delta_1)$, 都有$|f(x,y)-h(y) |<\epsilon/3$, 这里取$x_0\in U_0(a,\delta_1)$, 那么$|f(x_0,y)-h(y) |<\epsilon/3$\\ 
+因为$\lim_{y\to b}f(x,y)=g(x)$, 所以$\forall \epsilon>0$, $\exists \delta>0$, $\forall y\in U_0(b,\delta)$, $|f(x_0,y)-g(x_0)|<\epsilon/3 $, 这里的$x_0$是前面取定的$x_0$\\
+可以取$x_0$充分接近$a$, 使得$|g(x_0)-c|<\epsilon/3$\\
+因此有:
+\begin{align*}
+    |h(y)-c| \leq |h(y)-f(x_0,y)| + |f(x_0,y)-g(x_0)| +|g(x_0)-c|\leq \epsilon
+\end{align*}
+
+(3) 取$x$充分接近$a$, 那么$x\in U_0(a,\delta_0)$, 那么任意的$y$, 都有$|f(x,y)-h(y)|<\epsilon/2$.\\
+$\lim_{y\to b}h(y)=c$, 那么$y\in U_0(b,\delta_1)$, 有$|h(y)-c |<\epsilon/2$.\\
+结合在一起就是$|f(x,y)-c |<\epsilon$, $\forall (x,y)\in U_0((a,b), \delta^*), \delta^* = \min\{\delta, \delta_1\}$
+\end{solution}
+
+\begin{problem}
+19. 设函数 $f(x)$ 在 $[0,1]$ 上连续, 函数 $g(y)$ 在 $[0,1]$ 上有唯一的第一类间断点 $y_0=\frac{1}{2}$, ($g(y)$ 在 $[0,1] \backslash\left\{\frac{1}{2}\right\}$ 上连续). 试求函数 $F(x, y)=$ $f(x) g(y)$ 在 $[0,1] \times[0,1]$ 上的全体间断点.
+\end{problem}
+\begin{solution}
+全体间断点是: $\{(x,\frac{1}{2})| x\in [0,1], \textcolor{red}{f(x)\neq 0} \}$\\
+只需要考虑$\{(x,\frac{1}{2})| x\in [0,1]\}$是否全部都是间断点.\\
+如果$f(x_0)\neq 0$, 那么$(x_0,\frac{1}{2})$是间断点. 反证法, 假设$(x_0,\frac{1}{2})$是$f(x)g(y)$的连续点, 那么因为$f(x_0)\neq 0$, 那么$\frac{1}{2}$会是$\frac{f(x)g(x)}{f(x)}=g(x)$的连续点, 矛盾\\
+如果$f(x_0)=0$, \textcolor{blue}{因为是第一类间断点, 所以$g(y)$在$\frac{1}{2}$附近有界}, 所以
+$$ |f(x)g(y)|\leq M|f(x)|\to 0, (x,y)\to (x_0,\frac{1}{2})$$
+因此是连续点
+\end{solution}
+
+\begin{problem}
+20. 设函数 $f(x, y)$ 在 $D=[0,1] \times[0,1]$ 上有定义, 且对固定的 $x$, $f(x, y)$ 是 $y$ 的连续函数, 对固定的 $y, f(x, y)$ 是 $x$ 的连续函数. 证明:若 $f(x, y)$ 满足下列条件之一:
+    
+(1) 对固定的 $x, f(x, y)$ 是 $y$ 的单调上升函数;
+    
+(2) 对于 $\forall \varepsilon>0, \exists \delta>0$, 使得当 $y_1, y_2 \in[0,1]$ 且 $\left|y_1-y_2\right|<\delta$ 时, $\left|f\left(x, y_1\right)-f\left(x, y_2\right)\right|<\varepsilon$ 对于 $\forall x \in[0,1]$ 成立,则 $f(x, y)$ 在 $D$ 内连续.
+\end{problem}
+
+\begin{problem}
+21. 设 $E \subseteq \mathbb{R}^n$, 证明: 向量函数 $\boldsymbol{f}(\boldsymbol{x}): E \rightarrow \mathbb{R}^m$ 在 $\boldsymbol{x}_0 \in E$ 处连续的充分必要条件是对任何在 $U\left(\boldsymbol{f}\left(\boldsymbol{x}_0\right), \delta\right)(\delta>0)$ 内连续的函数 $h(\boldsymbol{y})$, $h(\boldsymbol{f}(\boldsymbol{x}))$ 在 $\boldsymbol{x}_0$ 处连续.
+\end{problem}
+
+\begin{problem}
+22. 设 $U \subseteq \mathbb{R}^n$ 是一个非空开集, 证明: 向量函数 $\boldsymbol{f}: U \rightarrow \mathbb{R}^m$ 在 $U$ 内连续的充分必要条件是开集的原像是开集, 即对 $\mathbb{R}^m$ 中的任意开集 $E, \boldsymbol{f}^{-1}(E)$ 是 $\mathbb{R}^n$ 中的开集.
+\end{problem}
+\begin{solution}
+\textcolor{red}{\textbf{方法一}}: 不妨假设在$\mathbb{R}^m$取的任意开集$E$属于$f(U)$, 那么$\forall y\in E, \exists x_0, f(x_0)=y, \exists \epsilon>0$, 使得$U(f(x_0),\epsilon)\subseteq E$\\
+函数$\bm{f}$连续$\iff \forall \epsilon>0, \exists \delta>0, \forall x_0\in U$, 有$x\in U(x_0,\delta) \Rightarrow f(x)\in U(f(x_0),\epsilon)$\\
+即\textcolor{blue}{$f(U(x_0,\delta))\subseteq U(f(x_0),\epsilon)\iff U(x_0,\delta)\subseteq f^{-1}(U(f(x_0),\epsilon))$}\\
+开集$E$的原像$f^{-1}(E)$是开集$\iff \forall x_0\in f^{-1}(E), \exists \epsilon>0$, 使得$U(f(x_0),\epsilon)\subseteq E\Rightarrow$$\exists \delta>0, U(x_0,\delta) \subseteq f^{-1}(E)$\\
+($\Leftarrow$) 已知开集的原像都是开集, 那么$U(f(x_0),\epsilon), \forall \epsilon>0$是开集, 那么原像$f^{-1}(U(f(x_0),\epsilon))$也是开始, 且$x_0\in f^{-1}(U(f(x_0),\epsilon))$, 所以$\exists \delta>0$, $U(x_0,\delta)\subseteq f^{-1}(U(f(x_0),\epsilon))$, 即$x\in U(x_0,\delta)\Rightarrow f(x)\in U(f(x_0),\epsilon)$. 得证.\\
+($\Rightarrow$) 已知函数$\bm{f}$是连续函数. 任取开集$E\subseteq f(U)$, 对取定的$E$, 任取$x_0\in f^{-1}(E)$, 有$y=f(x_0)\in E$, 因为$E$开集, $\exists \epsilon_{y}>0$, $\forall 0<\epsilon\leq \epsilon_y$, 有$U(f(x_0),\epsilon)\subseteq E$. 因为$f$连续, 所以$\exists \delta>0$, $f(U(x_0,\delta))\subseteq U(f(x_0),\epsilon)\iff U(x_0,\delta)\subseteq f^{-1}(U(f(x_0),\epsilon))\subseteq f^{-1}(E)$, $f^{-1}(E)$是开集,得证.
+
+\textcolor{red}{\textbf{方法二}}: 反证法:\\
+($\Rightarrow$): 已知函数连续, 假设开集$E\subseteq f(U)$的原像$f^{-1}(E)$不是开集, 存在$x_0\in f^{-1}(E)$是孤立点. 但由于$f(x_0)$是开集$E$的内点, 因此$\exists \epsilon>0, U(f(x_0),\epsilon)\subseteq E$, 因为$f$连续, $\exists \delta>0$, $f(U(x_0,\delta))\subseteq U(f(x_0),\epsilon) \iff U(x_0,\delta)\subseteq f^{-1}(U(f(x_0),\epsilon))\subseteq f^{-1}(E)$, 因此矛盾.\\
+($\Leftarrow$) 已知开集的原像是开集, 不妨假设$f$有间断点$x_0$, 即$\exists \epsilon_0>0$, $\forall k\in \mathbb{N}^*$, $\exists x_k$, 使得$|f(x_k)-f(x_0)|>\epsilon_0$, 但是开集$U(f(x_0),\epsilon_0)$的原像$f^{-1}(U(f(x_0),\epsilon_0))$是开集, 且$x_0\in f^{-1}(U(f(x_0),\epsilon_0))$, 而$\{x_k\}\not\subseteq f^{-1}(U(f(x_0),\epsilon_0))$, 这与开集的定义矛盾.
+\end{solution}
 
 \end{document}
 
