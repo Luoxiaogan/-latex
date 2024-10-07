@@ -1,0 +1,147 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig, xurl,booktabs}
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+% 标题设置
+\title{\textbf{gsm 微观 HW1}}
+\author{罗淦  2200013522}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+%\tableofcontents
+%\newpage
+\section{HW 1}
+
+\subsection{音乐会还是生日派对?}
+
+\begin{solution}
+(a) 机会成本: 选择某一选项而错过其他选择带来的最大收益\\
+此时, 如果选择去听音乐会, 我的机会成本不仅仅是参加朋友的生日派对的价值, 还有享受牛排的价值.(朋友的生日派对有牛排这一额外价值)\\
+也就是说, 我选择去听音乐会的机会成本增加了\\
+而我选择去朋友的生日派对的机会成本是听音乐会的价值, 这种情况的机会成本没有增加.\\
+如果我认为: 去朋友的生日派对且享受牛排的价值大于去音乐会的价值(注意, 根据题目条件, 已知我认为去朋友的生日派对的价值小于去音乐会的价值), 那么我就会重新考虑我的选择. 即, 这可能会改变我的选择.
+
+(b) 实际支出的票价实际上是$10$美元.\\
+因为钱已经会出去了, 并且不能退票. 那么, 实际计算中, 参加生日派对而不去音乐会的机会成本, 即参加音乐会的"收益", 是没有改变的\\
+因此, 买票的支出是"沉没成本", 现在的决策应该只取决于参加音乐会和参加生日派对带来的实际收益，而不应考虑已经支付的票价.
+\end{solution}
+
+\subsection{睡觉时间和学习时间}
+
+\begin{solution}
+(a) 最优的学习时间是$2$小时, 得分$16-3=13$.
+
+(b) 仅仅使用"边际效益"和"边际成本"这两列, 可以分析它们的差值随着学习时间的变化:\\
+从$0$到$1$: 差值是$10$\\
+从$1$到$2$: 差值是$3$\\
+从$2$到$3$: 差值是$-1$\\
+从$3$到$4$: 差值是$-7$\\
+因此, $2$到$3$之前, 随着学习时间增加, 我的得分是变高的. 之后就开始变低, 因此, 最优的学习时间是$2$小时.
+
+\end{solution}
+\newpage
+\subsection{租房子}
+\begin{solution}
+(a) 市场需求曲线: 纵轴是价格, 横轴是: 当前价格下会购买的人数.(只要价格小于等于他们的出价, 他们就会购买)
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{image/1.png}
+\end{figure}
+
+(b) 18美元是使公寓需求等于5个单位的最高价格
+
+(c) \textcolor{blue}{如果出价只能出整数值}, 那么16美元是使公寓需求等于5个单位的最低价格
+
+(d) 只供应4个单位的公寓, 那么是A,D,C,G四位得到. 因为商家可以涨价直到只有四个人出价, 价格区间是$p\in [25, 18)$
+
+(e) 供应6个单位的公寓, 均衡价格的的范围$p\in [15,10)$
+\end{solution}
+\begin{note}
+对于(c), 如果允许出任意实数值的价格, 那么不存在最低价格, 因为可以取任意接近$16$且的大于$16$实数.
+\end{note}
+
+\subsection{垄断者和租房子}
+
+\begin{solution}
+(1)
+\begin{center}
+\begin{tabular}{ccccccccc}
+\toprule
+Number & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 \\
+\midrule
+Price & 40 & 35 & 30 & 25 & 18 & 15 & 10 & 5 \\
+Revenue & 40 & 70 & 90 & 100 & 120 & 90 & 70 & 40 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+(2) 垄断者为了获取最大利润, 那么只会提供5个单位的公寓, 那么只有A,D,C,G,E可以得到住房
+
+(3) 垄断者只提供五个单位的公寓, 并且直到每个人的最高出价, 那么它可以得到:
+\begin{align*}
+  40+35+30+25+18=148
+\end{align*}
+
+(4) 垄断者只提供五个单位的公寓, 那么只有A,D,C,G,E可以得到住房
+
+(5) 相较于自由市场条件下, 因为供应者实际有$8$个单位的住房, 那么达成的均衡价格一定是$p\leq 5$, 那么八个人都能有房子住; 但垄断情况下, 垄断者为了最大化自己的收益, 只会提供5个单位的公寓, 那么只有A,D,C,G,E可以得到住房
+\end{solution}
+
+\subsection{业主和租客模型, 税收的影响}
+
+\begin{solution}
+(a) 如果对业主征税, \textcolor{red}{供给曲线不会变化(也可能变多, 例如空置的房子因为征税成为负资产, 会拿来出租), 需求曲线也不会变化}, 因此均衡价格不会变化. 因此对业主征税不会被转移到消费者身上.
+
+(b) 如果对租客收税. 那么租客可接受的价格就会降低. 假设在收税之前的最大均衡价格是$P_{e}$, 不妨以第三题中的情况为例, 此时$P_{e}=18$. 那么对租客收税之后,那么此时最大均衡价格$P_{e}^{\prime}-\text{tax}<18$. 这样房东的总收益也会减少.
+
+(c) 比较:\\
+业主收税: 供给不变, 需求不变, 均衡价格不变, 税收不会转移到消费者. 业主的收益会降低.\\
+租客收税: 租金可能下降, 租客的需求也可能下降, 房东的收益降低.
+
+
+\end{solution}
+
+
+
+
+\end{document}
