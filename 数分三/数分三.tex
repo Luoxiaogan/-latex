@@ -74,6 +74,33 @@
 \textcolor{blue}{实际上, 闭集的性质本身保证了上述定义的点到集合的距离, 即下确界, 是可以被取到的.}
 \end{note}
 
+\section{期中考试往年题}
+
+\subsection{杨家忠2021年期中}
+
+\begin{problem}
+1. (本题 15 分) 设
+$$
+f(x, y)= \begin{cases}0 & (x, y)=(0,0) \\ \left(x^2+y^2\right) \sin \frac{1}{\sqrt{x^2+y^2}}, & (x, y) \neq(0,0)\end{cases}
+$$
+试讨论 $f_x(x, y)$ 和 $f_y(x, y)$ 的连续性。
+\end{problem}
+
+\begin{solution}
+在$(x,y)\neq (0,0)$时, 通过链式求导法则计算:
+\begin{align*}
+    f_{x}(x,y)&=2x\sin \frac{1}{\sqrt{x^2+y^2}} - \frac{x}{\sqrt{x^2+y^2}}\cos \frac{1}{\sqrt{x^2+y^2}}\\
+    f_{y}(x,y)&=2y\sin \frac{1}{\sqrt{x^2+y^2}} - \frac{y}{\sqrt{x^2+y^2}}\cos \frac{1}{\sqrt{x^2+y^2}}
+\end{align*}
+当$(x,y)=(0,0)$时, 因为
+\begin{align*}
+    &\lim_{x\to 0} \frac{1}{x}\cdot \left(x^2+y^2\right) \sin \frac{1}{\sqrt{x^2+y^2}}=\lim_{x\to 0} x\sin \frac{1}{\sqrt{x^2+y^2}} + \lim_{x\to 0} \frac{y^2}{x}\sin \frac{1}{\sqrt{x^2+y^2}} \\
+    =&y^2\sin \frac{1}{\sqrt{y^2}}\lim_{x\to 0} \frac{1}{x}
+\end{align*}
+所以极限不存在, 因此$f_x(x,y)$在$(0,0)$无定义; 同理, $f_y(x,y)$也在$(0,0)$无定义\\
+考虑连续性, 在非$(0,0)$点,  $f_x(x,y), f_y(x,y)$连续. 在$(0,0)$点, 因为无定义, 肯定不连续.
+\end{solution}
+
 \section{多元函数的极限和连续}
 
 \begin{problem}

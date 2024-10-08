@@ -179,7 +179,7 @@ $$A=\begin{pmatrix}
 根据条件: (\textcolor{blue}{注意, 这里可以取$\sqrt{a_{11}}$是因为$A$是正定矩阵, 所有对角元都是正的})
 \begin{align*}
     &\begin{pmatrix}
-        y&x
+        y&x^T
     \end{pmatrix} \begin{pmatrix}
         a_{11} & \alpha^T \\ \alpha & A_{22} 
     \end{pmatrix} \begin{pmatrix}
@@ -194,6 +194,33 @@ $$A=\begin{pmatrix}
     =&x^T(A_{22} - \frac{1}{a_{11}}\alpha \alpha^T)x\geq 0
 \end{align*}
 且取$0$当且仅当$x=0$, 得证.
+\end{solution}
+\begin{solution}
+\textcolor{red}{\textbf{订正的解法: 因为正定矩阵不一定是对称矩阵}}\\
+考虑:
+\begin{align*}
+    &\begin{pmatrix}
+        x&y^T
+    \end{pmatrix} \begin{pmatrix}
+        a_{11} & \alpha^T \\ \beta & A_{22} 
+    \end{pmatrix} \begin{pmatrix}
+        x\\y
+    \end{pmatrix}=a_{11}y^2+ x\alpha^Ty+ xy^T\beta +x^TA_{22}x\\
+    =& (\sqrt{a_{11}}x + \frac{1}{\sqrt{a_{11}}} y^T\beta )(\sqrt{a_{11}}x + \frac{1}{\sqrt{a_{11}}} \alpha^Ty ) + y^T(A_{22}- \frac{1}{a_{11}} \beta \alpha^T)y
+\end{align*} 
+取$x = - \frac{y^T\alpha}{a_{11}}$, 有:
+\begin{align*}
+    &\begin{pmatrix}
+        x&y^T
+    \end{pmatrix} \begin{pmatrix}
+        a_{11} & \alpha^T \\ \beta & A_{22} 
+    \end{pmatrix} \begin{pmatrix}
+        x\\y
+    \end{pmatrix} = y^T\underbrace{(A_{22}- \frac{1}{a_{11}} \beta \alpha^T)}_{A_2}y
+\end{align*}
+因此取任意的向量$y\in \mathbb{R}^{n-1}$, 有$y^TA_{2}y\geq 0$\\
+且$y^TA_{2}y=0\iff y=0$\\
+因此$A$正定可以推出$A_2$正定.
 \end{solution}
 
 \begin{problem}
