@@ -27,6 +27,9 @@
 \linespread{1.2}
 
 \newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+
+\newenvironment{problemb}{\begin{framed}\par\noindent\textbf{\textcolor{blue}{\textit{非作业题目. }}}}{\end{framed}\par}
+
 \newenvironment{solution}{%
   \par\noindent\textbf{\textit{解答. }}\ignorespaces
 }{%
@@ -514,6 +517,83 @@ $$\frac{y(y+1)}{2}+(y+2)+(y+3)+\cdots+(x+y+1)=\frac{(x+y)(x+y+1)}{2}+x$$
 \end{align*}
 (3) $\sigma_1(z),\sigma_2(z)$原始递归, 所以加和原始递归
 \end{solution}
+
+\begin{problem}
+    $P_{38}$ 2.21 证明下述字函数是原始递归的：
+
+(1) 长度函数 $|w|$
+
+$|w|$ 等于 $w$ 的长度，即 $w$ 中的字符个数；
+
+(2) 连接函数 $\operatorname{CONCAT}^{(m)}\left(w_1, w_2, \cdots, w_m\right)$ ，其中 $m$ 是正整数，
+$$
+\operatorname{CONCAT}^{(m)}\left(w_1, w_2, \cdots, w_m\right)=w_1 w_2 \cdots w_m
+$$
+
+(3) 字尾函数 RTEND（w）
+
+当 $w=\varepsilon$ 时, RTEND $(w)=\varepsilon$ ；当 $w \neq \varepsilon$ 时，RTEND $(w)$ 等于 $w$ 最右端的字符；
+
+(4) 字头函数 $\operatorname{LTEND}(w)$
+
+当 $w=\varepsilon$ 时, $\operatorname{LTEND}(w)=\varepsilon$ ；当 $w \neq \varepsilon$ 时，LTEND $(w)$ 等于 $w$ 最左端的字符；
+
+(5) 截尾函数 $w^{-}$
+
+当 $w=\varepsilon$ 时, $w^{-}=\varepsilon$ ；当 $w \neq \varepsilon$ 时， $w^{-}$等于 $w$ 删去最右端的字符后的子串；
+
+(6)截头函数 $w$
+
+当 $w=\varepsilon$ 时, $-w=\varepsilon$ ；当 $w \neq \varepsilon$ 时， $-w$ 等于 $w$ 删去最左端的字符后的子串。
+\end{problem}
+\begin{solution}
+\textcolor{red}{要证明字函数是原始递归函数, 需要证明这个字函数对应的数论函数是原始递归的; 或者是由其他的原始递归的字函数构造得到的}
+
+指定字母表$A=\{a_1,\cdots,a_n\}$
+
+(1) \textcolor{blue}{从直观上说, 给定一个字符串$w$, 获取$w$的长度是不需要知道$w$的字符所属的字母表的, 但是, 这里为了分析这个过程的\textbf{可计算性}, 需要指定一个字母表.}
+
+那么在$n$进制下, 长度为$k+1$的最小字符串是$a_1a_1\cdots a_1=\sum_{t=0}^k n^{t}$, 那么长度是(控制$k\leq x$, 可以是有界极小化, 这里的$x$在比较的时候, 就是数), 根据有界极小化和原始递归谓词定义的函数是原始递归的:
+$$\min_{ k\leq x } \{\sum_{t=0}^k n^k > x \} $$
+
+(2) 连接函数, $w_1$向前挪动一格, 值乘上$n$, 而向前挪动的格子数可以由第一问的长度函数得到, 不妨设长度函数是$l(w)$, 那么: 
+\begin{align*}
+    &\text{CONCAT}^{(m)}(w_1,\cdots,w_m)\\
+    =& w_m + w_{m-1}\cdot n^{l(w_m)}+ w_{m-1}\cdot n^{l(w_m)+l(w_{m-1})}+\cdots+w_1\cdot n^{l_(w_m)+\cdots+l(w_2)}\\
+    =& \sum_{i=0}^{m-1} w_{m-i}\cdot n^{l_{w_m}+\cdots+l_{w_{m-i+1}}}
+\end{align*}
+
+(3) 首先, 判断$w=\epsilon$当然是原始递归的谓词, 因为这就是$w=0$的判断, 其次, 获取$w$最右端字符就是$R^{+}(w,n)$, 因此是原始递归的 
+\begin{align*}
+    \text{RTEND}(w)=\begin{cases}
+        \epsilon, &\text{if} \quad w=\epsilon\\
+        R^+(w,n), &\text{else} 
+    \end{cases}
+\end{align*}
+
+(4) 长度为$l(w)$的字符串的首位是$n^{l(w)-1}$的阶, 因此用$Q^+(w,n^{l(w)-1})$获取最左端的字符(即$w$用 $n^{l(w)-1}$来除之后得到的整数部分), 因此是原始递归的 
+\begin{align*}
+    \text{LTEND}(w)=\begin{cases}
+        \epsilon, &\text{if} \quad w=\epsilon\\
+        Q^+(w,n^{l(w)-1}), &\text{else} 
+    \end{cases}
+\end{align*}
+当然, 也可以用书上讲过的, 可以直接拿来用的函数, 更加安全, \textcolor{blue}{$h(m,n,x)$表示字符串$x$在$n$进制表示下第$m$位的字符}, 因此可以写成:
+\begin{align*}
+    \text{LTEND}(w)=\begin{cases}
+        \epsilon, &\text{if} \quad w=\epsilon\\
+        h(l(w)-1,n,x), &\text{else} 
+    \end{cases}
+\end{align*}
+\end{solution}
+
+\begin{problem}
+    $P_{38}$ 2.22 设两个字母表 $A=\left\{s_1, s_2, \cdots, s_n\right\}$ 和 $\tilde{A}=\left\{s_1, s_2, \cdots, s_m\right\}$, 其中 $n<m$ 。任给一个数 $x$, 设 $w \in A^*$ 是 $x$为底表示 9 , 以 5 为底表示 36 ,故UPCHANGE ${ }_{2,5}(9)=36$ 。
+
+    反之，任给一个数 $x$ ，设 $w \in \tilde{A} \cdot$ 是 $x$ 的 $m$ 进制表示，删去 $w$ 中不属于 $A$ 的符号后得到 $w^{\prime} \in A^*$ ，把以 $n$ 为底 $w^{\prime}$ 所表示的数记作DOWNCHANGE ${ }_{n, m}(x)$ 。例如, DOWNCHANGE ${ }_{2,5}(36)=9$. 又如, $s_1 s_4 s_2 s_3$ 以 5 为底表示 238 ,删去 $s_4$ 和 $s_3$ 得到 $s_1 s_2, s_1 s_2$, 以 2 为底表示 4 , 故DOWNCHANGE ${ }_{2,5}(238)=4$ 。
+    
+    试证明：DOWNCHANGE ${ }_{n, m}(x)$ 和UPCHANGE $\mathrm{UP}_{n, m}(x)$ 是原始递归的。
+\end{problem}
 
 \section{通用程序}
 

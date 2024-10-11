@@ -101,6 +101,32 @@ $$
 考虑连续性, 在非$(0,0)$点,  $f_x(x,y), f_y(x,y)$连续. 在$(0,0)$点, 因为无定义, 肯定不连续.
 \end{solution}
 
+\begin{problem}
+2. (本题 15 分) 证明方程 $x+x^2+y^2+\left(x^2+y^2\right) z^2+\sin z=0$ 在 $(0,0,0)$ 的某个邻域内唯一确定隐函数 $z=f(x, y)$, 并求 $f(x, y)$ 在 $(0,0)$ 处的所有三阶偏导数。
+\end{problem}
+
+\begin{problem}
+3. (本题 10 分) 从下面三个集合中任选两个, 证明它们相互同胚:
+(1) 挖掉一点的平面 $X_1: \mathbb{R}^2-\{(0,0)\}$.
+(2) 圆柱面 $X_2:\left\{(x, y, z) \in \mathbb{R}^3: x^2+y^2=1\right\}$.
+(3) 单叶双曲面 $X_3:\left\{(x, y, z) \in \mathbb{R}^3: x^2+y^2-z^2=1\right\}$.
+
+\end{problem}
+
+\begin{problem}
+4. (本题 10 分) 求 $f(x, y)=x^2+y^2$ 在条件 $\varphi(x, y)=(x-1)^3-y^2=0$ 下的最小值.
+\end{problem}
+
+\begin{problem}
+5. (本题 10 分) 试求曲线 $\Gamma: x=a \sin t, y=a \cos t, z=b t$ 上各点的切线 $\ell$ 的方程. 当切点沿 $\Gamma$ 运动时,记所有切线 $\ell$ 形成的曲面为 $\Sigma$, 试求曲面 $\Sigma$ 上各点的切平面方程.
+\end{problem}
+
+\begin{problem}
+6. 试讨论下列各题：（本题 20 分）
+（1）设 $\mathcal{A}$ 是 $\mathbb{R}^2$ 到 $\mathbb{R}^2$ 的 $1-1$ 线性映射，问 $\mathcal{A}$ 是否为开映射(把定义域空间中的任一开区域映成目标空间中的开区域的映射称为开映射？)是否为 $C^1$ 同胚映射？证明你的结论。
+（2）在情形（1）中，把线性映射 $\mathcal{A}$ 换成 $\mathbb{R}^2$ 到 $\mathbb{R}^2$ 的 $C^1$ 映射 $\vec{f}:(x, y) \rightarrow(u, v)$ ，请问你能否加上某些条件来保证 $\vec{f}$ 是开映射？是同胚映射？证明你的结论.        
+\end{problem}
+
 \section{多元函数的极限和连续}
 
 \begin{problem}
@@ -527,6 +553,17 @@ $$ |f(x)g(y)|\leq M|f(x)|\to 0, (x,y)\to (x_0,\frac{1}{2})$$
 ($\Rightarrow$): 已知函数连续, 假设开集$E\subseteq f(U)$的原像$f^{-1}(E)$不是开集, 存在$x_0\in f^{-1}(E)$是孤立点. 但由于$f(x_0)$是开集$E$的内点, 因此$\exists \epsilon>0, U(f(x_0),\epsilon)\subseteq E$, 因为$f$连续, $\exists \delta>0$, $f(U(x_0,\delta))\subseteq U(f(x_0),\epsilon) \iff U(x_0,\delta)\subseteq f^{-1}(U(f(x_0),\epsilon))\subseteq f^{-1}(E)$, 因此矛盾.\\
 ($\Leftarrow$) 已知开集的原像是开集, 不妨假设$f$有间断点$x_0$, 即$\exists \epsilon_0>0$, $\forall k\in \mathbb{N}^*$, $\exists x_k$, 使得$|f(x_k)-f(x_0)|>\epsilon_0$, 但是开集$U(f(x_0),\epsilon_0)$的原像$f^{-1}(U(f(x_0),\epsilon_0))$是开集, 且$x_0\in f^{-1}(U(f(x_0),\epsilon_0))$, 而$\{x_k\}\not\subseteq f^{-1}(U(f(x_0),\epsilon_0))$, 这与开集的定义矛盾.
 \end{solution}
+
+\begin{problem}
+    25. 设函数 $f(x, y)$ 在 $D=[0,1] \times[0,1]$ 上连续, 它的最大值为 $M$,最小值为 $m$. 证明：对于 $\forall c \in(m, M)$, 存在无限多个 $(\xi, \eta) \in D$, 使得
+    $$
+    f(\xi, \eta)=c .
+    $$
+\end{problem}
+
+\begin{problem}
+    28. 证明: 函数 $f(x, y)=\sqrt{x y}$ 在闭区域 $D=\{(x, y): x \geqslant 0, y \geqslant 0\}$上不一致连续.
+\end{problem}
 
 \end{document}
 

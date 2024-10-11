@@ -1352,6 +1352,59 @@ $$\xi = \sum_{t=0}^{\tau_i} \mathbf{1}_{\{X_t=j\}}, \quad X_0=i$$
     \( {7}^{ * } \) . 证明: 定理 1.9.3 的证明中定义的 \( \left\{  {W}_{n}\right\}   \) 与 \( \left\{  {Y}_{n}\right\}   \) 都是 \( S \) 上以 \( \mathrm{P} \) 为转移矩阵的马氏链.
 \end{problem}
 
+\subsection{综合练习题}
+
+\begin{problem}
+    5. $\{S_n\}$是一维随机游动, $S_0=0$, 步长分布$P(\xi=1)=1-P(\xi=-1)=p$, $\frac{1}{2}<p<1$, 对任意的整数$k$, $\tau_k=\inf\{n\geq 0 : S_n=k\}$, 求:
+
+(1) $P_0(\tau_k=n)$
+
+(2) $E_0(\tau_k)$
+
+(3) $Y:=\min\{S_0,S_1,\cdots\}$的概率分布
+\end{problem}
+
+\begin{solution}
+(1) $\{\tau_{k}=n\}$: 要在第$n$步走到$k$, 之前没有到$k$, 因为一次只能走一格.\\若$k>0$, 那么$n$之前最多走到$k-1$, 且第$n-1$步在$k-1$,第$n-2$步在$k-2$.(如果$n\geq 2$)\\
+若$k<0$, 那么$n$之前最多走到$k+1$, 且第$n-1$步在$k+1$,第$n-2$步在$k+2$\\
+那么$P_0(\tau_k=0)=\delta_{k,0}$, $P_0(\tau_k=1)=p\delta_{k,1}+q\delta_{k,-1}$, $P_0(\tau_k=2)=p^2\delta_{k,2}+q^2\delta_{k,-2}$\\
+当$n\geq 3$时, $n$步中, 向右走$w$步, 向左走$n-w$步, $|2w-n|=|k|$.\\
+若$n\geq 3, k\geq 1$, 那么$2w-n=k\iff w=\frac{n+k}{2}$, 那么$P_0(\tau_k=n)= {n-2 \choose \frac{n-k}{2} }q^{\frac{n-k}{2}}p^{\frac{n+k}{2}}$\\
+若$n\geq 3, k\leq -1$, 那么$n-2w=-k\iff w=\frac{n+k}{2}$, 那么$P_0(\tau_k=n)={n-2\choose \frac{n+k}{2}}q^{\frac{n-k}{2}}p^{\frac{n+k}{2}}$\\
+即, 若$n\geq 3$, 那么$P_0(\tau_k=n)={n-2\choose \frac{n-|k|}{2}}q^{\frac{n-k}{2}}p^{\frac{n+k}{2}}$
+\end{solution}
+\textcolor{red}{\textbf{上述的分析是错误的, 因为即使在$n\leq 2$的情况下考虑了"首达"的条件, 在$n\geq 3$的分析中, 选取左走和右走也会包含到并不是在第$n$步第一次到达$k$的情况}}
+\begin{solution}
+\textcolor{blue}{记住课上讲过的\textbf{反射定理}和它的推论}\\
+假设$n$步中, 向右走$w$步, 向左走$n-w$步\\
+(1) 对$k>0$, $2w-n=k\iff w=\frac{n+k}{2}$, 那么从$0$出发, 在第$n$步到达$k$的概率:
+$$P_0(S_n=k)= {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
+对$k<0$, $n-2w=-k\iff w=\frac{n+k}{2}$, 那么从$0$出发, 在第$n$步到达$k$的概率:\\
+\textcolor{blue}{注意, 因为这里的步数$w$和$n-w$都是正数, 而坐标$k$可正可负, 符号容易搞错}
+$$P_0(S_n=k)= {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
+即, 对$\forall k>0$, 有:
+$$P_0(S_n=k)= {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
+根据反射定理, 得到
+$$\textcolor{blue}{P_0(\tau_k=n)=\frac{|k|}{n}P_0(S_n=k)}=\frac{|k|}{n}{n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
+
+(2) 若$k>0$, 那么 
+\begin{align*}
+    E_0(\tau_k)=\sum_{n=0}^{\infty} nP_0(\tau_k=n)=k\sum_{n=0}^{\infty} {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}=\frac{k}{p-q}
+\end{align*}
+\textcolor{red}{最后的对组合数的求和是怎么得到的呢?}\\
+若$k<0$, 那么
+
+(3) 
+\end{solution}
+
+\begin{problem}
+    6. $\{S_n\}$是一维随机游动, $S_0=0$, 步长分布$P(\xi=1)=1-P(\xi=-1)=p$, $\frac{1}{2}<p<1$, 对任意的整数$k$, $\tau_k=\inf\{n\geq 0 : S_n=k\}$. 假设$N,M$是正整数, $\tau=\min\{\tau_{-M},\tau_{N}\}$.
+
+    (1) 证明 $P_0(\tau<\infty)=1$.
+
+    (2) 求$P_0(S_{\tau}=N)$和$E_0(\tau)$
+\end{problem}
+
 \section{跳过程}
 \subsection{泊松过程}
 
