@@ -1,0 +1,209 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig, xurl}
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+% 标题设置
+\title{\textbf{TCS HW4}}
+\author{罗淦 2200013522}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+%\tableofcontents
+%\newpage
+
+\section{HW 4}
+
+
+\begin{problem}
+    $P_{38}$ 2.21 证明下述字函数是原始递归的：
+
+(1) 长度函数 $|w|$
+
+$|w|$ 等于 $w$ 的长度，即 $w$ 中的字符个数；
+
+(2) 连接函数 $\operatorname{CONCAT}^{(m)}\left(w_1, w_2, \cdots, w_m\right)$ ，其中 $m$ 是正整数，
+$$
+\operatorname{CONCAT}^{(m)}\left(w_1, w_2, \cdots, w_m\right)=w_1 w_2 \cdots w_m
+$$
+
+(3) 字尾函数 RTEND（w）
+
+当 $w=\varepsilon$ 时, RTEND $(w)=\varepsilon$ ；当 $w \neq \varepsilon$ 时，RTEND $(w)$ 等于 $w$ 最右端的字符；
+
+(4) 字头函数 $\operatorname{LTEND}(w)$
+
+当 $w=\varepsilon$ 时, $\operatorname{LTEND}(w)=\varepsilon$ ；当 $w \neq \varepsilon$ 时，LTEND $(w)$ 等于 $w$ 最左端的字符；
+
+(5) 截尾函数 $w^{-}$
+
+当 $w=\varepsilon$ 时, $w^{-}=\varepsilon$ ；当 $w \neq \varepsilon$ 时， $w^{-}$等于 $w$ 删去最右端的字符后的子串；
+
+(6)截头函数 $^-w$
+
+当 $w=\varepsilon$ 时, $^-w=\varepsilon$ ；当 $w \neq \varepsilon$ 时， $^-w$ 等于 $w$ 删去最左端的字符后的子串。
+\end{problem}
+\begin{solution}
+\textcolor{red}{要证明字函数是原始递归函数, 需要证明这个字函数对应的数论函数是原始递归的; 或者是由其他的原始递归的字函数构造得到的}
+
+指定字母表$A=\{a_1,\cdots,a_n\}$
+
+(1) \textcolor{blue}{从直观上说, 给定一个字符串$w$, 获取$w$的长度是不需要知道$w$的字符所属的字母表的, 但是, 这里为了分析这个过程的\textbf{可计算性}, 需要指定一个字母表.}
+
+那么在$n$进制下, 长度为$k+1$的最小字符串是$a_1a_1\cdots a_1=\sum_{t=0}^k n^{t}$, 那么长度是(控制$k\leq x$, 可以是有界极小化, 这里的$x$在比较的时候, 就是数), 根据有界极小化和原始递归谓词定义的函数是原始递归的:
+$$\min_{ k\leq x } \{\sum_{t=0}^k n^k > x \} $$
+
+(2) 连接函数, $w_1$向前挪动一格, 值乘上$n$, 而向前挪动的格子数可以由第一问的长度函数得到, 不妨设长度函数是$l(w)$, 那么: 
+\begin{align*}
+    &\text{CONCAT}^{(m)}(w_1,\cdots,w_m)\\
+    =& w_m + w_{m-1}\cdot n^{l(w_m)}+ w_{m-1}\cdot n^{l(w_m)+l(w_{m-1})}+\cdots+w_1\cdot n^{l_(w_m)+\cdots+l(w_2)}\\
+    =& \sum_{i=0}^{m-1} w_{m-i}\cdot n^{l_{w_m}+\cdots+l_{w_{m-i+1}}}
+\end{align*}
+
+(3) 首先, 判断$w=\epsilon$当然是原始递归的谓词, 因为这就是$w=0$的判断, 其次, 获取$w$最右端字符就是$R^{+}(w,n)$, 因此是原始递归的 
+\begin{align*}
+    \text{RTEND}(w)=\begin{cases}
+        \epsilon, &\text{if} \quad w=\epsilon\\
+        R^+(w,n), &\text{else} 
+    \end{cases}
+\end{align*}
+
+(4) 长度为$l(w)$的字符串的首位是$n^{l(w)-1}$的阶, 因此用$Q^+(w,n^{l(w)-1})$获取最左端的字符(即$w$用 $n^{l(w)-1}$来除之后得到的整数部分), 因此是原始递归的 
+\begin{align*}
+    \text{LTEND}(w)=\begin{cases}
+        \epsilon, &\text{if} \quad w=\epsilon\\
+        Q^+(w,n^{l(w)-1}), &\text{else} 
+    \end{cases}
+\end{align*}
+当然, 也可以用书上讲过的, 可以直接拿来用的函数, 更加安全, \textcolor{blue}{$h(m,n,x)$表示字符串$x$在$n$进制表示下第$m$位的字符}, 因此可以写成:
+\begin{align*}
+    \text{LTEND}(w)=\begin{cases}
+        \epsilon, &\text{if} \quad w=\epsilon\\
+        h(l(w)-1,n,x), &\text{else} 
+    \end{cases}
+\end{align*}
+
+(5) 截尾函数$w^-$, 除$n$后留下来的整数部分就是向右挪动一格的结果, 很容易用原始递归函数来表示, 注意$R^+(w,n)$是余数部分, $Q^+(w,n)$才是整数部分:
+\begin{align*}
+    w^{-}=\begin{cases}
+        \epsilon,& \text{if}\quad w=\epsilon\\
+        Q^{+}(w,n), &\text{else}
+    \end{cases}
+\end{align*}
+
+(6) 可以获得长度$l(w)$, 最左端字符的的阶是$n^{l(w)-1}$, 可以根据LTEND$(w)$获得首位字符是什么, 那么减去即可:
+\begin{align*}
+    ^-w=\begin{cases}
+        \epsilon, &\text{if}\quad w=\epsilon\\
+        w-\text{LTEND}(w)\cdot n^{l(w)-1}, &\text{else}
+    \end{cases}
+\end{align*}
+\end{solution}
+
+\begin{problem}
+    $P_{38}$ 2.22 设两个字母表 $A=\left\{s_1, s_2, \cdots, s_n\right\}$ 和 $\tilde{A}=\left\{s_1, s_2, \cdots, s_m\right\}$, 其中 $n<m$ 。任给一个数 $x$, 设 $w \in A^*$ 是$x$的$n$进制表示, $w$也是$\tilde{A}^*$上的字符串, 把以$m$为底所表示的数记为$\text{UPCHANGE}_{n,m}(x)$.
+
+    反之，任给一个数 $x$ ，设 $w \in \tilde{A}^*$ 是 $x$ 的 $m$ 进制表示，删去 $w$ 中不属于 $A$ 的符号后得到 $w^{\prime} \in A^*$ ，把以 $n$ 为底 $w^{\prime}$ 所表示的数记作DOWNCHANGE ${ }_{n, m}(x)$ 。例如, DOWNCHANGE ${ }_{2,5}(36)=9$. 又如, $s_1 s_4 s_2 s_3$ 以 5 为底表示 238 ,删去 $s_4$ 和 $s_3$ 得到 $s_1 s_2, s_1 s_2$, 以 2 为底表示 4 , 故DOWNCHANGE ${ }_{2,5}(238)=4$.
+    
+    试证明: DOWNCHANGE$_{n, m}(x)$ 和UPCHANGE$_{n, m}(x)$ 是原始递归的.
+\end{problem}
+
+\begin{solution}
+(1) 对UPCHANGE$_{n,m}(x)$, 用原始递归的函数来表示它. 通过$l_{n}(x)$来获取$x$在$n$进制表示下的长度, 用$h(k,n,x), 0\leq k\leq l_n(w)-1$来获取每一位在字母表$A$中的序数, 因为$A\subseteq \tilde{A}$, 因此也是在字母表$\tilde{A}$中的序数, 然后通过$m$进制表示即可:
+\begin{align*}
+    \text{UPCHANGE}_{n,m}(x)=\sum_{k=0}^{l_n(x)-1} h(k,n,x)\cdot m^{k}
+\end{align*}
+
+(2) 对于$\text{DOWNCHANGE}_{n,m}(x)$, 用$l_{m}(x)$来获取在$m$进制下的长度, 用$h(k,m,x), 0\leq k\leq l_m(x)-1$来获取每一位的字符. 删去不属于$A$的字符的操作只需要考察$h(k,m,x)$是否小于等于$n$即可, \textcolor{red}{而对于删去一些字符后的位数, 可以用累加计数的方法来实现}, 函数$P(x)=\begin{cases}
+    1,&\text{if}\quad x\leq n\\
+    0,&\text{else}
+\end{cases}$:
+\begin{align*}
+    \text{DOWNCHANGE}_{n,m}(x)=\sum_{k=0}^{l_m(x)-1} h(k,m,x)\cdot P(h(k,m,x)) \cdot n^{\sum_{i=0}^{k} P(h(k,m,x))}
+\end{align*}
+\end{solution}
+
+\begin{note}
+(1)的书上的答案中写的是:
+\begin{align*}
+    \text{UPCHANGE}_{n,m}(x)=\sum_{k=0}^{\textcolor{red}{l_n(x)}} h(k,n,x)\cdot m^{k}
+\end{align*}
+
+(1)的书上的答案中写的是:
+\begin{align*}
+    \text{DOWNCHANGE}_{n,m}(x)=\sum_{k=0}^{ \textcolor{red}{l_m(x)} } h(k,m,x)\cdot P(h(k,m,x)) \cdot n^{\sum_{i=0}^{ \textcolor{red}{k-1} } P(h(k,m,x))}
+\end{align*}
+
+\textcolor{blue}{我仔细检查了, 应该是答案写错了?}
+\end{note}
+
+
+\begin{problem}
+    $P_{55}$ 4.1.4 设对$w\in \{0,1\}^*$, 有$f(w)=\overline{w}$, 其中$\overline{w}$是$w$的反码, 即$0\to 1, 1\to 0$. 构造一台TM计算$\overline{w}$.
+    \end{problem}
+    
+    \begin{solution}
+    
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.6\textwidth]{../../image/1.png}
+    \end{figure}
+    \end{solution}
+    
+    \begin{problem}
+    $P_{67}$ 4.1 设字母表$A=\{a,b\}$, $f(x)=x^R$, $x^R$是$x$的反转, 即颠倒$x$的符号的排列顺序所得到的字符串. 例如, $(abab)^R=baba$, 试构造一台TM计算$f(x)$.
+    \end{problem}
+    \begin{solution}
+    思路: 倒着读(从右往左读), 然后在字符串最右端的空白符的右边开始写(这样只需要把记录过的原字符串的字符改写成x, 而不用最后还跑回去改写会空白了吗?)
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\textwidth]{../../image/2.png}
+    \end{figure}
+    这样的TM输出的会是$x^R$, 之所以前面没有附带了相同长度的$x$字符串, 是因为\textcolor{red}{图灵机在接收状态只会输出输出带上在$A$中的字符}.
+    \newpage
+    当然, 如果想把$x$改为$B$也可以做到. 可以把状态$q_8$再添加一部分: 如果遇到的是$x$, 那么把$x$改写为$B$之后向右移动一格, 那么就可以把所有的$x$都变为$B$:
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.9\textwidth]{../../image/3.png}
+    \end{figure}
+    \end{solution}
+\end{document}

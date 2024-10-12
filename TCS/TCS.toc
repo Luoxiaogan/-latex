@@ -1,3 +1,4 @@
 \contentsline {section}{\numberline {1}$\mathscr {S}$ 程序和可计算函数}{2}{section.1}%
 \contentsline {section}{\numberline {2}原始递归函数}{9}{section.2}%
-\contentsline {section}{\numberline {3}通用程序}{12}{section.3}%
+\contentsline {section}{\numberline {3}通用程序}{13}{section.3}%
+\contentsline {section}{\numberline {4}Turing机}{16}{section.4}%
