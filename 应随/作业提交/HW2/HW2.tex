@@ -1,0 +1,278 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig, xurl}
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+% 标题设置
+\title{\textbf{应随 HW2}}
+\author{罗淦 2200013522}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+%\tableofcontents
+%\newpage
+
+\section{HW 2}
+
+
+
+\begin{problem}
+    鼠鼠的迷宫冒险
+\end{problem}
+\begin{solution}
+(1) $S=\{1,\cdots,9\}$, $p_{12}=1$, $p_{21}=p_{23}=1/2$, $p_{32}=p_{36}=1/2$, $p_{47}=1$, $p_{58}=1$, $p_{63}=1$, $p_{74}=p_{78}=1/2$, $p_{85}=p_{87}=p_{89}=1/3$, $p_{98}=1$.\\
+(2) 互通类: $\{1,2,3,6\}$和$\{4,5,7,8,9\}$.  
+\end{solution}
+
+\begin{problem}
+    证明书上的三个命题
+\end{problem}
+
+\begin{solution}
+(a) $i\to j$, 即$P_i(\exists n\geq 0, X_n=j)>0$, 如果$i\neq j$, 那么TFAE:\\
+(1) $i\to j$\\
+(2) $\exists n\geq 1$, $p_{ij}^{(n)}>0$\\
+(3) 存在一个正概率通路从$i$到$j$: $\exists n\geq 1$, $\exists i_0, i_1,\cdots, i_n\in S, i_0=i,i_n=j$, 使得$\Pi_{k=0}^{n-1}p_{i_k, i_{k+1}}>0$.\\
+\textcolor{blue}{\textbf{证明:}} (1)$\Rightarrow$(2) : 因为
+\begin{align*}
+    0<P_i(\exists n\geq 1, X_n=j)=P_i(\bigcup_{n=1}^{\infty}\{X_n=j\} )\leq \sum_{n=1}^{\infty} P_i(X_n=j)
+\end{align*}
+假如(2)不成立, 那么求和中所有元素为$0$, 求和为$0$, 矛盾.\\
+(2)$\Rightarrow$(3): 因为$\exists n\geq 1, p_{ij}^{(n)}>0$, \textcolor{blue}{$i$用$n$步到$j$的总概率是由所有概率通路的求和得到的, 因此其中必然有正概率通路}. 即:
+\begin{align*}
+    0<p_{ij}^{(n)}=\sum_{i_0=i, i_1,\cdots, i_{n-1}\in S, i_n=j} \Pi_{k=0}^{n-1}p_{i_k,i_{k+1}}
+\end{align*}
+(3)$\Rightarrow$(2), 显然, 因为存在一个正概率通路, 那么总概率必然大于零. \\
+(2)$\Rightarrow$(1), 显然, 因为如果存在一个概率$0$, 那么就取这个$n$就行了.
+\end{solution}
+\begin{solution}
+(b) 假设$A$是闭集, 那么$P_i(X_n\in A,\forall n\geq 0)=1, \forall i\in A$\\
+\textcolor{blue}{\textbf{证明:}} 考虑
+\begin{align*}
+    P_i(X_n\notin A, \exists n\geq 0)=P_i(\bigcup_{n=1}^{\infty}\{X_n\notin A\})\leq \sum_{n=0}^{\infty}P_i(X_n\notin A)
+\end{align*}
+已知$P_i(X_0\notin A)=P_i(X_1\notin A)=0$, 接下来用数学归纳法证明$P_i(X_k\notin A)=0$. 假设$P_i(X_k\notin A)=0$成立, 那么
+$$P_i(X_{k+1}\notin A)=\sum_{j\in A}P_i(X_{k+1}\notin A, X_{k}=j)=\sum_{j\in A}P_{i}(X_k=j)P_j(X_{1}\notin A)=0$$
+因此$0\leq P_i(X_n\notin A, \exists n\geq 0)=P_i(\bigcup_{n=1}^{\infty}\{X_n\notin A\})\leq \sum_{n=0}^{\infty}P_i(X_n\notin A)=0$, 所以$P_i(X_n\notin A, \exists n\geq 0)=0$, 因此$P_i(X_n\in A,\forall n\geq 0)=1, \forall i\in A$
+\end{solution}
+\begin{solution}
+(c) 假设$A$是互通类, 不是闭集, 那么$P_i(\exists n\geq 0, X_n\notin A)>0, \forall i\in A$.\\
+\textcolor{blue}{\textbf{证明:}} 因为$A$不是闭集, 所以$\exists i_0\in A,k\notin A, p_{i_0,k}>0$; 因为$A$互通, 所以$\forall i\in A, i\neq i_0, i\to i_0$, 根据第一问, $\exists m\geq 1, p_{i,i_0}^{(m)}>0$, 因此$p_{i,k}^{(m+1)}\geq p_{i,i_0}^{(m)}p_{i_0,k}>0$, 所以$P_i(\exists n\geq 1, X_n\notin A)\geq P_i(\exists n\geq 1, X_n=k)\geq p_{i,k}^{(m+1)}>0$
+\end{solution}
+
+\begin{problem}
+    3. 假设$A$是闭集, $C$是互通类, 证明: $C\subset A$或者$C\bigcap A=\varnothing$.
+\end{problem}
+\begin{solution}
+若$\i_0\in C\bigcap A$, 由于$C$互通, 所以$\forall j\in C$, $\exists m_j\geq 0, p_{i_0,j}^{(m_j)}>0$. 由于$A$闭集, 所以$P_{i_0}(X_n\in A,\forall n\geq 0)=1$. 那么, 如果$j\notin A$, 就与$P_{i_0}(X_n\in A,\forall n\geq 0)=1$矛盾, 所以$j\in A$, 因此$C\subset A$.
+\end{solution}
+
+\begin{problem}
+    4. 状态空间$S$可约当且仅当$S$有非空的, 闭的真子集.
+\end{problem}
+\begin{solution}
+(1) $\Leftarrow$: $S$有非空的, 闭的真子集$A$, 不妨设$i\in S,i\notin A$, 那么任取$j\in A$, $p_{ji}^{(m)}=0,\forall m\geq 0$, 因此$i$和$j$不互通, 因此$S$可约.\\
+(2) $\Rightarrow$: $S$不可约, 那么$\exists i_0,j_0\in S$, $i_0$不可达$j_0$, 即$P_{i_0}(\forall n\geq 0, X_n=j_0)=0$.\\ \textcolor{red}{取$A=\{k\in S|i_0\to k\}$, 那么$B=S\backslash A=\{k\in S|i_0\text{不可达} k\}$, $i_0\in A, j_0\in B$, 因此$A,B$非空}\\
+那么$A$一定是闭集, 因为$A$是$i_0$可达的状态集合, 那么如果从某个状态$k\in A$, 以正概率离开$A$, 进入$B$, 即$p_{i_0,k}^{(n)}>0, p_{k,t}>0,t\notin A\Rightarrow i_0$不可达$t$, 但实际上$p_{i_0,t}^{(n+1)}\geq p_{i_0,k}^{(n)}p_{k,t}>0 $, 矛盾, 因此$A$是闭集, 并且是$S$的非空真子集. 
+\end{solution}
+\begin{note}
+$\Rightarrow$中, 闭集构造的一个直观的思路：$a,b\in S$, $a$不可达$b$, 取$A=\{i\in S| a\to i\}$, 那么$A$自然构成一个闭集.
+\end{note}
+
+\begin{problem}
+    5. 状态空间$S$有限, 证明: 存在闭的互通类.
+\end{problem}
+\begin{solution}\\
+\textcolor{red}{\textbf{方法一}}: 如果$S$不可约, 那么$S$本身就是一个闭的互通类.\\
+如果$S$可约, 根据4的结论, $S$存在非空的, 闭的真子集$A$; 把马氏链限制在$A$上, 它构成一个新的有限的状态空间. 返回讨论第一步\\
+因为$S$有限, 上述两部不能无限进行, 最终存在$A^*$是$S$的闭的子集, 是互通类.\\
+\textcolor{red}{\textbf{方法二}}: 有限状态空间$S$是有限个互通类的无交的并, 而$S$至少有一个闭的子集(例如它自己), 根据3题的结论, 这个闭集要么和包含互通类, 要么和互通类完全不交. 因此必然存在一个闭的互通类.
+\end{solution}
+
+
+
+\begin{problem}
+    1. $i\neq j$, $P_i(\tau_j<\infty)=P_j(\tau_i<\infty)=1$, $P_i(\tau_j<\sigma_i)=p$, $P_j(\tau_i<\sigma_j)=q$, $0<p,q<1$. 将从$i$出发的马氏链在回到$i$之前, 访问状态$j$的次数记为$\xi$, 求$\xi$的分布列和期望.
+\end{problem}
+\begin{solution}
+有:
+$$\xi = \sum_{t=0}^{\tau_i} \mathbf{1}_{\{X_t=j\}}, \quad X_0=i$$
+\textcolor{red}{计算$\xi$的分布列其实不需要表达式, 可以直接从直观上来算}:
+\begin{align*}
+    P(\xi=0)&=1-p\\
+    P(\xi=1)&=pq\\
+    P(\xi=2)&=p(1-q)q\\
+    P(\xi=3)&=p(1-q)^2q\\
+    \cdots&\\
+    P(\xi=k+1)&=p(1-q)^kq
+\end{align*}
+期望:
+\begin{align*}
+    \mathbb{E}[\xi]&=\sum_{k=0}^{\infty} (k+1)pq(1-q)^k=\frac{p}{q}
+\end{align*}
+\end{solution}
+\begin{note}
+\textcolor{blue}{强马氏性, 因为到达每次$j$之后的随机过程当做新的马氏链来看待}
+\end{note}
+\begin{problem}
+    5. $\{S_n\}$是一维随机游动, $S_0=0$, 步长分布$P(\xi=1)=1-P(\xi=-1)=p$, $\frac{1}{2}<p<1$, 对任意的整数$k$, $\tau_k=\inf\{n\geq 0 : S_n=k\}$, 求:
+
+(1) $P_0(\tau_k=n)$
+
+(2) $E_0(\tau_k)$
+
+(3) $Y:=\min\{S_0,S_1,\cdots\}$的概率分布
+\end{problem}
+
+\begin{solution}
+(1) $\{\tau_{k}=n\}$: 要在第$n$步走到$k$, 之前没有到$k$, 因为一次只能走一格.\\若$k>0$, 那么$n$之前最多走到$k-1$, 且第$n-1$步在$k-1$,第$n-2$步在$k-2$.(如果$n\geq 2$)\\
+若$k<0$, 那么$n$之前最多走到$k+1$, 且第$n-1$步在$k+1$,第$n-2$步在$k+2$\\
+那么$P_0(\tau_k=0)=\delta_{k,0}$, $P_0(\tau_k=1)=p\delta_{k,1}+q\delta_{k,-1}$, $P_0(\tau_k=2)=p^2\delta_{k,2}+q^2\delta_{k,-2}$\\
+当$n\geq 3$时, $n$步中, 向右走$w$步, 向左走$n-w$步, $|2w-n|=|k|$.\\
+若$n\geq 3, k\geq 1$, 那么$2w-n=k\iff w=\frac{n+k}{2}$, 那么$P_0(\tau_k=n)= {n-2 \choose \frac{n-k}{2} }q^{\frac{n-k}{2}}p^{\frac{n+k}{2}}$\\
+若$n\geq 3, k\leq -1$, 那么$n-2w=-k\iff w=\frac{n+k}{2}$, 那么$P_0(\tau_k=n)={n-2\choose \frac{n+k}{2}}q^{\frac{n-k}{2}}p^{\frac{n+k}{2}}$\\
+即, 若$n\geq 3$, 那么$P_0(\tau_k=n)={n-2\choose \frac{n-|k|}{2}}q^{\frac{n-k}{2}}p^{\frac{n+k}{2}}$
+\end{solution}
+\textcolor{red}{\textbf{上述的分析是错误的, 因为即使在$n\leq 2$的情况下考虑了"首达"的条件, 在$n\geq 3$的分析中, 选取左走和右走也会包含到并不是在第$n$步第一次到达$k$的情况}}
+\\
+\begin{solution}
+\textcolor{blue}{本质上, 反射定理及其推论是对一维简单随机游走的"路径个数"的讨论, 而并不涉及其左走或右走一格的概率分布, 即使是有偏的分布, 也是成立的, 即: (此处$I$表示集合的路径个数)
+\begin{align*}
+    I(\{\tau_i<n, S_{n}=i+j\})=I(\{\tau_i<n, S_{n}=i-j\})
+\end{align*}
+以及
+\begin{align*}
+    I(\{\tau_k=n\})=\frac{|k|}{n}I(\{S_{n}=k\})
+\end{align*}
+}
+参考: \url{https://en.wikipedia.org/wiki/Reflection_principle_(Wiener_process)}
+\\
+\\假设$n$步中, 向右走$w$步, 向左走$n-w$步\\
+(1) 对$k>0$, $2w-n=k\iff w=\frac{n+k}{2}$, 那么从$0$出发, 在第$n$步到达$k$的概率:
+$$P_0(S_n=k)= {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
+对$k<0$, $n-2w=-k\iff w=\frac{n+k}{2}$, 那么从$0$出发, 在第$n$步到达$k$的概率:\\
+\textcolor{blue}{注意, 因为这里的步数$w$和$n-w$都是正数, 而坐标$k$可正可负, 符号容易搞错}
+$$P_0(S_n=k)= {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
+即, 对$\forall k>0$, 有:
+$$P_0(S_n=k)= {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
+根据上面的讨论, 得到
+$$\textcolor{blue}{P_0(\tau_k=n)=\frac{|k|}{n}P_0(S_n=k)}=\frac{|k|}{n}{n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
+
+(2) 若$k>0$, 那么 
+\begin{align*}
+    E_0(\tau_k)=\sum_{n=0}^{\infty} nP_0(\tau_k=n)=k\sum_{n=0}^{\infty} {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}=\frac{k}{p-q}
+\end{align*}
+\textcolor{red}{最后的对组合数的求和是怎么得到的呢? 我们可以换一种方法}\\
+\textcolor{red}{\textbf{方法二}}: \\
+因为$\forall k\geq 1$, $\tau_1,\tau_2-\tau_1,\cdots,\tau_k-\tau_{k-1}$是独立同分布的, 因此$E(\tau_k)=kE(\tau_1)$, 又根据首步分析法和平移不变性,
+\begin{align*}
+    E_0(\tau_1)=&p(E_1(\tau_1)+1)+(1-p)(E_{-1}(\tau_1)+1)\\
+    =&p+(1-p)(E_0(\tau_2)+1)=1+(1-p)E_0(\tau_2)=1+2(1-p)E_0(\tau_1)\\
+    \Rightarrow&E_0(\tau_1)=\frac{1}{2p-1}=\frac{1}{p-q}\\
+    \Rightarrow&E_0(\tau_k)=\frac{k}{p-q}
+\end{align*}
+如果$-k\leq -1$, 
+\begin{align*}
+    &E_0(\tau_{-k})=kE_0(\tau_{-1}), E_{\tau_{-1}}=\frac{1}{1-2p}<0\\
+    \Rightarrow& E_0(\tau_{-k})=\infty, \quad\text{不存在}
+\end{align*}
+\textcolor{red}{\textbf{方法三}}: \\
+考虑$Y_n = S_n -(p-q)n$, 根据\href{https://en.wikipedia.org/wiki/Optional_stopping_theorem}{Optional stopping theorem}, 我们有
+\begin{align*}
+    E_0(Y_{\tau_k})=E_0(S_{\tau_k}-(p-q)\tau_k)=k-(p-q)\tau_k=E_0(Y_0)=0\iff \tau_k=\frac{k}{p-q}
+\end{align*}
+(3) 计算$x_i=P_i(\tau_{b}<\tau_{-a})$, $\forall a,b>0$, 有 
+\begin{align*}
+    x_i=px_{i+1}+(1-p)x_{i-1},i=\{-a+1,\cdots,b-1\},  x_{-a}=0, x_{b}=1
+\end{align*}
+$(b+a-1)+2=b-a+1$个方程, $b-a+1$个未知数, 得到:
+$$P_0(\tau_{b}<\tau_{-a})=\frac{1-(\frac{q}{p})^a}{1-(\frac{q}{p})^{a+b}}$$
+对称有:
+$$P_0(\tau_{-a}<\tau_{b})=\frac{1-(\frac{p}{q})^b}{1-(\frac{p}{q})^{a+b}}$$
+注意, 这个实际上是非对称的赌徒破产模型的结果: 参考：\url{https://en.wikipedia.org/wiki/Gambler%27s_ruin}\\
+注意到$\tau_b\geq b, (X_0=0) \iff P_0(\tau_b\geq b)=1$, 因此$P_0(\tau_b<\tau_{-a})=P_0(b\leq \tau_b <\tau_{-a})$, 令$b\to +\infty$, 有
+$$\lim_{b\to +\infty}P_0(b\leq \tau_b <\tau_{-a})=P_0(+\infty<\tau_{-a})\textcolor{red}{=P_0(\min_{k}\{S_k\}>-a)}=1-(\frac{q}{p})^a$$
+\end{solution}
+
+\begin{problem}
+    6. $\{S_n\}$是一维随机游动, $S_0=0$, 步长分布$P(\xi=1)=1-P(\xi=-1)=p$, $\frac{1}{2}<p<1$, 对任意的整数$k$, $\tau_k=\inf\{n\geq 0 : S_n=k\}$. 假设$N,M$是正整数, $\tau=\min\{\tau_{-M},\tau_{N}\}$.
+
+    (1) 证明 $P_0(\tau<\infty)=1$.
+
+    (2) 求$P_0(S_{\tau}=N)$和$E_0(\tau)$
+\end{problem}
+
+\begin{solution}
+因为:
+\begin{align*}
+    \{\tau=\infty\}=\{-N<S_n<M,\forall n\}
+\end{align*}
+所以考虑$x_i=P_i(\tau=\infty)$, 有:
+\begin{align*}
+    x_i=px_{i+1}+qx_{i-1}, i=-M+1,\cdots,N-1, x_{-M}=x_{N}=0
+\end{align*}
+迭代得到:
+\begin{align*}
+    x_{N-2}-x_{N-1}&=\frac{p}{q}x_{N-1}\\
+    x_{N-3}-x_{N-2}&=(\frac{p}{q})^2x_{N-1}\\
+    \cdots&\\
+    x_{-M+1}-x_{-M+2}&=(\frac{p}{q})^{N+M-2}x_{N-1}\\
+    -x_{-M+1}&=(\frac{p}{q})^{N+M-1}x_{N-1} \Rightarrow x_i\equiv 0
+\end{align*}
+因此, $x_0=0$, 从而有$P_0(\tau<\infty)=1$
+
+(2) $P_0(S_{\tau}=N)=P_0(\tau_N<\tau_{-M})$\\
+这个在上一题的(3)已经计算过:
+\begin{align*}
+    P_0(S_{\tau}=N)=P_0(\tau_N<\tau_{-M})=\frac{1-(\frac{q}{p})^M}{1-(\frac{q}{p})^{N+M}}:=p^*
+\end{align*}
+由于$S_{\tau}$只有可能取$N$或者$-M$, 那么
+\begin{align*}
+    E_0(S_\tau)=Np^*+(-M)(1-p^*)=(N+M)p^*-M=(N+M)\frac{1-(\frac{q}{p})^M}{1-(\frac{q}{p})^{N+M}}-M
+\end{align*}
+考虑Wald等式, 因此有
+\begin{align*}
+    E_0(\tau)=E_0(\xi)\cdots E_0(\tau)=(p-q)E_0(\tau)\Rightarrow E_0(\tau)=\frac{1}{p-q}(N+M)\frac{1-(\frac{q}{p})^M}{1-(\frac{q}{p})^{N+M}}-M
+\end{align*}
+\end{solution}
+
+\end{document}

@@ -118,6 +118,31 @@
     \textcolor{blue}{a small question: 要基于$X_0$作为参数的条件下，才能反解，这样$X_0$的值是否会造成影响呢？答案是不会的，因为我只是需要$X_0$作为参数，具体的$X_0$到底取什么并不重要.}
 \end{note}
 
+\section{jdq第二次小测}
+
+\begin{problem}
+    1. (18分) 假设 $N=\left\{N_t: t \geq 0\right\}$ 是强度参数为 $\lambda>0$ 的泊松过程。 
+
+(1) (8分) $\forall 0<s<t$, 非负整数 $i \leq j$, 求条件概率 $P\left(N_s=i \mid N_t=j\right)$ 。
+
+(2) (10分) 利用强大数律证明 $P\left(\lim _{t \rightarrow+\infty} \frac{N_t}{t}=\lambda\right)=1$ 。
+\end{problem}
+
+\begin{problem}
+    2. (8分) 设 $B=\left\{B_t: t \geq 0\right\}$ 是一维零初值标准布朗运动。给定常数 $T>0$,令 $W_t=B_{T-t}-B_T, \forall t \in[0, T]$ 。证明 $W=\left\{W_t: t \in[0, T]\right\}$ 仍是标准布朗运动。
+\end{problem}
+
+
+\begin{problem}
+    3. (24分) 考虑 $M / M / s$ 排队系统。假设顾客按强度参数为 $\lambda>0$ 的泊松过程到达有 $s>0$ 个服务员的服务站；每个顾客在到达时如有服务员空闲就直接接受服务，否则在队列等待、然后到首个空闲的服务员处接受服务，服务结束后离开服务站；服务员对单个顾客的服务时间相互独立、均服从参数为 $\mu>0$ 的指数分布, 且与顾客的到达情况独立。 $\forall t \geq 0$, 以 $X_t$ 记 $t$ 时刻服务站中的顾客数。
+
+(1) (8分) 求连续时间参数马氏链 $X=\left\{X_t: t \geq 0\right\}$ 的转移速率矩阵。
+
+(2) (8分) 给出 $X$ 正常返的条件, 并在此条件下求 $X$ 的不变分布。
+
+(3) (8分) $\forall t \geq 0$, 以 $Y_t$ 记时段 $[0, t]$ 内离开服务站的顾客数, 证明当 $X$ 平稳时， $\left\{Y_t: t \geq 0\right\}$ 也是具有强度参数 $\lambda$ 的泊松过程。
+\end{problem}
+
 \section{马氏链}
 %%\CJKfamily{zhkai}
 \subsection{定义与例子}
@@ -1374,9 +1399,20 @@ $$\xi = \sum_{t=0}^{\tau_i} \mathbf{1}_{\{X_t=j\}}, \quad X_0=i$$
 即, 若$n\geq 3$, 那么$P_0(\tau_k=n)={n-2\choose \frac{n-|k|}{2}}q^{\frac{n-k}{2}}p^{\frac{n+k}{2}}$
 \end{solution}
 \textcolor{red}{\textbf{上述的分析是错误的, 因为即使在$n\leq 2$的情况下考虑了"首达"的条件, 在$n\geq 3$的分析中, 选取左走和右走也会包含到并不是在第$n$步第一次到达$k$的情况}}
+\\
 \begin{solution}
-\textcolor{blue}{记住课上讲过的\textbf{反射定理}和它的推论}\\
-假设$n$步中, 向右走$w$步, 向左走$n-w$步\\
+\textcolor{blue}{本质上, 反射定理及其推论是对一维简单随机游走的"路径个数"的讨论, 而并不涉及其左走或右走一格的概率分布, 即使是有偏的分布, 也是成立的, 即: (此处$I$表示集合的路径个数)
+\begin{align*}
+    I(\{\tau_i<n, S_{n}=i+j\})=I(\{\tau_i<n, S_{n}=i-j\})
+\end{align*}
+以及
+\begin{align*}
+    I(\{\tau_k=n\})=\frac{|k|}{n}I(\{S_{n}=k\})
+\end{align*}
+}
+参考: \url{https://en.wikipedia.org/wiki/Reflection_principle_(Wiener_process)}
+\\
+\\假设$n$步中, 向右走$w$步, 向左走$n-w$步\\
 (1) 对$k>0$, $2w-n=k\iff w=\frac{n+k}{2}$, 那么从$0$出发, 在第$n$步到达$k$的概率:
 $$P_0(S_n=k)= {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
 对$k<0$, $n-2w=-k\iff w=\frac{n+k}{2}$, 那么从$0$出发, 在第$n$步到达$k$的概率:\\
@@ -1384,17 +1420,43 @@ $$P_0(S_n=k)= {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
 $$P_0(S_n=k)= {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
 即, 对$\forall k>0$, 有:
 $$P_0(S_n=k)= {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
-根据反射定理, 得到
+根据上面的讨论, 得到
 $$\textcolor{blue}{P_0(\tau_k=n)=\frac{|k|}{n}P_0(S_n=k)}=\frac{|k|}{n}{n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}$$
 
 (2) 若$k>0$, 那么 
 \begin{align*}
     E_0(\tau_k)=\sum_{n=0}^{\infty} nP_0(\tau_k=n)=k\sum_{n=0}^{\infty} {n\choose \frac{n+k}{2}}p^{\frac{n+k}{2}}q^{\frac{n-k}{2}}=\frac{k}{p-q}
 \end{align*}
-\textcolor{red}{最后的对组合数的求和是怎么得到的呢?}\\
-若$k<0$, 那么
-
-(3) 
+\textcolor{red}{最后的对组合数的求和是怎么得到的呢? 我们可以换一种方法}\\
+\textcolor{red}{\textbf{方法二}}: \\
+因为$\forall k\geq 1$, $\tau_1,\tau_2-\tau_1,\cdots,\tau_k-\tau_{k-1}$是独立同分布的, 因此$E(\tau_k)=kE(\tau_1)$, 又根据首步分析法和平移不变性,
+\begin{align*}
+    E_0(\tau_1)=&p(E_1(\tau_1)+1)+(1-p)(E_{-1}(\tau_1)+1)\\
+    =&p+(1-p)(E_0(\tau_2)+1)=1+(1-p)E_0(\tau_2)=1+2(1-p)E_0(\tau_1)\\
+    \Rightarrow&E_0(\tau_1)=\frac{1}{2p-1}=\frac{1}{p-q}\\
+    \Rightarrow&E_0(\tau_k)=\frac{k}{p-q}
+\end{align*}
+如果$-k\leq -1$, 
+\begin{align*}
+    &E_0(\tau_{-k})=kE_0(\tau_{-1}), E_{\tau_{-1}}=\frac{1}{1-2p}<0\\
+    \Rightarrow& E_0(\tau_{-k})=\infty, \quad\text{不存在}
+\end{align*}
+\textcolor{red}{\textbf{方法三}}: \\
+考虑$Y_n = S_n -(p-q)n$, 根据\href{https://en.wikipedia.org/wiki/Optional_stopping_theorem}{Optional stopping theorem}, 我们有
+\begin{align*}
+    E_0(Y_{\tau_k})=E_0(S_{\tau_k}-(p-q)\tau_k)=k-(p-q)\tau_k=E_0(Y_0)=0\iff \tau_k=\frac{k}{p-q}
+\end{align*}
+(3) 计算$x_i=P_i(\tau_{b}<\tau_{-a})$, $\forall a,b>0$, 有 
+\begin{align*}
+    x_i=px_{i+1}+(1-p)x_{i-1},i=\{-a+1,\cdots,b-1\},  x_{-a}=0, x_{b}=1
+\end{align*}
+$(b+a-1)+2=b-a+1$个方程, $b-a+1$个未知数, 得到:
+$$P_0(\tau_{b}<\tau_{-a})=\frac{1-(\frac{q}{p})^a}{1-(\frac{q}{p})^{a+b}}$$
+对称有:
+$$P_0(\tau_{-a}<\tau_{b})=\frac{1-(\frac{p}{q})^b}{1-(\frac{p}{q})^{a+b}}$$
+注意, 这个实际上是非对称的赌徒破产模型的结果: 参考：\url{https://en.wikipedia.org/wiki/Gambler%27s_ruin}\\
+注意到$\tau_b\geq b, (X_0=0) \iff P_0(\tau_b\geq b)=1$, 因此$P_0(\tau_b<\tau_{-a})=P_0(b\leq \tau_b <\tau_{-a})$, 令$b\to +\infty$, 有
+$$\lim_{b\to +\infty}P_0(b\leq \tau_b <\tau_{-a})=P_0(+\infty<\tau_{-a})\textcolor{red}{=P_0(\min_{k}\{S_k\}>-a)}=1-(\frac{q}{p})^a$$
 \end{solution}
 
 \begin{problem}
@@ -1404,6 +1466,36 @@ $$\textcolor{blue}{P_0(\tau_k=n)=\frac{|k|}{n}P_0(S_n=k)}=\frac{|k|}{n}{n\choose
 
     (2) 求$P_0(S_{\tau}=N)$和$E_0(\tau)$
 \end{problem}
+
+\begin{solution}
+因为:
+\begin{align*}
+    \{\tau=\infty\}=\{-N<S_n<M,\forall n\}
+\end{align*}
+所以考虑$x_i=P_i(\tau=\infty)$, 有:
+\begin{align*}
+    x_i=px_{i+1}+qx_{i-1}, i=-M+1,\cdots,N-1, x_{-M}=x_{N}=0
+\end{align*}
+迭代得到:
+\begin{align*}
+    x_{N-2}-x_{N-1}&=\frac{p}{q}x_{N-1}\\
+    x_{N-3}-x_{N-2}&=(\frac{p}{q})^2x_{N-1}\\
+    \cdots&\\
+    x_{-M+1}-x_{-M+2}&=(\frac{p}{q})^{N+M-2}x_{N-1}\\
+    -x_{-M+1}&=(\frac{p}{q})^{N+M-1}x_{N-1} \Rightarrow x_i\equiv 0
+\end{align*}
+因此, $x_0=0$, 从而有$P_0(\tau<\infty)=1$
+
+(2) $P_0(S_{\tau}=N)=P_0(\tau_N<\tau_{-M})$\\
+这个在上一题的(3)已经计算过:
+\begin{align*}
+    P_0(S_{\tau}=N)=P_0(\tau_N<\tau_{-M})=\frac{1-(\frac{q}{p})^M}{1-(\frac{q}{p})^{N+M}}:=p^*
+\end{align*}
+由于$S_{\tau}$只有可能取$N$或者$-M$, 那么
+\begin{align*}
+    E_0(\tau)=Np^*+(-M)(1-p^*)=(N+M)p^*-M=(N+M)\frac{1-(\frac{q}{p})^M}{1-(\frac{q}{p})^{N+M}}-M
+\end{align*}
+\end{solution}
 
 \section{跳过程}
 \subsection{泊松过程}

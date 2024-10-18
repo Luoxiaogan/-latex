@@ -1,0 +1,236 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig, xurl}
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+% 标题设置
+\title{\textbf{应随 HW1}}
+\author{罗淦 2200013522}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+%\tableofcontents
+%\newpage
+
+
+\begin{problem}
+    2. $\{S_n\}$一维简单随机游动. $\forall n\geq 0$, $X_n=\max_{0\leq k\leq n}S_k$. $\{X_n\}$是马氏链吗? 说明之. 
+    \end{problem}
+    \begin{solution}
+    理解: $X_n$理解为前$n$步到达过的最大坐标$\max_{0\leq k\leq n}S_k$, 考虑用$S_n$表示$X_n$. \\$X_{n+1}=\begin{cases}
+        X_n, & S_{n+1}\leq X_n\\
+        S_{n+1}, &S_{n+1}>X_n
+    \end{cases}$, $X_{n+1}$的状态只取决于$S_n$和$X_n$的状态(但还是很难分析马氏性啊)\\ 
+    考虑条件概率:
+    \begin{align*}
+        &P(X_{n+1}=i_{n+1}|X_{n}=i_n,X_{n-1}=i_{n-1},\cdots,X_1=i_1,X_0=i_0)\\
+        =&P(S_{n+1}\leq X_n)\textcolor{blue}{P(X_n=i_{n+1}|X_{n}=i_n,X_{n-1}=i_{n-1},\cdots,X_1=i_1,X_0=i_0)}\\&+P(S_{n+1}>X_n)P(S_{n+1}=i_{n+1}|X_{n}=i_n,X_{n-1}=i_{n-1},\cdots,X_1=i_1,X_0=i_0)\\
+        =&P(S_{n+1}\leq X_n=i_n)\textcolor{blue}{P(X_n=i_{n+1}|X_{n}=i_n)}\\&+P(S_{n+1}>X_n=i_n)P(S_{n+1}=i_{n+1}|X_{n}=i_n,X_{n-1}=i_{n-1},\cdots,X_1=i_1,X_0=i_0)
+    \end{align*}
+    参考：\\
+    1. \url{https://math.stackexchange.com/questions/683123/the-maximum-of-a-simple-random-walk}\\
+    2. \url{https://math.stackexchange.com/questions/683060/let-s-n-be-a-simple-random-walk-m-n-is-maxs-1-s-2-ldots-s-n-is-m-n}\\
+    \textcolor{red}{$\{X_n\}$不是马氏链, 反例如下}.\\
+    因为是简单马氏链, 因此$S_0=X_0=0$. \\下面考虑$\{X_3=1\}$, 那么之前${(S_0,S_1,S_2,S_3)}$可能的状态集合有:$(0,1,0,1),(0,1,0,-1),(0,-1,0,1)$, 且都是等概率的($p=\frac{1}{16}$). \\那么条件概率$P(X_4=1|X_3=1)=\frac{4}{6}=\frac{2}{3}$. \\但对于$P(X_4=1|X_3=1,X_2=0)$, 那么对应$(0,-1,0,1)$的情况, 此时$P(X_4=1|X_3=1,X_2=0)=\frac{1}{2}$, 不符合马氏性的定义.
+    \end{solution}
+    \begin{note}
+        \textbf{\textcolor{red}{有没有什么深层次的原因呢?}}
+    \end{note}
+    
+    \begin{problem}
+    3. 某数据通信系统由 $n$ 个中继站组成, 从上一站向下一站传送信号 0 或 1 时, 接收的正确率为 $p$. 现用 $X_0$ 表示初始站发出的数字, 用 $X_k$ 表示第 $k$ 个中继站接收到的数字。
+    
+    (1) 写出 $\left\{X_k: 0 \leqslant k \leqslant n\right\}$ 的转移概率.
+    (2) 求
+    $$
+    P\left(X_0=1 \mid X_n=1\right)=\frac{\alpha+\alpha(p-q)^n}{1+(2 \alpha-1)(p-q)^n}
+    $$
+    其中 $\alpha=P\left(X_0=1\right), q=1-p$. 并解释上述条件概率的实际意义.
+    \end{problem}
+    
+    \begin{solution}
+    (1) $\mathbf{P}=\begin{pmatrix}
+        p&1-p\\
+        1-p&p
+    \end{pmatrix}=\begin{pmatrix}
+        p_{00}&p_{01}\\p_{10}&p_{11}
+    \end{pmatrix}$.\\
+    (2) 对角化$\mathbf{P}$. $|\lambda \mathbf{I}-\mathbf{P}|=(\lambda-1)(\lambda -(p-q))$\\$\lambda_1=1$对应特征向量$(1,1)^T$, $\lambda_2=p-q$对应特征向量$(1,-1)^T$\\因此$\mathbf{P}^n=\begin{pmatrix}
+        1&1\\1&-1
+    \end{pmatrix}^{-1}\begin{pmatrix}
+        1&0&\\0&(p-q)^n
+    \end{pmatrix}\begin{pmatrix}
+        1&1\\1&-1
+    \end{pmatrix}=\frac{1}{2}\begin{pmatrix}
+        1+(p-q)^n&1-(p-q)^n\\1-(p-q)^n&1+(p-q)^n
+    \end{pmatrix}$\\
+    下面计算:
+    \begin{align*}
+        P(X_0=1|X_n=1)&=\frac{P(X_0=1,X_n=1)}{P(X_n=1)}=\frac{P(X_0=1)P(X_n=1|X_0=1)}{P(X_n=1)}\\
+        &=\frac{\alpha\cdot (0,1)^T\mathbf{P}^n[2]}{(1-\alpha,\alpha)^T\mathbf{P}^n[2]}=\frac{\alpha+\alpha(p-q)^n}{1+(2\alpha-1)(p-q)^n}
+    \end{align*}
+    实际意义: 已知第$n$个中继站接收到$1$的情况下, 最开始真实发出的也是$1$的"后验概率".
+    \end{solution}
+    
+    \begin{problem}
+    5. 某篮球运动员投球成功的概率取决于他前两次的投球成绩. 如果两次都成功,则下次投球成功的概率为$\frac{3}{4}$；如果两次都失败，下次投球成功的概率为$\frac{1}{2}$；如果两次一次成功一次失败，下次投球成功的概率为$\frac{2}{3}$。用马氏链来刻画连续投球，求出投球成功的概率近似值。
+    \end{problem}
+    \begin{solution}
+    设成功是$W$，失败是$L$，那么设状态空间为$S=\{S_1,S_2,S_3,S_4\}$，对应$S_1=WW,S_2=WL,S_3=LW,S_4=LL$，转移矩阵是(考虑前两次投球所属的状态空间，根据这一次投球的结果，得到前一次加上这一次所处的状态空间)
+        $$P=\begin{pmatrix}
+            \frac{3}{4}&\frac{1}{4}&0&0\\0&0&\frac{2}{3}&\frac{1}{3}\\ \frac{2}{3}&\frac{1}{3}&0&0\\ 0&0&\frac{1}{2}&\frac{1}{2}
+        \end{pmatrix}$$
+        之后，计算perron vector，$\pi=(\pi_1,\cdots,\pi_4)^T=(\frac{1}{2},\frac{3}{16},\frac{3}{16},\frac{1}{8})^T$，那么得到了平衡状态下在各个状态的概率，因此可以计算成功率为
+        $$p=\pi_1\cdot \frac{3}{4}+\pi_2\cdot \frac{2}{3}+\pi_3\cdot \frac{2}{3}+\pi_4\cdot \frac{1}{2}=\frac{11}{16}$$
+    \end{solution}
+    \begin{note}
+    把连续两次的成绩看成一个状态，来找转移概率.
+    \end{note}
+    
+    
+    \begin{problem}
+    7. 假设某加油站给一辆车加油需要一个单位时间 (比如, 5 分钟). 令 \( {\xi }_{n} \) 是第 \( n \) 个单位时间来加油的汽车数. 假设 \( {\xi }_{1},{\xi }_{2},\cdots \) 独立同分布, 取值非负整数, \( P\left( {{\xi }_{1} = k}\right) = {p}_{k},k \geq 0 \) . 在任意时刻 \( n \) ,如果加油站有车, 那么加油站为其中一辆车加油 (耗时一个单位时间, 然后该汽车在时刻 \( n + 1 \) 离开加油站); 否则,加油站什么都不做. 将 \( n \) 时刻加油站中的汽车数记为 \( {X}_{n} \) . 写出 \( \left\{ {X}_{n}\right\} \) 的状态空间与转移概率.
+    \end{problem}
+    \begin{solution}
+    $S=\{0,1,2,\cdots\}=\mathbb{Z}$，$P(X_{n+1}=j|X_n=i)=p_{j-i+1}, \forall j\geq i-1$.
+    \end{solution}
+
+    \begin{problem}
+    11. 假设 \( \left\{ {X}_{n}\right\} \) 是规则树 \( {\mathbb{T}}^{d} \) 上的随机游动,取 \( {Y}_{n} = \left| {X}_{n}\right| \) (参见例 1.1.10). 根据上题, \( \left\{ {Y}_{n}\right\} \) 是马氏链. 试写出 \( \left\{ {Y}_{n}\right\} \) 的状态空间与转移概率.
+\end{problem}
+\begin{solution}
+状态空间$S=\{0,1,2,\cdots\}=\mathbb{N}$，转移概率$P(Y_{n+1}=1|Y_{n}=0)=1,P(Y_{n+1}=i-1|Y_{n}=i)=p_{i,i-1}=\frac{1}{d+1},P(Y_{n+1}=i+1|Y_{n}=i)=p_{i,i+1}=\frac{d}{d+1}$
+\end{solution}
+
+\begin{problem}
+    1. 算矩阵的不变分布
+    \end{problem}
+    \begin{solution}
+    考虑
+    $$\pi\mathbf{P}=\pi \iff (\mathbf{P}^T-\mathbf{I})\pi^T=0$$
+    先用高斯消元法算出通解，然后联立归一化条件得到不变分布:
+    $$\pi=(0.125 , 0.1875, 0.125 , 0.1875, 0.125 , 0.25)$$
+    \end{solution}
+    
+    \begin{problem}
+        2. 若$\pi$是不变分布, 则$\forall A\subset S$, 有 
+    $$\sum_{i\in A,j\notin A} \pi_i p_{ij} = \sum_{i\in A,j\notin A}\pi_j p_{ji}$$
+    \textcolor{blue}{即, 进入$A$的概率流等于离开$A$的概率流}
+    \end{problem}
+    \begin{solution}
+        \textcolor{blue}{思路: 先证明, 单个状态的流入和流出相等; 然后求和}
+    \begin{align*}
+        &\pi_i=\sum_{j\in S}\pi_jp_{ij}=\sum_{j\neq i}\pi_j p_{ij}+\pi_i p_{ii}\\
+        \iff &\pi_i\textcolor{red}{(1-p_{ii})}=\pi_i\textcolor{red}{\sum_{j\neq i}p_{ij}}=\sum_{j\neq i}\pi_jp_{ij}
+    \end{align*}
+    对$i\in A$求和, 得到
+    \begin{align*}
+        \sum_{i\in A}\pi_i\sum_{j\notin A}p_{ij}=\sum_{i\in A}\sum_{j\notin A}\pi_i p_{ij}
+    \end{align*}
+    \end{solution}
+    \begin{note}
+    注意: (转移矩阵对行求和)$p_{ii}+\sum_{j\neq i}p_{ij}=\sum_{j\in S}p_{ij}=1$, 但(转移矩阵对列求和)$\sum_{i\in S}p_{ij}$很可能不等于$1$.
+    \end{note}
+    
+    \begin{problem}
+        4. 给转移矩阵, 算不变分布和$\lim_{n\to\infty}P(X_n=1)$
+    \end{problem}
+    \begin{solution}
+        计算得到: (1)$\pi=(0.3,0.5,0.2)$. \\(2) $\lim_{n\to \infty}P(X_n=1)=\mu^T\mathbf{P}_{\infty}[1]=\mu^T\mathbf{1}_n\pi^T[1]=\pi_1=0.3$
+    \end{solution}
+    \begin{note}
+        补充说明为什么$\mathbf{P}_{\infty}=\mathbf{1}_n\pi^T$.\\
+        首先, 有限状态的时齐马氏链的不变分布存在, 又因为$\mathbf{P}_{\infty}\cdot \mathbf{P}=\mathbf{P}\cdot \mathbf{P}_{\infty}=\mathbf{P}_{\infty}$, 而$\mathbf{P}_{\infty}=\mathbf{1}_n\pi^T$满足条件.
+    \end{note}
+    
+    \begin{problem}
+    5. 证明: 转移矩阵$\mathbf{P}$的全体不变分布构成凸集. 即若$\mu,\pi$都是$\mathbf{P}$的不变分布,$0<p<1$, 那么$p\mu+(1-p)\pi$也是$\mathbf{P}$的不变分布.
+    \end{problem}
+    \begin{solution}
+    因为$\mu\mathbf{P}=\mathbf{P}, \pi\mathbf{P}=\mathbf{P}$, 所以$(p\mu+(1-p)\pi)\mathbf{P}=\mathbf{P}$, 且$\left\langle p\mu+(1-p)\pi, \mathbf{1}_n \right\rangle=1$. 且因为是凸组合, 所以每一个元素非负, 因此是不变分布.
+    \end{solution}
+    
+    \begin{problem}
+        7. 若$\mathbf{P}$满足列和为$1$, 即$\sum_{i\in S}p_{ij}=1$, 称为双随机矩阵.\\
+    (1) 如果$\mathbf{P}$双随机, 那么$\mathbf{P}^n$双随机\\
+    (2) 如果$\mathbf{P}$双随机, 那么$\mu\equiv 1$是不变测度.
+    \end{problem}
+    \begin{solution}
+    (1) 下面证明任意两个双随机矩阵相乘还是双随机. $A,B$双随机, 那么$AB$的第$i$列的求和是: $\sum_{j=1}^n AB[j,i]=\sum_{j=1}^n \sum_{k=1}^n a_{jk}b_{ki}=\sum_{k=1}^n b_{ki}\sum_{j=1}^n a_{jk}=\sum_{k=1}^n b_{ki}=1$. 最后两个等号分别利用了$\sum_{j=1}^n a_{jk}=1$($A$的第$k$列求和是$1$), 以及$\sum_{k=1}^n b_{ki}=1$($B$的第$i$列求和是$1$).\\
+    (2) 因为$\mu \mathbf{P}=\mathbf{P}$, 且所有元素是非负的, 当然是不变测度.
+    \end{solution}
+    
+    \begin{problem}
+    $S$有限, $\mathbf{P}$是$S$上的转移矩阵, 固定$i\in S$, 证明:\\
+    (1) 存在正整数子列$n_1,\cdots$, 使得对任意状态$j$, 极限
+    \begin{align*}
+        \lim_{r\to\infty} \left(\sum_{m=0}^{n_r-1}p_{ij}^{(m)}\right)/ n_r
+    \end{align*}
+    存在, 记为$\mu_j$.\\
+    (2) $\{\mu_j\}$是不变分布.
+    \end{problem}
+    \begin{solution}
+    (1) 因为对状态$j$有
+    $$\frac{\sum_{m=0}^{n-1}p_{ij}^{(m)}}{n}\leq 1$$
+    所以, $\{\frac{\sum_{m=0}^{n-1}p_{ij}^{(m)}}{n}\}$是一个有界序列, 必然存在收敛子列, 即存在子列$\{n_r\}$使得
+    $$\lim_{r\to \infty}\frac{\sum_{m=0}^{n_r-1}p_{ij}^{(m)}}{n_r}$$
+    存在, \textcolor{blue}{注意, 这个子列的选取是对于状态$j$而言的, 不过由于我们的状态空间$S$是有限的, 所以可以先取$j=1$对应的子列, 然后取$j=2$对应的子列的子列, 直到$j=n$, 最后得到的子列是对任意的$j\in S$成立的}.\\
+    (2) 计算:
+    \begin{align*}
+        &\sum_{j\in S}\mu_j\cdot p_{jk}=\sum_{j\in S}\lim_{r\to \infty} \frac{\sum_{m=0}^{n_r-1}p_{ij}^{(m)}}{n_r}\cdot p_{jk}=\lim_{r\to\infty}\frac{\sum_{j\in S}\sum_{m=0}^{n_r-1}p_{ij}^{(m)}p_{jk}}{n_r}=\lim_{r\to \infty}\frac{\sum_{m=1}^{n_r}p_{ik}^{(m)}}{n_r}=\mu_k
+    \end{align*}
+    以及验证归一化:
+    \begin{align*}
+        \sum_{j\in S}\mu_j=\sum_{j\in S}\lim_{r\to \infty} \frac{\sum_{m=0}^{n_r-1}p_{ij}^{(m)}}{n_r}=\lim_{r\to\infty}\frac{\sum_{m=0}^{n_r-1}\sum_{j\in S}p_{ij}^{(m)}}{n_r}=\lim_{r\to \infty}1=1
+    \end{align*}
+    \end{solution}
+    \begin{solution}\textcolor{red}{这个解答有点小问题: 从题目的用意上来说, 大概就是来让我证明这个不变分布存在的, 但是我直接使用了"有限状态空间的转移矩阵一定存在不变分布"的结论.}\\
+    (1) 直观上来说, 有限状态空间的转移矩阵一定存在不变分布, 且$\mathbf{P}^n\to \mathbf{P}_{\infty}=\mathbf{1}_n\pi^T$, 因此有$p_{ij}^{(m)}=\mathbf{P}^m[i,j]\to \mathbf{P}_{\infty}[i,j]=\pi_j$. 接下来就很好证明了, 因为这等价于, 已知$\lim_{n\to \infty} x_{n}=A$, 要证$\lim_{n \to \infty} \frac{\sum_{i=0}^{n-1}x_{i}}{n}=A$.\\
+    根据Stolze定理即可得到:
+    \begin{align*}
+        \lim_{n\to\infty} \frac{\sum_{m=0}^{n-1} p_{ij}^{m} }{n} =\lim_{n\to \infty} \frac{\sum_{m=0}^{n} p_{ij}^{m} - \sum_{m=0}^{n-1} p_{ij}^{m} }{(n+1)-n} = \pi_j
+    \end{align*}
+    那么任意子列当然成立.\\
+    (2) 根据(1)的分析$\mu_j=\pi_j$, 当然是不变分布.
+    \end{solution}
+
+\end{document}
