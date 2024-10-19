@@ -459,4 +459,111 @@ $(\Leftarrow)$: 已知等式成立, \textcolor{red}{考虑$y$关于$x$的正交�
 \end{align*}
 \end{solution}
 
+\section{最小二乘问题的解法}
+\begin{problem}
+1. 设$A=\begin{pmatrix}
+        1&2\\3&4\\5&6
+    \end{pmatrix}$, $b=\begin{pmatrix}
+        1\\1\\1
+    \end{pmatrix}$, 用正则化方法求$LS$问题的解
+\end{problem}
+\begin{solution}
+\textcolor{blue}{考虑正则化方法, 是考虑正则化方程$A^TAx=A^Tb$}\\
+求解得到:
+\begin{align*}
+    \begin{pmatrix}
+        35&44\\44&56
+    \end{pmatrix}\begin{pmatrix}
+        x_1\\x_2
+    \end{pmatrix}=\begin{pmatrix}
+        9\\12
+    \end{pmatrix}\Rightarrow
+    \begin{pmatrix}
+        x_1\\x_2
+    \end{pmatrix}=\begin{pmatrix}
+        -1\\1
+    \end{pmatrix}
+\end{align*}
+\end{solution}
+
+\begin{problem}
+2. 设$x=(1,0,4,6,3,4)^T$, 求一个Householder变换和一个正数$\alpha$, 使得$Hx=(1,\alpha,4,6,0,0)^T$.
+\end{problem}
+\begin{solution}
+因为Householder变换是正交变换, 因此向量长度不变, 根据$||x||_2^2=\norm{Hx}_2^2$得到正数$\alpha=5$.
+
+两向量相减, 得到镜面对称的法方向$v=(0,-5,0,0,3,4)^T$, 那么Householder变换应该是
+\begin{align*}
+    H(v)=I-2\frac{vv^T}{v^Tv}
+\end{align*}
+\textcolor{red}{请问助教老师, 考试的时候需要把真正的矩阵算出来吗?}
+\end{solution}
+\begin{note}
+注意书上的结论: Householder变换可以把一个向量的"任何若干相邻"的元素化为零, 想要把$x\in \mathbb{R}^n$, 长度为$n$的向量的$k+1$到$j$变成$0$, 那么需要把向量
+$$v=(0,\cdots,0,x_{k}-\alpha,\underbrace{x_{k+1},\cdots,x_{j}}_{\text{这是想要变成0的部分}},0,\cdots,0)^T, \quad \textcolor{red}{\alpha=\sqrt{x_k^2+\cdots+x_{j}^2}}$$
+\end{note}
+
+\begin{problem}
+5. $x=(x_1,x_2)^T$是一个二维的复向量, 给出一种算法, 计算酉矩阵
+$$Q=\begin{pmatrix}
+    c&\bar{s}\\-s&c
+\end{pmatrix}, c\in R,c^2+|s|^2=1$$
+使得$Q$的第二个分量是$0$.
+\end{problem}
+
+\begin{solution}
+若$x_1=0$, 那么$c=0, s=e^{i\theta}$\\
+若$x_2=0$, 那么$s=0, c=1\text{或}-1$\\
+若$x_1\neq 0,x_2\neq 0$, 那么考虑$\alpha=\arctan \frac{|x_1|}{|x_2|}$, 取$c=\sin \alpha, s=\cos \alpha \cdot \frac{x_1|x_2|}{|x_1|x_2}$, 满足$Qx$的第二个分量是$0$. 即(实际上核心是$cx_2=sx_1$):
+\begin{align*}
+    c = \frac{|x_1|}{\sqrt{|x_1|^2+|x_2|^2}}, s=\frac{|x_2|}{\sqrt{|x_1|^2+|x_2|^2}}\cdot\frac{x_1|x_2|}{|x_1|x_2}
+\end{align*}
+\textcolor{red}{但是, 结合书上对Givens变换的分析, 为了给出一个robust的算法, 防止在计算过程中出现溢出, 可以这么做}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.44\textwidth]{image/1.jpg}
+\end{figure}
+\end{solution}
+\newpage
+\begin{problem}
+7. 设$x$和$y$是$\mathbb{R}^n$中的两个非零向量, 给出一种算法来确定一个Householder变换$H$, 使得$Hx=\alpha y, \alpha\in R$.
+\end{problem}
+\begin{solution}
+因为把$x$镜面反射到$y$, 因此法向量$v\in \text{span}(x,y)$, 设$v=x+\beta y$, 因为 
+\begin{align*}
+H(v)x=x-2\frac{v^Tx}{v^Tv}v=(1-2\frac{v^Tx}{v^Tv})x-2\frac{v^Tx}{v^Tv}\beta y
+\end{align*}
+因此$x$的系数$1-2\frac{v^Tx}{v^Tv}=0 \iff \beta=\pm \frac{\norm{x}_2}{\norm{y}_2}$, 此时有:
+\begin{align*}
+    H(v)x=\pm \frac{\norm{x}_2}{\norm{y}_2}y, v=x\pm \frac{\norm{x}_2}{\norm{y}_2}y
+\end{align*}
+\end{solution}
+
+\begin{problem}
+    设$A\in \mathbb{R}^{m\times n}$(\textcolor{red}{书上typo, 此处就是$\mathbb{R}^{n\times n}$})是一个对角加边矩阵, 即:
+    \begin{align*}
+        A = \begin{bmatrix}
+            \alpha_1 & \rho_2 & \rho_3 & \dots & \dots & \rho_n & 0 \\
+            \beta_2 & \alpha_2 & 0 & \dots & \dots & \dots & 0 \\
+            \beta_3 & 0 & \alpha_3 & \dots & \dots & \dots & 0 \\
+            \vdots & \vdots & \vdots & \ddots & & \vdots & \vdots \\
+            \vdots & \vdots & \vdots & & \ddots & \vdots & \vdots \\
+            \beta_n & 0 & \dots & \dots & \dots & \alpha_{n-1} & 0 \\
+            0 & 0 & \dots & \dots & \dots & 0 & \alpha_n
+            \end{bmatrix}
+    \end{align*}
+    试给出用Givens变换求$A$的$QR$分解的详细算法
+\end{problem}
+\begin{solution}
+使用Givens变换对$A$进行逐列操作, 将$A$变为一个上三角矩阵. 但是这样还不如用Householder变换.
+
+想要利用稀疏矩阵的特性, 可以想到Givens变换$G(i,j,\theta)$左乘作用于矩阵$A$之后, 实际上仅仅改变了矩阵$A$的$i,j$行列交错的四个元素.
+
+因此, 为了消去$\beta_2$, 可以使用$G(1,2,\theta_2)$; 为了消去$\beta_3$, 可以使用$G(1,3,\theta_n)$; 直到为了消去$\beta_n$, 可以使用$G(1,n,\theta_n)$. 因此使用$n$个Givens变换即可达到效果, 具体的算法如下:
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{image/2.png}
+\end{figure}
+\end{solution}
+
 \end{document}

@@ -1,5 +1,5 @@
 \documentclass[10pt, a4paper, oneside]{ctexart}
-\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig,xurl, }
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig,xurl, verbatim}
 \usepackage[thicklines]{cancel}
 \usepackage{enumitem} % 用于更灵活的列表环境
 \usepackage{geometry} % 调整页面边距
@@ -528,6 +528,14 @@ $$\lim_{r\to \infty}\frac{\sum_{m=0}^{n_r-1}p_{ij}^{(m)}}{n_r}$$
 (2) 根据(1)的分析$\mu_j=\pi_j$, 当然是不变分布.
 \end{solution}
 
+\begin{problem}
+10. Kolmogrov准则: 对任意的$n\geq 1$, 若$i_0,\cdots,i_n$满足$p_{i_r,i_{r+1}}>0$, $r=0,\cdots,n$, 其中$i_{n+1}:=i_0$, 且有
+\begin{align*}
+    p_{i_0,i_1}p_{i_1,i_2}\cdots p_{i_n,i_{n+1}}=p_{i_{n+1},i_n}\cdots p_{i_2,i_1}p_{i_1,i_0}
+\end{align*}
+证明: $\mathbf{P}$可配称当且仅当Kolmogrov准则成立.
+\end{problem}
+
 \subsection{状态的分类}
 \begin{problem}
     鼠鼠的迷宫冒险
@@ -577,7 +585,7 @@ $$P_i(X_{k+1}\notin A)=\sum_{j\in A}P_i(X_{k+1}\notin A, X_{k}=j)=\sum_{j\in A}P
     3. 假设$A$是闭集, $C$是互通类, 证明: $C\subset A$或者$C\bigcap A=\varnothing$.
 \end{problem}
 \begin{solution}
-若$\i_0\in C\bigcap A$, 由于$C$互通, 所以$\forall j\in C$, $\exists m_j\geq 0, p_{i_0,j}^{(m_j)}>0$. 由于$A$闭集, 所以$P_{i_0}(X_n\in A,\forall n\geq 0)=1$. 那么, 如果$j\notin A$, 就与$P_{i_0}(X_n\in A,\forall n\geq 0)=1$矛盾, 所以$j\in A$, 因此$C\subset A$.
+若$i_0\in C\bigcap A$, 由于$C$互通, 所以$\forall j\in C$, $\exists m_j\geq 0, p_{i_0,j}^{(m_j)}>0$. 由于$A$闭集, 所以$P_{i_0}(X_n\in A,\forall n\geq 0)=1$. 那么, 如果$j\notin A$, 就与$P_{i_0}(X_n\in A,\forall n\geq 0)=1$矛盾, 所以$j\in A$, 因此$C\subset A$.
 \end{solution}
 
 \begin{problem}
@@ -642,16 +650,46 @@ $$\xi = \sum_{t=0}^{\tau_i} \mathbf{1}_{\{X_t=j\}}, \quad X_0=i$$
 \begin{solution}
 随机过程是样本点和时间的二元函数，映射到状态空间，对于$X(\omega,t)$，它的取值落入状态空间$S$，固定$t$，$X(\omega,t_0)$是一个随机变量，表示在$t_0$时刻的一个分布； 固定样本点$\omega$，$X(\omega_0,t)$是状态空间$S$中的一个样本轨道.
 
-(1) 有限闭集$D=\{a_1,\cdots,a_n\}$，因此可以看成新的状态空间，反证法，设每一个状态都不是常返的，那么$P(w\;|X(w)=a_i, \;i.o.)=0$. 那么$\sum_{i=0}^n P(\omega| X(\omega)=a_i,\;i.o.)=0$，有限和仍然是$0$，但是$P(\omega| \exists a_i \in D, \; X(\omega)=a_i\; i.o.)=1$，这是因为对于任意一个样本，这个样本的样本轨道即使遍历了有限的$D$，那么必定至少在一个状态常返。由$P(\omega| \exists a_i \in D, \; X(\omega)=a_i\; i.o.)\leq \sum_{i=0}^n P(\omega| X(\omega)=a_i,\;i.o.)$导出矛盾.
+(1) 有限闭集$D=\{a_1,\cdots,a_n\}$，因此可以看成新的状态空间，反证法，设每一个状态都不是常返的
+
+那么根据常返的定义, 状态$a_i$常返$\iff P_{a_i}(\sigma_{a_i}<\infty)=1 \iff P_{a_i}(V_{a_i}=\infty)=1$.
+
+那么状态$a_i$不常返(暂态)$\iff P_{a_i}(\sigma_{a_i}<\infty)<1\iff P_{a_i}(V_{a_i}=\infty)=0$.
+
+\textcolor{red}{也即
+$$P(\{w|X(w)=a_i, i.o. ; X_0(w)=a_i \})=0$$
+}
+因此有限和$\sum_{i=1}^{n}P(\{w|X(w)=a_i, i.o. ; X_0(w)=a_i \})=0$, 又因为 
+\begin{align*}
+    &P(\{w|\exists a_i, X(w)=a_i, i.o. ; X_0(w)=a_i \})=P(\bigcup_{i=1}^{n}\{w|X(w)=a_i, i.o. ; X_0(w)=a_i \})\\\leq& \sum_{i=1}^nP(\{w|X(w)=a_i, i.o. ; X_0(w)=a_i \})=0
+\end{align*}
+因此$P(\{w|\exists a_i, X(w)=a_i, i.o. ; X_0(w)=a_i \})=0$, 但这是不可能的.
+
+因此在有限的状态空间上, 对于任意一个取定的样本$w_0$, 这个样本的样本轨道在无穷时间内对$S$做遍历, 那么至少在一个状态上出现无数次, 因此测度$P(\{w|\exists a_i, X(w)=a_i, i.o. ; X_0(w)=a_i \})$必然大于$0$, 导出矛盾, 结论成立.
 
 (2) 有限状态空间本身是有限闭集
 
 (3) $C$有限闭集，因此内部存在常返类，$C$互通，因此整个是常返类
 \end{solution}
-
 \begin{note}
 \textcolor{blue}{(1) 中的“看成新的状态空间”这句话是重要的，否则样本轨道从大的状态$S$进入$D$的概率有可能是$0$，那么$P(\omega| \exists a_i \in D, \; X(\omega)=a_i\; i.o.)=0$.\\(2) 在状态$i$常返$\iff P_i(V_i=\infty)=1\iff P_i(\sigma_i<\infty)=1$. 即从正态$i$出发，返回$i$的总次数是无穷，返回$i$的时间是有限. 而求概率，本质上是在求满足条件的样本点集合的测度，即$P_i(\omega|X(\omega) i.o.)=1$}
 \end{note}
+
+\begin{problem}
+    给了转移矩阵, 想要知道哪些状态是常返的, 哪些状态是非常返的.
+\end{problem}
+\begin{solution}
+根据转移矩阵画出状态转移图, 可以看出, $\{5,6,7\}$是一个闭的互通类, 因此$\{5,6,7\}$必然是常返的. 又因为$\{1,3,4\}$是一个互通类, 但$\{1,3,4\}\to \{5,6,7\}$有净概率流出, 因此不是闭的互通类, $\{2\}$本身构成一个互通类, $2\to 3$有净概率流出, 因此$\{2\}$不是闭的互通类.
+
+因此$\{5,6,7\}$是常返的, 但$\{1,3,4\}$和$2$都不是常返的.
+
+计算不变分布: $\pi=(0,0,0,0,1/3,1/3,1/3)$, 这佐证了我的判断.
+\end{solution}
+\begin{note}
+    直观上来说, 一个"有限"互通类如果有净概率流出, 那么最后在不变分布中对应的分量一定是$0$.
+\end{note}
+
+\begin{comment}
 \subsection{极限行为}
 \begin{problem}设$\mathbf{P}$不可约,则存在正整数$d$以及$S$的一个分割${D}_{0},{D}_{1},\cdots,{D}_{d - 1}$。（对任何 $n$ 补充定义 ${{D}_{{nd} + r} \mathrel{\text{:=}} {D}_{r}}$ ）,使得:
 
@@ -664,6 +702,7 @@ $$\xi = \sum_{t=0}^{\tau_i} \mathbf{1}_{\{X_t=j\}}, \quad X_0=i$$
 (1) 按照提示的方法定义$d$和$D_i$. 反证法，假设存在$r_0\geq0$，存在$i_0\in D_{r_0}$，存在$l_0\geq 0$，使得$\sum_{j\in D_{r_0+l_0}p_{i_0,j}^{(l_0)}}<1$. 那么就存在状态$w^*$不属于$D_{r_0+l_0}$，使得从状态$i_0$走$l_0$步之后到达$w^*$，即$p_{i_0,w^*}^{(l_0)}>0$. 因为所有的$D_i$对$S$做了分割，因此$w^*$必然在某一个$D_i,i\neq i_0+l_0$中. 不妨设$r_0=1$，$l_0=1,i=3$，即$i_0\in D_1, l_0=1, \sum_{j\in D_2}p_{i_0,j}^{(1)}<1, w^*\in D_3,p_{i_0,w^*}^{(1)}>0$. 根据$d$的定义，存在$n_0,m_0\in R_{kk},d=n_0-m_0$. 现在，状态$k\in D_0$，可以通过包含$w^*$的路径，走$d-1$步返回$D_0$，这与$d$的定义矛盾.\\
 (2) 
 \end{solution}
+\end{comment}
 
 \subsection{击中概率}
 \begin{problem}
