@@ -51,8 +51,8 @@
 \maketitle
 
 % 添加目录
-%\tableofcontents
-%\newpage
+\tableofcontents
+\newpage
 
 \section{线性方程组的直接解法}
 \begin{problem}
@@ -565,5 +565,67 @@ H(v)x=x-2\frac{v^Tx}{v^Tv}v=(1-2\frac{v^Tx}{v^Tv})x-2\frac{v^Tx}{v^Tv}\beta y
     \includegraphics[width=0.7\textwidth]{image/2.png}
 \end{figure}
 \end{solution}
+
+\section{线性方程组的古典迭代解法}
+
+\begin{problem}
+    1. 设方程组 $A x=b$ 的系数矩阵为
+
+    $$
+    A_1=\left[\begin{array}{rrr}
+    2 & -1 & 1 \\
+    1 & 1 & 1 \\
+    1 & 1 & -2
+    \end{array}\right], \quad A_2=\left[\begin{array}{rrr}
+    1 & 2 & -2 \\
+    1 & 1 & 1 \\
+    2 & 2 & 1
+    \end{array}\right]
+    $$
+    
+    
+    证明：对 $A_1$ 来说, Jacobi 迭代法不收敛，而 G-S 迭代法收玫；对 $A_2$ 来说, Jacobi 迭代法收玫, 而 G-S 迭代法不收敛。
+\end{problem}
+\begin{solution}
+
+\end{solution}
+
+\begin{problem}
+    2. 设 $B \in \mathbf{R}^{n \times n}$ 满足 $\rho(B)=0$. 证明: 对任意的 $g, x_0 \in \mathbf{R}^n$, 迭代格式
+
+    $$
+    x_{k+1}=B x_k+g, \quad k=0,1, \cdots
+    $$
+    
+    
+    最多迭代 $n$ 次就可得到方程组 $x=B x+g$ 的精确解.
+\end{problem}
+
+\begin{problem}
+    3. 考虑线性方程组
+
+    $$
+    A x=b,
+    $$
+    
+    
+    这里
+    
+    $$
+    A=\left[\begin{array}{lll}
+    1 & 0 & a \\
+    0 & 1 & 0 \\
+    a & 0 & 1
+    \end{array}\right]
+    $$
+    
+    (1) $a$ 为何值时, $A$ 是正定的?
+    (2) $a$ 为何值时, Jacobi 迭代法收玫?
+    (3) $a$ 为何值时, G-S 迭代法收玫?
+\end{problem}
+
+\begin{problem}
+    5. 若 $A$ 是严格对角占优的或不可约对角占优的, 则 G-S 迭代法收敛.
+\end{problem}
 
 \end{document}
