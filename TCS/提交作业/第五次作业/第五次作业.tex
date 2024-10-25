@@ -1,0 +1,134 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig, xurl}
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+% 标题设置
+\title{\textbf{TCS HW5}}
+\author{罗淦 2200013522}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+%\tableofcontents
+%\newpage
+
+\section{HW 5}
+\begin{problem}
+    $P_{64}$ 4.4.2 给出接受下列语言的TM
+    \end{problem}
+    
+    \begin{problem}
+    $P_{67}$ 4.5.1 设 NTM $\mathcal{M}=\left(Q, A, C, \delta, B, q_0,\left\{q_2\right\}\right)$, 其中 $Q=\left\{q_0, q_1, q_2\right\}, A=\{0,1\}, C=\{0,1, B\}, \delta\left(q_0, B\right)=$ $\left\{\left(R, q_0\right)\right\}, \delta\left(q_0, 0\right)=\left\{\left(R, q_0\right),\left(R, q_1\right),\left(R, q_2\right)\right\}, \delta\left(q_1, 1\right)=\left\{\left(R, q_0\right)\right\}, \delta\left(q_2, 0\right)=\left\{\left(L, q_0\right)\right\}, \delta\left(q_2, 1\right)=$ $\left\{\left(L, q_0\right)\right\}$.
+    
+    \textcolor{red}{(0) 老师布置作业的时候添加的一个小问: 画出状态转移图}
+    
+    (1) 画出关于输人 0010 的计算树;
+    
+    (2) 给出关于输入 0010 的一个停机在接受格局的计算，一个停机在非接受格局的计算和 一个永不停机的计算;
+    
+    (3) 给出 $L(\mathscr{M})$.
+    \end{problem}
+
+    \begin{problem}
+        $P_{68}$ 4.4 设计接受下述语言的基本TM, 可以直接简述思想
+        
+        (1) $\{0^n1^n|n\in N\}$
+        
+        (2) $\{w|w\in \{0,1\}^* \text{且w中0和1的个数相同}\}$
+        \end{problem}
+        \begin{solution}
+        \textcolor{red}{详细画图见手写部分}
+        
+        (1) $q_0$遇到$B$右走到$q_1$, 如果遇到$0$, 右走到$q_2$; 在$q_2$, 遇到$1$, 右走回到$q_1$. 在$q_1$遇到空白$B$, 停机接受. 如果在$q_1$遇到$1$或者在$q_2$遇到$0,B$, 停机不接受. 
+        
+        (2) $q_0$遇到$B$右走到$q_1$\\
+        如果$q_1$读到$0$, 标记为$x$; 然后右走(可能读到$z,x,0$)直到遇见$1$, 标记为$z$, 然后向左走(可能读到$z,0$)直到之前标记的$x$, 把$x$改为$z$, 向右走一格, 回到状态$q_1$\\
+        如果$q_1$读到$1$, 标记为$y$; 然后右走(可能读到$z,y,1$)直到遇见$0$, 标记为$z$, 然后向左走(可能读到$z,1$)直到之前标记的$y$, 把$y$改为$z$, 向右走一格, 回到状态$q_1$\\
+        如果$q_1$读到$z$, 说明之前已经删除过这一字符, 向右走一格, 回到状态$q_1$\\
+        如果$q_1$读到$B$, 停机接受\\
+        其他状态读到$B$均停机不接受
+        \end{solution}
+        
+        \begin{problem}
+        $P_{68}$ 4.7 不指定接受状态的TM和基本TM的区别是没有接受状态集, 并且把所有的停机格局都看成接受格局. 证明:
+        
+        (1) 函数$f$是Turing部分可计算的, 当且仅当存在不指定接受状态的TM计算$f$
+        
+        (2) 语言$L$是r.e.当且仅当存在不指定接受状态的TM接受$L$
+        \end{problem}
+        \begin{solution}
+        (1) 我们已知: \textcolor{blue}{一个函数是Turing部分可计算的, 当且仅当存在TM计算$f$}\\
+        而不指定接收状态的TM是TM的一个特殊情况, 因此若存在TM计算$f$(这个TM可以是不指定接收状态的TM), 有函数$f$是Turing部分可计算的\\
+        现在来证明另一边: 函数$f$是Turing部分可计算的$\Rightarrow$存在不指定接受状态的TM计算$f$:\\
+        根据已知结论, 因为函数$f$是Turing部分可计算的, 所以存在一个基本TM, 记为$M$, 计算$f$. 那么可以构造不指定接受状态的TM, 记为$M_1$.\\
+        对于$M$的停机在非接受状态的$q$, $M_1$在此处进入死循环(虽然对所有停机状态都是接受的, 那么只需要这个状态永远不停机就等价于不接受了), 那么这样的$M_1$就可以计算$f$. 得证.
+        
+        (2) 我们已知: \textcolor{blue}{语言$L$是r.e., 当且仅当存在TM接受$L$}\\
+        而不指定接收状态的TM是TM的一个特殊情况, 因此若存在TM接受$L$(这个TM可以是不指定接收状态的TM), 有语言$L$是r.e.\\
+        现在来证明另一边: 语言$L$是r.e.的$\Rightarrow$存在不指定接受状态的TM接受$L$:\\
+        根据已知结论, 因为语言$L$是r.e.的, 所以存在一个基本TM, 记为$M$, 接受$L$. 那么可以构造不指定接受状态的TM, 记为$M_1$.\\
+        对于$M$的停机在非接受状态的$q$, $M_1$在此处进入死循环(虽然对所有停机状态都是接受的, 那么只需要这个状态永远不停机就等价于不接受了), 那么这样的$M_1$就可以接受$L$. 得证.
+        \end{solution}
+        
+        \begin{problem}
+        4.8 证明: $A$上的语言$L$是r.e.当且仅当存在DTM: $M$接受$L$, 且$M$有唯一的接受状态$q_{Y}$.
+        \end{problem}
+        \begin{solution}
+        我们已知: \textcolor{blue}{语言$L$是r.e., 当且仅当存在TM接受$L$}\\
+        而仅有一个接收状态的TM是TM的一个特殊情况, 因此若存在TM接受$L$(这个TM可以是仅有一个接收状态的TM), 有语言$L$是r.e.\\
+        现在来证明另一边: 语言$L$是r.e.的$\Rightarrow$存在仅有一个接收状态的TM接受$L$:\\
+        根据已知结论, 因为语言$L$是r.e.的, 所以存在一个基本TM, 记为$M$, 接受$L$. 那么可以构造仅有一个接收状态的TM, 记为$M_1$.\\
+        对于$M$的停机在接受状态的$q$, 不妨设这些接受格局不止一个, 那么任意选定其中一个为$q_Y$. 那么对于其他的不是$q_Y$的接受格局$q$, 在$M_1$中, 这些格局不再是接受格局, 而是"不做操作"且跳转到$q_Y$, 那么这样的$M_1$是仅有一个接收状态的TM, 且$M_1$接受$L$, 得证.
+        \end{solution}
+        
+        \begin{problem}
+        4.9 证明: $A$上的语言$L$是递归的, 当且仅当存在总停机的DTM: $M$接受$L$, 且$M$有唯一的接收状态$q_Y$和唯一的非接受的停机状态$q_N$, 使得当$x\in A$时, $M$最终停机在$q_Y$; 当$x\notin A$时, $M$最终停机在$q_N$.
+        \end{problem}
+        \begin{solution}
+        我们已知: \textcolor{blue}{语言$L$是递归的, 当且仅当存在总停机的TM接受$L$}\\
+        而有唯一的接收状态$q_Y$和唯一的非接受的停机状态$q_N$的总停机的TM是总停机的TM的一个特殊情况, 因此若存在总停机的TM接受$L$(这个TM可以是有唯一的接收状态$q_Y$和唯一的非接受的停机状态$q_N$的总停机的TM), 有语言$L$是递归\\
+        现在来证明另一边: 语言$L$是递归的$\Rightarrow$存在有唯一的接收状态$q_Y$和唯一的非接受的停机状态$q_N$的总停机的TM接受$L$:\\
+        根据已知结论, 因为语言$L$是递归的, 所以存在一个总停机的TM, 记为$M$, 接受$L$. 那么可以构造有唯一的接收状态$q_Y$和唯一的非接受的停机状态$q_N$的总停机的TM, 记为$M_1$.\\
+        对于$M$的所有停机格局, 对于所有的接受格局, 让它们不作操作, 然后跳转到新的一个接受格局为$q_Y$; 对于所有的非接受格局(当然是停机), 让它们不作操作, 然后跳转到新的一个接受格局为$q_N$\\
+        这样的$M_1$是一个有唯一的接收状态$q_Y$和唯一的非接受的停机状态$q_N$的总停机的TM, 且$M_1$接受$L$.
+        \end{solution}        
+\end{document}
