@@ -1,0 +1,198 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig, xurl, algorithm, algpseudocode}
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\ip}[1]{\left\langle#1\right\rangle}
+
+% 标题设置
+\title{\textbf{计算方法B  HW 4}}
+\author{罗淦  2200013522}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+%\tableofcontents
+%\newpage
+
+\section{HW 4}
+\begin{problem}
+    1. 设方程组 $A x=b$ 的系数矩阵为
+
+    $$
+    A_1=\left[\begin{array}{rrr}
+    2 & -1 & 1 \\
+    1 & 1 & 1 \\
+    1 & 1 & -2
+    \end{array}\right], \quad A_2=\left[\begin{array}{rrr}
+    1 & 2 & -2 \\
+    1 & 1 & 1 \\
+    2 & 2 & 1
+    \end{array}\right]
+    $$
+    
+    
+    证明：对 $A_1$ 来说, Jacobi 迭代法不收敛，而 G-S 迭代法收敛；对 $A_2$ 来说, Jacobi 迭代法收敛, 而 G-S 迭代法不收敛。
+\end{problem}
+\begin{solution}
+Jacobi迭代:
+$$x_{k+1}=D^{-1}(L+U)x_k+D^{-1}b$$
+G-S迭代:
+$$x_{k+1}=(D-L)^{-1}Ux_k+D^{-1}b$$
+对于$A_1$, \textcolor{red}{第一个容易出错的地方$A=D-L-U$, $L$和$U$是原来的$A$的不含对角的下三角部分和上三角部分的\textbf{负数值}}
+\begin{align*}
+    D^{-1}(L+U)&=\begin{pmatrix}
+        0&1/2&-1/2\\
+        -1&0&-1\\
+        1/2&1/2&0\\
+    \end{pmatrix}\Rightarrow |\lambda I-D^{-1}(L+U)|=\lambda(\lambda^2+5/4)\Rightarrow \rho(D^{-1}(L+U))=\sqrt{5/4}>1\\
+   (D-L)^{-1}U&=\begin{pmatrix}
+        0&1/2&-1/2\\
+        0&-1/2&-1/2\\
+        0&0&-1/2\\
+    \end{pmatrix}\Rightarrow |\lambda I-(D-L)^{-1}U|=\lambda(\lambda+1/2)^2\Rightarrow \rho(D^{-1}(L+U))=\sqrt{1/2}<1
+\end{align*}
+所以对 $A_1$ 来说, Jacobi 迭代法不收敛，而 G-S 迭代法收敛\\
+而对于$A_2$:
+\begin{align*}
+    D^{-1}(L+U)&=\begin{pmatrix}
+        0&-2&2\\
+        -1&0&-1\\
+        -2&-2&0\\
+    \end{pmatrix}\Rightarrow |\lambda I-D^{-1}(L+U)|=\lambda^3 \Rightarrow \rho(D^{-1}(L+U))=0<1\\
+   (D-L)^{-1}U&=\begin{pmatrix}
+        0&-2&2\\
+        0&2&-3\\
+        0&0&2\\
+    \end{pmatrix}\Rightarrow |\lambda I-(D-L)^{-1}U|=\lambda(\lambda-2)^2\Rightarrow \rho(D^{-1}(L+U))=2>1
+\end{align*}
+所以对 $A_2$ 来说, Jacobi 迭代法收敛, 而 G-S 迭代法不收敛
+\end{solution}
+
+\begin{problem}
+    2. 设 $B \in \mathbf{R}^{n \times n}$ 满足 $\rho(B)=0$. 证明: 对任意的 $g, x_0 \in \mathbf{R}^n$, 迭代格式
+
+    $$
+    x_{k+1}=B x_k+g, \quad k=0,1, \cdots
+    $$
+    
+    
+    最多迭代 $n$ 次就可得到方程组 $x=B x+g$ 的精确解.
+\end{problem}
+\begin{solution}
+因为$\rho(B)=0$, 所以$B$的特征多项式是$f_B(\lambda)=\lambda^n$, 根据\textcolor{red}{Cayley-Hamilton定理, 矩阵$B$的特征多项式零化$B$, 或者说, 矩阵的极小多项式整除特征多项式, 因此存在$m\leq n, B^m=0$}.\\
+所以有:
+\begin{align*}
+    x_{m}-x^*=B^m(x_0-x^*)=0, m\leq n
+\end{align*}
+因此最多$n$次就可以得到精确解.
+\end{solution}
+
+\begin{problem}
+    3. 考虑线性方程组
+
+    $$
+    A x=b,
+    $$
+    
+    
+    这里
+    
+    $$
+    A=\left[\begin{array}{lll}
+    1 & 0 & a \\
+    0 & 1 & 0 \\
+    a & 0 & 1
+    \end{array}\right]
+    $$
+    
+    (1) $a$ 为何值时, $A$ 是正定的?
+    (2) $a$ 为何值时, Jacobi 迭代法收敛?
+    (3) $a$ 为何值时, G-S 迭代法收敛?
+\end{problem}
+\begin{solution}
+(1) \textcolor{blue}{判断一个矩阵$A$是不是正定矩阵的方法: \\
+1. 矩阵$A$的特征值全部都是正数\\
+2. 矩阵$A$的各阶顺序主子式都是正数}\\
+考虑矩阵$A$的各阶顺序主子式, 分别是$1,1,1-a^2$, 因此$a^2<1$的时候, $A$是正定矩阵.
+
+(2) Jacobi迭代法, 分析矩阵$D^{-1}(L+U)$的谱半径:
+\begin{align*}
+    D^{-1}(L+U)=\begin{pmatrix}
+        0&0&-a\\
+        0&0&0\\
+        -a&0&0\\
+    \end{pmatrix}\Rightarrow |\lambda I-D^{-1}(L+U)|=\lambda(\lambda+a)(\lambda-a)
+\end{align*}
+因此$|a|<1$时Jacobi迭代收敛
+
+(3) G-S迭代法, 分析矩阵$(D-L)^{-1}U$的谱半径:
+\begin{align*}
+    (D-L)^{-1}U=\begin{pmatrix}
+        0&0&-a\\
+        0&0&0\\
+        0&0&a^2\\
+    \end{pmatrix}\Rightarrow |\lambda I-(D-L)^{-1}U|=\lambda^2(\lambda-a^2)
+\end{align*}
+因此$|a|<1$时G-S迭代收敛
+\end{solution}
+
+\begin{problem}
+    5. 若 $A$ 是严格对角占优的或不可约对角占优的, 则 G-S 迭代法收敛.
+\end{problem}
+\begin{solution}
+\textcolor{red}{模仿书上的证明方法, 也就是, 假设有一个绝对值大于等于$1$的特征值, 考虑迭代矩阵的特征多项式, 可以证明这个特征多项式(行列式)不等于$0$, 从而与特征值的定义矛盾}.
+
+考虑G-S迭代的迭代矩阵$(D-L)^{-1}U$存在特征值, 使得$|\lambda|\geq 1$, 那么考虑特征多项式$|\lambda I -(D-L)^{-1}U |$, 又因为:
+\begin{align*}
+    \lambda I-(D-L)^{-1}U=(D-L)^{-1}(\lambda D-\lambda L -U)
+\end{align*}
+且 
+$$\lambda D-\lambda L -U=\lambda(D-L-U)+\underbrace{(\lambda-1)}_{|\lambda|\geq 1}U=\lambda A+(\lambda-1)U$$
+因此$\lambda D-\lambda L -U$也是严格对角占优的或者不可约对角占优的, 因此$\lambda D-\lambda L -U$非奇异, 行列式不等于$0$. 从而得到 
+\begin{align*}
+    |\lambda I-(D-L)^{-1}U|
+    =|(D-L)^{-1}|\cdot|\lambda D-\lambda L -U|\neq 0
+\end{align*}
+这与$\lambda$是$I-(D-L)^{-1}U$的特征值矛盾, 因此$I-(D-L)^{-1}U$的所有特征值的模长小于$1$, 因此G-S迭代收敛.
+\end{solution}
+\end{document}
