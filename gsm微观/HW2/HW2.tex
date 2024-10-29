@@ -1,0 +1,119 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig, xurl,booktabs}
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+% 标题设置
+\title{\textbf{gsm 微观 HW2}}
+\author{罗淦  2200013522}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+%\tableofcontents
+%\newpage
+\section{HW 1}
+
+\subsection{Rosa喝咖啡}
+
+\begin{solution}
+(1) Rosa的"至少一样好"的关系是不可传递的. A和B相差0.75茶勺, 因此无法分辨, A和B至少一样好: $A\succeq B$. B和C相差0.75茶勺, 因此无法分辨, B和C至少一样好:  $A\succeq C$. 但是A和C差了1.5茶勺, 因此可以分辨, C比A好, 因此$A\succeq C$不成立, 所以传递性不成立.\\
+注: 在无法分辨的情况下,既可以说$A\succeq B$, 也可以说$B\succeq A$.
+
+(2) Rosa的"无法区分"的关系是不可传递的. 已知$A\sim B$, $B\sim C$, 但是$A\sim C$. 因此不具有传递性.
+
+(3) Rosa的"更好"的关系是可传递的. 考虑其他的情况, 如果$A\succ B, B\succ C$, 那么A至少比B多一茶勺, B至少比C多一茶勺. 那么A至少比C多两茶勺, 有$A\succ C$.
+\end{solution}
+
+\subsection{小明同学的效用函数}
+\begin{solution}
+(1) 无差异曲线$(x_A+1)(x_B+1)=u$, 此处的$u$是定值 
+(2)和(3)
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{image/2.png}
+\end{figure}   
+\end{solution}
+
+\subsection{宁的效用函数}
+\begin{solution}
+For simplicity, $x_A=x, x_B=y$
+
+(a) 预算约束: $x+2y\leq 40$.
+
+(b) 最优组合$(20,10)$
+
+求解$\max_{x+2y\leq 40}xy, L=xy+\lambda(x+2y-40), \begin{cases}
+    L_{x}&=y+\lambda=0\\
+    L_{y}&=x+2\lambda=0\\
+    L_{x}&=x+2y-40=0\\
+\end{cases}\Rightarrow x^*=20,y^*=10$
+
+(c) 最大效用$u_{\max}=x^*y^*=200$
+
+(d) 此时, 新的预算约束$x+3y\leq 40$.
+
+求解$\max_{x+3y\leq 40}xy, L=xy+\lambda(x+3y-40), \begin{cases}
+    L_{x}&=y+\lambda=0\\
+    L_{y}&=x+3\lambda=0\\
+    L_{x}&=x+3y-40=0\\
+\end{cases}\Rightarrow x^*=20,y^*=\frac{20}{3}$
+
+此时的效用是$u=\frac{400}{3}$.
+
+要计算替代效用和收入效应, 那么在新的价格下, 如果保持购买力不变, 此时的补偿预算约束是: $x+3y\leq 50$\\
+求解$\max_{x+3y\leq 50}xy, L=xy+\lambda(x+3y-50), \begin{cases}
+  L_{x}&=y+\lambda=0\\
+  L_{y}&=x+3\lambda=0\\
+  L_{x}&=x+3y-50=0\\
+\end{cases}\Rightarrow x^*=25,y^*=\frac{25}{3}$\\
+因此:\\
+替代效应: $x_{\text{补偿}}^*-x_{\text{最初}}^*=5$, $y_{\text{补偿}}^*-y_{\text{最初}}^*=-\frac{5}{3}$\\
+收入效应: $x_{\text{最终}}^*-x_{\text{补偿}}^*=-5$, $y_{\text{最终}}^*-y_{\text{补偿}}^*=-\frac{5}{3}$
+
+\subsection{}
+
+\end{solution}
+
+
+
+
+\end{document}
