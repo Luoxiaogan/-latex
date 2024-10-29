@@ -774,5 +774,86 @@ $$\nabla f(1,2,-1)=(12,14,-12)$$
 $$\{v^T\nabla f=12\cos \theta_1+14\cos \theta_2-12\cos \theta_3|\cos^2 \theta_1+\cos^2\theta_2+\cos^2 \theta_3=1\}$$
 \end{solution}
 
+\begin{problem}
+22. 求下列复合函数的偏导数, 其中 $f$ 是可微函数:
+
+(1) $z=f\left(x \mathrm{e}^y, x \mathrm{e}^{-y}\right)$;
+
+(2) $u=f\left(\sum_{i=1}^n x_i^2, \prod_{i=1}^n x_i^2, x_3, \cdots, x_n\right)$.
+\end{problem}
+
+\begin{solution}
+(1)
+\begin{align*}
+    \frac{\partial z}{\partial x}&=f_1(xe^y,xe^{-y})e^y+f_2(xe^y,xe^{-y})e^{-y}\\
+    \frac{\partial z}{\partial y}&=f_1(xe^y,xe^{-y})xe^y-f_2(xe^y,xe^{-y})xe^{-y}
+\end{align*}
+(2)
+\begin{align*}
+    \frac{\partial u}{\partial x_i}&=f_1(\sum_{i=1}^n x_i^2, \prod_{i=1}^n x_i^2, x_3, \cdots, x_n)2x_i+f_2(\sum_{i=1}^n x_i^2, \prod_{i=1}^n x_i^2, x_3, \cdots, x_n)2x_i\Pi_{j\neq i}x_j^2\\&+\sum_{j=3}^{n}\delta_{ij}f_j(\sum_{i=1}^n x_i^2, \prod_{i=1}^n x_i^2, x_3, \cdots, x_n)
+\end{align*}
+\end{solution}
+
+\begin{problem}
+    25. 若 $f(\boldsymbol{x})$ 是定义在区域 $D \subset \mathbb{R}^n(n \geqslant 2)$ 内的函数并且存在正整数 $K$, 使得 $f(t \boldsymbol{x})=t^K f(\boldsymbol{x})$ 对于 $\forall t>0, \forall \boldsymbol{x} \in D$ 成立, 则称 $f(\boldsymbol{x})$ 是 $K$次齐次函数. 设 $K$ 次齐次函数 $f(\boldsymbol{x})$ 在 $D$ 内具有各个 $k(1 \leqslant k \leqslant K)$阶连续偏导数, 证明:
+
+    $$
+    \left(\sum_{i=1}^n x_i \frac{\partial}{\partial x_i}\right)^k f(\boldsymbol{x})=K(K-1) \cdots(K-k+1) f(\boldsymbol{x})
+    $$
+\end{problem}
+
+\begin{problem}
+    28. 设函数 $x=r \cos \alpha-t \sin \alpha, y=r \sin \alpha+t \cos \alpha$, 其中 $\alpha \in \mathbb{R}$为常数. 证明：对任何可微函数 $f(x, y)$ ，成立
+
+    $$
+    \left(\frac{\partial f}{\partial x}\right)^2+\left(\frac{\partial f}{\partial y}\right)^2=\left(\frac{\partial f}{\partial r}\right)^2+\left(\frac{\partial f}{\partial t}\right)^2
+    $$    
+\end{problem}
+\begin{solution}
+    \begin{align*}
+        \frac{\partial f}{\partial r}&=f_x\cos \alpha+f_y\sin \alpha\\
+        \frac{\partial f}{\partial t}&=-f_x\sin \alpha+f_y\cos \alpha\\
+        \Rightarrow& (\frac{\partial f}{\partial r})^2+(\frac{\partial f}{\partial t})^2=f_x^2+f_y^2
+    \end{align*}
+\end{solution}
+
+\begin{problem}
+    31. 求下列函数的二阶偏导数, 其中函数 $f$ 具有二阶连续导数:
+
+    (1) $z=f\left(x^2+y^2, x y\right)$;
+
+    (2) $z=f\left(x_1+x_2+\cdots+x_n\right)$.
+\end{problem}
+\begin{solution}
+(1)
+\begin{align*}
+\frac{\partial z}{\partial x}&=2xf_1+yf_2\\
+\frac{\partial z}{\partial y}&=2yf_1+xf_2\\
+\frac{\partial^2 z}{\partial x^2}&=2yf_1+xf_2\\
+\end{align*}
+\end{solution}
+
+\begin{problem}
+34. 设 $f(x)$ 是一个二次可微函数, 证明
+    $F(x, t)=\frac{1}{2}[f(x-c t)+f(x+c t)] \quad$ (其中 $c$ 为常数)
+    满足偏微分方程 $\frac{\partial^2 F}{\partial t^2}=c^2 \frac{\partial^2 F}{\partial x^2}$.
+\end{problem}
+\begin{solution}
+    \begin{align*}
+        \frac{\partial F}{\partial x}&=\frac{1}{2}[f^{\prime}(x-ct)+f^{\prime}(x+ct)]\\ 
+        \frac{\partial F}{\partial t}&=\frac{c}{2}[-f^{\prime}(x-ct)+f^{\prime}(x+ct)]\\ 
+        \frac{\partial^2 F}{\partial x^2}&=\frac{1}{2}[f^{\prime\prime}(x-ct)+f^{\prime\prime}(x+ct)]\\ 
+        \frac{\partial^2 F}{\partial t^2}&=\frac{c^2}{2}[f^{\prime\prime}(x-ct)+f^{\prime\prime}(x+ct)]\\ 
+        \Rightarrow& \frac{\partial^2 F}{\partial t^2}=c^2\frac{\partial^2 F}{\partial x^2}
+    \end{align*}
+\end{solution}
+
+\begin{problem}
+    37. 设 $x=2 r-s, y=r+2 s$, 求 $\frac{\partial^2 f(x, y)}{\partial r \partial s}$, 其中函数 $f(x, y)$ 具有二阶连续偏导数.
+\end{problem}
+\begin{solution}
+    
+\end{solution}
+
 \end{document}
 
