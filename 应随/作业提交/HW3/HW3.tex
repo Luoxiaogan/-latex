@@ -1,0 +1,345 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig, xurl}
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+% 标题设置
+\title{\textbf{应随 HW3}}
+\author{罗淦 2200013522}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+%\tableofcontents
+%\newpage
+
+\section{HW 3}
+\subsection{第六周作业}
+5\begin{problem}
+        11. Kolmogrov准则: 对任意的$n\geq 1$, 若$i_0,\cdots,i_n$满足$p_{i_r,i_{r+1}}>0$, $r=0,\cdots,n$, 其中$i_{n+1}:=i_0$, 且有
+        \begin{align*}
+            p_{i_0,i_1}p_{i_1,i_2}\cdots p_{i_n,i_{n+1}}=p_{i_{n+1},i_n}\cdots p_{i_2,i_1}p_{i_1,i_0}
+        \end{align*}
+        证明: $\mathbf{P}$可配称当且仅当Kolmogrov准则成立.
+        \end{problem}
+        \begin{solution}
+        为了证明的方便, 不妨假设$\mathbb{P}$是不可约的(因为这样可以证明, 如果$\mathbb{P}$可配称, 配称测度的分量都是正数)
+        
+        ($\Rightarrow$) 已知$\mathbb{P}$可配称, 那么满足细致平稳条件
+        因此有:
+        \begin{align*}
+            &\pi_{i_0}p_{i_0,i_1}p_{i_1,i_2}\cdots p_{i_n,i_{n+1}}\\
+            =&p_{i_1,i_0}\pi_{i_1}p_{i_1,i_2}\cdots p_{i_n,i_{n+1}}\\
+            =&p_{i_1,i_0}p_{i_2,i_0}\cdots p_{i_{n+1},i_{n}}\underbrace{\pi_{i_{n+1}}}_{\pi_{i_{n+1}}=\pi_{i_0}}\\
+            \Rightarrow&p_{i_0,i_1}p_{i_1,i_2}\cdots p_{i_n,i_{n+1}}=p_{i_{n+1},i_n}\cdots p_{i_2,i_1}p_{i_1,i_0}
+        \end{align*}
+        ($\Leftarrow$) Kolmogrov准则成立, 想要构造一组满足细致平稳条件的配称测度$\pi$.
+        
+        构造: 选定$i_0$, 令$\mu_{i_0}=1$, 对任意的$i\in S$, 定义
+        $$\mu_{i}=\Pi_{k=0}^{m}\frac{p_{i_k,i_{k+1}}}{p_{i_{k+1},i_{k}}}, i_{m+1}=i$$
+        根据环条件, 如果有两条从$i_0$到$i$的通路, 那么从$i_0$从第一条通路到$i$, 从第二条通路逆向回到$i_0$构成一个环, 在这个环上的环条件保证了上述定义不依赖于选取的通路.
+        
+        验证这样定义的测度是配称测度:
+        \begin{align*}
+            \mu_{i}p_{ij}=\frac{p_{i_0,i_1}\cdots p_{i_{m},i}}{p_{i_1,i_0}\cdots p_{i,i_{m}}}p_{ij}=\frac{p_{i_0,i_1}\cdots p_{i_{m},i}p_{ij}}{p_{i_1,i_0}\cdots p_{i,i_{m}}p_{j,i}}p_{j,i}=\mu_j p_{ji}
+        \end{align*}
+        \end{solution}
+        
+        \begin{problem}
+            13. 假设$\pi$是$\mathbb{P}$的不变分布, $\{X_n\}$和$\{Y_n\}$都是$S$上的马氏链, 满足:
+        
+            (i) 转移矩阵分别为$\mathbb{P},\mathbb{\tilde{P}}$
+        
+            (ii) $Y_0=X_0\sim \pi$
+        
+            (iii) 在已知$\{X_0=Y_0=\pi\}$的条件下, $\{X_n|n\geq 1\}$和$\{Y_n|n\geq 1\}$相互独立
+        
+            令
+            $$Z_n=\begin{cases}
+                X_n,&n\geq 0\\
+                Y_{-n},&n<0
+            \end{cases}$$
+            证明: 给定$N\in\mathbb{Z}$, 令$W_n=Z_{N+n}$, 则$\{W_n\}$是以$\pi$为初分布, 以$\mathbb{P}$为转移矩阵的马氏链.
+        \end{problem}
+        \begin{solution}
+        若$N\geq 0$, 那么$W_n=Z_{N+n}=X_{N+n}$, 又因为$X_0=\pi$是$\mathbb{{P}}$的不变分布, 因此$X_n=\pi, \forall n\geq 0$, 所以当然有$\{W_n\}$是以$\pi$为初分布, 以$\mathbb{P}$为转移矩阵的马氏链
+        
+        因为$Y_0=\pi$, 检验得到: $\pi \tilde{\mathbb{P}}=\pi$, 因此也是$\tilde{\mathbb{P}}$的不变分布, 所以$Y_n=\pi, n\geq 0$.
+        
+        若$N<0$, 不妨假设$N=-2$, 那么$W_0=Y_2, W_1=Y_1, W_2=Y_0=X_0, W_3=X_1, \cdots, W_{k+2}=X_{k},\cdots$. 首先检查转移概率: 
+        \begin{align*}
+            P(Y_1=j|Y_2=i)&=\frac{P(Y_1=j)\tilde{p}_{ji}}{P(Y_2=i)}=\frac{\pi_j \cdot \frac{\pi_i p_{ij}}{\pi_j}}{\pi_i}=p_{ij}\\
+            P(Y_0=j|Y_1=i)&=p_{ij}, \text{同上}\\
+            P(X_1=j|Y_0=i)&=P(X_1=j|X_0=i)=p_{ij}
+        \end{align*}
+        因此每一步的转移矩阵确实是$\mathbb{{P}}$. 且初分布$Y_{-N}=\pi$. 下面来说明是马氏链.
+        
+        因为(不妨取$k\geq 0$, 否则局限在$Y$中当然是马氏链)
+        \begin{align*}
+            &P(W_{k+2}=j|W_{k+1}=i_{k+1},\cdots,W_{0}=i_0)\\
+            =&P(X_{k}=j|X_{k-1}=i_{k+1},\cdots,X_0=i_2,Y_1=i_1,Y_{2}=i_0)\\
+            =&\frac{P(X_{k}=j,X_{k-1}=i_{k+1},\cdots,X_0=i_2,Y_1=i_1,Y_{2}=i_0)}{P(X_{k-1}=i_{k+1},\cdots,X_0=i_2,Y_1=i_1,Y_{2}=i_0)}\\
+            =&\frac{P(X_{k}=j,X_{k-1}=i_{k+1},\cdots,X_0=i_2)P(Y_1=i_1,Y_{2}=i_0)}{P(X_{k-1}=i_{k+1},\cdots,X_0=i_2)P(Y_1=i_1,Y_{2}=i_0)}\\
+            =&\frac{P(X_{k}=j,X_{k-1}=i_{k+1},\cdots,X_0=i_2)}{P(X_{k-1}=i_{k+1},\cdots,X_0=i_2)}=p_{i{k+1},j}
+        \end{align*}
+        因此是马氏链
+        \end{solution}
+
+\begin{problem}
+    1. 证明:
+    
+    (1) 若 $D$ 是有限闭集,则存在常返类 $C$ ,使得 $C \subseteq D$
+    
+    (2) 有限状态空间上的马氏链有常返态.
+    
+    (3) 若 $C$ 是有限的闭的互通类,则 $C$ 是常返类.   
+    \end{problem}
+    \begin{solution}
+    随机过程是样本点和时间的二元函数，映射到状态空间，对于$X(\omega,t)$，它的取值落入状态空间$S$，固定$t$，$X(\omega,t_0)$是一个随机变量，表示在$t_0$时刻的一个分布； 固定样本点$\omega$，$X(\omega_0,t)$是状态空间$S$中的一个样本轨道.
+    
+    (1) 有限闭集$D=\{a_1,\cdots,a_n\}$，因此可以看成新的状态空间，反证法，设每一个状态都不是常返的
+    
+    那么根据常返的定义, 状态$a_i$常返$\iff P_{a_i}(\sigma_{a_i}<\infty)=1 \iff P_{a_i}(V_{a_i}=\infty)=1$.
+    
+    那么状态$a_i$不常返(暂态)$\iff P_{a_i}(\sigma_{a_i}<\infty)<1\iff P_{a_i}(V_{a_i}=\infty)=0$.
+    
+    \textcolor{red}{也即
+    $$P(\{w|X(w)=a_i, i.o. ; X_0(w)=a_i \})=0$$
+    }
+    因此有限和$\sum_{i=1}^{n}P(\{w|X(w)=a_i, i.o. ; X_0(w)=a_i \})=0$, 又因为 
+    \begin{align*}
+        &P(\{w|\exists a_i, X(w)=a_i, i.o. ; X_0(w)=a_i \})=P(\bigcup_{i=1}^{n}\{w|X(w)=a_i, i.o. ; X_0(w)=a_i \})\\\leq& \sum_{i=1}^nP(\{w|X(w)=a_i, i.o. ; X_0(w)=a_i \})=0
+    \end{align*}
+    因此$P(\{w|\exists a_i, X(w)=a_i, i.o. ; X_0(w)=a_i \})=0$, 但这是不可能的.
+    
+    因此在有限的状态空间上, 对于任意一个取定的样本$w_0$, 这个样本的样本轨道在无穷时间内对$S$做遍历, 那么至少在一个状态上出现无数次, 因此测度$P(\{w|\exists a_i, X(w)=a_i, i.o. ; X_0(w)=a_i \})$必然大于$0$, 导出矛盾, 结论成立.
+    
+    (2) 有限状态空间本身是有限闭集
+    
+    (3) $C$有限闭集，因此内部存在常返类，$C$互通，因此整个是常返类
+    \end{solution}
+    \begin{note}
+    \textcolor{blue}{(1) 中的“看成新的状态空间”这句话是重要的，否则样本轨道从大的状态$S$进入$D$的概率有可能是$0$，那么$P(\omega| \exists a_i \in D, \; X(\omega)=a_i\; i.o.)=0$.\\(2) 在状态$i$常返$\iff P_i(V_i=\infty)=1\iff P_i(\sigma_i<\infty)=1$. 即从正态$i$出发，返回$i$的总次数是无穷，返回$i$的时间是有限. 而求概率，本质上是在求满足条件的样本点集合的测度，即$P_i(\omega|X(\omega) i.o.)=1$}
+    \end{note}
+    
+    \begin{problem}
+        2. 给了转移矩阵, 想要知道哪些状态是常返的, 哪些状态是非常返的.
+    \end{problem}
+    \begin{solution}
+    根据转移矩阵画出状态转移图, 可以看出, $\{5,6,7\}$是一个闭的互通类, 因此$\{5,6,7\}$必然是常返的. 又因为$\{1,3,4\}$是一个互通类, 但$\{1,3,4\}\to \{5,6,7\}$有净概率流出, 因此不是闭的互通类, $\{2\}$本身构成一个互通类, $2\to 3$有净概率流出, 因此$\{2\}$不是闭的互通类.
+    
+    因此$\{5,6,7\}$是常返的, 但$\{1,3,4\}$和$2$都不是常返的.
+    
+    计算不变分布: $\pi=(0,0,0,0,1/3,1/3,1/3)$, 这佐证了我的判断.
+    \end{solution}
+    \begin{note}
+        直观上来说, 一个"有限"互通类如果有净概率流出, 那么最后在不变分布中对应的分量一定是$0$.
+    \end{note}
+
+    \begin{problem}
+        2. 假设 \( S \) 不可约、常返; \( A,B \) 为 \( S \) 中的非空子集,且 \( A \cap  B = \varnothing  \) 记 \( {x}_{i} = {P}_{i}\left( {{\tau }_{A} < {\tau }_{B}}\right)  \) ,写出 \( \left\{  {{x}_{i} : i \in  S}\right\}   \) 满足的方程组.
+    \end{problem}
+    \begin{solution}
+        $x_i=1,i\in A$, $x_i=0,i\in B$, 下面考虑$i\notin A, i\notin B$. 此时有
+        \begin{align*}
+            P_i(\tau_A<\tau_B)=\sum_{j\in S}p_{ij}P(\tau_A<\tau_B|X_1=j)
+        \end{align*}
+        考虑$Y_n=X_{n+1}$, 由于$i\notin A, i\notin B$, 有$\tau_A^{(Y)}=\tau_A^{(X)}+1, \tau_B^{(Y)}=\tau_B^{(X)}+1$, 因此有
+        \begin{align*}
+            P_i(\tau_A<\tau_B)=\sum_{j\in S}p_{ij}P(\tau_A<\tau_B|X_1=j)=\sum_{j\in S}p_{ij}x_j,\quad x_i=1,i\in A,\quad x_i=0,i\in B
+        \end{align*}
+    \end{solution}
+    
+    \begin{problem}
+        3. 制造某种产品需要经过前后两道工序. 在完成第一道工序之后 \( {10}\%  \) 的加工件成了废品, \( {20}\%  \) 的加工件需要返工,剩余的 \( {70}\%  \) 则进入第二道工序. 在完成第二道工序之后, \( 5\%  \) 的加工件成了废品, \( 5\%  \) 的加工件需要返回到第一道工序, \( {10}\%  \) 的加工件需要返回到第二道工序,剩余的 \( {80}\%  \) 可以出厂.
+    
+    (1) 试用马氏链模拟此系统.
+    
+    (2) 利用击中概率求整个生产过程的废品率.
+    \end{problem}
+    \begin{solution}
+        (1)设$A,B,C,D$分别代表处在第一道工序，处在第二道工序，出厂，废品四个状态，那么转移矩阵是
+        $$P=\begin{pmatrix}
+            0.2 & 0.7 & 0 &0.1 \\ 0.05 & 0.1 & 0.8 & 0.05 \\ 0 & 0 & 1 & 0 \\ 0 & 0& 0& 1
+        \end{pmatrix}$$
+    
+        (2) 废品率就是$P_A(\tau_D<\infty)$, 不妨$A,B,C,D$对应$1,2,3,4$, 有 
+        $$p_i(\tau_4<\infty)=x_i=\sum_{j=1}^4p_{ij}x_j, x_3=0,x_4=1, i\in \{1,2\}$$
+        解得$x_1=\frac{25}{137}, x_2=\frac{9}{137}$, 因此击中概率是$x_1=\frac{25}{137}$.
+    \end{solution}
+    
+    \begin{problem}
+        5. 研究更新过程 (例 1.1.9) 的常返性.
+    \end{problem}
+    \begin{proof}
+        因为$p_{i,i-1}=1, \forall i\geq 1, p_{0,i}=P(L=i+1), \forall i\geq 0$. 考虑$x_i=P_i(\tau_0<\infty)$, 显然有$x_0=1$. 由于$x_1=x_2=\dots=x_{n+1}=\dots$, 将它们记为$t$, 那么$x_0=1=p_1+(1-p_1)t=t$, 因此等式只有恒为$1$的解，而更新过程是不可约的马氏链，根据书上命题，更新过程是常返的。
+    \end{proof}
+
+    \begin{problem}
+        1. 一只青蛙在正立方体的 8 个顶点上做随机游动, 每次以 $\frac{1}{4}$
+    
+    概率停留不动,以 \( 1/4 \) 的概率选取一条边并跳至相邻的顶点. 试求
+    
+    (1) 从正方体的一个顶点 \( v \) 出发首次回到 \( v \) 的平均时间;
+    
+    (2) 从 \( v \) 出发首次到达对径点 \( w \) 的平均时间.
+    \end{problem}
+    \begin{solution}
+        (1) 显然这个马氏链不可约，且状态空间有限，那么不变分布一定存在，并且每个顶点都是正常返的。由对称性，$\pi_i=\frac{1}{8}$，又根据$E_i(\sigma_i)=\frac{1}{\pi_i}=8$得到首次返回平均时间.\\
+        (1) 另解：设$S=\{1,2,\cdots,8\}$，考虑$E_1(\sigma_1)$，采用首步分析法，有
+        \begin{align*}
+            E_1(\sigma_1)&=\frac{1}{4}\cdot 1+\frac{1}{4} E_1(\sigma_1|X_1=2)+\frac{1}{4} E_1(\sigma_1|X_1=3)+\frac{1}{4} E_1(\sigma_1|X_1=4)\\
+            &=1+\frac{1}{4}E_2(\sigma_1)+\frac{1}{4}E_3(\sigma_1)+\frac{1}{4}E_4(\sigma_1)
+        \end{align*}
+        以距离$1$有几条边，来分割状态空间，分别是$A,B,C,D$，那么有$E_{1}(\sigma_1)=e_A=1+\frac{3}{4}e_B$. 并且同理我们有：
+        \begin{align*}
+            e_A&=1+\frac{3}{4}e_B\\e_B&=1+\frac{1}{4}e_B+\frac{1}{2}e_C\\e_C&=1+\frac{1}{2}e_B+\frac{1}{4}e_C+\frac{1}{4}e_D\\e_D&=1+\frac{3}{4}e_C+\frac{1}{4}e_D
+        \end{align*}
+        \textcolor{red}{方程很容易列错，注意第二个方程里面没有$\frac{1}{4}e_A$}，求解，得到$e_A=8,e_B=\frac{28}{3},e_C=12,e_D=\frac{40}{3}$.\\(2) $e_D=\frac{40}{3}$.
+    \end{solution}
+
+    \begin{problem}
+        6. 假设 \( i,j \) 是两个互不相等的状态. 证明下面三条等价:
+       
+       (1) \( {\rho }_{ij} > 0 \) ; (2) \( i \rightarrow  j \) ; (3) \( {G}_{ij} > 0 \) .
+       \end{problem}
+       
+       \begin{solution}
+           (1)$\Rightarrow$(2), $\rho_{ij}=P_i(\sigma_j<\infty)>0$, 那么$\exists m>0, P_i(\sigma_j=m)>0$, 因此$p_{ij}^{(m)}=P_i(X_m=j)>P_i(\sigma_j=m)>0$, 因此$i\to j$.\\
+           (2)$\Rightarrow$(3), $G_{ij}=\sum_{k=0}^{\infty}p_{ij}^{(k)}>p_{ij}^{(m)}>0,\exists m>0$.\\
+           (3)$\Rightarrow$(1), 反证法, 若$\rho_{ij}=0$, 那么$P_i(\sigma_j=\infty)=1$, 那么和从$i$出发永远不可能到$j$(概率$1$), 那么$G_{ij}>0\Rightarrow p_{ij}^{(m)}=P_i(X_m=j)>P_i(\sigma_j=m)>0$矛盾, 因此$\rho_{ij}>0$.
+       \end{solution}
+       
+       \begin{problem}
+           7. 证明: \( {\rho }_{ii} = 1 - 1/{G}_{ii} \) .
+       \end{problem}
+       
+       \begin{solution}
+           \textcolor{blue}{实操上来说, 拆分$G_{ii}$反而要更容易, 到时候再想想拆$\rho_{ii}$的方法吧.}
+           \begin{align*}
+               G_{ii}&=1+\sum_{m=1}^{\infty}\textcolor{red}{p_{ii}^{(m)}}=1+\sum_{m=1}^{\infty}\textcolor{red}{\sum_{n=1}^{m}P_{i}(\sigma_i=n)p_{ii}^{(m-n)}}\\
+               &=1+\sum_{n=1}^{\infty}P_{i}(\sigma_i=n)\sum_{m=n}^{\infty}p_{ii}^{(m-n)}=1+G_{ii}\rho_{ii}\quad\Rightarrow{\rho }_{ii} = 1 - 1/{G}_{ii}
+           \end{align*}
+       \end{solution}
+       
+       \begin{problem}
+           8. 对任意 \( i,j \in  S \) ,令 \( {F}_{ij}\left( s\right)  \mathrel{\text{:=}} \mathop{\sum }\limits_{{n = 0}}^{\infty }{P}_{i}\left( {{\tau }_{j} = n}\right) {s}^{n},{G}_{ij}\left( s\right)  :=  \) \( \mathop{\sum }\limits_{{n = 0}}^{\infty }{P}_{i}\left( {{X}_{n} = j}\right) {s}^{n} \) . 证明: \( {G}_{ij}\left( s\right)  = {F}_{ij}\left( s\right) {G}_{jj}\left( s\right)  \) .
+       \end{problem}
+       
+       \begin{solution}
+           使用和上一题相同的处理方法 
+           \begin{align*}
+               G_{ij}(s)&=\sum_{n=0}^{\infty}P_i(X_n=j)s^n=\sum_{n=0}^{\infty}\sum_{m=0}^{n}P_i(\tau_j=m)p_{jj}^{(n-m)}s^n\\
+               &=\sum_{m=0}^{\infty}P_i(\tau_j=m)s^m\sum_{n=m}^{\infty}p_{jj}^{(n-m)}s^{n-m}=F_{ij}(s)G_{jj}(s)
+           \end{align*}
+       \end{solution}
+
+       \subsection{第七周作业}
+
+       \begin{problem}
+        6. 证明: 对任意 \( d \geq  2 \) ,规则树 \( {\mathbb{T}}^{d} \) 上的简单随机游动非常返.
+    \end{problem}
+    \begin{solution}
+        \textcolor{blue}{直接套用定理来构造存在不恒为$1$的解似乎很难，我们可以直接考虑使用格林函数.} 因为这是不可约马氏链，考虑根节点的格林函数，第$0$层总概率是$1$，第$1$层总概率是$(\frac{1}{d+1})^2(d+1)=\frac{1}{d+1}$，第$2$层的总概率是$(\frac{1}{d+1})^4(d+1)^2=(\frac{1}{d+1})^2$，归纳有$i$层总概率是$(\frac{1}{d+1})^{2i}$，求和是收敛的，因此非常返.
+    \end{solution}
+    
+    \begin{problem}
+        7. 假设 \( \left\{  {X}_{n}\right\}   \) 为 \( \{ 0,1,2,\cdots \}  \) 上的马氏链,转移概率如下:
+    \[\begin{matrix} {p}_{01} = 1;\;{p}_{i,i + 1} = \frac{{i}^{2} + {2i} + 1}{2{i}^{2} + {2i} + 1},\;{p}_{i,i - 1} = \frac{{i}^{2}}{2{i}^{2} + {2i} + 1},\;i \geq  1; \end{matrix}\]
+    若 \( \left| {i - j}\right|  \geq  2 \) ,则 \( {p}_{ij} = 0 \) . 证明该马氏链是非常返的,并计算 \( {\rho }_{i} =  \) \( {P}_{i}\left( {{\sigma }_{0} < \infty }\right)  \) . (提示: \( \mathop{\sum }\limits_{{k = 1}}^{\infty }\frac{1}{{k}^{2}} = \frac{{\pi }^{2}}{6} \) .)
+    \end{problem}
+    
+    \begin{solution}
+        首先，这个马氏链是不可约的。直接使用格林函数，计算$G_{00}=\sum_{n=0}^{\infty}p_{00}^{(n)}$. 首先，奇数次不可能返回，偶数次结果：$p_{00}^{(0)}=0,\dots, p_{00}^{(2k)}=\Pi_{i=1}^{k-1}\frac{i^2(i^2+2i+1)}{(2i^2+2i+1)^2}$，因此$p_{00}^{(2k)}=\frac{k^2}{2k^2+2k+1}\Pi_{i=1}^{k-1}\frac{i^2(i^2+2i+1)}{(2i^2+2i+1)^2}\sim O(\frac{1}{2\cdot 4^{k-1}})$，求和是收敛的，因此非常返. 根据$\rho_i$的定义，得到$\rho_i=p_{i,i-1}\rho_{i-1}+p_{i,i+1}\rho_{i+1},\forall i\geq 1$，那么可以证明$\rho_0=\rho_1=\cdots$，全部的$\rho$都是相等的。那么$\rho_i=\rho_0,\forall i\geq 0$，下面计算$\rho_0$.
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.5\textwidth]{../../image/2.png}
+        \end{figure}
+        怎么感觉$\sum_{k=2}^{\infty}\frac{k^2}{2k^2+2k+1}\Pi_{i=1}^{k-1}\frac{i^2(i^2+2i+1)}{(2i^2+2i+1)^2}$不是人能算出来的呢？
+    \end{solution}
+    
+    \begin{problem}
+        9. 假设 \( \left\{  {S}_{n}\right\}   \) 是一维简单随机游动, \( N \geq  2 \) . 记 \( \tau  = \inf \{ n \geq  0 \) : \( \left. {{S}_{n} = 0\text{ 或 }N}\right\}   \) . 证明:
+    
+    (1) \( {P}_{k}\left( {\tau  \leq  N}\right)  \geq  {2}^{-\left( {N - 1}\right) },k = 0,1,\cdots ,N \) ;
+    
+    (2) \( {E}_{k}\tau  < \infty ,k = 0,1,\cdots ,N \) .
+    \end{problem}
+    \begin{note}
+        $\tau$实际上是停时.
+    \end{note}
+    
+    \begin{solution}
+        (1) \textcolor{blue}{注意力惊人：思考耗时最短的路径是？} 最短的路径就是沿着一个方向一直走，这样的话$\tau\leq N$一定成立，这样的概率和是$\frac{1}{2^k}+\frac{1}{2^{N-k}}\geq 2\cdot\frac{1}{2^N}=\frac{1}{2^{N-1}}$.\\ 
+        (2) 考虑方程$E_k\tau=\frac{1}{2}E_{k-1}(\tau+1)+\frac{1}{2}E_{k+1}(\tau+1)=1+\frac{1}{2}E_{k-1}(\tau)+\frac{1}{2}E_{k+1}(\tau)$，以及边界条件$E_0(\tau)=E_{N}(\tau)=0$. 记$E_k(\tau)=e_i$，得到$e_0=e_{N-1}=0$，以及
+        \begin{align*}
+            e_1=\frac{e_2}{2}+1=\frac{e_3}{3}+2=\dots=\frac{e_{N-1}}{N-1}+(N-2)
+        \end{align*}
+        带入$2e_{N-1}=2+e_{N-2}$，得到$e_k=k(N-k)<\infty$.
+    \end{solution}
+
+    \begin{problem}
+        2. $S$有限, $\mathbb{P}$不可约, 证明:
+    
+        (1) 若$\mathbb{P}$可逆, 则$\mathbb{P}$的所有特征根是实数(注: $\mathbb{P}$与对称矩阵$Q$相似, 其中$q_{ij}=\sqrt{\pi_i}p_{ij}/\sqrt{\pi_j}$)
+    
+        (2) 举例说明: 特征根都是实数的转移矩阵未必是可逆的
+    \end{problem}
+    \begin{solution}
+    (1) 因为$\mathbb{P}$可逆, 所以满足平稳条件: $p_{ij}\pi_i=\pi_jp_{ji}$, 取$D=\text{diag}(\sqrt{\pi_1},\cdots,\sqrt{\pi_n})$, 那么有$D\mathbb{P}D^{-1}=Q$, 得证.
+    
+    (2) 
+    $$P=\begin{pmatrix}
+        3/4&1/4&0\\
+        0&0&1\\
+        1/4&3/4&0\\
+    \end{pmatrix}\Rightarrow (1-\lambda)(\lambda^2+\frac{1}{4}\lambda -\frac{1}{2})$$
+    特征值全部是实数, 但如果满足细致平稳条件:
+    \begin{align*}
+        1/4\pi_1=0\pi_2&\Rightarrow \pi_1=0\\
+        0\pi_1=1/4\pi_3&\Rightarrow \pi_3=0\\
+        1\pi_2=3/4\pi_3&\Rightarrow \pi_2=0\\
+    \end{align*}
+    因此不可逆.
+    \end{solution}
+
+
+\end{document}
