@@ -1,0 +1,247 @@
+\documentclass[10pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, xcolor, framed, graphicx, hyperref, mathrsfs, etoolbox, wrapfig, xurl, algorithm, algpseudocode}
+\usepackage[thicklines]{cancel}
+\usepackage{enumitem} % 用于更灵活的列表环境
+\usepackage{geometry} % 调整页面边距
+\usepackage{fancyhdr} % 页眉页脚定制
+\hypersetup{
+    colorlinks=true,            %链接颜色
+    linkcolor=black,             %内部链接
+    filecolor=magenta,          %本地文档
+    urlcolor=cyan,              %网址链接
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+% 页边距设置
+\geometry{left=3cm, right=3cm, top=2.5cm, bottom=2.5cm}
+
+% 页眉页脚设置
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark} % 左页眉显示章节标题
+\fancyhead[R]{\thepage} % 右页眉显示页码
+
+\newcommand{\norm}[1]{\| #1 \|}
+\newcommand{\ip}[1]{\left\langle#1\right\rangle}
+
+% 标题设置
+\title{\textbf{计算方法B  HW 5}}
+\author{罗淦  2200013522}
+\date{\today}
+
+% 行距设置
+\linespread{1.2}
+
+% 定义黑色边框的 problem 环境
+\newenvironment{problem}{\begin{framed}\par\noindent\textbf{\textit{题目. }}}{\end{framed}\par}
+\newenvironment{solution}{%
+  \par\noindent\textbf{\textit{解答. }}\ignorespaces
+}{%
+  \hfill\ensuremath{\square}\par % 在结尾添加正方形
+}
+\newenvironment{note}{\par\noindent\textbf{\textit{题目的注记. }}\ignorespaces}{\par}
+
+
+% 允许公式在页面之间自动换行
+\allowdisplaybreaks
+
+\begin{document}
+
+\maketitle
+
+% 添加目录
+%\tableofcontents
+%\newpage
+
+\section{HW 5}
+
+\begin{problem}
+    7. 分别应用幂法于矩阵
+    $$A=\begin{bmatrix}
+        \lambda&1\\
+        0&\lambda
+    \end{bmatrix}, B=\begin{bmatrix}
+        \lambda&1\\
+        0&-\lambda
+    \end{bmatrix} ,\lambda \neq 0$$
+    并考察所得序列的特性
+    \end{problem}
+    \begin{solution}
+    (1) $A$的两个特征值都是$\lambda$, 且特征子空间只有一维, $v=(1,0)$\\
+    取$u_0=(1,1)$, 有(不妨假设$\lambda>0$) 
+    \begin{align*}
+        y_1=Au_0=(\lambda+1,\lambda),& \mu_1=\lambda+1, u_1=(\lambda+1,\lambda)/(\lambda+1)\\
+        y_2=Au_1=(\lambda^2+2\lambda,\lambda^2),& \mu_2=(\lambda^2+2\lambda)/(\lambda+1), u_2=(\lambda^2+2\lambda)/(\lambda^2+2\lambda)\\
+    \end{align*}
+    因此, 实际有: 
+    $$y_k=A^ku_0/\norm{A^k}_{\infty}$$
+    而 
+    $A=\lambda I +H, H^k=0, \forall k\geq 2$
+    因此 
+    $$A^k=\lambda^k I +k\lambda^{k-1}H=\begin{bmatrix}
+        \lambda^k&k\lambda^{k-1}\\
+        0&\lambda^{k}\\
+    \end{bmatrix}\Rightarrow y_k=A^ku_0/\norm{A^k}_{\infty}=\frac{1}{\lambda^k+k\lambda^{k-1}}\begin{pmatrix}
+        \lambda^k+k\lambda^{k-1}\\
+        \lambda^k
+    \end{pmatrix}$$
+    而 
+    $$\frac{1}{\lambda^k+k\lambda^{k-1}}\begin{pmatrix}
+        \lambda^k+k\lambda^{k-1}\\
+        \lambda^k
+    \end{pmatrix}\to \begin{pmatrix}
+        1\\0
+    \end{pmatrix}$$
+    \textcolor{red}{而因为有两个相同的特征值, 收敛速度由
+    $$\frac{\lambda^k}{\lambda^k+k\lambda^{k-1}}=\frac{1}{1+\frac{k}{\lambda}}\sim O(\frac{\lambda}{k})\to 0$$
+    决定, 收敛速度较慢}
+    
+    (2) $B$的特征值是$\lambda, -\lambda$\\
+    取$u_0=(1,1)$, 那么:
+    \begin{align*}
+        y_1=Bu_0=(\lambda+1,-\lambda), &\mu_1=\lambda+1, u_1=(\lambda+1,-\lambda)/(\lambda+1)\\
+        y_2=Bu_1=(\lambda^2,\lambda^2)/(\lambda+1), &\mu_2=(\lambda^2)/(\lambda+1), u_2=(1,1)
+    \end{align*}
+    因此是一个震荡的, 不收敛的序列\\
+    如果取$u_0=(1,0)$, 那么就是一步收敛(因为是特征向量).
+    \end{solution}
+    
+    \begin{problem}
+        9. $A\in C^{n\times n}$有实特征值, 满足$\lambda_1>\lambda_2\geq \cdots \geq \lambda_n$. 对$A-\mu I$用幂法, 证明: 选择$\mu=\frac{1}{2}(\lambda_2+\lambda_n)$, 产生的迭代序列收敛到属于$\lambda_1$的特征向量最快.
+    \end{problem}
+    \begin{solution}
+    \textcolor{red}{这等价于求
+    $$\min_{\mu} \max_{2\leq i\leq n} |\frac{\lambda_i-\mu}{\lambda_1-\mu}|$$}
+    要证明:
+    $$\min_{\mu} \max_{2\leq i\leq n} |\frac{\lambda_i-\mu}{\lambda_1-\mu}|=\frac{1}{2}(\lambda_2+\lambda_n)$$
+    因为:
+    $$\frac{\lambda_2-\mu}{\lambda_1-\mu}=\frac{\lambda_n-\mu}{\lambda_1-\mu}\Rightarrow \mu^*=\frac{1}{2}(\lambda_2+\lambda_n)$$
+    \end{solution}
+    
+    \begin{problem}
+        11. 用反幂法计算 
+        $$\begin{bmatrix}
+            2&1&0\\
+            1&3&1\\
+            0&1&4\\
+        \end{bmatrix}$$
+        对应于近似特征值$\tilde{\lambda}=1.2679$的近似特征向量
+    \end{problem}
+    \begin{solution}
+    原理:
+    \begin{align*}
+        &A(X_1,X_2,X_3)=(X_1,X_2,X_3)\begin{pmatrix}
+            \lambda_1\\
+            \lambda_2\\
+            \lambda_3\\
+        \end{pmatrix}\iff X^{-1}AX=\begin{pmatrix}
+            \lambda_1\\
+            \lambda_2\\
+            \lambda_3\\
+        \end{pmatrix}\\
+        \Rightarrow& (X^{-1}AX)^{-1}=X^{-1}A^{-1}X=D^{-1}\iff A^{-1}X=XD^{-1}
+    \end{align*}
+    因此对应于近似特征值$\tilde{\lambda}=1.2679$的近似特征向量是$A^{-1}$的对应于$1/\tilde{\lambda}=0.7887$的近似特征向量
+    
+    根据迭代格式, 首先要计算$A$的逆矩阵:
+    $$A^{-1}=\frac{1}{18}\begin{bmatrix}
+        11&-4&1\\
+        -4&8&-2\\
+        1&-2&5
+    \end{bmatrix}$$
+    取初始的向量$u_0=(1,1,1)$, 那么:
+    \begin{align*}
+        y_1=A^{-1}u_0=\frac{1}{9}\begin{pmatrix}
+            4\\1\\2
+        \end{pmatrix}, & \mu_1=\norm{y_1}_{\infty}=\frac{4}{9}, u_1=\frac{1}{4}\begin{pmatrix}
+            4\\1\\2
+        \end{pmatrix}\\
+        y_2=A^{-1}u_1=\frac{1}{12}\begin{pmatrix}
+            7\\-2\\2
+        \end{pmatrix}, & \mu_2=\norm{y_2}_{\infty}=\frac{7}{12}, u_2=\frac{1}{7}\begin{pmatrix}
+            7\\-2\\2
+        \end{pmatrix}\\
+        y_3=A^{-1}u_2=\frac{1}{42}\begin{pmatrix}
+            29\\-16\\7
+        \end{pmatrix}, & \mu_3=\norm{y_3}_{\infty}=\frac{29}{42}, u_3=\frac{1}{29}\begin{pmatrix}
+            29\\-16\\7
+        \end{pmatrix}\\
+        y_4=A^{-1}u_3=\frac{1}{261}\begin{pmatrix}
+            390\\-1\\48
+        \end{pmatrix}, & \mu_4=\norm{y_4}_{\infty}=\frac{65}{87}\approx 0.747, u_4=\frac{1}{390}\begin{pmatrix}
+            390\\-1\\48
+        \end{pmatrix}
+    \end{align*}
+    因此近似的特征向量是$\frac{1}{390}\begin{pmatrix}
+        390\\-1\\48
+    \end{pmatrix}$
+    \end{solution}
+    
+    \begin{problem}
+    14. 应用QR算法的基本迭代格式于矩阵
+    $$A=\begin{bmatrix}
+        1&0\\1&-1
+    \end{bmatrix}$$ 
+    并考察所得矩阵序列的特点, 它是否收敛?  
+    \end{problem}
+    \begin{solution}
+    对于$2\times 2$的矩阵, 最方便的方法是使用Givens变换
+    \begin{align*}
+        &\begin{pmatrix}
+            c&s\\
+            -s&c
+        \end{pmatrix}\begin{pmatrix}
+            1\\1
+        \end{pmatrix}=\begin{pmatrix}
+            \sqrt{2}\\0
+        \end{pmatrix}\Rightarrow c=s=\frac{1}{\sqrt{2}}\\
+        &A=A_1=Q_1R_1=\begin{pmatrix}
+            \frac{1}{\sqrt{2}}&-\frac{1}{\sqrt{2}}\\
+            \frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}
+        \end{pmatrix}\begin{pmatrix}
+            \sqrt{2}&-\frac{1}{\sqrt{2}}\\
+            0&-\frac{1}{\sqrt{2}}
+        \end{pmatrix}\Rightarrow A_2=R_1Q_1=\begin{pmatrix}
+            \frac{1}{2}&-\frac{3}{2}\\
+            -\frac{1}{2}&-\frac{1}{2}
+        \end{pmatrix}
+    \end{align*}
+    再进行QR分解:
+    \begin{align*}
+        &\begin{pmatrix}
+            c&s\\
+            -s&c
+        \end{pmatrix}\begin{pmatrix}
+            \frac{1}{2}\\-\frac{1}{2}
+        \end{pmatrix}=\begin{pmatrix}
+            \frac{1}{\sqrt{2}}\\0
+        \end{pmatrix}\Rightarrow c=s-=\frac{1}{\sqrt{2}}\\
+        &A_2=Q_2R_2=\begin{pmatrix}
+            \frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}\\
+            -\frac{1}{\sqrt{2}}&\frac{1}{\sqrt{2}}
+        \end{pmatrix}\begin{pmatrix}
+            \frac{1}{\sqrt{2}}&-\frac{1}{\sqrt{2}}\\
+            0&-\sqrt{2}
+        \end{pmatrix}\Rightarrow A_2=R_1Q_1=\begin{pmatrix}
+            1&0\\1&-1
+        \end{pmatrix} 
+    \end{align*}
+    因此所得的序列是周期二摇摆的, 不收敛.
+    \end{solution}
+    
+    \begin{problem}
+        23. $A\in R^{n\times n}$是一个具有互不相同对角元的上三角阵, 给出计算$A$全部特征向量的详细算法 
+    \end{problem}
+    \begin{solution}
+        上三角矩阵的对角元就是特征值, 因此有$n$个互不相同的特征值.
+    
+        算法描述: 对每一个特征值, $i=1,\cdots,n$, 计算$A-\lambda_i I$, \textcolor{red}{利用反幂法, 在已知特征值的情况下, 来求矩阵$A$对应于特征值的特征向量.}
+    
+        对于$A-\lambda_i I$可逆的情况, 就直接利用反幂法的迭代即可得到对应的特征向量
+    
+        对于$A-\lambda_i I$不可逆的情况, 使用微小扰动, $A-(\lambda_i+\epsilon) I$, 再使用反幂法.
+    \end{solution}
+
+
+\end{document}
