@@ -310,7 +310,7 @@ The following statement hold for all $k\geq0$.
 5. $\Delta_{y}^{(k+1)}=(B-B_{\infty})\Delta_{y}^{(k)}+(B-B_{\infty})(I-B_{\infty})\Delta_{g}^{(k)}$. \label{eq:basic_transformation_5}
 
 \subsection{Technical Lemmas}
-\begin{lemma}
+\begin{lemma}\label{lemma: gradient consensus decomposition}
 The gradient consensus error can be written as the following rolling sum:
 \begin{align*}
 \norm{\Delta_y^{(k+1)}}_F^2&=\sum_{i=0}^k \norm{(B-B_{\infty})^{k-i}(I-B_{\infty})\Delta_g^{(i)}}_F^2\\
@@ -326,31 +326,18 @@ The gradient consensus error can be written as the following rolling sum:
   We can unfold the term $\norm{(B-B_\infty)\Delta_y^{(k)}}_F^2$ in the same manner. By repeating the unfolding process from $k$ to $0$, we obtain the lemma.
 \end{proof}
 
-\begin{lemma}
-  \begin{align*}
-    \sum_{k=0}^{T}\sum_{i=0}^k \EE{\norm{(B^{k-i}-B_{\infty})\Delta_g^{(i)}}_F^2}&\le 10 n(T+1)s_B^2\sigma^2+10s_B^2L^2\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}_F^2}\\
-    &\quad +5\alpha^2s_B^2L^2\sum_{k=0}^T\EE{\norm{A_{\infty}\vy^{(k)}}_F^2}
-    \end{align*}
-\textcolor{blue}{\begin{align*}
+\begin{lemma}\label{lemma: gradient consensus decomposition part 1}
+  % \begin{align*}
+  %   \sum_{k=0}^{T}\sum_{i=0}^k \EE{\norm{(B^{k-i}-B_{\infty})\Delta_g^{(i)}}_F^2}&\le 10 n(T+1)s_B^2\sigma^2+10s_B^2L^2\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}_F^2}\\
+  %   &\quad +5\alpha^2s_B^2L^2\sum_{k=0}^T\EE{\norm{A_{\infty}\vy^{(k)}}_F^2}
+  %   \end{align*}
+{\begin{align*}
         &\sum_{k=0}^T\sum_{i=0}^k \EE{\norm{(B^{k-i}-B_{\infty})\Delta_g^{(i)}}_F^2}\\
         \leq& 6n\sigma^2(T+1)s_BM_B+18s_B^2L^2\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}_F^2}+9\alpha^2s_B^2L^2\sum_{k=0}^T\EE{\norm{A_{\infty}\vy^{(k)}}_F^2}
     \end{align*}}
 \end{lemma}
 \begin{proof}
-\lly{
-1. Complete References. 
 
-2. Besides, I think the first term can be smaller, from $\cO(ns_B^2T\sigma^2)$ to $\cO(nM_Bs_BT\sigma^2)$. The estimate can be more accurate by separating the noise and $\nabla f(\vx^{(k+1)})-\nabla f(\vx^{(k)})$ from the very beginning. 
-
-For example, using the independent noise property, we have $\EE{\norm{(B^{k-i}-B_{\infty})\Delta_g^{(i)}}_F^2}= \EE{\EE{\norm{(B^{k-i}-B_\infty)\Delta_g^{(k)}}_F^2|\cF^{(k)}}}\le \EE{\norm{(B^{k-i}-B_\infty)(\vg^{(k+1)}-\nabla f(\vx^{(k)}))}_F^2+\EE{\norm{(B^{k-i}-B_{\infty})(\nabla f(\vx^{(k+1)})-\vg^{(k)})}_F^2|\cF^{(k)}}}\le n\sigma^2\norm{B^{k-i}-B_\infty}_2^2+\EE{\norm{(B^{k-i}-B_{\infty})(\nabla f(\vx^{(k+1)})-\vg^{(k)})}_F^2} $ 
-
-Further, by Cauchy inequality, we have 
-$\EE{\norm{(B^{k-i}-B_{\infty})(\nabla f(\vx^{(k+1)})-\vg^{(k)})}_F^2} \le 2\EE{\norm{(B^{k-i}-B_{\infty})(\nabla f(\vx^{(k+1)})-\nabla f(\vx^{(k)}))}_F^2}+2n\sigma^2\norm{B^{k-i}-B_\infty}_2^2$.
-
-Note that $n\sigma^2 \sum_{k=0}^T\sum_{i=0}^k \norm{B^{k-i}-B_\infty}_2^2\le n\sigma^2 \sum_{k=0}^T M_B\sum_{i=0}^k\norm{B^{k-i}-B_\infty}_2\le n\sigma^2\sum_{k=0}^T M_Bs_B=n(T+1)s_BM_B\sigma^2$, the order of $s_B$ becomes smaller.
-}
-
-\textcolor{blue}
 {
     Consider $\EE{\norm{(B^{k-i}-B_{\infty})\Delta_g^{(i)}}^2} $, we have that 
     \begin{align*}
@@ -368,7 +355,7 @@ Note that $n\sigma^2 \sum_{k=0}^T\sum_{i=0}^k \norm{B^{k-i}-B_\infty}_2^2\le n\s
         \sum_{k=0}^T\sum_{i=0}^k 3\EE{ \norm{(B^{k-i}-B_{\infty})(\nabla f(\vx^{(i+1)})-\nabla f(\vx^{(i)}))}^2}
         \leq 3s_B^2 \sum_{k=0}^T \EE{\norm{\nabla f(\vx^{(i+1)})-\nabla f(\vx^{(i)})}_F^2}
     \end{align*}
-    Noting that 
+    Note that 
     \begin{align*}
         \nabla f(\vx^{(i+1)})-\nabla f(\vx^{(i)})=\nabla f(\vx^{(k+1)})-\nabla f(\vw^{(k+1)})+\nabla f(\vw^{(k+1)})-\nabla f(\vw^{(k)})+\nabla f(\vw^{(k)})-\nabla f(\vx^{(k)})
     \end{align*}
@@ -384,48 +371,29 @@ Note that $n\sigma^2 \sum_{k=0}^T\sum_{i=0}^k \norm{B^{k-i}-B_\infty}_2^2\le n\s
         \leq& 6n\sigma^2(T+1)s_BM_B+18s_B^2L^2\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}_F^2}+9\alpha^2s_B^2L^2\sum_{k=0}^T\EE{\norm{A_{\infty}\vy^{(k)}}_F^2}
     \end{align*}
 }
-
-By applying Lemma \ref{lem: rolling sum} on $\sum_{k=0}^T\sum_{i=0}^k \norm{(B-B_{\infty})^{k-i}(I-B_{\infty})\Delta_g^{(i)}}_F^2$, we obtain that
-\begin{align*} 
-\sum_{k=0}^T\sum_{i=0}^k \norm{(B-B_{\infty})^{k-i}(I-B_{\infty})\Delta_g^{(i)}}_F^2 \leq s_B^2 \sum_{k=0}^T \norm{\Delta_g^{(k)}}_F^2
-\end{align*}
-Noting that 
-\begin{align*}
-    \Delta_g^{(k)}&=\vg^{(k+1)}-\nabla f(\vx^{(k+1)})+\nabla f(\vx^{(k+1)})-\nabla f(\vw^{(k+1)})+\nabla f(\vw^{(k+1)})-\nabla f(\vw^{(k)})\\
-    &\quad+\nabla f(\vw^{(k)})-\nabla f(\vx^{(k)})+\nabla f(\vx^{(k)})-\vg^{(k)},
-\end{align*}
-we can apply Cauchy's inequality and obtain that
-\begin{align*}
-&\EE{\norm{\Delta_g^{(k)}}_F^2}\\
-\leq& 5\EE{\norm{\vg^{(k+1)}-\nabla f(\vx^{(k+1)})}_F^2}+5\EE{\norm{\nabla f(\vx^{(k+1)})-\nabla f(\vw^{(k+1)})}_F^2}\\
-&+5\EE{\norm{\nabla f(\vw^{(k+1)})-\nabla f(\vw^{(k)})}_F^2} +5\EE{\norm{\nabla f(\vw^{(k)})-\nabla f(\vx^{(k)})}_F^2}+5\EE{\norm{\nabla f(\vx^{(k)})-\vg^{(k)}}_F^2}\\
-\leq &10n\sigma^2+5L^2\norm{\vx^{(k+1)}-\vw^{(k+1)}}_F^2+5L^2\norm{\vx^{(k)}-\vw^{(k)}}_F^2+5\alpha^2L^2\EE{\norm{A_{\infty}\vy^{(k)}}_F^2}
-\end{align*}
-By taking ? back to ?, we finish the proof of this lemma.
 \end{proof}
 
-\begin{lemma}
-\begin{align*}
-  &\sum_{l=0}^k \EE{\ip{(B^{k+1-l}-B_{\infty})\Delta_y^{(l)},(B^{k-l}-B_{\infty})\Delta_g^{(l)}}} \\ 
-  \leq& (0.5\alpha\eta_1^{-1}+\eta_2^{-1}) L \sum_{l=0}^k b_{k-l} \EE{\norm{\Delta_y^{(l)}}_F}+0.5\eta_1\alpha L\sum_{l=0}^k b_{k-l}\EE{\norm{A_{\infty}\vy^{(l)}}}\\&+0.5\eta_2 L\sum_{l=0}^k b_{k-l} \EE{\norm{\vx^{(l+1)}-\vw^{(l+1)}}_F}+0.5\eta_2 L\sum_{l=0}^k b_{k-l} \EE{\norm{\vx^{(l)}-\vw^{(l)}}_F}+n\sigma^2\sum_{l=0}^k b_{k-l}
-\end{align*}
-\lly{Do you mean $\ip{(B^{k+1-l}-B_{\infty})\Delta_y^{(l)},(B^{k-l}-B_{\infty})\Delta_g^{(l)}}$?}
+\begin{lemma}\label{lemma: gradient consensus decomposition part 2, before simplyfied}
+% \begin{align*}
+%   &\sum_{l=0}^k \EE{\ip{(B^{k+1-l}-B_{\infty})\Delta_y^{(l)},(B^{k-l}-B_{\infty})\Delta_g^{(l)}}} \\ 
+%   \leq& (0.5\alpha\eta_1^{-1}+\eta_2^{-1}) L \sum_{l=0}^k b_{k-l} \EE{\norm{\Delta_y^{(l)}}_F}+0.5\eta_1\alpha L\sum_{l=0}^k b_{k-l}\EE{\norm{A_{\infty}\vy^{(l)}}}\\&+0.5\eta_2 L\sum_{l=0}^k b_{k-l} \EE{\norm{\vx^{(l+1)}-\vw^{(l+1)}}_F}+0.5\eta_2 L\sum_{l=0}^k b_{k-l} \EE{\norm{\vx^{(l)}-\vw^{(l)}}_F}+n\sigma^2\sum_{l=0}^k b_{k-l}
+% \end{align*}
 
-\textcolor{blue}{To be consistent with lemma 2, is $\ip{(B-B_{\infty})^{k-i+1}\Delta_y^{(i)}, (B-B_{\infty})^{k-i}(I-B_{\infty})\Delta_g^{(i)}}$
-\begin{align*}
+
+{ \begin{align*}
   &\sum_{i=0}^k \EE{\ip{(B^{k-i+1}-B_{\infty})\Delta_y^{(i)},(B^{k-i}-B_{\infty})\Delta_g^{(i)}}} \\ 
   \leq& (0.5\alpha\eta_1^{-1}+\eta_2^{-1}) L \sum_{i=0}^k b_{k-i} \EE{\norm{\Delta_y^{(i)}}}+0.5\eta_1\alpha L\sum_{i=0}^k b_{k-i}\EE{\norm{A_{\infty}\vy^{(i)}}}\\&+0.5\eta_2 L\sum_{i=0}^k b_{k-i} \EE{\norm{\vx^{(i+1)}-\vw^{(i+1)}}}+0.5\eta_2 L\sum_{i=0}^k b_{k-i} \EE{\norm{\vx^{(i)}-\vw^{(i)}}_F}+n\sigma^2\sum_{i=0}^k b_{k-i}
 \end{align*}}
 \end{lemma}
 \begin{proof}
 
-Noticing that 
+Notice that 
 $$\EE{\Delta_{g}^{(i)}|\cF^{(i)}}=\EE{(\nabla f^{(i+1)}-\nabla f^{(i)})+(\nabla f^{(i)}-\vg^{(i)})|\cF^{(i)}}$$
-and use the basic transformation $(B-B_{\infty})^{k-i}(I-B_{\infty})=(B^{k-i}-B_{\infty})(I-B_{\infty})=B^{k-i}-B_{\infty}$, the term $\EE{\ip{(B-B_{\infty})^{k-i+1}\Delta_y^{(i)}, (B-B_{\infty})^{k-i}(I-B_{\infty})\Delta_g^{(i)}}}$ can be decomposed to two terms of inner product.
+and the basic transformation $(B-B_{\infty})^{k-i}(I-B_{\infty})=(B^{k-i}-B_{\infty})(I-B_{\infty})=B^{k-i}-B_{\infty},$
+the term $\EE{\ip{(B-B_{\infty})^{k-i+1}\Delta_y^{(i)}, (B-B_{\infty})^{k-i}\Delta_g^{(i)}}}$ can be decomposed to two terms of inner product.
 
 \begin{align*}
   &\EE{\ip{(B-B_{\infty})^{k-i+1}\Delta_y^{(i)}, (B-B_{\infty})^{k-i}(I-B_{\infty})\Delta_g^{(i)}}}\\
-  =& \EE{\ip{(B-B_{\infty})^{k-i+1}\Delta_y^{(i)}, (B-B_{\infty})^{k-i}\Delta_g^{(i)}}}\\
   =& \EE{\ip{(B-B_{\infty})^{k-i+1}\Delta_y^{(i)}, (B-B_{\infty})^{k-i}(\nabla f^{(i+1)}-\nabla f^{(i)})}}\\&+\EE{\ip{(B-B_{\infty})^{k-i+1}\Delta_y^{(i)}, (B-B_{\infty})^{k-i}(\nabla f^{(i)}-\vg^{(i)})}}
 \end{align*}
 
@@ -469,9 +437,9 @@ The above expression can be reduced to
 Combine \ref{first term} and \ref{second term}, we obtain the lemma.
 \end{proof}
 
-Since $\sum_{k=0}^T\sum_{l=0}^k c_{k-l}\norm{\Delta^{(l)}}_F^2=\sum_{l=0}^T\norm{\Delta^{(l)}}_F^2\sum_{k=l}^Tc_{k-l}$, next we give a brief discussion for the size of $\sum_{k=l}^T c_{k-l}$.
+Since $\sum_{k=0}^T\sum_{l=0}^k c_{k-l}\norm{\Delta^{(l)}}_F^2=\sum_{l=0}^T\norm{\Delta^{(l)}}_F^2\sum_{k=l}^Tc_{k-l}$, next we give a brief discussion of the size of $\sum_{k=l}^T c_{k-l}$.
 
-\begin{lemma}\label{lemma 6} 
+\begin{lemma}\label{lemma: gradient consensus decomposition part 2-trick}
 For $b_{k-l}:=\norm{B^{k-l}-B_\infty}_2\norm{B^{k-l+1}-B_\infty}_2$, we have the following inequality:
     \begin{align}
         \sum_{k=l}^T b_{k-l}\le M_B^2\frac{1+\ln(\kappa(\pi_B))}{1-\beta_B^2}\le 2M_Bs_B
@@ -484,43 +452,78 @@ For $b_{k-l}:=\norm{B^{k-l}-B_\infty}_2\norm{B^{k-l+1}-B_\infty}_2$, we have the
         &\le M_B^2\cdot(1+\min\{\lfloor \frac{p-1}{2} \rfloor, i\})+M_B^2\cdot\frac{1}{1-\beta_B^2}\beta_B^{2+2\lfloor \frac{p-1}{2}\rfloor-p}
     \end{align}
 Then, we can repeat the discussion of \eqref{eq: rolling sum lemma-3} in Lemma~\ref{lem: rolling sum} and obtain this lemma.
-    
+\end{proof}
+
+\begin{lemma}\label{lemma: gradient consensus decomposition part 2}
+\begin{align*}
+        &\sum_{k=0}^T\sum_{i=0}^k \EE{\ip{(B^{k-i+1}-B_{\infty})\Delta_y^{(i)},(B^{k-i}-B_{\infty})\Delta_g^{(i)}}} \\ 
+  \leq & M_Bs_B(\alpha\eta_1^{-1}+2\eta_2^{-1}) L \sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}}+M_Bs_B\eta_1\alpha L\sum_{k=0}^T\EE{\norm{A_{\infty}\vy^{(k)}}}\\&+2M_Bs_B\eta_2 L\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}}+2M_Bs_Bn\sigma^2(T+1)
+\end{align*}
+\end{lemma}
+\begin{proof}
+Notice that
+    \begin{align*}
+    \sum_{k=0}^T \sum_{i=0}^k b_{k-i}\EE{\Delta^{(i)}}= \sum_{i=0}^T\EE{\Delta^{(i)}}\sum_{k=i}^T b_{k-i}\leq 2M_Bs_B\sum_{i=0}^T\EE{\Delta^{(i)}}=2M_Bs_B\sum_{k=0}^T\EE{\Delta^{(k)}}
+    \end{align*}
+We substitute Lemma \ref{lemma: gradient consensus decomposition part 2-trick} in Lemma \ref{lemma: gradient consensus decomposition part 2, before simplyfied}, and obtain that
+\begin{align*}
+    &\sum_{k=0}^T\sum_{i=0}^k \EE{\ip{(B^{k-i+1}-B_{\infty})\Delta_y^{(i)},(B^{k-i}-B_{\infty})\Delta_g^{(i)}}} \\ 
+  \leq& (0.5\alpha\eta_1^{-1}+\eta_2^{-1}) L \sum_{k=0}^T\sum_{i=0}^k b_{k-i} \EE{\norm{\Delta_y^{(i)}}}+0.5\eta_1\alpha L\sum_{k=0}^T\sum_{i=0}^k b_{k-i}\EE{\norm{A_{\infty}\vy^{(i)}}}\\&+0.5\eta_2 L\sum_{k=0}^T\sum_{i=0}^k b_{k-i} \EE{\norm{\vx^{(i+1)}-\vw^{(i+1)}}}+0.5\eta_2 L\sum_{k=0}^T\sum_{i=0}^k b_{k-i} \EE{\norm{\vx^{(i)}-\vw^{(i)}}}+n\sigma^2\sum_{k=0}^T\sum_{i=0}^k b_{k-i}\\
+  \leq & M_Bs_B(\alpha\eta_1^{-1}+2\eta_2^{-1}) L \sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}}+M_Bs_B\eta_1\alpha L\sum_{k=0}^T\EE{\norm{A_{\infty}\vy^{(k)}}}\\&+M_Bs_B\eta_2 L\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}}+M_Bs_B\eta_2 L\sum_{k=0}^T \EE{\norm{\vx^{(k)}-\vw^{(k)}}}+2M_Bs_Bn\sigma^2(T+1)
+\end{align*}
+So we obtain the lemma
+\begin{align*}
+        &\sum_{k=0}^T\sum_{i=0}^k \EE{\ip{(B^{k-i+1}-B_{\infty})\Delta_y^{(i)},(B^{k-i}-B_{\infty})\Delta_g^{(i)}}} \\ 
+  \leq & M_Bs_B(\alpha\eta_1^{-1}+2\eta_2^{-1}) L \sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}}+M_Bs_B\eta_1\alpha L\sum_{k=0}^T\EE{\norm{A_{\infty}\vy^{(k)}}}\\&+2M_Bs_B\eta_2 L\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}}+2M_Bs_Bn\sigma^2(T+1)
+\end{align*}
 \end{proof}
 
 \subsection{Gradient Consensus lemma}
 \begin{lemma}
-By setting $\eta_1=10M_Bs_B\alpha L,\eta_2=20M_bs_bL$, and $\alpha <  \sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+50)}}$, we have
+By setting $\eta_1=10M_Bs_B\alpha L,\eta_2=20M_bs_BL$, and $\alpha < \frac{1}{s_BL\norm{A_{\infty}}}$, we have
   \begin{align*}
-    \sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}^2}\leq &(20s_B^2+8M_Bs_B)n(T+1)\sigma^2+(20+160M_B^2)s_B^2L^2\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}_F^2}\\&+4n\alpha^2c^2s_B^2L^2(5+20M_B^2) \sum_{k=0}^T \EE{\norm{\bar{g}^{(k)}}^2}
-  \end{align*}
-  \lly{The coefficients are a little too complex here. For example, you can use $25M_B^2$ to replace $5+20M_B^2$ because $M_B$ is typically larger than $1$.}
-  \\\textcolor{blue}{OK!}
+    \sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}^2}
+  <&20M_Bs_Bn (T+1)\sigma^2+200s_B^2M_B^2L^2\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2}\\&+120nc^2\alpha^2s_B^2M_B^2L^2 \sum_{k=0}^T \EE{\norm{\bar{g}^{(k)}}^2}
+\end{align*}
 \end{lemma}
 \begin{proof}
-We substitute Lemma ? and ? in Lemma ? using the result of Lemma ?, we obtain that 
+We substitute Lemma \ref{lemma: gradient consensus decomposition part 1} and Lemma \ref{lemma: gradient consensus decomposition part 2} in Lemma \ref{lemma: gradient consensus decomposition}, and obtain that 
 \begin{align*}
   &\left(1-2M_Bs_BL(\alpha\eta_1^{-1}+2\eta_2^{-1})\right)\sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}^2}\\ 
-  \leq &(10s_B^2+4M_Bs_B)n(T+1)\sigma^2+(10s_B^2L^2+4M_Bs_B\eta_2 L)\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}_F^2}\\&+(5\alpha^2s_B^2L^2+2M_Bs_B\eta_1\alpha L) \sum_{k=0}^T \EE{\norm{A_{\infty}\vy^{(k)}}^2}
+  \leq &10M_Bs_Bn(T+1)\sigma^2+(18s_B^2L^2+4M_Bs_B\eta_2 L)\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2}\\&+(9\alpha^2s_B^2L^2+2M_Bs_B\eta_1\alpha L) \sum_{k=0}^T \EE{\norm{A_{\infty}\vy^{(k)}}^2}
 \end{align*}
-Noting that $A_{\infty}\vy^{(k)}=c\one\bar{g}^{(k)}+\underbrace{A_{\infty}\Delta_{y}^{(k)}}_{\one^T\Delta_{y}^{(k)}}=0$, so we have $\norm{A_{\infty }\vy^{(k)}}^2_F\leq 2c^2 \norm{\one\bar{g}^{(k)}}_F^2+2 \norm{A_{\infty}}_2^2\norm{\Delta_y^{(k)}}_F^2= 2 nc^2 \norm{\bar{g}^{(k)}}^2+ 2\norm{A_{\infty}}_2^2\norm{\Delta_y^{(k)}}_F^2$, so we have
+Noting that $A_{\infty}\vy^{(k)}=A_{\infty}B_{\infty}\vy^{(k)}+ A_{\infty}(I-B_{\infty})\vy^{(k)}=c\one\bar{g}^{(k)}+A_{\infty}\Delta_{y}^{(k)}$, we have $\norm{A_{\infty }\vy^{(k)}}^2_F\leq 2c^2 \norm{\one\bar{g}^{(k)}}_F^2+2 \norm{A_{\infty}}_2^2\norm{\Delta_y^{(k)}}_F^2= 2 nc^2 \norm{\bar{g}^{(k)}}^2+ 2\norm{A_{\infty}}_2^2\norm{\Delta_y^{(k)}}_F^2$, so we have
 \begin{align*}
-  &\left(1-2M_Bs_BL(\alpha\eta_1^{-1}+2\eta_2^{-1})-2\norm{A_{\infty}}_2^2(5\alpha^2s_B^2L^2+2M_Bs_B\eta_1\alpha L) \right)\sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}^2}\\ 
-  \leq &(10s_B^2+4M_Bs_B)n (T+1)\sigma^2+(10s_B^2L^2+4M_Bs_B\eta_2 L)\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}_F^2}\\&+2nc^2(5\alpha^2s_B^2L^2+2M_Bs_B\eta_1\alpha L) \sum_{k=0}^T \EE{\norm{\bar{g}^{(k)}}^2}
+  &\left(1-2M_Bs_BL(\alpha\eta_1^{-1}+2\eta_2^{-1})-2\norm{A_{\infty}}_2^2(9\alpha^2s_B^2L^2+2M_Bs_B\eta_1\alpha L) \right)\sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}^2}\\ 
+  \leq &10M_Bs_Bn (T+1)\sigma^2+(18s_B^2L^2+4M_Bs_B\eta_2 L)\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2}\\&+2nc^2(9\alpha^2s_B^2L^2+2M_Bs_B\eta_1\alpha L) \sum_{k=0}^T \EE{\norm{\bar{g}^{(k)}}^2}
 \end{align*}
-By setting $\eta_1=\mathbf{p}\cdot M_Bs_B\alpha L,\eta_2=2\mathbf{p}\cdot M_bs_bL$, we have
+By setting $\eta_1=\mathbf{p}\cdot M_Bs_B\alpha L,\eta_2=2\mathbf{p}\cdot M_Bs_BL$, we have
 \begin{align*}
-  &\left(1-2M_Bs_BL(\alpha\eta_1^{-1}+2\eta_2^{-1})-2\norm{A_{\infty}}_2^2(5\alpha^2s_B^2L^2+2M_Bs_B\eta_1\alpha L) \right)\\ 
-  =&1- \frac{4}{\mathbf{p}}-2\alpha^2s_B^2L^2\norm{A_{\infty}}_2^2(5+2M_B^2 \mathbf{p})
+  &\left(1-2M_Bs_BL(\alpha\eta_1^{-1}+2\eta_2^{-1})-2\norm{A_{\infty}}_2^2(9\alpha^2s_B^2L^2+2M_Bs_B\eta_1\alpha L) \right)\\ 
+  =&1- \frac{4}{\mathbf{p}}-2\alpha^2s_B^2L^2\norm{A_{\infty}}_2^2(9+2M_B^2 \mathbf{p})
 \end{align*}
-Let $s_BL\norm{A_{\infty}}_2$ be denoted as $\mathbf{D}=s_BL\norm{A_{\infty}}_2$. We want $\frac{1}{2}\leq 1- \frac{4}{\mathbf{p}}-2\mathbf{D}^2\alpha^2(5+2M_B^2 \mathbf{p})$, this is equivalent to the following inequality 
+Let $s_BL\norm{A_{\infty}}_2$ be denoted as $\mathbf{D}=s_BL\norm{A_{\infty}}_2$. We want $\frac{1}{2}\leq 1- \frac{4}{\mathbf{p}}-2\mathbf{D}^2\alpha^2(9+2M_B^2 \mathbf{p})$; this is equivalent to the following inequality 
 \begin{align*}
-  2\mathbf{D}^2\alpha^2(5\mathbf{p}+2M_B^2\mathbf{p}^2)\leq \frac{\mathbf{p}}{2}-4
+  2\mathbf{D}^2\alpha^2(9\mathbf{p}+2M_B^2\mathbf{p}^2)\leq \frac{\mathbf{p}}{2}-4
 \end{align*}
-By setting $\mathbf{p}=10$, solve the inequality yields an upper bound for $\alpha$:
+By setting $\mathbf{p}=10$, solving the inequality yields an upper bound for $\alpha$:
 \begin{align*}
-  \alpha < \sqrt{\frac{1}{2\mathbf{D}^2(200M_B^2+50)}} =  \sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+50)}}
+  \alpha < \sqrt{\frac{1}{2\mathbf{D}^2(200M_B^2+90)}} =  \sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+90)}}
 \end{align*}
-Substituting $\eta_1=10\cdot M_Bs_B\alpha L,\eta_2=20\cdot M_bs_BL$, we complete the proof of the lemma.
+Substituting $\eta_1=10\cdot M_Bs_B\alpha L,\eta_2=20\cdot M_Bs_BL$, we obtain that
+\begin{align*}
+    \sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}^2}
+  \leq& 20M_Bs_Bn (T+1)\sigma^2+2s_B^2L^2(18+80M_B^2)\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2}\\&+4nc^2\alpha^2s_B^2L^2(9+20M_B^2) \sum_{k=0}^T \EE{\norm{\bar{g}^{(k)}}^2}
+\end{align*}
+Since $M_B$ is typically larger than $1$, we can simplify the upper bound 
+$$\alpha < \sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+90)}}\leq \sqrt{\frac{1}{580s_B^2L^2\norm{A_{\infty}}_2^2}}<\frac{1}{s_BL\norm{A_{\infty}}}$$
+and the inequality
+\begin{align*}
+    \sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}^2}
+  \leq& 20M_Bs_Bn (T+1)\sigma^2+2s_B^2L^2(18+80M_B^2)\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2}\\&+4nc^2\alpha^2s_B^2L^2(9+20M_B^2) \sum_{k=0}^T \EE{\norm{\bar{g}^{(k)}}^2}\\
+  <&20M_Bs_Bn (T+1)\sigma^2+200s_B^2M_B^2L^2\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2}\\&+120nc^2\alpha^2s_B^2M_B^2L^2 \sum_{k=0}^T \EE{\norm{\bar{g}^{(k)}}^2}
+\end{align*}
+We finish the proof of the lemma.
 \end{proof}
 
 \subsection{Consensus Lemma 1}
@@ -532,6 +535,7 @@ Substituting $\eta_1=10\cdot M_Bs_B\alpha L,\eta_2=20\cdot M_bs_BL$, we complete
   \end{align*}
 \end{lemma}
 \begin{proof}
+\lly{Since Lemma 3 changes, coefficients on $\sigma^2$ should also be different.}
 By definition of $\vw^{(k)}$, we have $\Delta_{x}^{(k+1)}=\vx^{(k+1)}-\vw^{(k+1)}=-\alpha\sum_{i=0}^k(A^{k-i}-A_{\infty})\vy^{(i)}$. This implies that
 \begin{align*}
 &\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2\\ 
@@ -660,6 +664,9 @@ Where
 \end{theorem}
 
 \begin{proof}
+
+\lly{You can simplify the upper bound of learning rate. For example, use $\frac{1}{30s_Bm_B\norm{A_\infty}_2L}$ to instead of  $\min\{\sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+50)}},\; \sqrt{\frac{1}{2s_B^2L^2(320M_B^2+40)}}\}$. You can also use a simplified upper bound of $C_1$ and $C_2$ to make them look easier. For example, take $c\alpha L \le 1$, so you can ensure that the order of $\alpha L$ be $1$ in $C_1(1)$ and the order of $\alpha$ is 2 in $C_2$.}
+
   Substitute $\sum_{k=0}^T\EE{\norm{\Delta_{y}^{(k)}}^2}$ by Lemma ?, we have
   \begin{align*}
     &\frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2}\\ 
