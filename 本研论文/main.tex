@@ -297,7 +297,7 @@ which finishes the proof of this lemma. The proof can be applied in the same way
 
 
 \subsection{Basic Transformation}
-The following statement hold for all $k\geq0$.
+The following statement holds for all $k\geq0$.
 
 1. $\bar{y}^{(k)}=\bar{g}^{(k)}$, $\forall k\geq 0$. \label{eq:basic_transformation_1}
 
@@ -479,8 +479,8 @@ So we obtain the lemma
 \end{proof}
 
 \subsection{Gradient Consensus lemma}
-\begin{lemma}
-By setting $\eta_1=10M_Bs_B\alpha L,\eta_2=20M_bs_BL$, and $\alpha < \frac{1}{s_BL\norm{A_{\infty}}}$, we have
+\begin{lemma}\label{Basic: Gradient Consensus lemma}
+By setting $\eta_1=10M_Bs_B\alpha L,\eta_2=20M_bs_BL$, and $\alpha < \frac{1}{25M_Bs_BL\norm{A_{\infty}}}$, we have
   \begin{align*}
     \sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}^2}
   <&20M_Bs_Bn (T+1)\sigma^2+200s_B^2M_B^2L^2\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2}\\&+120nc^2\alpha^2s_B^2M_B^2L^2 \sum_{k=0}^T \EE{\norm{\bar{g}^{(k)}}^2}
@@ -516,7 +516,7 @@ Substituting $\eta_1=10\cdot M_Bs_B\alpha L,\eta_2=20\cdot M_Bs_BL$, we obtain t
   \leq& 20M_Bs_Bn (T+1)\sigma^2+2s_B^2L^2(18+80M_B^2)\sum_{k=0}^T\EE{\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2}\\&+4nc^2\alpha^2s_B^2L^2(9+20M_B^2) \sum_{k=0}^T \EE{\norm{\bar{g}^{(k)}}^2}
 \end{align*}
 Since $M_B$ is typically larger than $1$, we can simplify the upper bound 
-$$\alpha < \sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+90)}}\leq \sqrt{\frac{1}{580s_B^2L^2\norm{A_{\infty}}_2^2}}<\frac{1}{s_BL\norm{A_{\infty}}}$$
+$$\alpha< \frac{1}{25M_Bs_BL\norm{A_{\infty}}}<\sqrt{\frac{1}{580M_B^2s_B^2L^2\norm{A_{\infty}}_2^2}}< \sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+90)}}$$
 and the inequality
 \begin{align*}
     \sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}^2}
@@ -527,15 +527,14 @@ We finish the proof of the lemma.
 \end{proof}
 
 \subsection{Consensus Lemma 1}
-\begin{lemma}
-  By setting $\alpha \leq \min\{\sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+50)}},\; \sqrt{\frac{1}{2s_B^2L^2(320M_B^2+40)}}\} $, we have
+\begin{lemma}\label{basic: Consensus Lemma 1}
+  By setting $\alpha \leq \min\{\frac{1}{20s_As_BM_BL},\; \frac{1}{25M_Bs_BL\norm{A_{\infty}}}\}$, we have
   \begin{align*}
-    \sum_{k=0}^T\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2 
-    \leq &\left(4\alpha^2s_A^2\norm{n\pi_B-\one}^2+16n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right) \sum_{k=0}^T\norm{\bar{g}^{(k)}}^2\\ &+2\alpha^2s_A^2(40s_B^2+16M_Bs_B)n (T+1)\sigma^2
+    \sum_{k=0}^T\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2\nonumber 
+  \leq &2\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right) \sum_{k=0}^T\norm{\bar{g}^{(k)}}^2\nonumber\\ &+80n\alpha^2s_A^2M_Bs_B(T+1)\sigma^2
   \end{align*}
 \end{lemma}
 \begin{proof}
-\lly{Since Lemma 3 changes, coefficients on $\sigma^2$ should also be different.}
 By definition of $\vw^{(k)}$, we have $\Delta_{x}^{(k+1)}=\vx^{(k+1)}-\vw^{(k+1)}=-\alpha\sum_{i=0}^k(A^{k-i}-A_{\infty})\vy^{(i)}$. This implies that
 \begin{align*}
 &\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2\\ 
@@ -544,28 +543,28 @@ By definition of $\vw^{(k)}$, we have $\Delta_{x}^{(k+1)}=\vx^{(k+1)}-\vw^{(k+1)
 \leq&2\alpha^2\norm{\sum_{i=0}^k(A^{k-i}-A_{\infty})(I-B_{\infty})\vy^{(i)}}+2\alpha^2\norm{\sum_{i=0}^k(A^{k-i}-A_{\infty})(n\pi_{B}^T-\one)\bar{y}^{(i)}}
 \end{align*}
 By summing up $k=0$ to $T$, we have that
-\begin{align*}
-&\sum_{k=0}^T\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2\\ 
-\leq& 2\alpha^2\sum_{k=0}^T\norm{\sum_{i=0}^k(A^{k-i}-A_{\infty})(I-B_{\infty})\vy^{(i)}}+2\alpha^2\sum_{k=0}^T\norm{\sum_{i=0}^k(A^{k-i}-A_{\infty})(n\pi_{B}^T-\one)\bar{y}^{(i)}}\\ 
-\leq& 2\alpha^2s_{A}^2\sum_{k=0}^T \norm{\Delta_{y}^{(k)}}^2+2\alpha^2s_{A}^2\norm{n\pi_{B}^T-\one}^2\sum_{k=0}^T\norm{\bar{g}^{(k)}}^2
-\end{align*}
-By further applying Lemma ? in ?, we have
-\begin{align*}
-  &\left(1-\alpha^2s_B^4L^2(40+320M_B^2)\right)\sum_{k=0}^T\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2\\ 
-  \leq &\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+8n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right) \sum_{k=0}^T\norm{\bar{g}^{(k)}}^2\\ &+\alpha^2s_A^2(40s_B^2+16M_Bs_B)n (T+1)\sigma^2
-\end{align*}
+\begin{align}
+&\sum_{k=0}^T\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2\nonumber\\ 
+\leq& 2\alpha^2\sum_{k=0}^T\norm{\sum_{i=0}^k(A^{k-i}-A_{\infty})(I-B_{\infty})\vy^{(i)}}+2\alpha^2\sum_{k=0}^T\norm{\sum_{i=0}^k(A^{k-i}-A_{\infty})(n\pi_{B}^T-\one)\bar{y}^{(i)}}\nonumber\\ 
+\leq& 2\alpha^2s_{A}^2\sum_{k=0}^T \norm{\Delta_{y}^{(k)}}^2+2\alpha^2s_{A}^2\norm{n\pi_{B}^T-\one}^2\sum_{k=0}^T\norm{\bar{g}^{(k)}}^2\label{basic, consensus lemma 1-0}
+\end{align}
+By further applying Lemma \ref{Basic: Gradient Consensus lemma} in \ref{basic, consensus lemma 1-0}, we have
+\begin{align}
+  &\left(1-400\alpha^2s_A^2s_B^2M_B^2L^2\right)\sum_{k=0}^T\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2\nonumber\\ 
+  \leq &\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right) \sum_{k=0}^T\norm{\bar{g}^{(k)}}^2\nonumber\\ &+40n\alpha^2s_A^2M_Bs_B(T+1)\sigma^2\label{consensus lemma 1-2}
+\end{align}
 By setting 
-$$\alpha \leq \min\{\sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+50)}},\; \sqrt{\frac{1}{2s_B^2L^2(320M_B^2+40)}}\} $$
-we have $1-\alpha^2s_B^4L^2(40+320M_B^2)\geq 0.5$. Therefore, we can double the both sides of ? and complete the proof.
+$$\alpha \leq \min\{\frac{1}{20s_As_BM_BL},\; \frac{1}{25M_Bs_BL\norm{A_{\infty}}}\} $$
+we have $1-400\alpha^2s_A^2s_B^2M_B^2L^2\geq 0.5$. Therefore, we can double both sides of \ref{consensus lemma 1-2} and complete the proof.
 \end{proof}
 
 \subsection{Consensus Lemma 2}
-\begin{lemma}
-  By setting $\alpha \leq \min\{\sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+50)}},\; \textcolor{orange}{\text{left to do}}\} $, we have
+\begin{lemma}\label{basic Consensus Lemma 2}
+  By setting $\alpha \leq \min\{\frac{1}{cL},\;\frac{1}{25M_Bs_BL\norm{A_{\infty}}},\; \sqrt{\frac{n}{1360ns_A^2s_B^2M_B^2L^2+8s_A^2L^2\norm{n\pi_B-\one}^2}}\} $, we have
   \begin{align*}
-    \sum_{k=0}^T\norm{\Delta_x^{(k)}}^2
-  \leq &\alpha^2s_A^2(80s_B^2+32M_Bs_B)n (T+1)\sigma^2\\&+\left(8\alpha^2s_A^2\norm{n\pi_B-\one}^2+32n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right)(T+1)\sigma^2\\&+\left(16\alpha^2s_A^2\norm{n\pi_B-\one}^2+64n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right) \sum_{k=0}^T\norm{\nabla f(w^{(k)})}^2
-  \end{align*}
+    \sum_{k=0}^T\norm{\Delta_x^{(k)}}^2 
+  \leq &80n\alpha^2s_A^2M_Bs_B(T+1)\sigma^2+4\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right)(T+1)\sigma^2\\&+8\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right) \sum_{k=0}^T\norm{\nabla f(w^{(k)})}^2
+\end{align*}
 \end{lemma}
 \begin{proof}
 By definition of $\vw^{(k)}$, we have $\Delta_{x}^{(k+1)}=\vx^{(k+1)}-\vw^{(k+1)}=-\alpha\sum_{i=0}^k(A^{k-i}-A_{\infty})\vy^{(i)}$. This implies that
@@ -576,26 +575,45 @@ By definition of $\vw^{(k)}$, we have $\Delta_{x}^{(k+1)}=\vx^{(k+1)}-\vw^{(k+1)
 \leq&2\alpha^2\norm{\sum_{i=0}^k(A^{k-i}-A_{\infty})(I-B_{\infty})\vy^{(i)}}+2\alpha^2\norm{\sum_{i=0}^k(A^{k-i}-A_{\infty})(n\pi_{B}^T-\one)\bar{y}^{(i)}}
 \end{align*}
 By summing up $k=0$ to $T$, we have that
-\begin{align*}
-&\sum_{k=0}^T\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2\\ 
-\leq& 2\alpha^2\sum_{k=0}^T\norm{\sum_{i=0}^k(A^{k-i}-A_{\infty})(I-B_{\infty})\vy^{(i)}}+2\alpha^2\sum_{k=0}^T\norm{\sum_{i=0}^k(A^{k-i}-A_{\infty})(n\pi_{B}^T-\one)\bar{y}^{(i)}}\\ 
-\leq& 2\alpha^2s_{A}^2\sum_{k=0}^T \norm{\Delta_{y}^{(k)}}^2+2\alpha^2s_{A}^2\norm{n\pi_{B}^T-\one}^2\sum_{k=0}^T\norm{\bar{g}^{(k)}}^2
-\end{align*}
-By further applying Lemma ? in ?, we have
-\begin{align*}
-  &\left(1-\alpha^2s_B^4L^2(40+320M_B^2)\right)\sum_{k=0}^T\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2\\ 
-  \leq &\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+8n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right) \sum_{k=0}^T\norm{\bar{g}^{(k)}}^2\\ &+\alpha^2s_A^2(40s_B^2+16M_Bs_B)n (T+1)\sigma^2
-\end{align*}
+\begin{align}
+&\sum_{k=0}^T\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2\nonumber\\ 
+\leq& 2\alpha^2\sum_{k=0}^T\norm{\sum_{i=0}^k(A^{k-i}-A_{\infty})(I-B_{\infty})\vy^{(i)}}+2\alpha^2\sum_{k=0}^T\norm{\sum_{i=0}^k(A^{k-i}-A_{\infty})(n\pi_{B}^T-\one)\bar{y}^{(i)}}\nonumber\\ 
+\leq& 2\alpha^2s_{A}^2\sum_{k=0}^T \norm{\Delta_{y}^{(k)}}^2+2\alpha^2s_{A}^2\norm{n\pi_{B}^T-\one}^2\sum_{k=0}^T\norm{\bar{g}^{(k)}}^2\label{consensus lemma 2-1}
+\end{align}
+By further applying Lemma \ref{Basic: Gradient Consensus lemma} in \ref{consensus lemma 2-1}, we have
+\begin{align}
+  &\left(1-400\alpha^2s_A^2s_B^2M_B^2L^2\right)\sum_{k=0}^T\norm{\vx^{(k+1)}-\vw^{(k+1)}}^2\nonumber\\ 
+  \leq &\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right) \sum_{k=0}^T\norm{\bar{g}^{(k)}}^2\nonumber\\ &+40n\alpha^2s_A^2M_Bs_B(T+1)\sigma^2\label{consensus lemma 2-2}
+\end{align}
 Noting that $\EE{\norm{\bar{g}^{k}}^2}\leq 2\sigma^2+\frac{4L^2}{n}\EE{\norm{\Delta_x^{(k)}}^2}+4\EE{\norm{\nabla f(w^{(k)})}^2}$, we have
 \begin{align*}
-  &\left(1-\alpha^2s_B^4L^2(40+320M_B^2)-\frac{4L^2}{n}\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+8n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right)\right)\sum_{k=0}^T\norm{\Delta_x^{(k)}}^2\\ 
-  \leq &\alpha^2s_A^2(40s_B^2+16M_Bs_B)n (T+1)\sigma^2\\&+\left(4\alpha^2s_A^2\norm{n\pi_B-\one}^2+16n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right)(T+1)\sigma^2\\&+\left(8\alpha^2s_A^2\norm{n\pi_B-\one}^2+32n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right) \sum_{k=0}^T\norm{\nabla f(w^{(k)})}^2
+  &\left(1-400\alpha^2s_A^2s_B^2M_B^2L^2-\frac{4L^2}{n}\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right)\right)\sum_{k=0}^T\norm{\Delta_x^{(k)}}^2\\ 
+  \leq &40n\alpha^2s_A^2M_Bs_B(T+1)\sigma^2\\&+2\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right)(T+1)\sigma^2\\&+4\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right) \sum_{k=0}^T\norm{\nabla f(w^{(k)})}^2
 \end{align*}
-By setting $\alpha \leq \textcolor{orange}{\text{left to do}}$, the coefficient of LHS is greater than $0.5$, so we obtain the lemma.
+We use $c\alpha L\leq 1$ to simplify the upper bound of $\alpha$
+\begin{align*}
+    &400\alpha^2s_A^2s_B^2M_B^2L^2+\frac{4L^2}{n}\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right)\\
+    \leq &400\alpha^2s_A^2s_B^2M_B^2L^2+\frac{4L^2}{n}\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240n\alpha^2s_A^2s_B^2M_B^2\right)\\
+    =&1360\alpha^2s_A^2s_B^2M_B^2L^2+\frac{8\alpha^2s_A^2L^2\norm{n\pi_B-\one}^2}{n}
+\end{align*}
+Since
+\begin{align*}
+    &\frac{1}{2}\leq 1-400\alpha^2s_A^2s_B^2M_B^2L^2-\frac{4L^2}{n}\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right)\\
+    \iff & 400\alpha^2s_A^2s_B^2M_B^2L^2+\frac{4L^2}{n}\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right)\leq \frac{1}{2}
+\end{align*}
+So we can obtain the upper bound of $\alpha$
+\begin{align*}
+    \alpha \leq \sqrt{\frac{n}{1360ns_A^2s_B^2M_B^2L^2+8s_A^2L^2\norm{n\pi_B-\one}^2}}
+\end{align*}
+and we obtain the lemma.
+\begin{align*}
+    \sum_{k=0}^T\norm{\Delta_x^{(k)}}^2 
+  \leq &80n\alpha^2s_A^2M_Bs_B(T+1)\sigma^2+4\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right)(T+1)\sigma^2\\&+8\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right) \sum_{k=0}^T\norm{\nabla f(w^{(k)})}^2
+\end{align*}
 \end{proof}
 
 \subsection{Descent Lemma: Basic 1}
-\begin{lemma}
+\begin{lemma}\label{basic: descent lemma 1}
   \begin{align*}
     &\frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2}\\ 
   \leq & \frac{4(f(w^{(0)})-f(w^{*}))}{c\alpha(T+1)}+\frac{4}{T+1}\left(2c\alpha L-\frac{1}{2}\right)\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}+8c\alpha L\sigma^2\\&+\frac{ 4L^2}{n(T+1)}\sum_{k=0}^T\EE{\norm{\Delta_x^{(k)}}^2}+\frac{4\norm{\pi_A}^2}{c\alpha(T+1)}\left(c^2\alpha^2L+\frac{\alpha}{\textcolor{red}{c}}\right)\sum_{k=0}^T\EE{\norm{\Delta_{y}^{(k)}}^2}
@@ -648,53 +666,71 @@ We finish the proof of this lemma.
 
 \subsection{Main Theorem: Basic 1}
 \begin{theorem}
-By setting $\alpha \leq \min\{\sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+50)}},\; \sqrt{\frac{1}{2s_B^2L^2(320M_B^2+40)}},\; \textcolor{red}{\text{left to do}}\} $, we have 
+By setting $\alpha \leq \min\{\frac{1}{cL},\; \frac{1}{25M_Bs_BL\norm{A_{\infty}}},\; \frac{1}{20s_As_BM_BL},\; \frac{-4cL+\sqrt{16c^2L^2+4\mathbf{\tilde{C}_2}}}{2\mathbf{\tilde{C}_2}}\} $, we have 
 \begin{align*}
   \frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2} 
-\leq  \frac{4(f(w^{(0)})-f(w^{*}))}{c\alpha(T+1)}+\left(\mathbf{C_1}(1)+2\mathbf{C_2}(\alpha^2)\right)\sigma^2
+\leq & \frac{4(f(w^{(0)})-f(w^{*}))}{c\alpha(T+1)}+\left(\mathbf{C_1}(1)+2\mathbf{C_2}(\alpha^2)\right)\sigma^2\\
+\leq & \frac{4(f(w^{(0)})-f(w^{*}))}{c\alpha(T+1)}+\left(\mathbf{\tilde{C}_1}+2\alpha^2\mathbf{\tilde{C}_2}\right)\sigma^2
 \end{align*}
 Where 
   \begin{align*}
-    \mathbf{C_1}(1)=&\left(8c\alpha L+4n\norm{\pi_A}^2(c\alpha L +\frac{1}{c^2})(20s_B^2+8s_BM_B)\right)\\&+\left(4L^2+4ns_B^2L^2\norm{\pi_A}^2(c\alpha L+\frac{1}{c^2})(20+160M_B^2)\right)\cdot 2\alpha^2s_A^2(40s_B^2+16M_Bs_B)
+    \mathbf{C_1}(1)=&\left(8c\alpha L+80nM_Bs_B\norm{\pi_A}^2(c\alpha L +\frac{1}{c^2})\right)+\left(4L^2+800ns_B^2M_B^2L^2\norm{\pi_A}^2(c\alpha L+\frac{1}{c^2})\right)\cdot 80\alpha^2s_A^2M_Bs_B\\
+    \mathbf{C_2}(\alpha^2)=&\left(4L^2+800ns_B^2M_B^2L^2\norm{\pi_A}^2(c\alpha L+\frac{1}{c^2})\right)\cdot 240c^2\alpha^4s_A^2s_B^2M_B^2L^2+480ns_B^2M_B^2L^2\norm{\pi_A}^2(c^3\alpha^3 L + \alpha^2)
   \end{align*}
   and
   \begin{align*}
-    \mathbf{C_2}(\alpha^2)=&16(c^3\alpha^3 L + \alpha^2)n s_B^2 L^2\norm{\pi_A}^2(5+20M_B^2)\\&+\left(\frac{ 4L^2}{n}+4s_B^2L^2\norm{\pi_A}^2(c\alpha L+\frac{1}{c^2})(20+160M_B^2)\right)\\ &\cdot \left(4\alpha^2s_A^2\norm{n\pi_B-\one}^2+16n\alpha^4c^2s_B^4L^2(5+20M_B^2) \right)
+\mathbf{\tilde{C}_1}:=&\left(8+80nM_Bs_B\norm{\pi_A}^2(1 +\frac{1}{c^2})\right)+\left(4\frac{1}{c^2}+800ns_B^2M_B^2\norm{\pi_A}^2\frac{c^2+1}{c^4}\right)\cdot 80s_A^2M_Bs_B\\  
+\mathbf{\tilde{C}_2}:=&\left(4L^2+800ns_B^2M_B^2L^2\norm{\pi_A}^2(cL+\frac{1}{c^2})\right)\cdot 240s_A^2s_B^2M_B^2+480ns_B^2M_B^2L^2\norm{\pi_A}^2(c^2+1)
   \end{align*}
 \end{theorem}
 
 \begin{proof}
-
-\lly{You can simplify the upper bound of learning rate. For example, use $\frac{1}{30s_Bm_B\norm{A_\infty}_2L}$ to instead of  $\min\{\sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+50)}},\; \sqrt{\frac{1}{2s_B^2L^2(320M_B^2+40)}}\}$. You can also use a simplified upper bound of $C_1$ and $C_2$ to make them look easier. For example, take $c\alpha L \le 1$, so you can ensure that the order of $\alpha L$ be $1$ in $C_1(1)$ and the order of $\alpha$ is 2 in $C_2$.}
-
-  Substitute $\sum_{k=0}^T\EE{\norm{\Delta_{y}^{(k)}}^2}$ by Lemma ?, we have
+  Substitute $\sum_{k=0}^T\EE{\norm{\Delta_{y}^{(k)}}^2}$ in Lemma \ref{basic: descent lemma 1} by Lemma \ref{Basic: Gradient Consensus lemma}, we have
   \begin{align*}
     &\frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2}\\ 
-  \leq & \frac{4(f(w^{(0)})-f(w^{*}))}{c\alpha(T+1)}+\frac{4}{T+1}\left(2c\alpha L-\frac{1}{2}\right)\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}\\&+\left(8c\alpha L+4n\norm{\pi_A}^2(c\alpha L +\frac{1}{c^2})(20s_B^2+8s_BM_B)\right)\sigma^2\\&+\left(\frac{ 4L^2}{n(T+1)}+\frac{4s_B^2L^2\norm{\pi_A}^2}{T+1}(c\alpha L+\frac{1}{c^2})(20+160M_B^2)\right)\sum_{k=0}^T\EE{\norm{\Delta_x^{(k)}}^2}\\&+\frac{16(c^3\alpha^3 L + \alpha^2)n s_B^2 L^2\norm{\pi_A}^2}{T+1}(5+20M_B^2)\sum_{k=0}^T\EE{\norm{\bar{g}^{(k)}}^2}
+  \leq & \frac{4(f(w^{(0)})-f(w^{*}))}{c\alpha(T+1)}+\frac{4}{T+1}\left(2c\alpha L-\frac{1}{2}\right)\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}\\&+\left(8c\alpha L+80nM_Bs_B\norm{\pi_A}^2(c\alpha L +\frac{1}{c^2})\right)\sigma^2\\&+\left(\frac{ 4L^2}{n(T+1)}+\frac{800s_B^2M_B^2L^2\norm{\pi_A}^2}{T+1}(c\alpha L+\frac{1}{c^2})\right)\sum_{k=0}^T\EE{\norm{\Delta_x^{(k)}}^2}\\&+\frac{480ns_B^2M_B^2L^2\norm{\pi_A}^2(c^3\alpha^3 L + \alpha^2)}{T+1}\sum_{k=0}^T\EE{\norm{\bar{g}^{(k)}}^2}
   \end{align*}
-  Substitute $\sum_{k=0}^T\EE{\norm{\Delta_{x}^{(k)}}^2}$ by Lemma ?, we have
+  Substitute $\sum_{k=0}^T\EE{\norm{\Delta_{x}^{(k)}}^2}$ by Lemma \ref{basic: Consensus Lemma 1}, we have
   \begin{align*}
     &\frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2}\\ 
   \leq & \frac{4(f(w^{(0)})-f(w^{*}))}{c\alpha(T+1)}+\frac{4}{T+1}\left(2c\alpha L-\frac{1}{2}\right)\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}\\&+\mathbf{C_1}\sigma^2+\frac{\mathbf{C_2}}{T+1}\sum_{k=0}^T\EE{\norm{\bar{g}^{(k)}}^2}
   \end{align*}
   Where 
   \begin{align*}
-    \mathbf{C_1}(1)=&\left(8c\alpha L+4n\norm{\pi_A}^2(c\alpha L +\frac{1}{c^2})(20s_B^2+8s_BM_B)\right)\\&+\left(4L^2+4ns_B^2L^2\norm{\pi_A}^2(c\alpha L+\frac{1}{c^2})(20+160M_B^2)\right)\cdot 2\alpha^2s_A^2(40s_B^2+16M_Bs_B)
+    \mathbf{C_1}(1)=&\left(8c\alpha L+80nM_Bs_B\norm{\pi_A}^2(c\alpha L +\frac{1}{c^2})\right)\\&+\left(4L^2+800ns_B^2M_B^2L^2\norm{\pi_A}^2(c\alpha L+\frac{1}{c^2})\right)\cdot 80\alpha^2s_A^2M_Bs_B
   \end{align*}
   and
   \begin{align*}
-    \mathbf{C_2}(\alpha^2)=&16(c^3\alpha^3 L + \alpha^2)n s_B^2 L^2\norm{\pi_A}^2(5+20M_B^2)\\&+\left(\frac{ 4L^2}{n}+4s_B^2L^2\norm{\pi_A}^2(c\alpha L+\frac{1}{c^2})(20+160M_B^2)\right)\\ &\cdot \left(4\alpha^2s_A^2\norm{n\pi_B-\one}^2+16n\alpha^4c^2s_B^4L^2(5+20M_B^2) \right)
+    \mathbf{C_2}(\alpha^2)=&\left(4L^2+800ns_B^2M_B^2L^2\norm{\pi_A}^2(c\alpha L+\frac{1}{c^2})\right)\cdot 240c^2\alpha^4s_A^2s_B^2M_B^2L^2\\&+480ns_B^2M_B^2L^2\norm{\pi_A}^2(c^3\alpha^3 L + \alpha^2)
   \end{align*}
   Since $\EE{\norm{\bar{g}^{(k)}}^2}\leq 2\sigma^2+2\EE{\norm{\overline{\nabla f}^{(k)}}^2}$, we have 
   \begin{align*}
     &\frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2}\\ 
   \leq & \frac{4(f(w^{(0)})-f(w^{*}))}{c\alpha(T+1)}+\frac{4}{T+1}\left(2c\alpha L-\frac{1}{2}+\frac{\mathbf{C_2}(\alpha^2)}{2}\right)\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}\\&+\left(\mathbf{C_1}(1)+2\mathbf{C_2}(\alpha^2)\right)\sigma^2
   \end{align*}
-  By setting \textcolor{red}{$\alpha \leq \text{left to do}$}, we finish the proof of the theorem.
+  Since $2c\alpha L-\frac{1}{2}+\frac{\mathbf{C_2}(\alpha^2)}{2}\leq 0 \iff 2c\alpha L+\frac{\mathbf{C_2}(\alpha^2)}{2}\leq \frac{1}{2}$, and use the upper bound $\alpha\leq \frac{1}{cL}$
+  \begin{align*}
+   &\mathbf{C_2}(\alpha^2)\leq \alpha^2\mathbf{\tilde{C}_2}\\
+    &\mathbf{\tilde{C}_2}:=\left(4L^2+800ns_B^2M_B^2L^2\norm{\pi_A}^2(cL+\frac{1}{c^2})\right)\cdot 240s_A^2s_B^2M_B^2+480ns_B^2M_B^2L^2\norm{\pi_A}^2(c^2+1)
+  \end{align*}
+  Then we can obtain the upper bound of $\alpha$
+  \begin{align*}
+      2c\alpha L+\frac{1}{2}\alpha^2\mathbf{\tilde{C}_2} \leq \frac{1}{2}
+      \iff  \alpha \leq \frac{-4cL+\sqrt{16c^2L^2+4\mathbf{\tilde{C}_2}}}{2\mathbf{\tilde{C}_2}}
+  \end{align*}
+  and obtain the lemma
+   \begin{align*}
+    &\frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2}\leq  \frac{4(f(w^{(0)})-f(w^{*}))}{c\alpha(T+1)}+\left(\mathbf{C_1}(1)+2\mathbf{C_2}(\alpha^2)\right)\sigma^2
+  \end{align*}
+  We can also use the bound $c\alpha L\leq 1$ to simplify the upper bound of $\mathbf{C_1}(1),\mathbf{C_2}(\alpha^2)$
+  \begin{align*}
+\mathbf{C_1}(1)\leq \mathbf{\tilde{C}_1}:=&\left(8+80nM_Bs_B\norm{\pi_A}^2(1 +\frac{1}{c^2})\right)\\&+\left(4\frac{1}{c^2}+800ns_B^2M_B^2\norm{\pi_A}^2\frac{c^2+1}{c^4}\right)\cdot 80s_A^2M_Bs_B\\
+\mathbf{C_2}(\alpha^2)\leq \alpha^2\mathbf{\tilde{C}_2}&
+  \end{align*}
 \end{proof}
 
 \subsection{Descent Lemma: Basic 2}
-\begin{lemma}
+\begin{lemma}\label{Descent Lemma: Basic 2}
   \begin{align*}
     &\frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}\\ \leq& \frac{2(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c\alpha(T+1)}+\frac{2}{T+1}\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}\right)\sum_{k=0}^T\EE{\norm{\Delta_x^{(k)}}^2}+4c\alpha L\sigma^2\\&+\frac{2\norm{\pi_A}^2}{(T+1)c\alpha}\left(\frac{\alpha}{\textcolor{red}{c}}+c^2\alpha^2L\right)\sum_{k=0}^T\EE{\norm{\Delta_{y}^{(k)}}^2}+\frac{2}{T+1}\left(4c\alpha L-\frac{1}{4}\right)\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2}
   \end{align*}
@@ -746,66 +782,82 @@ We finish the proof of this lemma.
 \subsection{Main Theorem: Basic 2}
 
 \begin{theorem}
-  By setting $\alpha \leq \min\{\sqrt{\frac{1}{2s_B^2L^2\norm{A_{\infty}}_2^2(200M_B^2+50)}},\; \textcolor{orange}{\text{left to do}},\; \textcolor{green}{\text{left to do}}\} $, we have 
+  By setting $\alpha \leq \min\{\frac{1}{cL} ,\;\frac{1}{25M_Bs_BL\norm{A_{\infty}}},\; \sqrt{\frac{n}{1360ns_A^2s_B^2M_B^2L^2+8s_A^2L^2\norm{n\pi_B-\one}^2}},\; \\\frac{-8cL+\sqrt{16c^2L^2+2\left(960n\norm{\pi_A}^2M_B^2s_B^2L^2\left(1+c^2\right)+\mathbf{\tilde{D}_2}\right)}}{2\left(960n\norm{\pi_A}^2M_B^2s_B^2L^2\left(1+c^2\right)+\mathbf{\tilde{D}_2}\right)}\} $, we have 
   \begin{align*}
-    &\frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2} \leq \frac{2(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c\alpha(T+1)}+\mathbf{D_1}(1)\sigma^2
-  \end{align*}
+ \frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}\leq&\frac{2(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c\alpha(T+1)}+\mathbf{D_1}(1)\sigma^2\\
+ \leq&\frac{2(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c\alpha(T+1)}+\mathbf{\tilde{D}_1}\sigma^2
+\end{align*}
   Where 
   \begin{align*}
-    \mathbf{D_1}(1)=&\left(4c\alpha L+2n\norm{\pi_A}^2\left(\frac{1}{c^2}+c\alpha L\right)(20s_B^2+8s_BM_B)\right)
-    \\&+16ns_B^2L^2(5+20M_B^2)\norm{\pi_A}^2\left(c\alpha^2+c^3\alpha^3 L\right)
-    \\&+2\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}+s_B^2L^2\norm{\pi_A}^2\left(\frac{1}{c^2}+c\alpha L\right)(20+160M_B^2)\right)
-    \\&\cdot\alpha^2 n s_A^2(80s_B^2+32M_Bs_B)
-    \\&+2\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}+s_B^2L^2\norm{\pi_A}^2\left(\frac{1}{c^2}+c\alpha L\right)(20+160M_B^2)\right)
-    \\&\cdot \left(8\alpha^2s_A^2\norm{n\pi_B-\one}^2+32n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right)
-    \\&+32s_B^2L^4(5+20M_B^2)\norm{\pi_A}^2\left(c\alpha^2+c^3\alpha^3 L\right)\cdot\alpha^2 n s_A^2(80s_B^2+32M_Bs_B)
-    \\&+32s_B^2L^4(5+20M_B^2)\norm{\pi_A}^2\left(c\alpha^2+c^3\alpha^3 L\right)
-    \\&\cdot \left(8\alpha^2s_A^2\norm{n\pi_B-\one}^2+32n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right)
+\mathbf{\tilde{D}_1}:=&4+2n\norm{\pi_A}^2M_Bs_B\left(\frac{1}{c^2}+1\right)+480n\norm{\pi_A}^2M_B^2s_B^2\left(\frac{1}{c^2}+1\right)\\
+    &+160ns_A^2M_Bs_B\left(\frac{2}{nc^2}+200\norm{\pi_A}^2M_B^2s_B^2\frac{c^2+1}{c^4}\right)+7680n\norm{\pi_A}^2s_A^2M_B^3s_B^3\frac{c^2+1}{c^4}\\
+    &+8\left(\frac{5}{nc^2}+200\norm{\pi_A}^2M_B^2s_B^2\frac{c^2+1}{c^4}\right)\left(2s_A^2\norm{n\pi_B-\one}^2+240ns_A^2s_B^2M_B^2\right)\\
+    &+3840\norm{\pi_A}^2M_B^2s_B^2\frac{c^2+1}{c^4}\left(2s_A^2\norm{n\pi_B-\one}^2+240ns_A^2s_B^2M_B^2\right)\\
+    \mathbf{\tilde{D}_2}=&16\left(\frac{5L^2}{n}+200\norm{\pi_A}^2M_B^2s_B^2L^2\left(\frac{1}{c^2}+1\right)\right)\left(2s_A^2\norm{n\pi_B-\one}^2+240ns_A^2s_B^2M_B^2\right) \\
+  &+7680\norm{\pi_A}^2M_B^2s_B^2\left(\frac{L^2}{c^2}+ L^2\right)\left(2s_A^2\norm{n\pi_B-\one}^2+240ns_A^2s_B^2M_B^2\right)
   \end{align*}
 \end{theorem}
 
 \begin{proof}
-  Substitute $\sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}^2}$ by Lemma ?, we have
+  Substitute $\sum_{k=0}^T \EE{\norm{\Delta_y^{(k)}}^2}$ in Lemma \ref{Descent Lemma: Basic 2} by Lemma \ref{Basic: Gradient Consensus lemma}, we have
   \begin{align*}
     &\frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}\\ \leq& \frac{2(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c\alpha(T+1)}+\frac{2}{T+1}\left(4c\alpha L-\frac{1}{4}\right)\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2}
-    \\&+\frac{2}{T+1}\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}+s_B^2L^2\norm{\pi_A}^2\left(\frac{1}{c^2}+c\alpha L\right)(20+160M_B^2)\right)\sum_{k=0}^T\EE{\norm{\Delta_x^{(k)}}^2}
-    \\&+\left(4c\alpha L+2n\norm{\pi_A}^2\left(\frac{1}{c^2}+c\alpha L\right)(20s_B^2+8s_BM_B)\right)\sigma^2
-    \\&+\frac{8ns_B^2L^2(5+20M_B^2)\norm{\pi_A}^2}{T+1}\left(c\alpha^2+c^3\alpha^3 L\right)\sum_{k=0}^T\EE{\norm{\bar{g}^{(k)}}^2}
+    \\&+\frac{2}{T+1}\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}+200\norm{\pi_A}^2M_B^2s_B^2L^2\left(\frac{1}{c^2}+c\alpha L\right)\right)\sum_{k=0}^T\EE{\norm{\Delta_x^{(k)}}^2}
+    \\&+\left(4c\alpha L+2n\norm{\pi_A}^2M_Bs_B\left(\frac{1}{c^2}+c\alpha L\right)\right)\sigma^2
+    \\&+\frac{240n\norm{\pi_A}^2M_B^2s_B^2}{T+1}\left(\alpha^2L^2+c^3\alpha^3 L^3\right)\sum_{k=0}^T\EE{\norm{\bar{g}^{(k)}}^2}
   \end{align*}
   Since $\EE{\norm{\bar{g}^{(k)}}^2}\leq 2\sigma^2+\frac{4L^2}{n}\EE{\norm{\Delta_x^{(k)}}^2}+4\EE{\norm{\nabla f(w^{(k)})}^2}$, we have
   \begin{align*}
     &\frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}\\ \leq& \frac{2(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c\alpha(T+1)}
-    \\&+\frac{2}{T+1}\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}+s_B^2L^2\norm{\pi_A}^2\left(\frac{1}{c^2}+c\alpha L\right)(20+160M_B^2)\right)\sum_{k=0}^T\EE{\norm{\Delta_x^{(k)}}^2}
-    \\&+\frac{32s_B^2L^4(5+20M_B^2)\norm{\pi_A}^2}{T+1}\left(c\alpha^2+c^3\alpha^3 L\right)\sum_{k=0}^T\EE{\norm{\Delta_x^{(k)}}^2}
-    \\&+\left(4c\alpha L+2n\norm{\pi_A}^2\left(\frac{1}{c^2}+c\alpha L\right)(20s_B^2+8s_BM_B)\right)\sigma^2
-    \\&+16ns_B^2L^2(5+20M_B^2)\norm{\pi_A}^2\left(c\alpha^2+c^3\alpha^3 L\right)\cdot\sigma^2
-    \\&+\frac{2}{T+1}\left(16ns_B^2L^2(5+20M_B^2)\norm{\pi_A}^2\left(c\alpha^2+c^3\alpha^3 L\right)+4c\alpha L-\frac{1}{4}\right)\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2}
+    \\&+\frac{2}{T+1}\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}+200\norm{\pi_A}^2M_B^2s_B^2L^2\left(\frac{1}{c^2}+c\alpha L\right)\right)\sum_{k=0}^T\EE{\norm{\Delta_x^{(k)}}^2}
+    \\&+\frac{960\norm{\pi_A}^2M_B^2s_B^2}{T+1}\left(\alpha^2L^4+c^3\alpha^3 L^5\right)\sum_{k=0}^T\EE{\norm{\Delta_x^{(k)}}^2}
+    \\&+\left(4c\alpha L+2n\norm{\pi_A}^2M_Bs_B\left(\frac{1}{c^2}+c\alpha L\right)+480n\norm{\pi_A}^2M_B^2s_B^2\left(\alpha^2L^2+c^3\alpha^3 L^3\right)\right)\sigma^2
+    \\&+\frac{2}{T+1}\left(480n\norm{\pi_A}^2M_B^2s_B^2\left(\alpha^2L^2+c^3\alpha^3 L^3\right)+4c\alpha L-\frac{1}{4}\right)\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2}
   \end{align*}
-  Substitute $\sum_{k=0}^T \EE{\norm{\Delta_x^{(k)}}^2}$ by Consensus Lemma 2, we have
+  Substitute $\sum_{k=0}^T \EE{\norm{\Delta_x^{(k)}}^2}$ by Lemma \ref{basic Consensus Lemma 2}, we have
   \begin{align*}
-    &\frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}\\ \leq& \frac{2(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c\alpha(T+1)}+\mathbf{D_1}(1)\sigma^2
-    \\&+\frac{2}{T+1}\left(16ns_B^2L^2(5+20M_B^2)\norm{\pi_A}^2\left(c\alpha^2+c^3\alpha^3 L\right)+\frac{\mathbf{D_2}(\alpha^2)}{2}+4c\alpha L-\frac{1}{4}\right)\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2}
+    \frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}\leq&\frac{2}{T+1}\left(480n\norm{\pi_A}^2M_B^2s_B^2\left(\alpha^2L^2+c^3\alpha^3 L^3\right)+\frac{\mathbf{D_2}(\alpha^2)}{2}+4c\alpha L-\frac{1}{4}\right)\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2}\\&+\frac{2(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c\alpha(T+1)}+\mathbf{D_1}(1)\sigma^2
   \end{align*}
   Where 
   \begin{align*}
-    \mathbf{D_1}(1)=&\left(4c\alpha L+2n\norm{\pi_A}^2\left(\frac{1}{c^2}+c\alpha L\right)(20s_B^2+8s_BM_B)\right)
-    \\&+16ns_B^2L^2(5+20M_B^2)\norm{\pi_A}^2\left(c\alpha^2+c^3\alpha^3 L\right)
-    \\&+2\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}+s_B^2L^2\norm{\pi_A}^2\left(\frac{1}{c^2}+c\alpha L\right)(20+160M_B^2)\right)
-    \\&\cdot\alpha^2 n s_A^2(80s_B^2+32M_Bs_B)
-    \\&+2\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}+s_B^2L^2\norm{\pi_A}^2\left(\frac{1}{c^2}+c\alpha L\right)(20+160M_B^2)\right)
-    \\&\cdot \left(8\alpha^2s_A^2\norm{n\pi_B-\one}^2+32n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right)
-    \\&+32s_B^2L^4(5+20M_B^2)\norm{\pi_A}^2\left(c\alpha^2+c^3\alpha^3 L\right)\cdot\alpha^2 n s_A^2(80s_B^2+32M_Bs_B)
-    \\&+32s_B^2L^4(5+20M_B^2)\norm{\pi_A}^2\left(c\alpha^2+c^3\alpha^3 L\right)
-    \\&\cdot \left(8\alpha^2s_A^2\norm{n\pi_B-\one}^2+32n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right)
+    \mathbf{D_1}(1)=&4c\alpha L+2n\norm{\pi_A}^2M_Bs_B\left(\frac{1}{c^2}+c\alpha L\right)+480n\norm{\pi_A}^2M_B^2s_B^2\left(\alpha^2L^2+c^3\alpha^3 L^3\right)\\
+    &+160n\alpha^2s_A^2M_Bs_B\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}+200\norm{\pi_A}^2M_B^2s_B^2L^2\left(\frac{1}{c^2}+c\alpha L\right)\right)\\
+    &+8\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}+200\norm{\pi_A}^2M_B^2s_B^2L^2\left(\frac{1}{c^2}+c\alpha L\right)\right)\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right)\\
+    &+7680n\norm{\pi_A}^2s_A^2M_B^3s_B^3\left(\alpha^4L^4+c^3\alpha^5 L^5\right)\\
+    &+3840\norm{\pi_A}^2M_B^2s_B^2\left(\alpha^2L^4+c^3\alpha^3 L^5\right)\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right)
   \end{align*}
 and 
 \begin{align*}
-  \mathbf{D_2}(\alpha^2)=&2\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}+s_B^2L^2\norm{\pi_A}^2\left(\frac{1}{c^2}+c\alpha L\right)(20+160M_B^2)\right)
-  \\&\cdot \left(16\alpha^2s_A^2\norm{n\pi_B-\one}^2+64n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right) 
-  \\&+32s_B^2L^4(5+20M_B^2)\norm{\pi_A}^2\left(c\alpha^2+c^3\alpha^3 L\right)
-  \\&\cdot \left(16\alpha^2s_A^2\norm{n\pi_B-\one}^2+64n\alpha^4c^2s_B^4L^2(5+20M_B^2)\right) 
+  \mathbf{D_2}(\alpha^2)=&16\left(\frac{L^2}{n}+\frac{4c\alpha L^3}{n}+200\norm{\pi_A}^2M_B^2s_B^2L^2\left(\frac{1}{c^2}+c\alpha L\right)\right)\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right) \\
+  &+7680\norm{\pi_A}^2M_B^2s_B^2\left(\alpha^2L^4+c^3\alpha^3 L^5\right)\left(2\alpha^2s_A^2\norm{n\pi_B-\one}^2+240nc^2\alpha^4s_A^2s_B^2M_B^2L^2\right) 
 \end{align*}
-By setting \textcolor{green}{$\alpha \leq \text{left to do}$}, we finish the proof of the theorem.
+Use the bound $c\alpha L\leq 1$, we have that
+\begin{align*}
+\mathbf{D_1}(1)\leq &\mathbf{\tilde{D}_1}:=4+2n\norm{\pi_A}^2M_Bs_B\left(\frac{1}{c^2}+1\right)+480n\norm{\pi_A}^2M_B^2s_B^2\left(\frac{1}{c^2}+1\right)\\
+    &+160ns_A^2M_Bs_B\left(\frac{2}{nc^2}+200\norm{\pi_A}^2M_B^2s_B^2\frac{c^2+1}{c^4}\right)+7680n\norm{\pi_A}^2s_A^2M_B^3s_B^3\frac{c^2+1}{c^4}\\
+    &+8\left(\frac{5}{nc^2}+200\norm{\pi_A}^2M_B^2s_B^2\frac{c^2+1}{c^4}\right)\left(2s_A^2\norm{n\pi_B-\one}^2+240ns_A^2s_B^2M_B^2\right)\\
+    &+3840\norm{\pi_A}^2M_B^2s_B^2\frac{c^2+1}{c^4}\left(2s_A^2\norm{n\pi_B-\one}^2+240ns_A^2s_B^2M_B^2\right)\\
+\mathbf{D_2}(\alpha^2)\leq &\alpha^2 \mathbf{\tilde{D}_2}
+\end{align*}
+and 
+\begin{align*}
+\mathbf{\tilde{D}_2}=&16\left(\frac{5L^2}{n}+200\norm{\pi_A}^2M_B^2s_B^2L^2\left(\frac{1}{c^2}+1\right)\right)\left(2s_A^2\norm{n\pi_B-\one}^2+240ns_A^2s_B^2M_B^2\right) \\
+  &+7680\norm{\pi_A}^2M_B^2s_B^2\left(\frac{L^2}{c^2}+ L^2\right)\left(2s_A^2\norm{n\pi_B-\one}^2+240ns_A^2s_B^2M_B^2\right)
+\end{align*}
+Since 
+\begin{align*}
+&480n\norm{\pi_A}^2M_B^2s_B^2\left(\alpha^2L^2+c^3\alpha^3 L^3\right)+\frac{\mathbf{D_2}(\alpha^2)}{2}\leq480n\norm{\pi_A}^2M_B^2s_B^2\alpha^2L^2\left(1+c^2\right)+\frac{\alpha^2\mathbf{\tilde{D}_2}}{2}
+\end{align*}
+So we have that 
+\begin{align*}
+&960n\norm{\pi_A}^2M_B^2s_B^2\alpha^2L^2\left(1+c^2\right)+\alpha^2\mathbf{\tilde{D}_2}+8c\alpha L-\frac{1}{2}\leq 0\\
+\iff  &  \alpha \leq \frac{-8cL+\sqrt{16c^2L^2+2\left(960n\norm{\pi_A}^2M_B^2s_B^2L^2\left(1+c^2\right)+\mathbf{\tilde{D}_2}\right)}}{2\left(960n\norm{\pi_A}^2M_B^2s_B^2L^2\left(1+c^2\right)+\mathbf{\tilde{D}_2}\right)}
+\end{align*}
+So apply the upper bound we obtain the lemma.
+\begin{align*}
+ \frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}\leq&\frac{2(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c\alpha(T+1)}+\mathbf{D_1}(1)\sigma^2\\
+ \leq&\frac{2(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c\alpha(T+1)}+\mathbf{\tilde{D}_1}\sigma^2
+\end{align*}
 \end{proof}
 
 \section{Convergence Analysis: Quadratic Term}
