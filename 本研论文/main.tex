@@ -665,7 +665,7 @@ We finish the proof of this lemma.
 \end{proof}
 
 \subsection{Main Theorem: Basic 1}
-\begin{theorem}
+\begin{theorem}\label{Main Theorem: Basic 1}
 By setting $\alpha \leq \min\{\frac{1}{cL},\; \frac{1}{25M_Bs_BL\norm{A_{\infty}}},\; \frac{1}{20s_As_BM_BL},\; \frac{-4cL+\sqrt{16c^2L^2+4\mathbf{\tilde{C}_2}}}{2\mathbf{\tilde{C}_2}}\} $, we have 
 \begin{align*}
   \frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\nabla f(w^{(k)})}^2} 
@@ -781,7 +781,7 @@ We finish the proof of this lemma.
 
 \subsection{Main Theorem: Basic 2}
 
-\begin{theorem}
+\begin{theorem}\label{Main Theorem: Basic 2}
   By setting $\alpha \leq \min\{\frac{1}{cL} ,\;\frac{1}{25M_Bs_BL\norm{A_{\infty}}},\; \sqrt{\frac{n}{1360ns_A^2s_B^2M_B^2L^2+8s_A^2L^2\norm{n\pi_B-\one}^2}},\; \\\frac{-8cL+\sqrt{16c^2L^2+2\left(960n\norm{\pi_A}^2M_B^2s_B^2L^2\left(1+c^2\right)+\mathbf{\tilde{D}_2}\right)}}{2\left(960n\norm{\pi_A}^2M_B^2s_B^2L^2\left(1+c^2\right)+\mathbf{\tilde{D}_2}\right)}\} $, we have 
   \begin{align*}
  \frac{1}{T+1}\sum_{k=0}^T\EE{\norm{\overline{\nabla f}^{(k)}}^2}\leq&\frac{2(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c\alpha(T+1)}+\mathbf{D_1}(1)\sigma^2\\
@@ -862,7 +862,7 @@ So apply the upper bound we obtain the lemma.
 
 \section{Convergence Analysis: Quadratic Term}
 \subsection{Decomposition}
-\begin{lemma}
+\begin{lemma}\label{Convergence Analysis: Quadratic Term-Decomposition}
   \begin{align*}
     \frac{\alpha^2L}{2}\norm{\pi_{A}^T\sum_{i=0}^{m-1}\vy^{(k+i)}}^2\leq &c^2\alpha^2L\norm{\sum_{i=0}^{m-1}\bar{g}^{(k+i)}}^2+2\alpha^2L\norm{\pi_A^T(\sum_{i=0}^{m-1}B^i - m B_{\infty})\vy^{(k)}}^2\\&+2\alpha^2L\norm{\pi_A^{T}\sum_{i=0}^{m-1}(B^{m-1-i}-B_{\infty})(\vg^{(k+i)}-\vg^{(k)})}^2
   \end{align*}
@@ -880,7 +880,7 @@ We finish the proof of the lemma.
 \end{proof}
 
 \subsection{Technical Lemmas}
-\begin{lemma}
+\begin{lemma}\label{Convergence Analysis: Quadratic Term-Decomposition-1}
   \begin{align*}
     &\frac{c^2\alpha^2L}{m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\sum_{i=0}^{m-1}\bar{g}^{(k+i)}}^2}
   \\ \leq& \textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+ \textcolor{blue}{\frac{4c^2\alpha^2mL}{K+1}\sum_{k=0,m,\cdots,mK}\EE{\norm{\nabla f(w^{(k)})}^2}}\\&+\frac{8c^2\alpha^2L^3}{n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}+\frac{16c^4m\alpha^4L^3}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}\\&+\frac{16c^2m\alpha^4L^3}{n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}
@@ -922,7 +922,7 @@ then we obtain the lemma.
 We finish the proof of the lemma.
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{Convergence Analysis: Quadratic Term-Decomposition-2}
   \begin{align*}
     \frac{\alpha^2L}{m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\pi_A^T(\sum_{i=0}^{m-1}B^i - m B_{\infty})\vy^{(k)}}^2}\leq \frac{\alpha^2s_B^2L\norm{\pi_A}^2}{m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\Delta_y^{(k)}}^2}
   \end{align*}
@@ -942,7 +942,7 @@ We finish the proof of the lemma.
   We finish the proof of the lemma.
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{Convergence Analysis: Quadratic Term-Decomposition-3}
   \begin{align*}
     &\frac{\alpha^2L}{m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\pi_A^{T}\sum_{i=0}^{m-1}(B^{m-1-i}-B_{\infty})(\vg^{(k+i)}-\vg^{(k)})}^2}\\
     \leq& \frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{18\alpha^2L^3\norm{\pi_A}^2s_B^2}{ K+1}\sum_{t=0}^{m(K+1)}\norm{\Delta_x^{(t)}}^2\\&+\frac{18\alpha^4L^3\norm{\pi_A}^2s_B^2\norm{A_{\infty}}^2}{ K+1}\sum_{t=0}^{m(K+1)}\norm{\Delta_y^{(t)}}^2+\frac{18n^2\alpha^4L^3s_B^2\norm{\pi_A}^2\norm{\pi_B}^2\norm{A_{\infty}}^2}{ K+1}\sum_{t=0}^{m(K+1)}\norm{\bar{g}^{(t)}}^2
@@ -993,7 +993,7 @@ We finish the proof of the lemma.
 
 \subsection{Main Theorem}
 
-\begin{theorem}
+\begin{theorem}\label{Convergence Analysis: Quadratic Term-Decomposition, main theorem}
   \begin{align*}
     &\frac{\alpha^2 L}{2mK}\sum_{k=0,m,\cdots,mK}\EE{\norm{\pi_A^T\sum_{i=0}^{m-1}\vy^{(k+i)}}^2}\\
     \leq&\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+ \textcolor{blue}{\frac{4c^2\alpha^2mL}{K+1}\sum_{k=0,m,\cdots,mK}\EE{\norm{\nabla f(w^{(k)})}^2}}\\&+\frac{8c^2\alpha^2L^3}{n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}+\frac{18\alpha^2L^3\norm{\pi_A}^2s_B^2}{ K+1}\sum_{t=0}^{m(K+1)}\norm{\Delta_x^{(t)}}^2\\&+\textcolor{brown}{\frac{16c^2m\alpha^4L^3}{n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}}+\frac{18\alpha^4L^3\norm{\pi_A}^2s_B^2\norm{A_{\infty}}^2}{ K+1}\sum_{t=0}^{m(K+1)}\norm{\Delta_y^{(t)}}^2
@@ -1003,7 +1003,7 @@ We finish the proof of the lemma.
 \end{theorem}
 
 \begin{proof}
-  Substitute Lemma ?,? and ? to Lemma ?, we obtain that 
+  Substitute Lemma \ref{Convergence Analysis: Quadratic Term-Decomposition-1}, \ref{Convergence Analysis: Quadratic Term-Decomposition-2}, and \ref{Convergence Analysis: Quadratic Term-Decomposition-3} to Lemma \ref{Convergence Analysis: Quadratic Term-Decomposition}, we obtain that 
   \begin{align*}
     &\frac{\alpha^2L}{2m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\pi_A^T\sum_{i=0}^{m-1}\vy^{(k+i)}}^2}\\
     \leq&\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+ \textcolor{blue}{\frac{4c^2\alpha^2mL}{K+1}\sum_{k=0,m,\cdots,mK}\EE{\norm{\nabla f(w^{(k)})}^2}}\\&+\frac{8c^2\alpha^2L^3}{n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}+\frac{16c^4m\alpha^4L^3}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}\\&+\frac{16c^2m\alpha^4L^3}{n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}
@@ -1016,7 +1016,7 @@ We finish the proof of the lemma.
 \section{Convergence Analysis: Inner Product Term}
 \subsection{Decomposition}
 
-\begin{lemma}
+\begin{lemma}\label{Convergence Analysis: Inner Product Term-Decomposition}
   \begin{align*}
     &-\alpha\EE{\ip{\pi_A^T\sum_{i=0}^{m-1}\vy^{(k+i)},\nabla f(w^{(k)})}}\\
     =&-\alpha\EE{\ip{\pi_A^T(\sum_{i=0}^{m-1}B^i-B_{\infty}) \vy^{(k)},\nabla f(w^{(k)})}}-c\alpha m\EE{\ip{\bar{g}^{(k)},\nabla f(w^{(k)})}}\\&-\alpha\EE{\ip{\pi_A^T\sum_{i=0}^{m-1}B^{m-1-i}(\vg^{(k+i)}-\vg^{(k)}),\nabla f(w^{(k)})}}
@@ -1033,7 +1033,7 @@ taking conditional expectation, we obtain the lemma.
 \end{proof}
 
 \subsection{Technical Lemmas}
-\begin{lemma}
+\begin{lemma}\label{Convergence Analysis: Inner Product Term-1}
   \begin{align*}
     &-\frac{\alpha}{m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\ip{\pi_A^T(\sum_{i=0}^{m-1}B^i-B_{\infty}) \vy^{(k)},\nabla f(w^{(k)})}}\\ \leq& \textcolor{blue}{\frac{c\alpha}{4(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\nabla f(w^{(k)})}}^2}+\textcolor{red}{\frac{\alpha\norm{\pi_A}^2s_B^2}{cm^2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\Delta_y^{(k)}}^2}}
   \end{align*}
@@ -1054,7 +1054,7 @@ taking conditional expectation, we obtain the lemma.
   We finish the proof of the lemma.
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{Convergence Analysis: Inner Product Term-2}
   \begin{align*}
     &-\frac{c\alpha }{K+1} \sum_{k=0,m,\cdots,mK}\EE{\ip{\bar{g}^{(k)},\nabla f(w^{(k)})}}\\\leq& -\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}+\frac{c\alpha L^2}{2n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}\\&\textcolor{blue}{-\frac{c\alpha}{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\nabla f(w^{(k)})}^2}}
   \end{align*}
@@ -1072,7 +1072,7 @@ taking conditional expectation, we obtain the lemma.
   We finish the proof of the lemma.
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{Convergence Analysis: Inner Product Term-3}
     \begin{align*}
     &-\frac{\alpha}{mK}\sum_{k=0,m,\cdots,mK}\EE{\ip{\pi_A^T\sum_{i=1}^{m-1}B^{m-1-i}(\vg^{(k+i)}-\vg^{(k)}),\nabla f(w^{(k)})}}\\ 
     \leq&\frac{54\alpha L^2\norm{\pi_A}^2(s_B+m\norm{B_{\infty}})^2}{cm^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}\\&+\frac{144\alpha^3L^2\norm{\pi_A}^2\norm{A_{\infty}}^2(s_B+m\norm{B_{\infty}})^2}{cm^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}
@@ -1117,7 +1117,7 @@ taking conditional expectation, we obtain the lemma.
 \end{proof}
 
 \subsection{Main Theorem}
-\begin{theorem}
+\begin{theorem}\label{Convergence Analysis: Quadratic Term-Decomposition, theorem}
   \begin{align*}
     &-\frac{\alpha}{m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\pi_A^T\sum_{i=0}^{m-1}\vy^{(k+i)},\nabla f(w^{(k)}) }}\\
     \leq& \textcolor{blue}{-\frac{c\alpha}{32(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\nabla f(w^{(k)})}}^2}+\textcolor{red}{\frac{\alpha\norm{\pi_A}^2s_B^2}{cm^2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\Delta_y^{(k)}}^2}}\\&-\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}+\frac{c\alpha L^2}{2n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}\\&+\frac{54\alpha L^2\norm{\pi_A}^2(s_B+m\norm{B_{\infty}})^2}{cm^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}\\&+\frac{144\alpha^3L^2\norm{\pi_A}^2\norm{A_{\infty}}^2(s_B+m\norm{B_{\infty}})^2}{cm^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}
@@ -1126,7 +1126,7 @@ taking conditional expectation, we obtain the lemma.
 \end{theorem}
 
 \begin{proof}
-  Substitute Lemma ?,? and ? to Lemma ?, we obtain that
+  Substitute Lemma \ref{Convergence Analysis: Inner Product Term-1}, \ref{Convergence Analysis: Inner Product Term-2} and \ref{Convergence Analysis: Inner Product Term-3} to Lemma \ref{Convergence Analysis: Inner Product Term-Decomposition}, we obtain that
   \begin{align*}
     &-\frac{\alpha}{m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\pi_A^T\sum_{i=0}^{m-1}\vy^{(k+i)},\nabla f(w^{(k)}) }}\\
     \leq& \textcolor{blue}{-\frac{c\alpha}{32(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\nabla f(w^{(k)})}}^2}+\textcolor{red}{\frac{\alpha\norm{\pi_A}^2s_B^2}{cm^2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\Delta_y^{(k)}}^2}}\\&-\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}+\frac{c\alpha L^2}{2n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}\\&+\frac{54\alpha L^2\norm{\pi_A}^2(s_B+m\norm{B_{\infty}})^2}{cm^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}\\&+\frac{144\alpha^3L^2\norm{\pi_A}^2\norm{A_{\infty}}^2(s_B+m\norm{B_{\infty}})^2}{cm^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}
@@ -1138,11 +1138,10 @@ taking conditional expectation, we obtain the lemma.
 \section{Convergence Analysis and Linear Speedup}
 
 \subsection{Analysis}
-\begin{lemma}
-  \begin{align*}
-    &\frac{f(w^{(*)})-f(w^{(0)})}{m(K+1)}
-    \\\leq& -\frac{\alpha}{m(K+1)}\sum_{k=0,m,\cdots,mK} \EE{\ip{\pi_{A}^T\sum_{i=0}^{m-1}\vy^{(k+i)},\nabla f(w^{(k)})}}\\&+\frac{\alpha^2L}{2m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\pi_{A}^T\sum_{i=0}^{m-1}\vy^{(k+i)}}^2}
-  \end{align*}
+\begin{lemma}\label{Convergence Analysis and Linear Speedup-Analysis}
+\begin{align*}
+  \frac{f(w^{(*)})-f(w^{(0)})}{m(K+1)}\leq& -\frac{\alpha}{m(K+1)}\sum_{k=0,m,\cdots,mK} \EE{\ip{\pi_{A}^T\sum_{i=0}^{m-1}\vy^{(k+i)},\nabla f(w^{(k)})}}\\&+\frac{\alpha^2L}{2m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\pi_{A}^T\sum_{i=0}^{m-1}\vy^{(k+i)}}^2}
+\end{align*}
 \end{lemma}
 \begin{proof}
 Since $w^{(k+m)}=w^{(km)}-\alpha\pi_{A}^T\sum_{i=0}^{m-1}\vy^{(k+i)}$, we can apply the descent lemma and obtain that
@@ -1155,24 +1154,20 @@ Taking conditional expectation, we have
 \end{align*}
 By summing over $k=0,m,\cdots,mK$, we have $T=m(K+1)$, and we have
 \begin{align*}
-  &\frac{f(w^{(*)})-f(w^{(0)})}{m(K+1)}
-  \\\leq& -\frac{\alpha}{m(K+1)}\sum_{k=0,m,\cdots,mK} \EE{\ip{\pi_{A}^T\sum_{i=0}^{m-1}\vy^{(k+i)},\nabla f(w^{(k)})}}\\&+\frac{\alpha^2L}{2m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\pi_{A}^T\sum_{i=0}^{m-1}\vy^{(k+i)}}^2}
+  \frac{f(w^{(*)})-f(w^{(0)})}{m(K+1)}\leq& -\frac{\alpha}{m(K+1)}\sum_{k=0,m,\cdots,mK} \EE{\ip{\pi_{A}^T\sum_{i=0}^{m-1}\vy^{(k+i)},\nabla f(w^{(k)})}}\\&+\frac{\alpha^2L}{2m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\pi_{A}^T\sum_{i=0}^{m-1}\vy^{(k+i)}}^2}
 \end{align*}
 Then we finish the proof of the lemma.
 \end{proof}
 \subsection{Substitution}
-\begin{lemma}
-  With many const upper bound for $\alpha$, we have
-  \begin{align*}
-    &\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}
-  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\frac{4\alpha L\mathbf{I_2}(1)(f(w^{(0)})- f(w^{(*)}))}{cm^2(K+1)}+\frac{4\alpha^2L^2\mathbf{I_1}(1)( f(w^{(0)})- f(w^{(*)}))}{c(K+1)}
-  \\&\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\textcolor{brown}{16c^2m^2\alpha^4L^3(20s_B^2+8M_Bs_B)\sigma^2}+\alpha^2 mnL \mathbf{H_2}(\frac{1}{m^2})(20s_B^2+8M_Bs_B)\sigma^2\\ &+\frac{2\alpha^3 L^2s_A^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)(40s_B^2+16M_Bs_B)}{cm}\sigma^2\\&+2m\alpha^3L^2\mathbf{I_1}(1)\sigma^2+\frac{2\alpha^2L\mathbf{I_2}(1)}{m}\sigma^2
-  +2m\alpha^3L^2\mathbf{I_1}(1)\mathbf{D_1}(1)\sigma^2
-  +\frac{2\alpha^2L\mathbf{I_2}(1)\mathbf{D_1}(1)}{m}\sigma^2
-  \end{align*} 
+\begin{lemma}\label{Convergence Analysis and Linear Speedup-substitution}
+By setting $\alpha \leq \min\{\frac{1}{cL} ,\;\frac{1}{128cmL},\;\frac{1}{25M_Bs_BL\norm{A_{\infty}}},\; \sqrt{\frac{n}{1360ns_A^2s_B^2M_B^2L^2+8s_A^2L^2\norm{n\pi_B-\one}^2}},\; \\\frac{-8cL+\sqrt{16c^2L^2+2\left(960n\norm{\pi_A}^2M_B^2s_B^2L^2\left(1+c^2\right)+\mathbf{\tilde{D}_2}\right)}}{2\left(960n\norm{\pi_A}^2M_B^2s_B^2L^2\left(1+c^2\right)+\mathbf{\tilde{D}_2}\right)}\} $ and $m\geq 1$, we have
+\begin{align}
+    &\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}\label{main-sub}
+  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\frac{4(m^2\alpha^2L\mathbf{I_1}+\alpha L \mathbf{H_3})(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{cm^2(K+1)}\nonumber\\&+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\nonumber\\&+\frac{20\alpha^2 L \mathbf{H_2}}{m}M_Bs_Bn \sigma^2+320m^2c^2\alpha^4L^3M_Bs_B\sigma^2\nonumber\\&+\frac{30000\alpha^3 s_A^2M_Bs_BL \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)}{cm^2}\sigma^2\nonumber\\&+\frac{2(m^2\alpha^3L\mathbf{I_1}+\alpha^2 L \mathbf{H_3})}{m}\sigma^2+\frac{2(m^2\alpha^3L\mathbf{I_1}+\alpha^2 L \mathbf{H_3})}{m}\mathbf{\tilde{D}_1}\sigma^2\nonumber
+  \end{align}
 \end{lemma}
 \begin{proof}
-  Substitute Theorem ? and ? to Lemma ?, we have
+  Substitute Theorem \ref{Convergence Analysis: Quadratic Term-Decomposition, main theorem} and \ref{Convergence Analysis: Quadratic Term-Decomposition, theorem} to Lemma \ref{Convergence Analysis and Linear Speedup-Analysis}, we have
   \begin{align*}
     &\frac{f(w^{(*)})-f(w^{(0)})}{m(K+1)}
   \\\leq& \textcolor{blue}{\left(\frac{4c^2\alpha^2mL}{K+1}-\frac{c\alpha}{32(K+1)}\right)\sum_{k=0,m,\cdots,mK}\EE{\norm{\nabla f(w^{(k)})}}^2}\\&+\textcolor{red}{\frac{\alpha\norm{\pi_A}^2s_B^2}{cm^2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\Delta_y^{(k)}}^2}}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2\\&+\textcolor{orange}{\frac{\alpha^2s_B^2L\norm{\pi_A}^2}{m(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\Delta_y^{(k)}}^2}}\\&-\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}+\frac{c\alpha L^2}{2n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}\\&+\frac{54\alpha L^2\norm{\pi_A}^2(s_B+m\norm{B_{\infty}})^2}{cm^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}\\&+\frac{144\alpha^3L^2\norm{\pi_A}^2\norm{A_{\infty}}^2(s_B+m\norm{B_{\infty}})^2}{cm^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}
@@ -1209,109 +1204,106 @@ Then we finish the proof of the lemma.
     \\&+\frac{144n^2\alpha^3L^2\norm{\pi_A}^2\norm{\pi_B}^2\norm{A_{\infty}}^2(s_B+m\norm{B_{\infty}})^2}{cm^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}
     \\&+\frac{18n^2\alpha^4L^3s_B^2\norm{\pi_A}^2\norm{\pi_B}^2\norm{A_{\infty}}^2}{ K+1}\sum_{t=0}^{m(K+1)}\norm{\bar{g}^{(t)}}^2+\textcolor{brown}{\frac{16c^4m\alpha^4L^3}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}}
   \end{align*}
-  By setting $\alpha \leq \frac{1}{12cmL}$, the coefficient of $\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}$ can be simplified to:
+  By setting $\alpha \leq \frac{1}{12cmL}$, the coefficient of $\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}$ can be simplified to $\frac{\textcolor{red}{\alpha}L^2\mathbf{H_1}}{K+1}$, where
   \begin{align*}
-    \frac{\textcolor{red}{\alpha}L^2\mathbf{H_1}(1)}{K+1}=&\frac{13\norm{\pi_A}^2s_B^4L^2}{cm^2(K+1)}+\frac{cL^2}{2n(K+1)}+\frac{54L^2\norm{\pi_A}^2(s_B+m\norm{B_{\infty}})^2}{cm^2(K+1)}\\&+\frac{2cL^2}{3mn(K+1)}+\frac{3L^2\norm{\pi_A}^2s_B^2}{2cm(K+1)}
+    \mathbf{H_1}=&\frac{13\norm{\pi_A}^2s_B^4}{cm^2}+\frac{c}{2n}+\frac{54\norm{\pi_A}^2(s_B+m\norm{B_{\infty}})^2}{cm^2}+\frac{2c}{3mn}+\frac{3\norm{\pi_A}^2s_B^2}{2cm}
   \end{align*}
-  By setting $\alpha \leq \frac{1}{2cmL}$, the coefficient of $\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}$ can be simplified to:
+  By setting $\alpha \leq \frac{1}{2cmL}$, the coefficient of $\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}$ can be simplified to $\frac{\textcolor{red}{\alpha^2}L\mathbf{H_2}}{m^2(K+1)}+\textcolor{brown}{\frac{16c^2m\alpha^4L^3}{n(K+1)}}$, where
   \begin{align*}
-    \frac{\textcolor{red}{\alpha^2}L\mathbf{H_2}(\frac{1}{m^2})}{K+1}+\textcolor{brown}{\frac{16c^2m\alpha^4L^3}{n(K+1)}}=&\frac{6\norm{\pi_A}^2s_B^4L}{c^2m^3(K+1)}+\frac{3s_B^2L\norm{\pi_A}^2\norm{A_{\infty}}^2}{c^2m^3(K+1)}+\textcolor{brown}{\frac{16c^2m\alpha^4L^3}{n(K+1)}}\\&+\frac{9L\norm{\pi_A}^2s_B^2\norm{A_{\infty}}^2}{2c^2m^2(K+1)}+\frac{72L\norm{\pi_A}^2\norm{A_{\infty}}^2(s_B+m\norm{B_{\infty}})^2}{c^2m^3(K+1)}
+    \mathbf{H_2}=&\frac{6\norm{\pi_A}^2s_B^4}{c^2m}+\frac{3s_B^2\norm{\pi_A}^2\norm{A_{\infty}}^2}{c^2m}+\frac{9\norm{\pi_A}^2s_B^2\norm{A_{\infty}}^2}{2c^2}+\frac{72\norm{\pi_A}^2\norm{A_{\infty}}^2(s_B+m\norm{B_{\infty}})^2}{c^2m}
   \end{align*}
-  By setting $\alpha \leq \frac{1}{2cmL}$, the coefficient of $\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}$ can be simplified to:
+  By setting $\alpha \leq \frac{1}{2cmL}$, the coefficient of $\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}$ can be simplified to $\frac{\textcolor{red}{\alpha^2}L\mathbf{H_3}}{m^2(K+1)}+\textcolor{brown}{\frac{16c^4m\alpha^4L^3}{K+1}}$, where
   \begin{align*}
-    \frac{\textcolor{red}{\alpha^2}L\mathbf{H_3}(\frac{1}{m^2})}{K+1}+\textcolor{brown}{\frac{16c^4m\alpha^4L^3}{K+1}}=&\frac{6n^2\norm{\pi_A}^2\norm{\pi_B}^2s_B^4L}{c^2m^3(K+1)}+\frac{3n^2s_B^2L\norm{\pi_A}^2\norm{\pi_B}^2\norm{A_{\infty}}}{c^2m^3(K+1)}\\&+\frac{72n^2L\norm{\pi_A}^2\norm{\pi_B}^2\norm{A_{\infty}}^2(s_B+m\norm{B_{\infty}})^2}{c^2m^3(K+1)}\\&+\frac{9n^2Ls_B^2\norm{\pi_A}^2\norm{\pi_B}^2\norm{A_{\infty}}^2}{2c^2m^2(K+1)}+\textcolor{brown}{\frac{16c^4m\alpha^4L^3}{K+1}}
+    \mathbf{H_3}=&\frac{6n^2\norm{\pi_A}^2\norm{\pi_B}^2s_B^4}{c^2m}+\frac{3n^2s_B^2\norm{\pi_A}^2\norm{\pi_B}^2\norm{A_{\infty}}}{c^2m}+\frac{72n^2\norm{\pi_A}^2\norm{\pi_B}^2\norm{A_{\infty}}^2(s_B+m\norm{B_{\infty}})^2}{c^2m}\\&+\frac{9n^2s_B^2\norm{\pi_A}^2\norm{\pi_B}^2\norm{A_{\infty}}^2}{2c^2}
   \end{align*}
-  Where the expression inside the parentheses denote the order of $m$. Then we have that 
+ Then we have that 
   \begin{align*}
     &\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}
-  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\frac{\alpha L^2\mathbf{H_1}(1)}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}+\frac{\alpha^2 L \mathbf{H_2}(\frac{1}{m^2})}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}\\&+\textcolor{brown}{\frac{16c^2m\alpha^4L^3}{n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}}\\&+\frac{\alpha^2 L \mathbf{H_3}(\frac{1}{m^2})}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}+\textcolor{brown}{\frac{16c^4m\alpha^4L^3}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}}
+  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\frac{\alpha L^2\mathbf{H_1}}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}+\frac{\alpha^2 L \mathbf{H_2}}{m^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}\\&+\textcolor{brown}{\frac{16c^2m\alpha^4L^3}{n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}}\\&+\frac{\alpha^2 L \mathbf{H_3}}{m^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}+\textcolor{brown}{\frac{16c^4m\alpha^4L^3}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}}
   \end{align*}
-  Then we substitute $\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}$ by Gradient Consensus Lemma. And we set $\alpha \leq \min\{\frac{1}{2s_BcmL\sqrt{5+20M_B^2}},\; \frac{1}{cmLs_B^2(20+160M_B^2)},\; \frac{1}{\sqrt[3]{16s_B^2(20+160M_B^2)}},\;\frac{1}{\sqrt[4]{64s_B^2(5+20M_B^2)}}\}$, we have that 
+  
+  Then we substitute $\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_y^{(t)}}^2}$ by Lemma \ref{Basic: Gradient Consensus lemma}. And we set $\alpha \leq \min\{\frac{1}{25M_Bs_BL\norm{A_{\infty}}}\;, \frac{1}{cmL}\}$, we have that 
   \begin{align*}
     &\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}
-  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\textcolor{brown}{16c^2m^2\alpha^4L^3(20s_B^2+8M_Bs_B)\sigma^2}+\alpha^2 mnL \mathbf{H_2}(\frac{1}{m^2})(20s_B^2+8M_Bs_B)\sigma^2\\&+\frac{\alpha L^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)}{cm^2n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}\\&+\frac{\alpha^2L\left(m^3\mathbf{H_3}(\frac{1}{m^2})+mn\mathbf{H_2}(\frac{1}{m^2})+1\right)}{m^3(K+1)}\sum_{t=0}^{m(K+1)} \EE{\norm{\bar{g}^{(t)}}^2}\\&+\textcolor{brown}{\frac{16c^4m\alpha^4L^3}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}}
+  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\frac{20\alpha^2 L \mathbf{H_2}}{m}M_Bs_Bn \sigma^2+320m^2c^2\alpha^4L^3M_Bs_B\sigma^2\\&+\frac{\alpha m^2nL\mathbf{H_1}+200nc\alpha^2 L^3s_B^2M_B^2\mathbf{H_2} +3200c^2m^3\alpha^4L^5s_B^2M_B^2}{m^2n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t+1)}}^2}\\&+\frac{120nc^2\alpha^4 L^3s_B^2M_B^2 \mathbf{H_2}}{m^2(K+1)} \sum_{t=0}^{m(K+1)} \EE{\norm{\bar{g}^{(t)}}^2}+\frac{1920c^4m\alpha^6L^5s_B^2M_B^2 }{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2} \\&+\frac{\alpha^2 L \mathbf{H_3}}{m^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}+\textcolor{brown}{\frac{16c^4m\alpha^4L^3}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}}
   \end{align*}
-  Then we substitute $\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}$ by Consensus Lemma 1. And we set $\alpha \leq \frac{1}{16cmL}$, so we have that 
+  And the coefficient of $\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t+1)}}^2}$ can be simplified to
+  $$\frac{3200\alpha L \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)}{cm^3n(K+1)}$$
+  So we have 
   \begin{align*}
     &\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}
-  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\textcolor{brown}{16c^2m^2\alpha^4L^3(20s_B^2+8M_Bs_B)\sigma^2}+\alpha^2 mnL \mathbf{H_2}(\frac{1}{m^2})(20s_B^2+8M_Bs_B)\sigma^2\\ &+\frac{2\alpha^3 L^2s_A^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)(40s_B^2+16M_Bs_B)}{cm}\sigma^2\\&+\frac{\alpha^3 L^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)}{cm^2n(K+1)}\left(4s_A^2\norm{n\pi_B-\one}^2+16n\alpha^2c^2s_B^4L^2(5+20M_B^2)\right) \sum_{t=0}^{m(T+1)}\norm{\bar{g}^{(t)}}^2\\&+\frac{\alpha^2L\left(m^3\mathbf{H_3}(\frac{1}{m^2})+mn\mathbf{H_2}(\frac{1}{m^2})+1\right)}{m^3(K+1)}\sum_{t=0}^{m(K+1)} \EE{\norm{\bar{g}^{(t)}}^2}\\&+\textcolor{brown}{\frac{c^3\alpha^3L^2}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}}
+  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\frac{20\alpha^2 L \mathbf{H_2}}{m}M_Bs_Bn \sigma^2+320m^2c^2\alpha^4L^3M_Bs_B\sigma^2\\&+\frac{3200\alpha L \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)}{cm^3n(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t+1)}}^2}\\&+\frac{120nc^2\alpha^4 L^3s_B^2M_B^2 \mathbf{H_2}}{m^2(K+1)} \sum_{t=0}^{m(K+1)} \EE{\norm{\bar{g}^{(t)}}^2}+\frac{2000c^4m\alpha^6L^5s_B^2M_B^2 }{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2} \\&+\frac{\alpha^2 L \mathbf{H_3}}{m^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}+\textcolor{brown}{\frac{16c^4m\alpha^4L^3}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}}
   \end{align*}
-  We simplify the coefficient of $\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}$ as follows.
+  Then we substitute $\sum_{t=0}^{m(K+1)}\EE{\norm{\Delta_x^{(t)}}^2}$ by Lemma \ref{basic: Consensus Lemma 1}. And we set $\alpha \leq \min\{\frac{1}{16cmL},\; \frac{1}{cL}\}$, so we have that 
   \begin{align*}
-    &\frac{\alpha^3L^2\mathbf{I_1}(1)}{K+1}+\frac{\alpha^2L\mathbf{I_2}(1)}{m^2(K+1)}
-    \\=&\frac{\alpha^3 L^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)}{cm^2n(K+1)}\left(4s_A^2\norm{n\pi_B-\one}^2+16n\alpha^2c^2s_B^4L^2(5+20M_B^2)\right) \\&+\frac{\alpha^2L\left(m^3\mathbf{H_3}(\frac{1}{m^2})+mn\mathbf{H_2}(\frac{1}{m^2})+1\right)}{m^3(K+1)}+\textcolor{brown}{\frac{c^3\alpha^3L^2}{K+1}}
+    &\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}
+  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\frac{20\alpha^2 L \mathbf{H_2}}{m}M_Bs_Bn \sigma^2+320m^2c^2\alpha^4L^3M_Bs_B\sigma^2\\&+\frac{30000\alpha^3 s_A^2M_Bs_BL \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)}{cm^2}\sigma^2\\&+\frac{20000\alpha^3 L \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)\left(s_A^2\norm{n\pi_B-\one}^2+120ns_A^2s_B^2M_B^2\right)}{cm^3n(K+1)} \sum_{t=0}^{m(K+1)}\norm{\bar{g}^{(t)}}^2\\&+\frac{120nc^2\alpha^4 L^3s_B^2M_B^2 \mathbf{H_2}}{m^2(K+1)} \sum_{t=0}^{m(K+1)} \EE{\norm{\bar{g}^{(t)}}^2}+\frac{2000c^4m\alpha^6L^5s_B^2M_B^2 }{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2} \\&+\frac{\alpha^2 L \mathbf{H_3}}{m^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}+\textcolor{brown}{\frac{16c^4m\alpha^4L^3}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}}
+  \end{align*}
+  By setting $\alpha \leq \frac{1}{cmL}$ and $m\geq 1$, we can simplify the coefficient of $\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}$ as follows.
+  \begin{align*}
+    &\frac{20000\alpha^3 L \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)\left(s_A^2\norm{n\pi_B-\one}^2+120ns_A^2s_B^2M_B^2\right)}{cm^3n(K+1)}\\&+\frac{120nc^2\alpha^4 L^3s_B^2M_B^2 \mathbf{H_2}}{m^2(K+1)} +\frac{2000c^4m\alpha^6L^5s_B^2M_B^2 }{K+1}+\frac{\alpha^2 L \mathbf{H_3}}{m^2(K+1)}+\frac{16c^4m\alpha^4L^3}{K+1}\\
+    \leq & \frac{\alpha^3 L\mathbf{I_1} }{K+1}+\frac{\alpha^2 L \mathbf{H_3}}{m^2(K+1)}=\frac{m^2\alpha^3L\mathbf{I_1}+\alpha^2 L \mathbf{H_3}}{m^2(K+1)}
+  \end{align*}
+  Where
+  \begin{align*}
+    \mathbf{I_1}=&  \frac{20000  \left(cn\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +Ls_B^2M_B^2\right)\left(s_A^2\norm{n\pi_B-\one}^2+120ns_A^2s_B^2M_B^2\right)}{cn}\\&+120ncLs_B^2M_B^2 \mathbf{H_2}+2000cLs_B^2M_B^2+16c^3 L
   \end{align*}
   And we have 
   \begin{align*}
     &\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}
-  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\textcolor{brown}{16c^2m^2\alpha^4L^3(20s_B^2+8M_Bs_B)\sigma^2}+\alpha^2 mnL \mathbf{H_2}(\frac{1}{m^2})(20s_B^2+8M_Bs_B)\sigma^2\\ &+\frac{2\alpha^3 L^2s_A^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)(40s_B^2+16M_Bs_B)}{cm}\sigma^2\\&+\frac{\alpha^3L^2\mathbf{I_1}(1)}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}+\frac{\alpha^2L\mathbf{I_2}(1)}{m^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\bar{g}^{(t)}}^2}
+  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\frac{20\alpha^2 L \mathbf{H_2}}{m}M_Bs_Bn \sigma^2+320m^2c^2\alpha^4L^3M_Bs_B\sigma^2\\&+\frac{30000\alpha^3 s_A^2M_Bs_BL \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)}{cm^2}\sigma^2\\&+\frac{m^2\alpha^3L\mathbf{I_1}+\alpha^2 L \mathbf{H_3}}{m^2(K+1)}\sum_{t=0}^{m(K+1)}\norm{\bar{g}^{(t)}}^2
   \end{align*}
   Since $\EE{\norm{\bar{g}^{(t)}}^2}\leq 2\EE{\norm{\bar{g}^{(t)}-\overline{\nabla f}^{(t)}}^2}+2\EE{\norm{\overline{\nabla f}^{(t)}}^2}\leq 2\sigma^2+2\EE{\norm{\overline{\nabla f}^{(t)}}^2}$, we have
   \begin{align*}
     &\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}
-  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\textcolor{brown}{16c^2m^2\alpha^4L^3(20s_B^2+8M_Bs_B)\sigma^2}+\alpha^2 mnL \mathbf{H_2}(\frac{1}{m^2})(20s_B^2+8M_Bs_B)\sigma^2\\ &+\frac{2\alpha^3 L^2s_A^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)(40s_B^2+16M_Bs_B)}{cm}\sigma^2\\&+2m\alpha^3L^2\mathbf{I_1}(1)\sigma^2+\frac{2\alpha^2L\mathbf{I_2}(1)}{m}\sigma^2\\&+\frac{2\alpha^3L^2\mathbf{I_1}(1)}{K+1}\sum_{t=0}^{m(K+1)}\EE{\norm{\overline{\nabla f}^{(t)}}^2}+\frac{2\alpha^2L\mathbf{I_2}(1)}{m^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\overline{\nabla f}^{(t)}}^2}
+  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\frac{20\alpha^2 L \mathbf{H_2}}{m}M_Bs_Bn \sigma^2+320m^2c^2\alpha^4L^3M_Bs_B\sigma^2\\&+\frac{30000\alpha^3 s_A^2M_Bs_BL \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)}{cm^2}\sigma^2\\&+\frac{2(m^2\alpha^3L\mathbf{I_1}+\alpha^2 L \mathbf{H_3})}{m}\sigma^2+\frac{2(m^2\alpha^3L\mathbf{I_1}+\alpha^2 L \mathbf{H_3})}{m^2(K+1)}\sum_{t=0}^{m(K+1)}\EE{\norm{\overline{\nabla f}^{(t)}}^2}
   \end{align*}
-  Substituting $\sum_{t=0}^{m(K+1)}\EE{\norm{\overline{\nabla f}^{(t)}}^2}$ by Main Theorem: Basic 2, we have
+  Substituting $\sum_{t=0}^{m(K+1)}\EE{\norm{\overline{\nabla f}^{(t)}}^2}$ by Theorem \ref{Main Theorem: Basic 2}, we have
   \begin{align*}
     &\frac{c\alpha }{2(K+1)}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}
-  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\frac{4\alpha L\mathbf{I_2}(1)(f(w^{(0)})- f(w^{(*)}))}{cm^2(K+1)}+\frac{4\alpha^2L^2\mathbf{I_1}(1)( f(w^{(0)})- f(w^{(*)}))}{c(K+1)}
-  \\&\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\textcolor{brown}{16c^2m^2\alpha^4L^3(20s_B^2+8M_Bs_B)\sigma^2}+\alpha^2 mnL \mathbf{H_2}(\frac{1}{m^2})(20s_B^2+8M_Bs_B)\sigma^2\\ &+\frac{2\alpha^3 L^2s_A^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)(40s_B^2+16M_Bs_B)}{cm}\sigma^2\\&+2m\alpha^3L^2\mathbf{I_1}(1)\sigma^2+\frac{2\alpha^2L\mathbf{I_2}(1)}{m}\sigma^2
-  +2m\alpha^3L^2\mathbf{I_1}(1)\mathbf{D_1}(1)\sigma^2
-  +\frac{2\alpha^2L\mathbf{I_2}(1)\mathbf{D_1}(1)}{m}\sigma^2
-  \end{align*} 
+  \\\leq& \frac{f(w^{(0)})-f(w^{(*)})}{m(K+1)}+\textcolor{red}{\frac{8\alpha \norm{\pi_A}^2s_B^4}{cm^2}\sigma^2}+\textcolor{red}{ \frac{2c^2\alpha^2L}{n}\sigma^2}+\frac{6\alpha^2L\norm{\pi_A}^2s_B^2}{m}\sigma^2+\frac{8\alpha^2s_B^4L\norm{\pi_A}^2}{m}\sigma^2\\&+\frac{20\alpha^2 L \mathbf{H_2}}{m}M_Bs_Bn \sigma^2+320m^2c^2\alpha^4L^3M_Bs_B\sigma^2\\&+\frac{30000\alpha^3 s_A^2M_Bs_BL \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)}{cm^2}\sigma^2\\&+\frac{2(m^2\alpha^3L\mathbf{I_1}+\alpha^2 L \mathbf{H_3})}{m}\sigma^2+\frac{2(m^2\alpha^3L\mathbf{I_1}+\alpha^2 L \mathbf{H_3})}{m}\mathbf{\tilde{D}_1}\sigma^2\\&+\frac{4(m^2\alpha^2L\mathbf{I_1}+\alpha L \mathbf{H_3})(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{cm^2(K+1)}
+  \end{align*}
+  We finish the proof of the lemma.
 \end{proof}
 
 \subsection{Main Theorem}
 \begin{theorem}
-  \begin{align*}
+\begin{align*}
     &\frac{1 }{K+1}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}
-  \\\leq& \frac{2(f(w^{(0)})-f(w^{(*)}))}{c\alpha m(K+1)}+\frac{8L\mathbf{I_2}(1)(f(w^{(0)})- f(w^{(*)}))}{c^2m^2(K+1)}+\frac{8\alpha L^2\mathbf{I_1}(1)( f(w^{(0)})- f(w^{(*)}))}{c^2(K+1)}
-  \\&\textcolor{red}{\frac{16 \norm{\pi_A}^2s_B^4}{c^2m^2}\sigma^2}+\textcolor{red}{ \frac{4c\alpha L}{n}\sigma^2}+\frac{12\alpha L\norm{\pi_A}^2s_B^2}{cm}\sigma^2+\frac{16\alpha s_B^4L\norm{\pi_A}^2}{cm}\sigma^2\\&+\textcolor{brown}{32cm^2\alpha^3L^3(20s_B^2+8M_Bs_B)\sigma^2}+\frac{2\alpha mnL \mathbf{H_2}(\frac{1}{m^2})(20s_B^2+8M_Bs_B)}{c}\sigma^2\\ &+\frac{4\alpha^2 L^2s_A^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)(40s_B^2+16M_Bs_B)}{c^2m}\sigma^2\\&+\frac{4m\alpha^2L^2\mathbf{I_1}(1)}{c}\sigma^2+\frac{4\alpha L\mathbf{I_2}(1)}{cm}\sigma^2
-  +\frac{4m\alpha^2L^2\mathbf{I_1}(1)\mathbf{D_1}(1)}{c}\sigma^2
-  +\frac{4\alpha L\mathbf{I_2}(1)\mathbf{D_1}(1)}{cm}\sigma^2
-  \\\sim & \frac{f(w^{(0)})-f(w^{(*)})}{\sqrt{nT}}+\frac{\sigma^2}{\sqrt{nT}}+\mathbf{J_2}(\frac{1}{T^{\frac{3}{4}}})\sigma^2
+  \\\leq& \frac{2(f(w^{(0)})-f(w^{(*)}))}{c\alpha m(K+1)}+\frac{8L(m^2\alpha \mathbf{I_1}+ \mathbf{H_3})(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c^2 m^2(K+1)}\nonumber\\&+\textcolor{red}{\frac{16 \norm{\pi_A}^2s_B^4}{c^2 m^2}\sigma^2}+\textcolor{red}{ \frac{4c\alpha L}{n}\sigma^2}+\frac{12\alpha L\norm{\pi_A}^2s_B^2}{c m}\sigma^2+\frac{16\alpha s_B^4L\norm{\pi_A}^2}{c m}\sigma^2\nonumber\\&+\frac{40\alpha L \mathbf{H_2}}{c m}M_Bs_Bn \sigma^2+640m^2c\alpha^3L^3M_Bs_B\sigma^2\nonumber\\&+\frac{60000\alpha^2 s_A^2M_Bs_BL \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)}{c^2m^2}\sigma^2\nonumber\\&+\frac{4(m^2\alpha^2L\mathbf{I_1}+\alpha L \mathbf{H_3})}{c m}\sigma^2+\frac{4(m^2\alpha^2L\mathbf{I_1}+\alpha L \mathbf{H_3})}{c m}\mathbf{\tilde{D}_1}\sigma^2
+  \\\sim & \frac{3(f(w^{(0)})-f(w^{(*)}))}{\sqrt{nT}}+\frac{\sigma^2}{\sqrt{nT}}+\mathbf{J_2}(\frac{1}{T^{\frac{3}{4}}})\sigma^2
   \end{align*}
 \end{theorem}
 
 \begin{proof}
-  Multiple $\frac{2}{c\alpha}$ on both side of ?, and we have
+  Multiple $\frac{2}{c\alpha}$ on both sides of \ref{main-sub}, and we have
   \begin{align*}
-    &\frac{1 }{K+1}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}
-  \\\leq& \frac{2(f(w^{(0)})-f(w^{(*)}))}{c\alpha m(K+1)}+\frac{8L\mathbf{I_2}(1)(f(w^{(0)})- f(w^{(*)}))}{c^2m^2(K+1)}+\frac{8\alpha L^2\mathbf{I_1}(1)( f(w^{(0)})- f(w^{(*)}))}{c^2(K+1)}
-  \\&\textcolor{red}{\frac{16 \norm{\pi_A}^2s_B^4}{c^2m^2}\sigma^2}+\textcolor{red}{ \frac{4c\alpha L}{n}\sigma^2}+\frac{12\alpha L\norm{\pi_A}^2s_B^2}{cm}\sigma^2+\frac{16\alpha s_B^4L\norm{\pi_A}^2}{cm}\sigma^2\\&+\textcolor{brown}{32cm^2\alpha^3L^3(20s_B^2+8M_Bs_B)\sigma^2}+\frac{2\alpha mnL \mathbf{H_2}(\frac{1}{m^2})(20s_B^2+8M_Bs_B)}{c}\sigma^2\\ &+\frac{4\alpha^2 L^2s_A^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)(40s_B^2+16M_Bs_B)}{c^2m}\sigma^2\\&+\frac{4m\alpha^2L^2\mathbf{I_1}(1)}{c}\sigma^2+\frac{4\alpha L\mathbf{I_2}(1)}{cm}\sigma^2
-  +\frac{4m\alpha^2L^2\mathbf{I_1}(1)\mathbf{D_1}(1)}{c}\sigma^2
-  +\frac{4\alpha L\mathbf{I_2}(1)\mathbf{D_1}(1)}{cm}\sigma^2
+    &\frac{1}{K+1}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}\label{main-sub}
+  \\\leq& \frac{2(f(w^{(0)})-f(w^{(*)}))}{c\alpha m(K+1)}+\frac{8L(m^2\alpha \mathbf{I_1}+ \mathbf{H_3})(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c^2 m^2(K+1)}\nonumber\\&+\textcolor{red}{\frac{16 \norm{\pi_A}^2s_B^4}{c^2 m^2}\sigma^2}+\textcolor{red}{ \frac{4c\alpha L}{n}\sigma^2}+\frac{12\alpha L\norm{\pi_A}^2s_B^2}{c m}\sigma^2+\frac{16\alpha s_B^4L\norm{\pi_A}^2}{c m}\sigma^2\nonumber\\&+\frac{40\alpha L \mathbf{H_2}}{c m}M_Bs_Bn \sigma^2+640m^2c\alpha^3L^3M_Bs_B\sigma^2\nonumber\\&+\frac{60000\alpha^2 s_A^2M_Bs_BL \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)}{c^2m^2}\sigma^2\nonumber\\&+\frac{4(m^2\alpha^2L\mathbf{I_1}+\alpha L \mathbf{H_3})}{c m}\sigma^2+\frac{4(m^2\alpha^2L\mathbf{I_1}+\alpha L \mathbf{H_3})}{c m}\mathbf{\tilde{D}_1}\sigma^2\nonumber
   \end{align*}
   Consider the coefficient of $\frac{f(w^{(0)})-f(w^{(*)})}{c\alpha m(K+1)}=\frac{f(w^{(0)})-f(w^{(*)})}{c\alpha T}$
   \begin{align*}
-    \mathbf{J_1}=2+\frac{8\alpha L\mathbf{I_2}(1)}{c m}+\frac{8m\alpha^2 L^2\mathbf{I_1}(1)}{c}
+    \mathbf{J_1}=2+\frac{8\alpha L(m^2\alpha \mathbf{I_1}+ \mathbf{H_3})}{c m}
   \end{align*}
-  Consider the coefficient of the non-red term $\sigma^2$
+  and the coefficient of the non-red term $\sigma^2$
   \begin{align*}
-    \mathbf{J_2}=&\frac{12\alpha L\norm{\pi_A}^2s_B^2}{cm}\sigma^2+\frac{16\alpha s_B^4L\norm{\pi_A}^2}{cm}\sigma^2\\&+\textcolor{brown}{32cm^2\alpha^3L^3(20s_B^2+8M_Bs_B)\sigma^2}+\frac{2\alpha mnL \mathbf{H_2}(\frac{1}{m^2})(20s_B^2+8M_Bs_B)}{c}\sigma^2\\ &+\frac{4\alpha^2 L^2s_A^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)(40s_B^2+16M_Bs_B)}{c^2m}\sigma^2\\&+\frac{4m\alpha^2L^2\mathbf{I_1}(1)}{c}\sigma^2+\frac{4\alpha L\mathbf{I_2}(1)}{cm}\sigma^2
-    +\frac{4m\alpha^2L^2\mathbf{I_1}(1)\mathbf{D_1}(1)}{c}\sigma^2
-    +\frac{4\alpha L\mathbf{I_2}(1)\mathbf{D_1}(1)}{cm}\sigma^2
+    \mathbf{J_2}=&\frac{12\alpha L\norm{\pi_A}^2s_B^2}{c m}\sigma^2+\frac{16\alpha s_B^4L\norm{\pi_A}^2}{c m}\sigma^2\nonumber\\&+\frac{40\alpha L \mathbf{H_2}}{c m}M_Bs_Bn \sigma^2+640m^2c\alpha^3L^3M_Bs_B\sigma^2\nonumber\\&+\frac{60000\alpha^2 s_A^2M_Bs_BL \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)}{c^2m^2}\sigma^2\nonumber\\&+\frac{4(m^2\alpha^2L\mathbf{I_1}+\alpha L \mathbf{H_3})}{c m}\sigma^2+\frac{4(m^2\alpha^2L\mathbf{I_1}+\alpha L \mathbf{H_3})}{c m}\mathbf{\tilde{D}_1}\sigma^2\nonumber
   \end{align*}
   So when $m \geq \frac{4\sqrt{2}\norm{\pi_A}s_Bn^{\frac{1}{4}}T^{\frac{1}{4}}}{c}$, we have that $\textcolor{red}{\frac{16 \norm{\pi_A}^2s_B^4}{c^2m^2}\sigma^2}\leq \frac{\sigma^2}{2\sqrt{nT}}$. When $\alpha \leq \frac{\sqrt{n}}{8cL\sqrt{T}}$, we have $\textcolor{red}{ \frac{4c\alpha L}{n}\sigma^2}\leq \frac{\sigma^2}{2\sqrt{nT}}$. Then we have that $\textcolor{red}{\frac{16 \norm{\pi_A}^2s_B^4}{c^2m^2}\sigma^2}+\textcolor{red}{ \frac{4c\alpha L}{n}\sigma^2} \leq \frac{\sigma^2}{\sqrt{nT}}$, this is the linear speedup term.
 
-  Furthermore, by setting $\frac{4\sqrt{2}\norm{\pi_A}s_Bn^{\frac{1}{4}}T^{\frac{1}{4}}}{c}\leq m \leq \frac{8\sqrt{2}\norm{\pi_A}s_Bn^{\frac{1}{4}}T^{\frac{1}{4}}}{c}$, and $0.5\min\{\text{many terms}\}\leq \alpha \leq \min\{\text{many terms}\}$. Since $T$ can be sufficiently large to make $\frac{\sqrt{n}}{8cL\sqrt{T}}$ be the minimum, we have that $\alpha \sim O(\frac{1}{T^{\frac{1}{2}}}), m\sim O(T^{\frac{1}{4}})$. With help of this ,we have that 
+  Furthermore, by setting $\frac{4\sqrt{2}\norm{\pi_A}s_Bn^{\frac{1}{4}}T^{\frac{1}{4}}}{c}\leq m \leq \frac{8\sqrt{2}\norm{\pi_A}s_Bn^{\frac{1}{4}}T^{\frac{1}{4}}}{c}$, $\mathbf{B_0}=\min\{\frac{1}{cL} ,\;\frac{1}{128cmL},\;\frac{1}{25M_Bs_BL\norm{A_{\infty}}},\; \sqrt{\frac{n}{1360ns_A^2s_B^2M_B^2L^2+8s_A^2L^2\norm{n\pi_B-\one}^2}},\; \\\frac{-8cL+\sqrt{16c^2L^2+2\left(960n\norm{\pi_A}^2M_B^2s_B^2L^2\left(1+c^2\right)+\mathbf{\tilde{D}_2}\right)}}{2\left(960n\norm{\pi_A}^2M_B^2s_B^2L^2\left(1+c^2\right)+\mathbf{\tilde{D}_2}\right)}\} $, and $0.5\mathbf{B_0}\leq \alpha \leq \mathbf{B_0}$. Since $T$ can be sufficiently large to make $\frac{\sqrt{n}}{8cL\sqrt{T}}$ be the minimum, we have that $\alpha \sim O(\frac{1}{T^{\frac{1}{2}}}), m\sim O(T^{\frac{1}{4}})$. With the help of this,we have that 
   \begin{align*}
-    \mathbf{J_1}=2+\frac{8\alpha L\mathbf{I_2}(1)}{c m}+\frac{8m\alpha^2 L^2\mathbf{I_1}(1)}{c}\sim 2+O(\frac{1}{T^{\frac{1}{4}}})
+    \mathbf{J_1}=2+\frac{8\alpha L(m^2\alpha \mathbf{I_1}+ \mathbf{H_3})}{c m}\sim 2+O(\frac{1}{T^{\frac{1}{4}}})
   \end{align*}
-  so $\mathbf{J_1}$ have a const upper bound $3$. And we have that 
+  so $\mathbf{J_1}$ have a constant upper bound $3$. And we have that 
   \begin{align*}
-    \mathbf{J_2}=&\frac{12\alpha L\norm{\pi_A}^2s_B^2}{cm}\sigma^2+\frac{16\alpha s_B^4L\norm{\pi_A}^2}{cm}\sigma^2\\&+\textcolor{brown}{32cm^2\alpha^3L^3(20s_B^2+8M_Bs_B)\sigma^2}+\frac{2\alpha mnL \mathbf{H_2}(\frac{1}{m^2})(20s_B^2+8M_Bs_B)}{c}\sigma^2\\ &+\frac{4\alpha^2 L^2s_A^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)(40s_B^2+16M_Bs_B)}{c^2m}\sigma^2\\&+\frac{4m\alpha^2L^2\mathbf{I_1}(1)}{c}\sigma^2+\frac{4\alpha L\mathbf{I_2}(1)}{cm}\sigma^2
-    +\frac{4m\alpha^2L^2\mathbf{I_1}(1)\mathbf{D_1}(1)}{c}\sigma^2
-    +\frac{4\alpha L\mathbf{I_2}(1)\mathbf{D_1}(1)}{cm}\sigma^2\\ \sim& O(\frac{1}{T^{\frac{3}{4}}})\sigma^2 
+    \mathbf{J_2}=&\frac{12\alpha L\norm{\pi_A}^2s_B^2}{c m}\sigma^2+\frac{16\alpha s_B^4L\norm{\pi_A}^2}{c m}\sigma^2\nonumber\\&+\frac{40\alpha L \mathbf{H_2}}{c m}M_Bs_Bn \sigma^2+640m^2c\alpha^3L^3M_Bs_B\sigma^2\nonumber\\&+\frac{60000\alpha^2 s_A^2M_Bs_BL \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)}{c^2m^2}\sigma^2\nonumber\\&+\frac{4(m^2\alpha^2L\mathbf{I_1}+\alpha L \mathbf{H_3})}{c m}\sigma^2+\frac{4(m^2\alpha^2L\mathbf{I_1}+\alpha L \mathbf{H_3})}{c m}\mathbf{\tilde{D}_1}\sigma^2\nonumber\\ \sim& O(\frac{1}{T^{\frac{3}{4}}})\sigma^2 
   \end{align*}
   So we obtain the main theorem
   \begin{align*}
     &\frac{1 }{K+1}\sum_{k=0,m,\cdots,mK}\EE{\norm{\overline{\nabla f}^{(k)}}^2}
-  \\\leq& \frac{2(f(w^{(0)})-f(w^{(*)}))}{c\alpha m(K+1)}+\frac{8L\mathbf{I_2}(1)(f(w^{(0)})- f(w^{(*)}))}{c^2m^2(K+1)}+\frac{8\alpha L^2\mathbf{I_1}(1)( f(w^{(0)})- f(w^{(*)}))}{c^2(K+1)}
-  \\&\textcolor{red}{\frac{16 \norm{\pi_A}^2s_B^4}{c^2m^2}\sigma^2}+\textcolor{red}{ \frac{4c\alpha L}{n}\sigma^2}+\frac{12\alpha L\norm{\pi_A}^2s_B^2}{cm}\sigma^2+\frac{16\alpha s_B^4L\norm{\pi_A}^2}{cm}\sigma^2\\&+\textcolor{brown}{32cm^2\alpha^3L^3(20s_B^2+8M_Bs_B)\sigma^2}+\frac{2\alpha mnL \mathbf{H_2}(\frac{1}{m^2})(20s_B^2+8M_Bs_B)}{c}\sigma^2\\ &+\frac{4\alpha^2 L^2s_A^2\left(cm^2n\mathbf{H_1}(1)+nm\mathbf{H_2}(\frac{1}{m^2})+1\right)(40s_B^2+16M_Bs_B)}{c^2m}\sigma^2\\&+\frac{4m\alpha^2L^2\mathbf{I_1}(1)}{c}\sigma^2+\frac{4\alpha L\mathbf{I_2}(1)}{cm}\sigma^2
-  +\frac{4m\alpha^2L^2\mathbf{I_1}(1)\mathbf{D_1}(1)}{c}\sigma^2
-  +\frac{4\alpha L\mathbf{I_2}(1)\mathbf{D_1}(1)}{cm}\sigma^2
-  \\\sim & \frac{f(w^{(0)})-f(w^{(*)})}{\sqrt{nT}}+\frac{\sigma^2}{\sqrt{nT}}+\mathbf{J_2}(\frac{1}{T^{\frac{3}{4}}})\sigma^2
+  \\\leq& \frac{2(f(w^{(0)})-f(w^{(*)}))}{c\alpha m(K+1)}+\frac{8L(m^2\alpha \mathbf{I_1}+ \mathbf{H_3})(\nabla f(w^{(0)})-\nabla f(w^{(*)}))}{c^2 m^2(K+1)}\nonumber\\&+\textcolor{red}{\frac{16 \norm{\pi_A}^2s_B^4}{c^2 m^2}\sigma^2}+\textcolor{red}{ \frac{4c\alpha L}{n}\sigma^2}+\frac{12\alpha L\norm{\pi_A}^2s_B^2}{c m}\sigma^2+\frac{16\alpha s_B^4L\norm{\pi_A}^2}{c m}\sigma^2\nonumber\\&+\frac{40\alpha L \mathbf{H_2}}{c m}M_Bs_Bn \sigma^2+640m^2c\alpha^3L^3M_Bs_B\sigma^2\nonumber\\&+\frac{60000\alpha^2 s_A^2M_Bs_BL \left(cm^3n\mathbf{H_1}+nc Ls_B^2M_B^2\mathbf{H_2} +mLs_B^2M_B^2\right)}{c^2m^2}\sigma^2\nonumber\\&+\frac{4(m^2\alpha^2L\mathbf{I_1}+\alpha L \mathbf{H_3})}{c m}\sigma^2+\frac{4(m^2\alpha^2L\mathbf{I_1}+\alpha L \mathbf{H_3})}{c m}\mathbf{\tilde{D}_1}\sigma^2
+  \\\sim & \frac{3(f(w^{(0)})-f(w^{(*)}))}{\sqrt{nT}}+\frac{\sigma^2}{\sqrt{nT}}+\mathbf{J_2}(\frac{1}{T^{\frac{3}{4}}})\sigma^2
   \end{align*}
 \end{proof}
 
